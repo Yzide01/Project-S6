@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cdsm7yw3b1amd"]
+
+[ext_resource type="PackedScene" uid="uid://be34xywoneljk" path="res://inventory_slot.tscn" id="1_pohso"]
+[ext_resource type="Script" uid="uid://3stdpf1rr2l8" path="res://inventory_main.gd" id="1_psafj"]
+
+[node name="canvas_ui" type="CanvasLayer" unique_id=201793935]
+process_mode = 3
+script = ExtResource("1_psafj")
+
+[node name="control_inventory" type="Control" parent="." unique_id=1743049131]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="inventory_back" type="TextureRect" parent="control_inventory" unique_id=1749907275]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="inventory_grid" type="GridContainer" parent="control_inventory" unique_id=502298400]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
+
+[node name="inventory_slot" parent="control_inventory/inventory_grid" unique_id=1261994198 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot2" parent="control_inventory/inventory_grid" unique_id=1736798138 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot3" parent="control_inventory/inventory_grid" unique_id=1348241317 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot4" parent="control_inventory/inventory_grid" unique_id=679405768 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot5" parent="control_inventory/inventory_grid" unique_id=1183496047 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot6" parent="control_inventory/inventory_grid" unique_id=1985707786 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot7" parent="control_inventory/inventory_grid" unique_id=1650231295 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot8" parent="control_inventory/inventory_grid" unique_id=1104986382 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot9" parent="control_inventory/inventory_grid" unique_id=941978738 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="equipement_back" type="TextureRect" parent="control_inventory" unique_id=1380158295]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="equipement_grid" type="GridContainer" parent="control_inventory" unique_id=651634055]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
+
+[node name="inventory_slot" parent="control_inventory/equipement_grid" unique_id=1898865863 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot2" parent="control_inventory/equipement_grid" unique_id=904236505 instance=ExtResource("1_pohso")]
+layout_mode = 2
+
+[node name="inventory_slot3" parent="control_inventory/equipement_grid" unique_id=13728985 instance=ExtResource("1_pohso")]
+layout_mode = 2

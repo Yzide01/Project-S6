@@ -8,4 +8,4 @@ func interact(player: Node2D) -> void:
 	if not is_interactable:
 		return
 	
-	print("Interaction basique avec : ", object_name)
+	pass

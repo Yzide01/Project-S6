@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://be34xywoneljk"]
+
+[ext_resource type="Script" uid="uid://di6fkhlsep4x4" path="res://script_inventory_slot.gd" id="1_42eed"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42eed"]
+size = Vector2(75, 75)
+
+[node name="inventory_slot" type="Control" unique_id=1261994198]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_42eed")
+
+[node name="slot_back" type="TextureRect" parent="." unique_id=122883490]
+layout_mode = 0
+offset_right = 75.0
+offset_bottom = 75.0
+
+[node name="slot_area" type="Area2D" parent="." unique_id=1087061362]
+position = Vector2(37.5, 37.5)
+collision_layer = 256
+
+[node name="slot_collision" type="CollisionShape2D" parent="slot_area" unique_id=1947159010]
+shape = SubResource("RectangleShape2D_42eed")
