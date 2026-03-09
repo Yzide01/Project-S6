@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://be34xywoneljk" path="res://inventory_slot.tscn" id="1_pohso"]
 [ext_resource type="Script" uid="uid://3stdpf1rr2l8" path="res://inventory_main.gd" id="1_psafj"]
 
-[node name="canvas_ui" type="CanvasLayer" unique_id=201793935]
+[node name="Inventaire" type="CanvasLayer" unique_id=201793935]
 process_mode = 3
 script = ExtResource("1_psafj")
 

@@ -7,7 +7,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	# --- Ouverture / Fermeture ---
 	if event.is_action_pressed("toggle_inventory"):
 		visible = !visible
-		get_tree().paused = visible
 
 	# --- Utilisation de la Hotbar ---
 	# On ne permet l'utilisation que si l'inventaire est fermé

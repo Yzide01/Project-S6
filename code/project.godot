@@ -16,7 +16,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-InventoryUI="*uid://cdsm7yw3b1amd"
+InventoryManager="*uid://3stdpf1rr2l8"
+SaveManager="*uid://b0b6lb6le3m77"
 
 [input]
 
