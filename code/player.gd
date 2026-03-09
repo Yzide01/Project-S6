@@ -9,11 +9,17 @@ extends CharacterBody2D
 @export var sprint_speed: float = 300.0
 @export var interact_distance: float = 100.0
 
+# --- Fluidité du mouvement ---
+@export var acceleration: float = 10.0
+
 # --- Machine à états simple ---
 enum State {NORMAL, CRAWLING, SPRINT}
 var current_state: State = State.NORMAL
 
-func _physics_process(_delta: float) -> void:
+
+func _physics_process(delta: float) -> void:
+
+	# --- Gestion des états ---
 	if Input.is_action_pressed("crawl"):
 		current_state = State.CRAWLING
 	elif Input.is_action_pressed("sprint"):
@@ -21,6 +27,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		current_state = State.NORMAL
 
+	# --- Choix de la vitesse ---
 	var active_speed: float = normal_speed
 	match current_state:
 		State.CRAWLING:
@@ -28,17 +35,26 @@ func _physics_process(_delta: float) -> void:
 		State.SPRINT:
 			active_speed = sprint_speed
 
+	# --- Direction du joueur ---
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	
+
+	# --- Direction du raycast pour interaction ---
 	if direction != Vector2.ZERO:
 		interact_ray.target_position = direction.normalized() * interact_distance
-	
-	velocity = direction * active_speed
+
+	# --- Vitesse cible ---
+	var desired_velocity = direction * active_speed
+
+	# --- Déplacement fluide ---
+	velocity = velocity.lerp(desired_velocity, acceleration * delta)
+
 	move_and_slide()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("climb"):
 		print("Le joueur essaie de grimper ou d'interagir")
+
 	if event.is_action_pressed("interact"):
 		interact_ray.force_raycast_update()
 		if interact_ray.is_colliding():
@@ -54,11 +70,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		match event.physical_keycode:
 			KEY_1:
 				InventoryManager.add_item("Fiole_Test", 1)
+
 			KEY_2:
-
 				InventoryManager.use_item("Fiole_Test", self)
-			KEY_F5:
 
+			KEY_F5:
 				SaveManager.save_game()
+
 			KEY_F9:
 				SaveManager.load_game()
