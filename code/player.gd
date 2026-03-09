@@ -4,9 +4,9 @@ extends CharacterBody2D
 @onready var interact_ray: RayCast2D = $RayCast2D
 
 # --- Vitesses de déplacement ---
-@export var normal_speed: float = 200.0
-@export var crawl_speed: float = 100.0
-@export var sprint_speed: float = 300.0
+@export var normal_speed: float = 300.0
+@export var crawl_speed: float = 200.0
+@export var sprint_speed: float = 400.0
 @export var interact_distance: float = 100.0
 
 # --- Fluidité du mouvement ---
