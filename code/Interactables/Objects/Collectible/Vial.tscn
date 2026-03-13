@@ -8,6 +8,8 @@ resource_local_to_scene = true
 size = Vector2(8, 10)
 
 [node name="Vial" unique_id=1453888151 instance=ExtResource("1_lgjaw")]
+object_name = "Objet Inconnu"
+is_interactable = true
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=709049503]
 shape = SubResource("RectangleShape2D_lgjaw")

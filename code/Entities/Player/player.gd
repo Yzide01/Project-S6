@@ -12,6 +12,9 @@ extends CharacterBody2D
 # --- Fluidité du mouvement ---
 @export var acceleration: float = 10.0
 
+# --- Inventaire ---
+@export var inventory: Inventory
+
 # --- Machine à états simple ---
 enum State {NORMAL, CRAWLING, SPRINT}
 var current_state: State = State.NORMAL

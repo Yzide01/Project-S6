@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://c5bgljh8fgcp0"]
+
+[ext_resource type="Script" uid="uid://y2adiqmd6hk5" path="res://Core/InventorySystem/inventoryItem.gd" id="1_c0na2"]
+[ext_resource type="Texture2D" uid="uid://db87ijh36tbx3" path="res://Assets/Graphics/Ninja Adventure - Asset Pack/Items/Weapons/Stick/Sprite.png" id="2_vb6u8"]
+
+[resource]
+script = ExtResource("1_c0na2")
+name = "stick"
+texture = ExtResource("2_vb6u8")
+metadata/_custom_type_script = "uid://y2adiqmd6hk5"
