@@ -64,18 +64,3 @@ func _unhandled_input(event: InputEvent) -> void:
 				target.interact(self)
 		else:
 			print("Il n'y a rien devant moi.")
-	
-	# --- TOUCHES DE TEST ---
-	if event is InputEventKey and event.pressed and not event.echo:
-		match event.physical_keycode:
-			KEY_1:
-				InventoryManager.add_item("Fiole_Test", 1)
-
-			KEY_2:
-				InventoryManager.use_item("Fiole_Test", self)
-
-			KEY_F5:
-				SaveManager.save_game()
-
-			KEY_F9:
-				SaveManager.load_game()

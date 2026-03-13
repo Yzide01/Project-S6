@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://clwo72ixn0e06"
+path="res://.godot/imported/3 - Revelation.ogg-bfd6dff5c54b6fa51c6c1cefdb8f2b2d.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Graphics/Ninja Adventure - Asset Pack/Audio/Musics/3 - Revelation.ogg"
+dest_files=["res://.godot/imported/3 - Revelation.ogg-bfd6dff5c54b6fa51c6c1cefdb8f2b2d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

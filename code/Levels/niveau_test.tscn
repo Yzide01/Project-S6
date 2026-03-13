@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dymi2j8feyf8l"]
 
-[ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://player.tscn" id="1_ksi5g"]
-[ext_resource type="PackedScene" uid="uid://dhg2qy0amium8" path="res://Door.tscn" id="2_bgc3l"]
+[ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="1_ksi5g"]
+[ext_resource type="PackedScene" uid="uid://dhg2qy0amium8" path="res://Interactables/Objects/Door/Door.tscn" id="2_bgc3l"]
+[ext_resource type="PackedScene" uid="uid://sxnwwvxb0y6y" path="res://Interactables/Objects/Collectible/Vial.tscn" id="3_lhbca"]
 
 [node name="Niveau_Test" type="Node2D" unique_id=1389472509]
 position = Vector2(0, 1)
@@ -11,3 +12,6 @@ position = Vector2(312, 334)
 
 [node name="Door" parent="." unique_id=691378837 instance=ExtResource("2_bgc3l")]
 position = Vector2(965, 260)
+
+[node name="Collectable" parent="." unique_id=1453888151 instance=ExtResource("3_lhbca")]
+position = Vector2(669, 454)
