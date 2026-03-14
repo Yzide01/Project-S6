@@ -2,19 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://d1l122ovxbmcl" path="res://Interactables/Objects/Collectible/collectable.tscn" id="1_bw6hd"]
 [ext_resource type="Texture2D" uid="uid://db87ijh36tbx3" path="res://Assets/Graphics/Ninja Adventure - Asset Pack/Items/Weapons/Stick/Sprite.png" id="2_iljjj"]
-[ext_resource type="Resource" uid="uid://c5bgljh8fgcp0" path="res://Core/InventorySystem/items/Stick.tres" id="2_ncxod"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_76p2j"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bw6hd"]
 resource_local_to_scene = true
 size = Vector2(4, 16)
 
 [node name="Stick" unique_id=1453888151 instance=ExtResource("1_bw6hd")]
-itemRes = ExtResource("2_ncxod")
-object_name = "Objet Inconnu"
-is_interactable = true
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=709049503]
-shape = SubResource("RectangleShape2D_76p2j")
+shape = SubResource("RectangleShape2D_bw6hd")
 
 [node name="Sprite2D" parent="." index="1" unique_id=1068193919]
 texture = ExtResource("2_iljjj")

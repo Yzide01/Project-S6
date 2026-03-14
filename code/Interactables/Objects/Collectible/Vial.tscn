@@ -2,19 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://d1l122ovxbmcl" path="res://Interactables/Objects/Collectible/collectable.tscn" id="1_lgjaw"]
 [ext_resource type="Texture2D" uid="uid://dc23qeyn50ekc" path="res://Assets/Graphics/Ninja Adventure - Asset Pack/Items/Potion/LifePot.png" id="2_b55yb"]
-[ext_resource type="Resource" uid="uid://cnqrnyi3aesln" path="res://Core/InventorySystem/items/Vial.tres" id="2_tqolc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s618k"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgjaw"]
 resource_local_to_scene = true
 size = Vector2(8, 10)
 
 [node name="Vial" unique_id=1453888151 instance=ExtResource("1_lgjaw")]
-itemRes = ExtResource("2_tqolc")
 object_name = "Objet Inconnu"
 is_interactable = true
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=709049503]
-shape = SubResource("RectangleShape2D_s618k")
+shape = SubResource("RectangleShape2D_lgjaw")
 
 [node name="Sprite2D" parent="." index="1" unique_id=1068193919]
 scale = Vector2(1.0555556, 1.0454545)
