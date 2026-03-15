@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name  Player extends CharacterBody2D
 
 # --- Noeuds enfants ---
 @onready var interact_ray: RayCast2D = $RayCast2D
@@ -19,6 +19,8 @@ extends CharacterBody2D
 enum State {NORMAL, CRAWLING, SPRINT}
 var current_state: State = State.NORMAL
 
+func _ready():
+	inventory.use_item.connect(use_item)
 
 func _physics_process(delta: float) -> void:
 
@@ -67,3 +69,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				target.interact(self)
 		else:
 			print("Il n'y a rien devant moi.")
+
+func use_item(item : InventoryItem) -> void:
+	item.use(self)

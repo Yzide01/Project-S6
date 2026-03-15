@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://sxnwwvxb0y6y" path="res://Interactables/Objects/Collectible/Vial.tscn" id="3_lhbca"]
 [ext_resource type="PackedScene" uid="uid://bpm3h5vmfhbrf" path="res://Core/InventorySystem/inventory_gui.tscn" id="4_jj8mn"]
 [ext_resource type="PackedScene" uid="uid://bp28at0v6cbfe" path="res://Interactables/Objects/Collectible/stick.tscn" id="4_qmtjt"]
+[ext_resource type="PackedScene" uid="uid://cni72vkbksv45" path="res://Core/InventorySystem/Hotbar.tscn" id="7_cya24"]
 
 [node name="Niveau_Test" type="Node2D" unique_id=1389472509]
 position = Vector2(0, 1)
@@ -38,6 +39,19 @@ offset_right = 52.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Hotbar" parent="CanvasLayer" unique_id=1661991271 instance=ExtResource("7_cya24")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -71.0
+offset_right = 42.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [connection signal="closed" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_closed"]
 [connection signal="opened" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_opened"]
