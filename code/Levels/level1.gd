@@ -5,10 +5,10 @@ extends Node2D
 @onready var corde2 = $string_2
 @onready var corde3 = $string_3
 @onready var corde4 = $string_4
-@onready var audio_player = $String_Door/AudioStreamPlayer2D
+@onready var audio_player_door = $String_Door/AudioStreamPlayer2D
 
 
-# La nouvelle combinaison secrète
+# La combinaison secrète
 var combinaison_secrete: Array[int] = [1, 3, 2, 4] 
 var sequence_jouee: Array[int] = [] 
 
@@ -17,10 +17,10 @@ var is_playing_hint: bool = false
 
 func _ready() -> void:
 	if porte:
-		porte.is_interactable = true # La porte DOIT être interactable pour donner l'indice !
-		porte.is_locked = true       # Mais elle est verrouillée
+		porte.is_interactable = true
+		porte.is_locked = true       
 		porte.is_open = false
-		porte.hint_requested.connect(_on_door_hint_requested) # On écoute la porte
+		porte.hint_requested.connect(_on_door_hint_requested) 
 		porte._update_door_state() 
 
 	if corde1: corde1.corde_jouee.connect(_on_corde_jouee)
@@ -29,31 +29,54 @@ func _ready() -> void:
 	if corde4: corde4.corde_jouee.connect(_on_corde_jouee)
 
 func _on_corde_jouee(note_id: int) -> void:
+	# Si une animation (indice ou erreur) est en cours, on bloque les clics
 	if is_playing_hint:
-		return # On ignore les clics si l'indice est en train d'être joué
+		return 
 		
+	# 1. On enregistre la note
 	sequence_jouee.append(note_id)
-	var index_courant = sequence_jouee.size() - 1
 	
-	if sequence_jouee[index_courant] != combinaison_secrete[index_courant]:
-		print("Fausse note ! On recommence.")
-		sequence_jouee.clear() 
-		return
+	# 2. On allume TOUJOURS la corde que le joueur vient de toucher
+	match note_id:
+		1: if corde1: corde1.set_progressive_glow(true)
+		2: if corde2: corde2.set_progressive_glow(true)
+		3: if corde3: corde3.set_progressive_glow(true)
+		4: if corde4: corde4.set_progressive_glow(true)
 		
+	# 3. On vérifie SI le joueur a fini d'entrer ses 4 notes
 	if sequence_jouee.size() == combinaison_secrete.size():
-		print("Mélodie correcte ! Ouverture de la porte...")
-		_ouvrir_la_porte()
+		
+		# On verrouille temporairement la porte et les cordes
+		is_playing_hint = true 
+		
+		# On compare les deux tableaux directement
+		if sequence_jouee == combinaison_secrete:
+			print("Mélodie correcte ! Ouverture de la porte...")
+			_ouvrir_la_porte()
+		else:
+			print("Mauvaise combinaison ! On efface tout.")
+			# On attend une demi-seconde pour que le joueur voie sa 4ème corde s'allumer
+			await get_tree().create_timer(0.6).timeout 
+			
+			# On éteint toutes les cordes et on vide la mémoire
+			_reset_progressive_glows()
+			sequence_jouee.clear()
+			
+		# On déverrouille pour qu'il puisse réessayer
+		is_playing_hint = false
 
+# Nouvelle fonction pour éteindre toutes les cordes d'un coup
+func _reset_progressive_glows() -> void:
+	if corde1: corde1.set_progressive_glow(false)
+	if corde2: corde2.set_progressive_glow(false)
+	if corde3: corde3.set_progressive_glow(false)
+	if corde4: corde4.set_progressive_glow(false)
 
 func _ouvrir_la_porte() -> void:
 	if porte:
-		porte.is_locked = false # On déverrouille le cadenas de l'énigme
-		
-		# --- LA MODIFICATION EST ICI ---
-		# Au lieu de simuler une interaction, on FORCE la porte à s'ouvrir :
+		porte.is_locked = false
 		porte.is_open = true 
 		porte._update_door_state() 
-		# -------------------------------
 		
 		# On désactive les cordes une fois terminé
 		if corde1: corde1.is_interactable = false
@@ -68,6 +91,15 @@ func _on_door_hint_requested() -> void:
 		return
 		
 	is_playing_hint = true
-	sequence_jouee.clear() # On réinitialise la tentative du joueur pour éviter les bugs
-	audio_player.play()
+	sequence_jouee.clear() 
+	
+	# --- On éteint les cordes pour jouer l'indice proprement ---
+	_reset_progressive_glows()
+	
+	# (Optionnel : On pourrait allumer les cordes une par une ici aussi)
+	
+	audio_player_door.play()
+	
+	# On attend la fin du son (environ 3 secondes ici pour l'exemple, à ajuster)
+	await get_tree().create_timer(3.0).timeout
 	is_playing_hint = false
