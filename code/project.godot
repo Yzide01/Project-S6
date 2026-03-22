@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 InventoryManager="*uid://3stdpf1rr2l8"
 SaveManager="*uid://b0b6lb6le3m77"
+AppConfig="*uid://cjke6crjg14a0"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/maaacks_options_menus/plugin.cfg")
 
 [input]
 
@@ -82,6 +87,16 @@ move_selector={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/maaacks_options_menus/base/translations/menus_translations.en.translation", "res://addons/maaacks_options_menus/base/translations/menus_translations.fr.translation")
+
+[maaacks_options_menus]
+
+disable_update_check=false
+disable_install_wizard=true
+copy_path="res://"
 
 [physics]
 

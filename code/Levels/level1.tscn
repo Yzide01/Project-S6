@@ -1,9 +1,10 @@
-[gd_scene format=3 uid="uid://dymi2j8feyf8l"]
+[gd_scene format=3 uid="uid://by5bb12lnrl3a"]
 
 [ext_resource type="Script" uid="uid://dxyebyr4gh2qt" path="res://Levels/level1.gd" id="1_3y0gf"]
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="1_ksi5g"]
 [ext_resource type="PackedScene" uid="uid://dhg2qy0amium8" path="res://Interactables/Objects/Door/Door.tscn" id="2_bgc3l"]
 [ext_resource type="Texture2D" uid="uid://b5i1a3x7lebqu" path="res://Assets_temp/backgroundV1_cordesN1.png" id="2_cya24"]
+[ext_resource type="PackedScene" uid="uid://diasamjckjrxi" path="res://scenes/menus/options_menu/master_options_menu_with_tabs.tscn" id="2_eaymk"]
 [ext_resource type="PackedScene" uid="uid://bpm3h5vmfhbrf" path="res://Core/InventorySystem/inventory_gui.tscn" id="4_jj8mn"]
 [ext_resource type="Script" uid="uid://brellt2mouu8y" path="res://Interactables/Objects/Strings/string.gd" id="4_jtjhf"]
 [ext_resource type="Texture2D" uid="uid://deg80yqb6in5x" path="res://Assets_temp/Player/cap4-removebg.png" id="4_kyf5l"]
@@ -43,7 +44,9 @@ size = Vector2(1629, 206)
 size = Vector2(851, 160)
 
 [node name="Level_Strings_1" type="Node2D" unique_id=1389472509]
+process_mode = 3
 script = ExtResource("1_3y0gf")
+pause_menu_scene = ExtResource("2_eaymk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1096330893]
 texture = ExtResource("2_cya24")

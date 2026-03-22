@@ -1,5 +1,34 @@
 extends Node2D
+# Glisse-dépose ta scène de menu pause ici depuis l'inspecteur
+@export var pause_menu_scene : PackedScene
+var current_pause_menu = null
 
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		# Si le jeu est déjà en pause, on essaie de reprendre
+		if get_tree().paused:
+			close_pause_menu()
+		else:
+			open_pause_menu()
+
+func open_pause_menu():
+	if pause_menu_scene:
+		current_pause_menu = pause_menu_scene.instantiate()
+		# IMPORTANT : On s'assure que le menu lui-même peut tourner en pause
+		current_pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+		add_child(current_pause_menu)
+		get_tree().paused = true
+
+func close_pause_menu():
+	# On cherche s'il y a un menu de pause dans la scène pour le supprimer
+	if current_pause_menu != null:
+		current_pause_menu.queue_free()
+		current_pause_menu = null
+	
+	# On relance le temps dans le jeu
+	get_tree().paused = false
+	
+	
 @onready var porte: InteractableObject = $String_Door 
 @onready var corde1 = $string_1 
 @onready var corde2 = $string_2

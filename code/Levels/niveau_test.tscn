@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dymi2j8feyf8l"]
 
-[ext_resource type="Script" uid="uid://dxyebyr4gh2qt" path="res://Levels/level1.gd" id="1_3y0gf"]
+[ext_resource type="Script" path="res://Levels/level1.gd" id="1_3y0gf"]
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="1_ksi5g"]
 [ext_resource type="PackedScene" uid="uid://dhg2qy0amium8" path="res://Interactables/Objects/Door/Door.tscn" id="2_bgc3l"]
 [ext_resource type="PackedScene" uid="uid://sxnwwvxb0y6y" path="res://Interactables/Objects/Collectible/Vial.tscn" id="3_lhbca"]
