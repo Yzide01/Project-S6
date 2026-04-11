@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d1l122ovxbmcl"]
 
 [ext_resource type="Script" uid="uid://cpa4dpdo320yd" path="res://collectable.gd" id="1_gddeg"]
+[ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="2_g7csu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7csu"]
 resource_local_to_scene = true
@@ -43,10 +44,10 @@ _data = {
 &"spin": SubResource("Animation_g7csu")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_g7csu"]
+
 [node name="Collectable" type="Area2D" unique_id=1453888151]
 script = ExtResource("1_gddeg")
-object_name = null
-is_interactable = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=709049503]
 shape = SubResource("RectangleShape2D_g7csu")
@@ -55,3 +56,11 @@ shape = SubResource("RectangleShape2D_g7csu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1330177773]
 libraries/ = SubResource("AnimationLibrary_3f550")
+
+[node name="Interactable" parent="." unique_id=1836534378 instance=ExtResource("2_g7csu")]
+interact_name = "Pick up"
+
+[node name="LabelPosition" type="Marker2D" parent="Interactable" unique_id=88710858]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=336349050]
+shape = SubResource("CircleShape2D_g7csu")

@@ -1,5 +1,6 @@
-extends InteractableObject
+extends Area2D
 
+@onready var interactable: Area2D = $Interactable
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var solid_wall_collision: CollisionShape2D = $SolidWall/CollisionShape2D
 @onready var animations = $AnimationPlayer
@@ -7,15 +8,14 @@ extends InteractableObject
 @export var itemRes: InventoryItem
 
 func _ready() -> void:
-	object_name = "Collectable"
+	interactable.interact = _on_interact
 	
 func collect(inventory: Inventory):
 	inventory.insert(itemRes)
 	queue_free()
 
-func interact(_player: Node2D) -> void:
-	if not is_interactable:
-		return
+func _on_interact(_player: Node2D) -> void:
+
 	animations.play("spin")
 	await animations.animation_finished
 	collect(_player.inventory)

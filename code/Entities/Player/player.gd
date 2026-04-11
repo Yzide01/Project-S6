@@ -1,7 +1,5 @@
 class_name  Player extends CharacterBody2D
 
-# --- Noeuds enfants ---
-@onready var interact_ray: RayCast2D = $RayCast2D
 
 # --- Vitesses de déplacement ---
 @export var normal_speed: float = 300.0
@@ -43,10 +41,6 @@ func _physics_process(delta: float) -> void:
 	# --- Direction du joueur ---
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	# --- Direction du raycast pour interaction ---
-	if direction != Vector2.ZERO:
-		interact_ray.target_position = direction.normalized() * interact_distance
-
 	# --- Vitesse cible ---
 	var desired_velocity = direction * active_speed
 
@@ -59,16 +53,6 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("climb"):
 		print("Le joueur essaie de grimper ou d'interagir")
-
-	if event.is_action_pressed("interact"):
-		interact_ray.force_raycast_update()
-		if interact_ray.is_colliding():
-			var target = interact_ray.get_collider()
-			if target is InteractableObject:
-				print("Objet interactif détecté !")
-				target.interact(self)
-		else:
-			print("Il n'y a rien devant moi.")
 
 func use_item(item : InventoryItem) -> void:
 	item.use(self)

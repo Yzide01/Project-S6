@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://64sfkj8dg4ai"]
+[gd_scene format=3 uid="uid://0cslo8uxf46d"]
+
+[ext_resource type="Script" uid="uid://bw6p2w0sp7blh" path="res://Interactables/Base/interacting_component.gd" id="1_vh7nu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hes78"]
+radius = 127.06297
 
 [sub_resource type="LabelSettings" id="LabelSettings_vh7nu"]
 font_size = 12
@@ -8,6 +11,7 @@ shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 
 [node name="InteractingComponent" type="Node2D" unique_id=65921056]
+script = ExtResource("1_vh7nu")
 
 [node name="InteractRange" type="Area2D" parent="." unique_id=1275966187]
 collision_layer = 0
@@ -16,7 +20,8 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange" unique_id=738685653]
 shape = SubResource("CircleShape2D_hes78")
 
-[node name="InteractLabel" type="Label" parent="." unique_id=1306253336]
+[node name="InteractLabel" type="Label" parent="." unique_id=1393273633]
+z_index = 10
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -33,3 +38,6 @@ text = "E to interact"
 label_settings = SubResource("LabelSettings_vh7nu")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="area_entered" from="InteractRange" to="." method="_on_interact_range_area_entered"]
+[connection signal="area_exited" from="InteractRange" to="." method="_on_interact_range_area_exited"]

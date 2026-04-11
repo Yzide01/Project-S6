@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://3b4gc3oaunnw" path="res://Entities/Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://skpam71vlkm7" path="res://icon.svg" id="2_i3pqv"]
 [ext_resource type="Resource" uid="uid://uilb1xmhdr7n" path="res://Core/InventorySystem/playerInventory.tres" id="2_lu8i8"]
+[ext_resource type="PackedScene" uid="uid://0cslo8uxf46d" path="res://Interactables/Base/interacting_component.tscn" id="4_tekja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(127, 129)
@@ -18,6 +19,4 @@ texture = ExtResource("2_i3pqv")
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_hqtel")
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=2052133454]
-target_position = Vector2(0, 100)
-collide_with_areas = true
+[node name="InteractingComponent" parent="." unique_id=65921056 instance=ExtResource("4_tekja")]
