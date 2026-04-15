@@ -3226,6 +3226,7 @@ position = Vector2(-24.500004, -118)
 
 [node name="String_2" type="Node2D" parent="." unique_id=1502162149]
 position = Vector2(193, 0)
+script = ExtResource("13_libwh")
 
 [node name="Interactable" parent="String_2" unique_id=1839064579 instance=ExtResource("13_34tpl")]
 position = Vector2(366.5, 309)
@@ -3241,6 +3242,7 @@ position = Vector2(-24.500004, -118)
 
 [node name="String_3" type="Node2D" parent="." unique_id=1382963561]
 position = Vector2(386, -33)
+script = ExtResource("13_libwh")
 
 [node name="Interactable" parent="String_3" unique_id=1598276308 instance=ExtResource("13_34tpl")]
 position = Vector2(366.5, 309)

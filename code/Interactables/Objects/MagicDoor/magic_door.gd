@@ -1,29 +1,20 @@
 extends Node2D
 
-@export var is_open: bool = false
-@export var label_open: String = "E pour Fermer"
-@export var label_closed: String = "E pour Ouvrir"
-
-@onready var interactable: Area2D = $Interactable
-@onready var solid_wall_collision: CollisionShape2D = $CollisionShape2D
+@onready var interactable_area = $InteractableArea
 
 func _ready() -> void:
-	# On lie le Callable pour le système d'interaction
-	interactable.interact = _on_interact
-	_update_door_state()
-	
-func _on_interact():
-	is_open = !is_open
-	_update_door_state()
+	if interactable_area:
+		interactable_area.interact_name = "Mélodie requise"
+		interactable_area.is_interactable = false # Bloqué au début
+		interactable_area.interact = _on_interact
 
-func _update_door_state() -> void:
-	# On vérifie si le nœud de collision est bien chargé
-	if not is_node_ready() or solid_wall_collision == null:
-		return
-		
-	if is_open:
-		interactable.interact_name = label_open
-		solid_wall_collision.set_deferred("disabled", true)
-	else:
-		interactable.interact_name = label_closed
-		solid_wall_collision.set_deferred("disabled", false)
+func _on_interact():
+	# Ce qui se passe quand le joueur appuie sur E après avoir résolu l'énigme
+	print("Le joueur traverse la porte !")
+	# ex: get_tree().change_scene_to_file("res://Levels/niveau2.tscn")
+
+# Fonction appelée par le gestionnaire du niveau
+func unlock() -> void:
+	if interactable_area:
+		interactable_area.is_interactable = true
+		interactable_area.interact_name = "Passer la porte"

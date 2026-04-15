@@ -2,17 +2,18 @@ extends Node2D
 
 signal played(id: int)
 
-@export var interact_name: String = "Jouer la corde"
-@export var is_interactable: bool = true
-
-# Requis par interacting_component.gd
-var interact: Callable 
+# On va chercher l'enfant Area2D (la scène de ton coéquipier)
+@onready var interactable_area = $InteractableArea
 
 func _ready() -> void:
-	interact = _on_interact
+	if interactable_area:
+		interactable_area.interact_name = "Jouer la corde"
+		interactable_area.is_interactable = true
+		# On lie l'action à ce script
+		interactable_area.interact = _on_interact
 
 func _on_interact():
-	if is_interactable:
-		# On récupère l'ID depuis le nom du nœud (ex: "String_3" -> 3)
-		var id = int(name.get_slice("_", 1))
-		played.emit(id) # Utilisation correcte du signal
+	# Extrait le chiffre du Node2D (ex: "String_1" -> 1)
+	var id = int(name.get_slice("_", 1))
+	played.emit(id)
+	print("Corde jouée : ", id)
