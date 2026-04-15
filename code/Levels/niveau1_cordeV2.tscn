@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="13_34tpl"]
 [ext_resource type="Script" uid="uid://bynd2qmwk8tuh" path="res://Interactables/Objects/String/strings_level_1.gd" id="13_libwh"]
 [ext_resource type="Script" uid="uid://patf78cxkiax" path="res://Interactables/Objects/MagicDoor/magic_door.gd" id="16_1p3ex"]
+[ext_resource type="AudioStream" uid="uid://bl2cgd7cmm42b" path="res://Assets/Sound/Trials/strings_first_trial.wav" id="16_dn6wu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u17ea"]
 texture = ExtResource("1_ch8kj")
@@ -3224,6 +3225,8 @@ shape = SubResource("CircleShape2D_libwh")
 [node name="LabelPosition" type="Marker2D" parent="String_1/Interactable" unique_id=2106683813]
 position = Vector2(-24.500004, -118)
 
+[node name="Pluck_1" type="AudioStreamPlayer2D" parent="String_1" unique_id=627687143]
+
 [node name="String_2" type="Node2D" parent="." unique_id=1502162149]
 position = Vector2(193, 0)
 script = ExtResource("13_libwh")
@@ -3240,6 +3243,8 @@ shape = SubResource("CircleShape2D_libwh")
 [node name="LabelPosition" type="Marker2D" parent="String_2/Interactable" unique_id=1402578905]
 position = Vector2(-24.500004, -118)
 
+[node name="Pluck_2" type="AudioStreamPlayer2D" parent="String_2" unique_id=1693890853]
+
 [node name="String_3" type="Node2D" parent="." unique_id=1382963561]
 position = Vector2(386, -33)
 script = ExtResource("13_libwh")
@@ -3254,6 +3259,12 @@ shape = SubResource("CircleShape2D_libwh")
 
 [node name="LabelPosition" type="Marker2D" parent="String_3/Interactable" unique_id=2090347736]
 position = Vector2(-32.500004, -81)
+
+[node name="Pluck_3" type="AudioStreamPlayer2D" parent="String_3" unique_id=107983221]
+
+[node name="HintAudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=502577578]
+position = Vector2(551.5, 110)
+stream = ExtResource("16_dn6wu")
 
 [node name="MagicDoor" type="Node2D" parent="." unique_id=876037793]
 position = Vector2(185, -199)
