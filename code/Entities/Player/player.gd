@@ -5,7 +5,7 @@ class_name Player extends CharacterBody2D
 @export var normal_speed: float = 150
 @export var crawl_speed: float = 50
 @export var sprint_speed: float = 200
-@export var interact_distance: float = 30
+@export var interact_distance: float = 10
 
 # --- Movement smoothing ---
 @export var acceleration: float = 10.0

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bw6p2w0sp7blh" path="res://Interactables/Base/interacting_component.gd" id="1_vh7nu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hes78"]
-radius = 127.06297
+radius = 41.01219
 
 [sub_resource type="LabelSettings" id="LabelSettings_vh7nu"]
 font_size = 12

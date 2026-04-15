@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ymplbpettjao" path="res://Assets/spritesheet_barde_ok-sac_768.png.png" id="5_5c2io"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
-size = Vector2(127, 129)
+size = Vector2(35, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4wf4l"]
 atlas = ExtResource("5_5c2io")
@@ -478,11 +478,11 @@ script = ExtResource("1_onrkg")
 inventory = ExtResource("2_lu8i8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=126583999]
-position = Vector2(0.5, 0.5)
+position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_hqtel")
 
 [node name="InteractingComponent" parent="." unique_id=65921056 instance=ExtResource("4_tekja")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2025306507]
 sprite_frames = SubResource("SpriteFrames_d17g3")
-animation = &"idle_down_right"
+animation = &"idle_up"

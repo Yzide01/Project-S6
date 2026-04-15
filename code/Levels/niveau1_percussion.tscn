@@ -8753,6 +8753,7 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_xmc0g")
 
 [node name="InteractingComponent2" parent="Player" unique_id=65921056 instance=ExtResource("12_ntwyx")]
+scale = Vector2(0.5, 0.5)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player" unique_id=764201066]
 visible = false
