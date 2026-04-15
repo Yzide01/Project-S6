@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Chromestesia"
-run/main_scene="uid://dymi2j8feyf8l"
+run/main_scene="uid://dasathemdxaea"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

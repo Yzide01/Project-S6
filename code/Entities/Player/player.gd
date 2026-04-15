@@ -1,28 +1,36 @@
-class_name  Player extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 
-# --- Vitesses de déplacement ---
+# --- Movement speeds ---
 @export var normal_speed: float = 300.0
 @export var crawl_speed: float = 200.0
 @export var sprint_speed: float = 400.0
 @export var interact_distance: float = 100.0
 
-# --- Fluidité du mouvement ---
+# --- Movement smoothing ---
 @export var acceleration: float = 10.0
 
-# --- Inventaire ---
+# --- Inventory ---
 @export var inventory: Inventory
 
-# --- Machine à états simple ---
-enum State {NORMAL, CRAWLING, SPRINT}
+# --- Animation ---
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+
+# --- State machine ---
+enum State { NORMAL, CRAWLING, SPRINT }
 var current_state: State = State.NORMAL
+
+# --- Remember last direction for idle ---
+var last_direction: Vector2 = Vector2.DOWN
+
 
 func _ready():
 	inventory.use_item.connect(use_item)
 
+
 func _physics_process(delta: float) -> void:
 
-	# --- Gestion des états ---
+	# --- State handling ---
 	if Input.is_action_pressed("crawl"):
 		current_state = State.CRAWLING
 	elif Input.is_action_pressed("sprint"):
@@ -30,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		current_state = State.NORMAL
 
-	# --- Choix de la vitesse ---
+	# --- Speed selection ---
 	var active_speed: float = normal_speed
 	match current_state:
 		State.CRAWLING:
@@ -38,13 +46,17 @@ func _physics_process(delta: float) -> void:
 		State.SPRINT:
 			active_speed = sprint_speed
 
-	# --- Direction du joueur ---
+	# --- Input direction ---
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	# --- Vitesse cible ---
-	var desired_velocity = direction * active_speed
+	# Save last direction if moving
+	if direction != Vector2.ZERO:
+		last_direction = direction.normalized()
 
-	# --- Déplacement fluide ---
+	update_animation(direction)
+
+	# --- Movement ---
+	var desired_velocity = direction * active_speed
 	velocity = velocity.lerp(desired_velocity, acceleration * delta)
 
 	move_and_slide()
@@ -52,7 +64,43 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("climb"):
-		print("Le joueur essaie de grimper ou d'interagir")
+		print("Le joueur essaie d'interagir")
 
-func use_item(item : InventoryItem) -> void:
+
+func use_item(item: InventoryItem) -> void:
 	item.use(self)
+
+
+func update_animation(direction: Vector2) -> void:
+	var is_idle = direction.length() < 0.1
+	var dir_to_use = last_direction if is_idle else direction
+
+	# calculate angle
+	var angle = int(snapped(rad_to_deg(dir_to_use.angle()), 45))
+
+	var anim_name = ""
+
+	# match animation
+	match angle:
+		0: 
+			anim_name = "right"
+		45: 
+			anim_name = "right" 
+		90: 
+			anim_name = "down"
+		135: 
+			anim_name = "left"
+		180, -180: 
+			anim_name = "left"
+		-135: 
+			anim_name = "up_left"
+		-90: 
+			anim_name = "up"
+		-45: 
+			anim_name = "up_right"
+
+	# idle if player is not moving anymore
+	if is_idle:
+		anim.play("idle_" + anim_name)
+	else:
+		anim.play(anim_name)
