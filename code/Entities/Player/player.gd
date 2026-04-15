@@ -2,10 +2,10 @@ class_name Player extends CharacterBody2D
 
 
 # --- Movement speeds ---
-@export var normal_speed: float = 300.0
-@export var crawl_speed: float = 200.0
-@export var sprint_speed: float = 400.0
-@export var interact_distance: float = 100.0
+@export var normal_speed: float = 150
+@export var crawl_speed: float = 50
+@export var sprint_speed: float = 200
+@export var interact_distance: float = 30
 
 # --- Movement smoothing ---
 @export var acceleration: float = 10.0
@@ -104,3 +104,13 @@ func update_animation(direction: Vector2) -> void:
 		anim.play("idle_" + anim_name)
 	else:
 		anim.play(anim_name)
+
+
+	# Ajuster la vitesse de l'animation selon l'état
+	match current_state:
+		State.CRAWLING:
+			anim.speed_scale = 0.7  # Ralentit l'anim
+		State.SPRINT:
+			anim.speed_scale = 1.5  # Accélère l'anim
+		State.NORMAL:
+			anim.speed_scale = 1.0  # Vitesse normale
