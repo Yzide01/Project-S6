@@ -26,16 +26,16 @@ func _on_interact():
 	state_changed.emit() 
 
 func _update_feedback():
-	# Modifie le pitch (hauteur du son) en fonction de la masse simulée
+	# Modifies the pitch based on the simulated mass
 	if audio:
 		match current_mass_state:
-			0: audio.pitch_scale = 1.5 # Moins de masse = son aigu
-			1: audio.pitch_scale = 1.0 # Masse moyenne = son moyen
-			2: audio.pitch_scale = 0.6 # Beaucoup de masse = son grave
+			0: audio.pitch_scale = 1.5 # Low mass = High pitch
+			1: audio.pitch_scale = 1.0 # Medium mass = Medium pitch
+			2: audio.pitch_scale = 0.6 # High mass = Low pitch
 			
-	# Le texte aide le joueur à comprendre le concept de "Masse"
+	# Updates the text to clearly explain the cycle
 	if interactable:
 		match current_mass_state:
-			0: interactable.interact_name = "Add water (Current: Empty / High Pitch)"
-			1: interactable.interact_name = "Add water (Current: Half / Medium Pitch)"
-			2: interactable.interact_name = "Empty water (Current: Full / Low Pitch)"
+			0: interactable.interact_name = "Pour water (Currently: Empty / High Pitch)"
+			1: interactable.interact_name = "Pour more water (Currently: Half / Medium)"
+			2: interactable.interact_name = "Empty the bowl (Currently: Full / Low Pitch)"

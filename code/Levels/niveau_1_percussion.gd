@@ -1,6 +1,6 @@
 extends Node2D
 
-# Solution : Exemple [2, 0, 1] (Full, Empty, Half)
+# Solution : [2, 0, 1] (Full, Empty, Half)
 @export var secret_combination: Array[int] = [2, 0, 1] 
 var is_solved: bool = false
 
