@@ -21,7 +21,7 @@ func _ready() -> void:
 func _on_door_hint_requested() -> void:
 	if is_playing_hint:
 		return
-		
+	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level1/level1.dialogue"), "start")
 	is_playing_hint = true
 	current_sequence.clear() # On remet à zéro quand on redemande l'indice
 	print("Lecture de l'indice sonore...")

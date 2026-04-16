@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://lajx2afiaoau"
+path="res://.godot/imported/level1.dialogue-b7eac5c437d5f09efee18b65635bd9b4.tres"
+
+[deps]
+
+source_file="res://Dialogues/Level1/level1.dialogue"
+dest_files=["res://.godot/imported/level1.dialogue-b7eac5c437d5f09efee18b65635bd9b4.tres"]
+
+[params]
+
+defaults=true
