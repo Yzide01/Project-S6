@@ -18,10 +18,7 @@ func _ready() -> void:
 	_play_intro_dialogue()
 
 func _play_intro_dialogue():
-	print("--- INTRO SEQUENCE ---")
-	print("Percussion Spirit: 'An intruder... So light, so fragile. You think you can restore Harmony? True power lies not in the wind that blows, but in the weight that strikes! My bowls are empty, their voices weak and piercing. Flee, before I crush you with my tempo!'")
-	print("Wind Spirit (Guide): 'Do not listen to him, Guardian. Listen to this empty bowl: it sounds hollow and high-pitched. If you can fill them with water, you will increase their mass...'")
-
+	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level3/Intro.dialogue"), "start")
 func _check_solution():
 	if is_solved: return # Ne rien faire si c'est déjà gagné
 	
@@ -47,11 +44,6 @@ func _play_victory_sequence():
 	if bowl2 and bowl2.has_node("Interactable"): bowl2.get_node("Interactable").is_interactable = false
 	if bowl3 and bowl3.has_node("Interactable"): bowl3.get_node("Interactable").is_interactable = false
 	
-	print("Percussion Spirit: 'I... I hear it. The depth. The gravity. You understand the secret of matter, little Guardian. You played with mass to tame the frequency.'")
+	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level3/Outro.dialogue"), "start")
+
 	
-	print("--- SERIOUS GAME PANEL UI ---")
-	print("Concept Validated: The Influence of Mass on Frequency")
-	print("By adding water to the bronze bowls, you increased their overall mass. In acoustic physics, the more massive and heavy a resonating body is, the more it resists movement. It therefore vibrates more slowly, producing a low-frequency wave (a deep sound). Conversely, a light object vibrates quickly, creating a high-pitched sound.")
-	
-	print("Percussion Spirit: 'Take this. Let its weight remind you that even the heaviest stone can sing if properly tuned.'")
-	print("*Item Received: Ancient Stone Pestle*")

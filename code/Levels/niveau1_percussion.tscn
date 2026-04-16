@@ -8337,7 +8337,7 @@ position = Vector2(287.5, -100)
 stream = ExtResource("16_x6vnd")
 
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("11_rrpsy")]
-position = Vector2(578, 584)
+position = Vector2(578, 489)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=706403430]
 limit_left = 1152

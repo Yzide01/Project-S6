@@ -1,0 +1,14 @@
+~ start
+Nathan: C'est cool regardez on peut faire ça si on veut
+Nathan: Here are some choices.
+- First one
+	Nathan: You picked the first one.
+- Second one
+	Nathan: You picked the second one.
+- Start again => start
+- End the conversation => END
+Percussion Spirit: An intruder... So light, so fragile. 
+Percussion Spirit: You think you can restore Harmony? True power lies not in the wind that blows, but in the weight that strikes! My bowls are empty, their voices weak and piercing. Flee, before I crush you with my tempo!
+Thoughts: I should not listen to him. I should try to fill the bowls with water, it will increase their mass... I need to find the perfect combination...
+
+=> END

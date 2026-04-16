@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://caybuctdyn1x2"
+path="res://.godot/imported/Outro.dialogue-99cf6e76316cc8395f78f3fdc0a6373f.tres"
+
+[deps]
+
+source_file="res://Dialogues/Level3/Outro.dialogue"
+dest_files=["res://.godot/imported/Outro.dialogue-99cf6e76316cc8395f78f3fdc0a6373f.tres"]
+
+[params]
+
+defaults=true
