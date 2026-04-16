@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://by36jxdjraokm"]
 
+[ext_resource type="Script" uid="uid://bbqlgivvmxm5v" path="res://Levels/niveau_1_percussion.gd" id="1_ntwyx"]
 [ext_resource type="Texture2D" uid="uid://dcgq6abtyukr8" path="res://Assets/percussions/niveau1_percussions/Tileset-Terrain2.png" id="1_xy8x2"]
 [ext_resource type="Texture2D" uid="uid://d0x0fcr0hocns" path="res://Assets/percussions/niveau1_percussions/Tilemap_color1.png" id="2_mslb5"]
 [ext_resource type="Texture2D" uid="uid://ymplbpettjao" path="res://Assets/spritesheet_barde_ok-sac_768.png.png" id="2_nlata"]
@@ -13,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://r41r1h7dbcob" path="res://Assets/percussions/niveau1_percussions/waterfall1.png" id="9_cftau"]
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="11_rrpsy"]
 [ext_resource type="PackedScene" uid="uid://0cslo8uxf46d" path="res://Interactables/Base/interacting_component.tscn" id="12_ntwyx"]
+[ext_resource type="Script" uid="uid://25olcxr5yrtl" path="res://Interactables/Objects/Level3/bowls.gd" id="15_jk20k"]
+[ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="16_5sg2u"]
+[ext_resource type="AudioStream" uid="uid://tsk5r8hy4mcs" path="res://Assets/Sound/Trials/Bowl.wav" id="16_x6vnd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5dx0f"]
 texture = ExtResource("1_xy8x2")
@@ -8694,7 +8698,11 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_x6vnd"]
+radius = 115.60818
+
 [node name="Node2D" type="Node2D" unique_id=1451406429]
+script = ExtResource("1_ntwyx")
 
 [node name="floor" type="TileMapLayer" parent="." unique_id=1930917716]
 tile_set = SubResource("TileSet_higgj")
@@ -8759,3 +8767,55 @@ scale = Vector2(0.5, 0.5)
 visible = false
 sprite_frames = SubResource("SpriteFrames_jk20k")
 animation = &"up"
+
+[node name="Bowl_1" type="Node2D" parent="." unique_id=1324267439]
+script = ExtResource("15_jk20k")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="Bowl_1" unique_id=932387142]
+stream = ExtResource("16_x6vnd")
+
+[node name="Interactable" parent="Bowl_1" unique_id=1836534378 instance=ExtResource("16_5sg2u")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bowl_1/Interactable" unique_id=502537194]
+position = Vector2(34.499996, -37.999996)
+scale = Vector2(0.315, 0.315)
+shape = SubResource("CircleShape2D_x6vnd")
+
+[node name="LabelPosition" type="Marker2D" parent="Bowl_1/Interactable" unique_id=62866772]
+position = Vector2(-24.500004, -118)
+
+[node name="Bowl_2" type="Node2D" parent="." unique_id=1401810810]
+
+[node name="Interactable" parent="Bowl_2" unique_id=1771701302 instance=ExtResource("16_5sg2u")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bowl_2/Interactable" unique_id=236393341]
+position = Vector2(209.49998, -38.999996)
+scale = Vector2(0.315, 0.315)
+shape = SubResource("CircleShape2D_x6vnd")
+
+[node name="LabelPosition" type="Marker2D" parent="Bowl_2/Interactable" unique_id=1709555360]
+position = Vector2(-24.500004, -118)
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="Bowl_2" unique_id=388786053]
+stream = ExtResource("16_x6vnd")
+
+[node name="Bowl_3" type="Node2D" parent="." unique_id=1245090798]
+
+[node name="Interactable" parent="Bowl_3" unique_id=369878536 instance=ExtResource("16_5sg2u")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bowl_3/Interactable" unique_id=73395051]
+position = Vector2(387.49997, -39.999996)
+scale = Vector2(0.315, 0.315)
+shape = SubResource("CircleShape2D_x6vnd")
+
+[node name="LabelPosition" type="Marker2D" parent="Bowl_3/Interactable" unique_id=868943140]
+position = Vector2(-24.500004, -118)
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="Bowl_3" unique_id=1271814302]
+stream = ExtResource("16_x6vnd")
