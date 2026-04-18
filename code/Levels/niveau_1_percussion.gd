@@ -37,7 +37,6 @@ func _check_solution():
 		pass
 
 func _play_victory_sequence():
-	print("--- VICTORY SEQUENCE ---")
 	
 	# Désactive les bassins pour que le joueur ne les dérègle plus
 	if bowl1 and bowl1.has_node("Interactable"): bowl1.get_node("Interactable").is_interactable = false
