@@ -3,7 +3,7 @@ extends Node2D
 var is_solved: bool = false
 
 @onready var wheel = $wheel
-@onready var altar_door = $bridge
+@onready var altar_door = $altar
 
 func _ready() -> void:
 	# L'autel est bloqué au début

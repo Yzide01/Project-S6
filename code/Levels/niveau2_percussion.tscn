@@ -2229,16 +2229,17 @@ limit_right = 0
 limit_bottom = 976
 position_smoothing_enabled = true
 
-[node name="bridge" type="Node2D" parent="." unique_id=59293974]
+[node name="altar" type="Node2D" parent="." unique_id=59293974]
+position = Vector2(-4, -510)
 
-[node name="Interactable" parent="bridge" unique_id=719652897 instance=ExtResource("12_ubdlm")]
+[node name="Interactable" parent="altar" unique_id=719652897 instance=ExtResource("12_ubdlm")]
 position = Vector2(555, 684)
 interact_name = "Bridge"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge/Interactable" unique_id=1074280145]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="altar/Interactable" unique_id=1074280145]
 position = Vector2(23.999996, -56.999996)
 scale = Vector2(0.44, 0.44)
 shape = SubResource("CircleShape2D_o1wam")
 
-[node name="LabelPosition" type="Marker2D" parent="bridge/Interactable" unique_id=1754682069]
+[node name="LabelPosition" type="Marker2D" parent="altar/Interactable" unique_id=1754682069]
 position = Vector2(-48, -132)
