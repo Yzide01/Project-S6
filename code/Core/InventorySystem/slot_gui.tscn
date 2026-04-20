@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cqo0565r6dfra" path="res://Assets/Graphics/inventorySlot.png" id="1_itblk"]
 [ext_resource type="Script" uid="uid://bxel08toq2plu" path="res://Core/InventorySystem/slot_gui.gd" id="1_rc4m2"]
 
-[node name="Slot" type="Button" unique_id=975678488]
+[node name="Slot" type="Button" unique_id=2052752854]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(20, 20)
 offset_right = 20.0
@@ -20,3 +20,8 @@ custom_minimum_size = Vector2(20, 20)
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0
+
+[node name="Panel" type="Panel" parent="CenterContainer" unique_id=4844515]
+layout_mode = 2
+
+[node name="item" type="Sprite2D" parent="CenterContainer/Panel" unique_id=854806990]

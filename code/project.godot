@@ -11,19 +11,27 @@ config_version=5
 [application]
 
 config/name="Chromestesia"
-run/main_scene="uid://dasathemdxaea"
+run/main_scene="uid://by5bb12lnrl3a"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
+PauseMenuManager="*res://Core/PauseMenuManager.gd"
 InventoryManager="*uid://3stdpf1rr2l8"
 SaveManager="*uid://b0b6lb6le3m77"
 DialogueManager="*uid://c3rodes2l3gxb"
+AppConfig="*uid://cjke6crjg14a0"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/maaacks_options_menus/plugin.cfg")
 
 [input]
 
@@ -90,12 +98,19 @@ move_selector={
 
 [internationalization]
 
+locale/translations=PackedStringArray("res://addons/maaacks_options_menus/base/translations/menus_translations.en.translation", "res://addons/maaacks_options_menus/base/translations/menus_translations.fr.translation")
 locale/translations_pot_files=PackedStringArray("res://Dialogues/Level1/level1.dialogue", "res://Dialogues/Level3/Intro.dialogue", "res://Dialogues/Level3/Outro.dialogue")
 
 [layer_names]
 
 2d_physics/layer_1="world"
 2d_physics/layer_2="interactions"
+
+[maaacks_options_menus]
+
+disable_update_check=false
+disable_install_wizard=true
+copy_path="res://"
 
 [physics]
 
