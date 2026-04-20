@@ -3,9 +3,8 @@ extends Node2D
 @export var pause_menu_scene : PackedScene
 var current_pause_menu = null
 
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		# Si le jeu est déjà en pause, on essaie de reprendre
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
 		if get_tree().paused:
 			close_pause_menu()
 		else:
@@ -16,7 +15,10 @@ func open_pause_menu():
 		current_pause_menu = pause_menu_scene.instantiate()
 		# IMPORTANT : On s'assure que le menu lui-même peut tourner en pause
 		current_pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
-		add_child(current_pause_menu)
+		if has_node("CanvasLayer"):
+			$CanvasLayer.add_child(current_pause_menu)
+		else:
+			add_child(current_pause_menu)
 		get_tree().paused = true
 
 func close_pause_menu():
