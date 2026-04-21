@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cu7aftdugcs2a" path="res://Assets/cordes/niveau2_cordes/piano.png" id="8_gnaaj"]
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="9_7wtkx"]
 [ext_resource type="Script" uid="uid://bnqukdmcjx8k" path="res://Interactables/Objects/Level2/piano.gd" id="9_8ldkp"]
-[ext_resource type="PackedScene" uid="uid://d1l122ovxbmcl" path="res://Interactables/Objects/Collectible/collectable.tscn" id="11_ckdfb"]
+[ext_resource type="PackedScene" uid="uid://d1ptxfuge8vfm" path="res://Interactables/Objects/Collectible/Partition.tscn" id="10_8ldkp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jofdi"]
 texture = ExtResource("1_x61l1")
@@ -28711,13 +28711,23 @@ limit_bottom = 720
 position_smoothing_enabled = true
 
 [node name="Piano" type="StaticBody2D" parent="decoration" unique_id=2104161994]
+position = Vector2(382, -329)
 script = ExtResource("9_8ldkp")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="decoration/Piano" unique_id=350884930]
+position = Vector2(1, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/Piano" unique_id=1948714059]
-position = Vector2(384, -326)
 shape = SubResource("RectangleShape2D_8ldkp")
+
+[node name="Partition" parent="decoration" unique_id=1453888151 instance=ExtResource("10_8ldkp")]
+position = Vector2(866, -1393)
+
+[node name="Partition2" parent="decoration" unique_id=1849915806 instance=ExtResource("10_8ldkp")]
+position = Vector2(1521, -225)
+
+[node name="Partition3" parent="decoration" unique_id=1562279610 instance=ExtResource("10_8ldkp")]
+position = Vector2(2418, -1745)
 
 [node name="piano" type="TileMapLayer" parent="decoration" unique_id=936717173]
 tile_map_data = PackedByteArray("AAAUAOb/AQAAAAAAAAAUAOf/AQAAAAEAAAAUAOj/AQAAAAIAAAAUAOn/AQAAAAMAAAAUAOr/AQAAAAQAAAAUAOv/AQAAAAUAAAAUAOz/AQAAAAYAAAAUAO3/AQAAAAcAAAAVAOb/AQABAAAAAAAVAOf/AQABAAEAAAAVAOj/AQABAAIAAAAVAOn/AQABAAMAAAAVAOr/AQABAAQAAAAVAOv/AQABAAUAAAAVAOz/AQABAAYAAAAVAO3/AQABAAcAAAAWAOb/AQACAAAAAAAWAOf/AQACAAEAAAAWAOj/AQACAAIAAAAWAOn/AQACAAMAAAAWAOr/AQACAAQAAAAWAOv/AQACAAUAAAAWAOz/AQACAAYAAAAWAO3/AQACAAcAAAAXAOb/AQADAAAAAAAXAOf/AQADAAEAAAAXAOj/AQADAAIAAAAXAOn/AQADAAMAAAAXAOr/AQADAAQAAAAXAOv/AQADAAUAAAAXAOz/AQADAAYAAAAXAO3/AQADAAcAAAAYAOb/AQAEAAAAAAAYAOf/AQAEAAEAAAAYAOj/AQAEAAIAAAAYAOn/AQAEAAMAAAAYAOr/AQAEAAQAAAAYAOv/AQAEAAUAAAAYAOz/AQAEAAYAAAAYAO3/AQAEAAcAAAAZAOb/AQAFAAAAAAAZAOf/AQAFAAEAAAAZAOj/AQAFAAIAAAAZAOn/AQAFAAMAAAAZAOr/AQAFAAQAAAAZAOv/AQAFAAUAAAAZAOz/AQAFAAYAAAAZAO3/AQAFAAcAAAAaAOb/AQAGAAAAAAAaAOf/AQAGAAEAAAAaAOj/AQAGAAIAAAAaAOn/AQAGAAMAAAAaAOr/AQAGAAQAAAAaAOv/AQAGAAUAAAAaAOz/AQAGAAYAAAAaAO3/AQAGAAcAAAAbAOb/AQAHAAAAAAAbAOf/AQAHAAEAAAAbAOj/AQAHAAIAAAAbAOn/AQAHAAMAAAAbAOr/AQAHAAQAAAAbAOv/AQAHAAUAAAAbAOz/AQAHAAYAAAAbAO3/AQAHAAcAAAA=")
@@ -28726,7 +28736,3 @@ tile_set = SubResource("TileSet_4bauj")
 [node name="partitions" type="TileMapLayer" parent="decoration/piano" unique_id=764728955]
 tile_map_data = PackedByteArray("AABeAPH/AAAeAC4AAABeAPL/AAAeAC8AAABfAPH/AAAfAC4AAABfAPL/AAAfAC8AAAA1AKj/AAAeAC4AAAA1AKn/AAAeAC8AAAA2AKj/AAAfAC4AAAA2AKn/AAAfAC8AAACWAJL/AAAeAC4AAACWAJP/AAAeAC8AAACXAJL/AAAfAC4AAACXAJP/AAAfAC8AAAA=")
 tile_set = SubResource("TileSet_r1l3a")
-
-[node name="Collectable" parent="." unique_id=1453888151 instance=ExtResource("11_ckdfb")]
-
-[node name="Sprite2D2" type="Sprite2D" parent="Collectable" unique_id=62781299]
