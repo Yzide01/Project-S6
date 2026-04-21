@@ -31,8 +31,13 @@ class_name Player extends CharacterBody2D
 # --- Animation ---
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
+# --- Jump Settings ---
+@export var tile_size: float = 64.0 # Taille d'une case en pixels (à ajuster selon ton jeu)
+@export var jump_height: float = 30.0 # Hauteur visuelle du saut (en pixels)
+@export var jump_duration: float = 0.35 # Durée de l'animation de saut en secondes
+
 # --- State machine ---
-enum State { NORMAL, CRAWLING, SPRINT }
+enum State { NORMAL, CRAWLING, SPRINT, JUMPING }
 var current_state: State = State.NORMAL
 
 # --- Remember last direction for idle ---
@@ -49,6 +54,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if current_state == State.JUMPING:
+		_update_depth_scale() 
+		return
+	if Input.is_action_just_pressed("jump"):
+		attempt_jump()
+		return
+		
 	# --- State handling ---
 	if Input.is_action_pressed("crawl"):
 		current_state = State.CRAWLING
@@ -114,11 +126,6 @@ func _update_sprite_direction(dir: Vector2) -> void:
 		if tex_droite: sprite.texture = tex_droite
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("climb"):
-		print("Le joueur essaie d'interagir")
-
-
 func use_item(item: InventoryItem) -> void:
 	item.use(self)
 
@@ -166,3 +173,54 @@ func update_animation(direction: Vector2) -> void:
 			anim.speed_scale = 1.5  # Accélère l'anim
 		State.NORMAL:
 			anim.speed_scale = 1.0  # Vitesse normale
+
+# --- MÉCANIQUE DE SAUT ---
+
+func attempt_jump() -> void:
+	if last_direction == Vector2.ZERO:
+		return
+		
+	# Destination calcul
+	var jump_vector = last_direction * (tile_size * 2)
+	var target_global_position = global_position + jump_vector
+	
+	# Check landing
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsPointQueryParameters2D.new()
+	query.position = target_global_position
+	
+	# Change the number depending of the layer of the map (wall and hole)
+	query.collision_mask = 1 
+	
+	var result = space_state.intersect_point(query)
+	
+	# If lading point is a wall or a hole
+	if result.size() > 0:
+		print("Impossible Jump : more than one case")
+		return
+		
+	# If possible jump
+	execute_jump(target_global_position)
+
+
+func execute_jump(target_pos: Vector2) -> void:
+	current_state = State.JUMPING
+	
+	var move_tween = create_tween()
+	# Move carractere toward destination
+	move_tween.tween_property(self, "global_position", target_pos, jump_duration).set_trans(Tween.TRANS_LINEAR)
+		
+	# At the end, retake a normal state
+	move_tween.tween_callback(func():
+		current_state = State.NORMAL
+	)
+	
+	# An other tween for the visual effect
+	if sprite:
+		var sprite_original_y = sprite.position.y
+		var arc_tween = create_tween()
+				
+		# Sprite arise
+		arc_tween.tween_property(sprite, "position:y", sprite_original_y - jump_height, jump_duration / 2.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		# Sprite go back down
+		arc_tween.tween_property(sprite, "position:y", sprite_original_y, jump_duration / 2.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
