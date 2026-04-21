@@ -55,7 +55,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if current_state == State.JUMPING:
-		_update_depth_scale() 
+		#_update_depth_scale() 
 		return
 	if Input.is_action_just_pressed("jump"):
 		attempt_jump()
