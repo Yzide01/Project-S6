@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://crbf0xp4440lp"]
+
+[ext_resource type="Script" uid="uid://bvwjbjmav0kss" path="res://scenes/BookUI.gd" id="1_h7dfs"]
+[ext_resource type="Script" uid="uid://c758645g28agj" path="res://scenes/onde_vibrante.gd" id="2_ogy4m"]
+[ext_resource type="Texture2D" uid="uid://b7hhimyp66l3f" path="res://Assets/cordes/niveau1_cordes/corde3.png" id="2_qjh8d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogy4m"]
+bg_color = Color(0.9019608, 0.8352941, 0.72156864, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.23921569, 0.14509805, 0.11764706, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_h7dfs"]
+color = Color(0.23921569, 0.14509805, 0.11764706, 1)
+thickness = 5
+vertical = true
+
+[node name="BookUI" type="CanvasLayer" unique_id=1635178096]
+script = ExtResource("1_h7dfs")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=825529325]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 41.0
+offset_right = -78.0
+offset_bottom = -112.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogy4m")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1490642222]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1907134922]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="PageGauche" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1679283857]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PageGauche" unique_id=868447435]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer" unique_id=932996492]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 15
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "[center][b][font_size=30]LESSON I[/font_size][/b]
+[i][color=gray]The Voice of Objects[/color][/i][/center]
+
+The size of an object determines its [b]voice[/b]. In our world, everything that vibrates creates a sound.
+
+[b]The Rule:[/b]
+A short string vibrates [color=red]faster[/color] than a long one."
+fit_content = true
+
+[node name="SchemaFreq" type="ColorRect" parent="PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer" unique_id=2046358906]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.19966345, 0.13335153, 0.07846785, 1)
+
+[node name="OndeVibrante" type="Line2D" parent="PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer/SchemaFreq" unique_id=1908200424]
+z_index = 5
+scale = Vector2(0.07, 1)
+points = PackedVector2Array(-22, 71.259125, 366.99994, 71.03058, -22, 71.5)
+texture = ExtResource("2_qjh8d")
+texture_mode = 1
+script = ExtResource("2_ogy4m")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer" unique_id=406623727]
+layout_mode = 2
+size_flags_vertical = 15
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "[center][i]Observe the fast vibration above.[/i][/center]"
+fit_content = true
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer" unique_id=1345106578]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=97392568]
+layout_mode = 2
+theme_override_constants/separation = 100
+theme_override_styles/separator = SubResource("StyleBoxLine_h7dfs")
+
+[node name="PageDroite" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=202417045]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PageDroite" unique_id=335230461]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/PageDroite/VBoxContainer" unique_id=1593045651]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 15
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 35
+theme_override_font_sizes/bold_font_size = 35
+bbcode_enabled = true
+text = "[center][b][font_size=25]HIGH PITCH[/font_size][/b][/center]
+
+A [b]short string[/b] vibrates very fast. 
+This creates a [color=red]High Frequency[/color].
+
+[i]The smaller the object, the higher the note.[/i]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/PageDroite/VBoxContainer" unique_id=548186971]
+layout_mode = 2

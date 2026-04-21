@@ -73,19 +73,26 @@ func _reset_progressive_glows() -> void:
 	if corde2: corde2.set_progressive_glow(false)
 	if corde3: corde3.set_progressive_glow(false)
 	if corde4: corde4.set_progressive_glow(false)
-
+	
 func _ouvrir_la_porte() -> void:
 	if porte:
 		porte.is_locked = false
 		porte.is_open = true 
 		porte._update_door_state() 
 		
+		# --- C'EST ICI QU'ON OUVRE LE LIVRE ---
+	if has_node("BookUI"):
+		$BookUI.open_book(
+"LESSON I: THE DIMENSION OF SOUND", 
+"Length dictates the note.\n\nLong String = Low Frequency.\nLarger objects vibrate slower, creating a Deep sound.", 
+"\n\nShort String = High Frequency.\nSmaller objects vibrate faster, creating a High sound.")
+		# --------------------------------------
+		
 		# On désactive les cordes une fois terminé
 		if corde1: corde1.is_interactable = false
 		if corde2: corde2.is_interactable = false
 		if corde3: corde3.is_interactable = false
 		if corde4: corde4.is_interactable = false
-		
 		
 # --- LA FONCTION DE L'INDICE ---
 func _on_door_hint_requested() -> void:
