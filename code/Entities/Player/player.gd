@@ -83,23 +83,8 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.lerp(desired_velocity, acceleration * delta)
 
 	move_and_slide()
-	
-	# --- Appliquer l'effet de profondeur ---
-	_update_depth_scale()
 
 
-# --- NOUVELLES FONCTIONS ---
-
-# 1. Fonction pour le rapetissement
-func _update_depth_scale() -> void:
-	# On calcule la profondeur (0.0 = fond, 1.0 = devant)
-	var depth = clamp((global_position.y - y_min) / (y_max - y_min), 0.0, 1.0)
-	
-	# On calcule la taille actuelle
-	var current_scale = lerp(scale_min, scale_max, depth)
-	
-	# On applique la taille sur le joueur
-	scale = Vector2(current_scale, current_scale)
 
 # 2. Fonction pour gérer le Sprite et les directions
 func _update_sprite_direction(dir: Vector2) -> void:
