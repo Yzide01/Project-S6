@@ -7,10 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://cfjw2jj64thyy" path="res://Assets/cordes/niveau2_cordes/Dec_Damage_WoodDoor_3.png" id="5_6ajq4"]
 [ext_resource type="Texture2D" uid="uid://j5hvqjlufwlx" path="res://Assets/cordes/niveau2_cordes/deco.png" id="6_1qqjd"]
 [ext_resource type="Texture2D" uid="uid://ctmkj0xl1eqh0" path="res://Assets/cordes/niveau2_cordes/furniture_and_props.png" id="7_df1gw"]
+[ext_resource type="Script" uid="uid://cvm6x2hsedpw5" path="res://Interactables/Objects/Level2/sheets.gd" id="8_ckdfb"]
 [ext_resource type="Texture2D" uid="uid://cu7aftdugcs2a" path="res://Assets/cordes/niveau2_cordes/piano.png" id="8_gnaaj"]
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="9_7wtkx"]
 [ext_resource type="Script" uid="uid://bnqukdmcjx8k" path="res://Interactables/Objects/Level2/piano.gd" id="9_8ldkp"]
-[ext_resource type="PackedScene" uid="uid://d1ptxfuge8vfm" path="res://Interactables/Objects/Collectible/Partition.tscn" id="10_8ldkp"]
+[ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="9_ooyhu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jofdi"]
 texture = ExtResource("1_x61l1")
@@ -10030,6 +10031,13 @@ texture = ExtResource("6_1qqjd")
 
 [sub_resource type="TileSet" id="TileSet_4kn2i"]
 sources/0 = SubResource("TileSetAtlasSource_po4yw")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_libwh"]
+radius = 115.60818
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckdfb"]
+atlas = ExtResource("7_df1gw")
+region = Rect2(490.00018, 742.7594, 15.036194, 15.807251)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nau8j"]
 texture = ExtResource("7_df1gw")
@@ -28688,6 +28696,66 @@ tile_set = SubResource("TileSet_3yu45")
 tile_map_data = PackedByteArray("AABFAAMAAAAKABIAAABFAAQAAAAKABMAAABGAAMAAAALABIAAABGAAQAAAALABMAAABCAAEAAAAKABIAAABCAAIAAAAKABMAAABDAAEAAAALABIAAABDAAIAAAALABMAAABDACQAAAAKABIAAABDACUAAAAKABMAAABEACQAAAALABIAAABEACUAAAALABMAAABAACYAAAAKABIAAABAACcAAAAKABMAAABBACYAAAALABIAAABBACcAAAALABMAAAABACIAAAAKABUAAAABACMAAAAKABYAAAABACQAAAAKABcAAAACACIAAAALABUAAAACACMAAAALABYAAAACACQAAAALABcAAABBACIAAAAKABUAAABBACMAAAAKABYAAABBACQAAAAKABcAAABCACIAAAALABUAAABCACMAAAALABYAAABCACQAAAALABcAAAADAAEAAAAKABUAAAADAAIAAAAKABYAAAADAAMAAAAKABcAAAAEAAEAAAALABUAAAAEAAIAAAALABYAAAAEAAMAAAALABcAAAABAAUAAAAKABUAAAABAAYAAAAKABYAAAABAAcAAAAKABcAAAACAAUAAAALABUAAAACAAYAAAALABYAAAACAAcAAAALABcAAABEAAYAAAAKAA0AAABEAAcAAAAKAA4AAABEAAgAAAAKAA8AAABFAAYAAAALAA0AAABFAAcAAAALAA4AAABFAAgAAAALAA8AAAAGAAQAAAAKAA0AAAAGAAUAAAAKAA4AAAAGAAYAAAAKAA8AAAAHAAQAAAALAA0AAAAHAAUAAAALAA4AAAAHAAYAAAALAA8AAAA=")
 tile_set = SubResource("TileSet_4kn2i")
 
+[node name="partition1" type="Node2D" parent="decoration" unique_id=955981842]
+position = Vector2(1, 1)
+script = ExtResource("8_ckdfb")
+
+[node name="Interactable" parent="decoration/partition1" unique_id=1836534378 instance=ExtResource("9_ooyhu")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/partition1/Interactable" unique_id=1248106257]
+position = Vector2(499.5, -1703)
+scale = Vector2(0.066, 0.064)
+shape = SubResource("CircleShape2D_libwh")
+
+[node name="LabelPosition" type="Marker2D" parent="decoration/partition1/Interactable" unique_id=877985893]
+position = Vector2(508.31, -1702)
+
+[node name="Sprite2D" type="Sprite2D" parent="decoration/partition1" unique_id=1531362339]
+position = Vector2(866, -1394)
+texture = SubResource("AtlasTexture_ckdfb")
+
+[node name="partition2" type="Node2D" parent="decoration" unique_id=295568950]
+position = Vector2(656, 1168)
+script = ExtResource("8_ckdfb")
+
+[node name="Interactable" parent="decoration/partition2" unique_id=1939955432 instance=ExtResource("9_ooyhu")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/partition2/Interactable" unique_id=1923688940]
+position = Vector2(499.5, -1703)
+scale = Vector2(0.045, 0.065)
+shape = SubResource("CircleShape2D_libwh")
+
+[node name="LabelPosition" type="Marker2D" parent="decoration/partition2/Interactable" unique_id=1278075944]
+position = Vector2(511.5, -1702)
+
+[node name="Sprite2D" type="Sprite2D" parent="decoration/partition2" unique_id=1419190855]
+position = Vector2(866, -1394)
+texture = SubResource("AtlasTexture_ckdfb")
+
+[node name="partition3" type="Node2D" parent="decoration" unique_id=742361381]
+position = Vector2(245, 269)
+script = ExtResource("8_ckdfb")
+
+[node name="Interactable" parent="decoration/partition3" unique_id=2107021230 instance=ExtResource("9_ooyhu")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/partition3/Interactable" unique_id=1745215875]
+position = Vector2(1806, -2324)
+scale = Vector2(0.05, 0.06)
+shape = SubResource("CircleShape2D_libwh")
+
+[node name="LabelPosition" type="Marker2D" parent="decoration/partition3/Interactable" unique_id=1340798127]
+position = Vector2(1818.5, -2323)
+
+[node name="Sprite2D" type="Sprite2D" parent="decoration/partition3" unique_id=1516625724]
+position = Vector2(2172, -2014)
+texture = SubResource("AtlasTexture_ckdfb")
+
 [node name="spiderweb" type="TileMapLayer" parent="decoration" unique_id=658335385]
 tile_map_data = PackedByteArray("AAAAAAAAAQACABAAAAAAAAEAAQACABEAAAABAAAAAQADABAAAAABAAEAAQADABEAAABEAAMAAQAGABEAAABEAAQAAQAGABIAAABEAAUAAQAGABMAAABFAAIAAQAHABAAAABFAAMAAQAHABEAAABFAAQAAQAHABIAAABFAAUAAQAHABMAAABDACUAAQAGABEAAABDACYAAQAGABIAAABDACcAAQAGABMAAABEACQAAQAHABAAAABEACUAAQAHABEAAABEACYAAQAHABIAAABEACcAAQAHABMAAAACACIAAQAIABIAAAACACMAAQAIABMAAAAmAOv/AQAOABEAAAAnAOr/AQAPABAAAAAnAOv/AQAPABEAAAAGAOr/AQAPABAAABAHAOv/AQAOABEAABAGAOv/AQAPABEAABABAPz/AQAPABAAABACAP3/AQAOABEAABABAP3/AQAPABEAABBfAOj/AQAKAA4AAABfAOn/AQAKAA8AAABgAOj/AQALAA4AAABRAPL/AQAKAA4AAFBRAPP/AQALAA4AAFBQAPL/AQAKAA8AAFA0AKf/AQAOAA4AAAA0AKj/AQAOAA8AAAA1AKf/AQAPAA4AAAA1AKj/AQAPAA8AAAA9ALD/AQAOAA4AAAA9ALH/AQAOAA8AAAA+ALD/AQAPAA4AAAA+ALH/AQAPAA8AAAAcAMP/AQAOAA4AAAAcAMT/AQAOAA8AAAAdAMP/AQAPAA4AAAAdAMT/AQAPAA8AAAAVAM3/AQAOAA4AAAAVAM7/AQAOAA8AAAAWAM3/AQAPAA4AAAAWAM7/AQAPAA8AAAAVAMH/AQAIAA0AAAAVAML/AQAIAA4AAAAVAMP/AQAIAA8AAAAWAML/AQAJAA4AAAAWAMP/AQAJAA8AAABFAND/AQAIAA0AAABGANH/AQAJAA4AAABGANL/AQAKABEAAABHANL/AQALABEAAACLAIj/AQACABIAAACLAIn/AQACABMAAACMAIj/AQADABIAAACMAIn/AQADABMAAACWAJT/AQAKABMAABCVAJT/AQALABMAABBfALX/AQAOABMAAABgALT/AQAPABIAAABgALX/AQAPABMAAABjALT/AQAPABIAABBkALX/AQAOABMAABBjALX/AQAPABMAABB0AK3/AQAKABEAAAB1AK3/AQALABEAAABPAK7/AQAKABEAAABQAK7/AQALABEAAABPAL7/AQAEABAAAABPAL//AQAEABEAAABQAL7/AQAFABAAAABQAL//AQAFABEAAAB3AL7/AQAEABAAAAB3AL//AQAEABEAAAB4AL7/AQAFABAAAAB4AL//AQAFABEAAAA=")
 tile_set = SubResource("TileSet_mtpig")
@@ -28710,7 +28778,7 @@ limit_right = 2688
 limit_bottom = 720
 position_smoothing_enabled = true
 
-[node name="Piano" type="StaticBody2D" parent="decoration" unique_id=2104161994]
+[node name="Piano" type="StaticBody2D" parent="decoration" unique_id=2104161994 groups=["Piano"]]
 position = Vector2(382, -329)
 script = ExtResource("9_8ldkp")
 
@@ -28720,14 +28788,17 @@ position = Vector2(1, -2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/Piano" unique_id=1948714059]
 shape = SubResource("RectangleShape2D_8ldkp")
 
-[node name="Partition" parent="decoration" unique_id=1453888151 instance=ExtResource("10_8ldkp")]
-position = Vector2(866, -1393)
+[node name="Interactable" parent="decoration/Piano" unique_id=1610811854 instance=ExtResource("9_ooyhu")]
+position = Vector2(9, 38)
+interact_name = "Play String 3"
 
-[node name="Partition2" parent="decoration" unique_id=1849915806 instance=ExtResource("10_8ldkp")]
-position = Vector2(1521, -225)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/Piano/Interactable" unique_id=326290153]
+position = Vector2(-11, -37)
+scale = Vector2(0.505, 0.38)
+shape = SubResource("CircleShape2D_libwh")
 
-[node name="Partition3" parent="decoration" unique_id=1562279610 instance=ExtResource("10_8ldkp")]
-position = Vector2(2418, -1745)
+[node name="LabelPosition" type="Marker2D" parent="decoration/Piano/Interactable" unique_id=872486468]
+position = Vector2(66.515, -50)
 
 [node name="piano" type="TileMapLayer" parent="decoration" unique_id=936717173]
 tile_map_data = PackedByteArray("AAAUAOb/AQAAAAAAAAAUAOf/AQAAAAEAAAAUAOj/AQAAAAIAAAAUAOn/AQAAAAMAAAAUAOr/AQAAAAQAAAAUAOv/AQAAAAUAAAAUAOz/AQAAAAYAAAAUAO3/AQAAAAcAAAAVAOb/AQABAAAAAAAVAOf/AQABAAEAAAAVAOj/AQABAAIAAAAVAOn/AQABAAMAAAAVAOr/AQABAAQAAAAVAOv/AQABAAUAAAAVAOz/AQABAAYAAAAVAO3/AQABAAcAAAAWAOb/AQACAAAAAAAWAOf/AQACAAEAAAAWAOj/AQACAAIAAAAWAOn/AQACAAMAAAAWAOr/AQACAAQAAAAWAOv/AQACAAUAAAAWAOz/AQACAAYAAAAWAO3/AQACAAcAAAAXAOb/AQADAAAAAAAXAOf/AQADAAEAAAAXAOj/AQADAAIAAAAXAOn/AQADAAMAAAAXAOr/AQADAAQAAAAXAOv/AQADAAUAAAAXAOz/AQADAAYAAAAXAO3/AQADAAcAAAAYAOb/AQAEAAAAAAAYAOf/AQAEAAEAAAAYAOj/AQAEAAIAAAAYAOn/AQAEAAMAAAAYAOr/AQAEAAQAAAAYAOv/AQAEAAUAAAAYAOz/AQAEAAYAAAAYAO3/AQAEAAcAAAAZAOb/AQAFAAAAAAAZAOf/AQAFAAEAAAAZAOj/AQAFAAIAAAAZAOn/AQAFAAMAAAAZAOr/AQAFAAQAAAAZAOv/AQAFAAUAAAAZAOz/AQAFAAYAAAAZAO3/AQAFAAcAAAAaAOb/AQAGAAAAAAAaAOf/AQAGAAEAAAAaAOj/AQAGAAIAAAAaAOn/AQAGAAMAAAAaAOr/AQAGAAQAAAAaAOv/AQAGAAUAAAAaAOz/AQAGAAYAAAAaAO3/AQAGAAcAAAAbAOb/AQAHAAAAAAAbAOf/AQAHAAEAAAAbAOj/AQAHAAIAAAAbAOn/AQAHAAMAAAAbAOr/AQAHAAQAAAAbAOv/AQAHAAUAAAAbAOz/AQAHAAYAAAAbAO3/AQAHAAcAAAA=")

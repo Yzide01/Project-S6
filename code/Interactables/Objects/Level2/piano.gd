@@ -1,29 +1,39 @@
-extends InteractableObject
+extends Node2D
 
 @export var partitions_requises: int = 3
-@onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+var partitions_actuelles: int = 0
+var is_locked: bool = true
 
-func interact(player: Node2D) -> void:
-	# 1. On compte combien de partitions le joueur possède dans son inventaire
-	var partitions_trouvees = 0
-	
-	if player.inventory:
-		for slot in player.inventory.slots:
-			if slot.item and slot.item.name == "Partition":
-				partitions_trouvees += slot.amount
+@onready var interactable_area = $Interactable
+@onready var audio_player = $AudioStreamPlayer2D
 
-	# 2. On vérifie si on a le bon compte
-	if partitions_trouvees >= partitions_requises:
-		_jouer_musique_finale()
+func _ready() -> void:
+	# On configure l'interaction exactement comme la porte
+	if interactable_area:
+		interactable_area.interact_name = "Inspecter le piano"
+		interactable_area.is_interactable = true 
+		interactable_area.interact = _on_interact
+
+func _on_interact():
+	if is_locked:
+		print("Il manque des partitions... J'en ai : ", partitions_actuelles)
+		# Ici tu pourras mettre la pensée du joueur
 	else:
-		_lancer_pensee_manquante()
+		print("Le joueur joue la mélodie !")
+		interactable_area.is_interactable = false # On désactive après avoir joué
+		if audio_player:
+			audio_player.play()
 
-func _jouer_musique_finale() -> void:
-	is_interactable = false # On désactive le piano pour qu'il ne se relance pas
-	audio_player.play()
-	print("Bravo ! La musique finale se joue.")
-	# Optionnel : lancer un dialogue de fin ici
+# Cette fonction sera appelée par les partitions
+func ajouter_partition() -> void:
+	partitions_actuelles += 1
+	print("Partition reçue par le piano ! Total : ", partitions_actuelles)
+	
+	# Si on a le compte, on déverrouille le piano !
+	if partitions_actuelles >= partitions_requises:
+		unlock()
 
-func _lancer_pensee_manquante() -> void:
-	# On lance le dialogue qui dit qu'il manque des partitions
-	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level2/level2.dialogue"), "partitions_manquantes")
+func unlock() -> void:
+	is_locked = false
+	if interactable_area:
+		interactable_area.interact_name = "Jouer la mélodie"
