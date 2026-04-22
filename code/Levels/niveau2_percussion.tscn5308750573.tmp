@@ -2169,10 +2169,10 @@ sources/0 = SubResource("TileSetAtlasSource_fusta")
 radius = 115.60818
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6onm5"]
-size = Vector2(1158, 96)
+size = Vector2(1158, 119)
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_kvna6"]
-points = PackedVector2Array(54, -5, 29, -24, -16, -25, -45, -14, -53, 11, 31, 18, 53, -5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvna6"]
+size = Vector2(128, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubdlm"]
 size = Vector2(560, 97.5)
@@ -2257,14 +2257,14 @@ position = Vector2(-48, -132)
 [node name="EdgeTrigger" type="Area2D" parent="." unique_id=1797769607]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeTrigger" unique_id=1103937300]
-position = Vector2(579, 634)
+position = Vector2(579, 645.5)
 shape = SubResource("RectangleShape2D_6onm5")
 
 [node name="DrumTrigger" type="Area2D" parent="." unique_id=1634162440]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrumTrigger" unique_id=1187203832]
 position = Vector2(641, 563)
-shape = SubResource("ConvexPolygonShape2D_kvna6")
+shape = SubResource("RectangleShape2D_kvna6")
 
 [node name="PercussionSpirit" type="Sprite2D" parent="." unique_id=259532132]
 visible = false
@@ -2280,4 +2280,3 @@ shape = SubResource("RectangleShape2D_ubdlm")
 
 [connection signal="body_entered" from="EdgeTrigger" to="." method="_on_edge_trigger_body_entered"]
 [connection signal="body_entered" from="DrumTrigger" to="." method="_on_drum_trigger_body_entered"]
-[connection signal="body_entered" from="FinishTrigger" to="." method="_on_finish_trigger_body_entered"]

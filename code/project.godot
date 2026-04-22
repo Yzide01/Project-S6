@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Chromestesia"
-run/main_scene="uid://by5bb12lnrl3a"
+run/main_scene="uid://t3obcer27yl2"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -104,7 +104,7 @@ jump={
 [internationalization]
 
 locale/translations=PackedStringArray("res://addons/maaacks_options_menus/base/translations/menus_translations.en.translation", "res://addons/maaacks_options_menus/base/translations/menus_translations.fr.translation")
-locale/translations_pot_files=PackedStringArray("res://Dialogues/Level1/level1.dialogue", "res://Dialogues/Level3/Intro.dialogue", "res://Dialogues/Level3/Outro.dialogue", "res://Dialogues/Level2/level2.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogues/Level1/level1.dialogue", "res://Dialogues/Level3/Intro.dialogue", "res://Dialogues/Level3/Outro.dialogue", "res://Dialogues/Level2/level2.dialogue", "res://Dialogues/Level4/Intro.dialogue")
 
 [layer_names]
 
