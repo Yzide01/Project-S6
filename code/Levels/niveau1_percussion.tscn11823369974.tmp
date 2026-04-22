@@ -8234,8 +8234,6 @@ radius = 115.60818
 
 [node name="Node2D" type="Node2D" unique_id=1451406429]
 script = ExtResource("1_ntwyx")
-intro_position = Vector2(759, 428)
-outro_position = Vector2(580, -29)
 
 [node name="floor" type="TileMapLayer" parent="." unique_id=1930917716]
 tile_set = SubResource("TileSet_higgj")
@@ -8350,6 +8348,6 @@ limit_bottom = 733
 position_smoothing_enabled = true
 
 [node name="PercussionSpirit" type="Sprite2D" parent="." unique_id=619430691]
-position = Vector2(580, -28.999992)
+position = Vector2(759, 428)
 scale = Vector2(0.33323172, 0.35649675)
 texture = ExtResource("16_jk20k")
