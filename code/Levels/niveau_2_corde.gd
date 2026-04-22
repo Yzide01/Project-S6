@@ -4,14 +4,13 @@ extends Node2D
 var partitions_actuelles: int = 0
 var is_locked: bool = true
 
-# On charge le fichier de dialogue du niveau 2
-var level2_dialogue = load("res://Dialogues/Level2/level2.dialogue")
+# On charge le fichier de dialogue
+var level2_dialogue = load("res://Dialogues/Level2/Strings.dialogue")
 
 @onready var interactable_area = $Interactable
-@onready var audio_player = $AudioStreamPlayer2D
 
 func _ready() -> void:
-	add_to_group("Piano") # Indispensable pour que la partition le trouve
+	add_to_group("Piano")
 	if interactable_area:
 		interactable_area.interact_name = "Inspect piano"
 		interactable_area.is_interactable = true 
@@ -19,20 +18,21 @@ func _ready() -> void:
 
 func _on_interact():
 	if is_locked:
-		# Dialogue : "Il manque des morceaux..."
+		# On ne lance QUE le dialogue d'inactivité si le piano est bloqué
 		_play_dialogue("piano_inactive")
 	else:
-		# Dialogue : "C'est l'heure de jouer"
+		# On ne lance QUE le dialogue actif si on a les 3 partitions
 		await _play_dialogue("piano_active")
+		# Ici tu lances ta musique ou ton mini-jeu
 		interactable_area.is_interactable = false 
-		if audio_player:
-			audio_player.play()
 
+# Cette fonction est appelée UNIQUEMENT par la partition quand elle est ramassée
 func ajouter_partition() -> void:
 	partitions_actuelles += 1
 	
-	# On lance le dialogue correspondant au fragment trouvé
-	_play_dialogue("find_fragment_" + str(partitions_actuelles))
+	# Sécurité : On vérifie que le titre du dialogue existe bien (ex: find_fragment_1)
+	var dialogue_title = "find_fragment_" + str(partitions_actuelles)
+	_play_dialogue(dialogue_title)
 	
 	if partitions_actuelles >= partitions_requises:
 		unlock()
@@ -42,13 +42,16 @@ func unlock() -> void:
 	if interactable_area:
 		interactable_area.interact_name = "Play melody"
 
-# Fonction générique pour les dialogues (identique au Niveau 6)
 func _play_dialogue(title: String):
 	var player = get_tree().get_root().find_child("Player", true, false)
+	
+	# Empêcher de lancer un dialogue vide ou invalide
+	if not level2_dialogue: return
+
 	if player: player.process_mode = Node.PROCESS_MODE_DISABLED
 	
-	if level2_dialogue:
-		DialogueManager.show_example_dialogue_balloon(level2_dialogue, title)
-		await DialogueManager.dialogue_ended
+	# DialogueManager ne lancera que la section demandée (~ title)
+	DialogueManager.show_example_dialogue_balloon(level2_dialogue, title)
+	await DialogueManager.dialogue_ended
 	
 	if player: player.process_mode = Node.PROCESS_MODE_INHERIT

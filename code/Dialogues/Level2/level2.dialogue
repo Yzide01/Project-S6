@@ -1,4 +1,30 @@
-~ partitions_manquantes
+~ start
+The Guardian: This room... it feels heavy with silence. 
+The Guardian: A piano stands in the center, but its keys are frozen.
+The Guardian: It seems the music has been torn apart. I need to find the missing fragments of the score to wake it up.
+=> END
 
-Pensée: Il me manque encore des morceaux de la partition... Je devrais utiliser mon sonar.
+~ piano_inactive
+The Guardian: The piano is silent. It's missing three specific pieces of sheet music.
+The Guardian: I cannot play anything until the harmony is complete again.
+=> END
+
+~ find_fragment_1
+The Guardian: I found the first fragment! The melody is beginning to reappear in my mind.
+The Guardian: Only two more to go.
+=> END
+
+~ find_fragment_2
+The Guardian: The second fragment. The rhythm is getting stronger. 
+The Guardian: Just one last piece of the puzzle remains.
+=> END
+
+~ find_fragment_3
+The Guardian: That's it! The score is complete. 
+The Guardian: Now, let's see if this piano remembers how to sing.
+=> END
+
+~ piano_active
+The Guardian: The score is placed. The strings are vibrating with anticipation.
+The Guardian: It's time to play.
 => END

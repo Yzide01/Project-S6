@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cc5b8mm41gaah"]
 
+[ext_resource type="Script" uid="uid://cb4ympujbgw8s" path="res://Levels/niveau_2_corde.gd" id="1_ooyhu"]
 [ext_resource type="Texture2D" uid="uid://bw8dxc4pejoaf" path="res://Assets/cordes/niveau2_cordes/mockup2.png" id="1_x61l1"]
 [ext_resource type="Texture2D" uid="uid://d3o3vlld8n185" path="res://Assets/cordes/niveau2_cordes/wood7.png" id="2_pinuy"]
 [ext_resource type="Texture2D" uid="uid://b5h5t0vnfvqeq" path="res://Assets/cordes/niveau2_cordes/wood8.png" id="3_qydiq"]
@@ -28643,6 +28644,7 @@ texture = ExtResource("7_df1gw")
 sources/0 = SubResource("TileSetAtlasSource_bieip")
 
 [node name="Node2D" type="Node2D" unique_id=597112713]
+script = ExtResource("1_ooyhu")
 
 [node name="floor" type="TileMapLayer" parent="." unique_id=1122086784]
 
