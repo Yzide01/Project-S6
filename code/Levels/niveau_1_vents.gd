@@ -16,17 +16,15 @@ func _ready() -> void:
 	if spirit:
 		spirit.hide()
 		spirit.modulate.a = 0.0
-		spirit.z_index = 999 # Priorité maximale
+		# On le force à être devant tout le monde
+		spirit.z_index = 100 
 
 	if intro_dialogue:
 		await get_tree().create_timer(1.0).timeout
+		# 1. Mélos parle seul
 		await _play_sequence(intro_dialogue, "start", null)
+		# 2. L'esprit apparaît sur le MarkerIntro
 		await _play_sequence(intro_dialogue, "partie_2", marker_intro)
-
-func _on_bellows_area_body_entered(body: Node2D) -> void:
-	if body.name == "Player" and not bellows_seen:
-		bellows_seen = true
-		_play_sequence(bellows_dialogue, "start", null)
 
 func _on_hydraulis_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and not hydraulis_seen:
@@ -38,10 +36,9 @@ func _play_sequence(dialogue_resource, title: String, target_marker: Marker2D):
 	if player: player.process_mode = Node.PROCESS_MODE_DISABLED
 
 	if target_marker and spirit:
-		# ON FORCE LA POSITION ET LA VISIBILITÉ
+		# ON FORCE LA POSITION ET LE RENDU
 		spirit.global_position = target_marker.global_position
 		spirit.show()
-		spirit.modulate = Color(1, 1, 1, 0) # On part de transparent
 		
 		if spirit.has_node("SpiritSound"):
 			spirit.get_node("SpiritSound").play()
