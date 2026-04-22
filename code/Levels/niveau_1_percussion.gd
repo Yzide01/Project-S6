@@ -1,48 +1,44 @@
 extends Node2D
 
-# Solution : [2, 0, 1] (Full, Empty, Half)
+@export var intro_position: Vector2
+@export var outro_position: Vector2
 @export var secret_combination: Array[int] = [2, 0, 1] 
-var is_solved: bool = false
 
-@onready var bowl1 = $Bowl_1
-@onready var bowl2 = $Bowl_2
-@onready var bowl3 = $Bowl_3
+var is_solved: bool = false
+@onready var spirit = $PercussionSpirit
+@onready var bowls = [$Bowl_1, $Bowl_2, $Bowl_3]
 
 func _ready() -> void:
-	# On écoute les changements sur les bassins
-	if bowl1: bowl1.state_changed.connect(_check_solution)
-	if bowl2: bowl2.state_changed.connect(_check_solution)
-	if bowl3: bowl3.state_changed.connect(_check_solution)
-	
-	# Lancement de la séquence d'introduction
-	_play_intro_dialogue()
+	for b in bowls:
+		b.state_changed.connect(_check_solution)
+	_play_sequence("Intro", intro_position, "res://Dialogues/Level3/Intro.dialogue")
 
-func _play_intro_dialogue():
-	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level3/Intro.dialogue"), "start")
 func _check_solution():
-	if is_solved: return # Ne rien faire si c'est déjà gagné
-	
-	var state1 = bowl1.current_mass_state if bowl1 else 0
-	var state2 = bowl2.current_mass_state if bowl2 else 0
-	var state3 = bowl3.current_mass_state if bowl3 else 0
-	
-	var current_state = [state1, state2, state3]
-	
-	if current_state == secret_combination:
+	if is_solved: return
+	var current = [bowls[0].current_mass_state, bowls[1].current_mass_state, bowls[2].current_mass_state]
+	if current == secret_combination:
 		is_solved = true
-		_play_victory_sequence()
-	else:
-		# Optionnel : Petit indice si le joueur galère
-		# print("Wind Spirit: 'Focus on the mass! More water = more mass = lower frequency.'")
-		pass
+		_play_sequence("Outro", outro_position, "res://Dialogues/Level3/Outro.dialogue")
 
-func _play_victory_sequence():
+func _play_sequence(type, pos, diag_path):
+	var player = get_tree().get_first_node_in_group("player")
+	if player: player.can_move = false # BLOQUAGE
 	
-	# Désactive les bassins pour que le joueur ne les dérègle plus
-	if bowl1 and bowl1.has_node("Interactable"): bowl1.get_node("Interactable").is_interactable = false
-	if bowl2 and bowl2.has_node("Interactable"): bowl2.get_node("Interactable").is_interactable = false
-	if bowl3 and bowl3.has_node("Interactable"): bowl3.get_node("Interactable").is_interactable = false
-	
-	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level3/Outro.dialogue"), "start")
+	if spirit:
+		spirit.global_position = pos
+		spirit.modulate.a = 0
+		spirit.show()
+		var t = create_tween()
+		t.tween_property(spirit, "modulate:a", 1.0, 1.0)
+		await t.finished
 
+	DialogueManager.show_example_dialogue_balloon(load(diag_path), "start")
+	await DialogueManager.dialogue_ended
 	
+	if spirit:
+		var t2 = create_tween()
+		t2.tween_property(spirit, "modulate:a", 0.0, 1.0)
+		await t2.finished
+		spirit.hide()
+		
+	if player: player.can_move = true # LIBÉRATION

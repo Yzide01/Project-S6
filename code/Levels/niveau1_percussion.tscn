@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="11_rrpsy"]
 [ext_resource type="Script" uid="uid://25olcxr5yrtl" path="res://Interactables/Objects/Level3/bowls.gd" id="15_jk20k"]
 [ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="16_5sg2u"]
+[ext_resource type="Texture2D" uid="uid://c3y7rrtqp1sbn" path="res://Assets/Spirit/Esprit des percussions sans fond.png" id="16_jk20k"]
 [ext_resource type="AudioStream" uid="uid://tsk5r8hy4mcs" path="res://Assets/Sound/Trials/Bowl.wav" id="16_x6vnd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5dx0f"]
@@ -8233,6 +8234,8 @@ radius = 115.60818
 
 [node name="Node2D" type="Node2D" unique_id=1451406429]
 script = ExtResource("1_ntwyx")
+intro_position = Vector2(759, 428)
+outro_position = Vector2(579, -29.625)
 
 [node name="floor" type="TileMapLayer" parent="." unique_id=1930917716]
 tile_set = SubResource("TileSet_higgj")
@@ -8345,3 +8348,8 @@ limit_top = -224
 limit_right = 0
 limit_bottom = 733
 position_smoothing_enabled = true
+
+[node name="PercussionSpirit" type="Sprite2D" parent="." unique_id=619430691]
+position = Vector2(759, 428)
+scale = Vector2(0.33323172, 0.35649675)
+texture = ExtResource("16_jk20k")

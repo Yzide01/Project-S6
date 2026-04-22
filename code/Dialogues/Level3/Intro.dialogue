@@ -1,14 +1,10 @@
 ~ start
-Nathan: C'est cool regardez on peut faire ça si on veut
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
-- Start again => start
-- End the conversation => END
-Percussion Spirit: An intruder... So light, so fragile. 
-Percussion Spirit: You think you can restore Harmony? True power lies not in the wind that blows, but in the weight that strikes! My bowls are empty, their voices weak and piercing. Flee, before I crush you with my tempo!
-Thoughts: I should not listen to him. I should try to fill the bowls with water, it will increase their mass... I need to find the perfect combination...
+Percussion Spirit: An intruder? Your voice is weak... thin like the air!
+Percussion Spirit: Like these empty bowls, you lack weight. You vibrate too fast!
+Percussion Spirit: Without mass, there is no depth. Without gravity, there is no music.
+Percussion Spirit: Make them heavy. Make them sing. Or leave!
 
+Mélos: (Thinking) He’s talking about mass... 
+Mélos: (Thinking) If the bowls are empty, they are light and vibrate too fast. That's why the sound is so high.
+Mélos: (Thinking) I need to add water. More mass will slow the vibrations down and create a deep, low sound!
 => END

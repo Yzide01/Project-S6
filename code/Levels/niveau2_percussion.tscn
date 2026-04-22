@@ -2175,7 +2175,7 @@ size = Vector2(1158, 96)
 points = PackedVector2Array(54, -5, 29, -24, -16, -25, -45, -14, -53, 11, 31, 18, 53, -5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubdlm"]
-size = Vector2(560, 97.5)
+size = Vector2(560, 73.5)
 
 [node name="Node2D" type="Node2D" unique_id=28935177]
 script = ExtResource("1_6onm5")
@@ -2275,7 +2275,7 @@ texture = ExtResource("14_kvna6")
 [node name="FinishTrigger" type="Area2D" parent="." unique_id=1115739708]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishTrigger" unique_id=1094683117]
-position = Vector2(575, 217.25)
+position = Vector2(575, 205.25)
 shape = SubResource("RectangleShape2D_ubdlm")
 
 [connection signal="body_entered" from="EdgeTrigger" to="." method="_on_edge_trigger_body_entered"]
