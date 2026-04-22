@@ -49,6 +49,9 @@ var current_state: State = State.NORMAL
 var last_direction: Vector2 = Vector2.DOWN
 
 func _ready() -> void:
+	# Le joueur écoute les signaux globaux du plugin de dialogue
+	DialogueManager.dialogue_started.connect(_on_dialogue_started)
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	# 1. Initialisation de l'inventaire
 	if inventory:
 		inventory.use_item.connect(use_item)
@@ -61,9 +64,19 @@ func _ready() -> void:
 	if sprite: base_sprite_y = sprite.position.y
 	if anim: base_anim_y = anim.position.y
 
+var is_in_dialogue: bool = false
 
 
-func _physics_process(delta: float) -> void:
+
+func _physics_process(delta):
+	# On coupe les contrôles si un dialogue est ouvert
+	if is_in_dialogue:
+		velocity.x = 0
+		if anim:
+			update_animation(Vector2.ZERO)
+		return # On bloque les contrôles
+
+
 	if Input.is_action_just_pressed("jump") and z_height <= 0.0:
 		attempt_jump()
 		
@@ -217,3 +230,12 @@ func apply_gravity(delta: float) -> void:
 			sprite.position.y = base_sprite_y - z_height
 		if anim:
 			anim.position.y = base_anim_y - z_height
+
+func _on_dialogue_started(_resource):
+	# Le dialogue s'ouvre : on fige le joueur
+	is_in_dialogue = true
+
+func _on_dialogue_ended(_resource):
+	# Le dialogue se ferme : on attend 0.1s puis on libère le joueur
+	await get_tree().create_timer(0.1).timeout
+	is_in_dialogue = false
