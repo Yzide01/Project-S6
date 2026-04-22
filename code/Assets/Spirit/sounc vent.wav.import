@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://jlis2iwatvhm"
+path="res://.godot/imported/sounc vent.wav-8d9cc7088f1fdc28092b05c076cd60f5.sample"
+
+[deps]
+
+source_file="res://Assets/Spirit/sounc vent.wav"
+dest_files=["res://.godot/imported/sounc vent.wav-8d9cc7088f1fdc28092b05c076cd60f5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
