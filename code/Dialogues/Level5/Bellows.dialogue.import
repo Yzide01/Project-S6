@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://iqfm1m6y4arf"
+path="res://.godot/imported/Bellows.dialogue-89538bf23b2bea9c85c811f843753284.tres"
+
+[deps]
+
+source_file="res://Dialogues/Level5/Bellows.dialogue"
+dest_files=["res://.godot/imported/Bellows.dialogue-89538bf23b2bea9c85c811f843753284.tres"]
+
+[params]
+
+defaults=true

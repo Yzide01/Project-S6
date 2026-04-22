@@ -3123,12 +3123,6 @@ texture = ExtResource("16_v844k")
 [sub_resource type="TileSet" id="TileSet_mxan3"]
 sources/1 = SubResource("TileSetAtlasSource_ncv2p")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kfgp"]
-size = Vector2(394.5, 386.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxbew"]
-size = Vector2(383.5, 386.5)
-
 [node name="Node2D" type="Node2D" unique_id=1658413396]
 script = ExtResource("1_0kfgp")
 
@@ -3166,18 +3160,3 @@ limit_top = -144
 limit_right = 1920
 limit_bottom = 1152
 position_smoothing_enabled = true
-
-[node name="BellowsArea" type="Area2D" parent="." unique_id=1551443660]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BellowsArea" unique_id=652407968]
-position = Vector2(-252.25, 413.75)
-shape = SubResource("RectangleShape2D_0kfgp")
-
-[node name="HydraulisArea" type="Area2D" parent="." unique_id=87707697]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HydraulisArea" unique_id=410045266]
-position = Vector2(1547.25, 284.75)
-shape = SubResource("RectangleShape2D_mxbew")
-
-[connection signal="body_entered" from="BellowsArea" to="." method="_on_bellows_area_body_entered"]
-[connection signal="body_entered" from="HydraulisArea" to="." method="_on_hydraulis_area_body_entered"]
