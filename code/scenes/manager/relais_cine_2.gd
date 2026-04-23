@@ -5,5 +5,5 @@ func _ready():
 	# elle lance immédiatement la Cinématique 2, puis envoie vers le Niveau 1
 	SceneManager.jouer_cinematique(
 		"res://Assets/Videos/Scene-2.ogv", 
-		"res://Levels/niveau1_percussion.tscn" 
+		"res://Levels/niveau1_cordeV2.tscn" 
 	)

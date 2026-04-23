@@ -53,14 +53,27 @@ func jouer_cinematique(chemin_video: String, chemin_scene_suivante: String) -> v
 	# 3. On enlève l'écran noir pour voir la vidéo
 	animation_player.play("fade_to_normal")
 
-# Appelée quand la vidéo arrive à la fin naturellement
+# Appelée quand la vidéo arrive à la fin (ou est passée)
 func _on_video_finished() -> void:
-	video_player.visible = false # On cache l'écran de cinéma
-	changer_niveau(scene_apres_video) # On lance le vrai niveau !
+	video_player.stop() # On coupe tout de suite le son/image
+	
+	# 1. On lance le fondu noir par dessus la dernière image de la vidéo
+	animation_player.play("fade_to_black")
+	await animation_player.animation_finished
+	
+	# 2. L'écran est totalement noir. On peut cacher la vidéo incognito !
+	video_player.visible = false 
+	
+	# 3. On charge la scène suivante "dans le noir"
+	get_tree().change_scene_to_file(scene_apres_video)
+	
+	# 4. On rouvre les rideaux sur le nouveau niveau
+	animation_player.play("fade_to_normal")
 
-# Bonus : Permettre au joueur de passer la vidéo avec Espace
+# Permettre au joueur de passer la vidéo avec Espace
 func _input(event: InputEvent) -> void:
 	if video_player.visible and video_player.is_playing():
 		if event.is_action_pressed("jump") or event.is_action_pressed("ui_cancel"):
-			video_player.stop() # Coupe la vidéo
-			_on_video_finished() # Enchaîne sur le niveau
+			# Cette ligne dit à Godot : "J'ai géré cet appui sur Espace, ne le dis pas aux autres !"
+			get_viewport().set_input_as_handled() 
+			_on_video_finished()
