@@ -57,6 +57,7 @@ _data = {
 }
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1418027770]
+layer = 67
 script = ExtResource("1_7lmbi")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1738078782]
