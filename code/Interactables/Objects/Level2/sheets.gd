@@ -4,17 +4,16 @@ extends Node2D
 
 func _ready() -> void:
 	if interactable_area:
-		interactable_area.interact_name = "Ramasser la partition"
+		interactable_area.interact_name = "Pick up sheet music" # Nom en anglais
 		interactable_area.is_interactable = true 
 		interactable_area.interact = _on_interact
 
 func _on_interact():
-	# 1. On cherche le piano dans la scène (grâce à son groupe)
 	var piano = get_tree().get_first_node_in_group("Piano")
 	
-	# 2. On lui donne la partition
 	if piano:
 		piano.ajouter_partition()
+		# Le dialogue spécifique au fragment (1, 2 ou 3) 
+		# sera géré par le piano pour être plus centralisé.
 	
-	# 3. La partition disparaît de la carte
 	queue_free()

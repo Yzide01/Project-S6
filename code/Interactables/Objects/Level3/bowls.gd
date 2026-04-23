@@ -21,6 +21,6 @@ func _on_interact():
 func _update_feedback():
 	if audio:
 		match current_mass_state:
-			0: audio.pitch_scale = 1.5 # Vide = Aigu
+			0: audio.pitch_scale = 1.7 # Vide = Aigu
 			1: audio.pitch_scale = 1.0
 			2: audio.pitch_scale = 0.6 # Plein = Grave

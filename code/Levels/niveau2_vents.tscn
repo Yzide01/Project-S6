@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dmigh3n8mj6di" path="res://Assets/vents/niveau2_vents/Tileset-Terrain2.png" id="1_ea82f"]
 [ext_resource type="Texture2D" uid="uid://csodq2m2beue1" path="res://Assets/vents/niveau2_vents/TX Tileset Grass.png" id="1_plhlm"]
+[ext_resource type="Script" uid="uid://dyepjdlgvir1h" path="res://Levels/niveau_2_vents.gd" id="1_poa13"]
 [ext_resource type="Texture2D" uid="uid://cgxi67n2y8hbj" path="res://Assets/vents/niveau2_vents/altar 224x288 - standard.png" id="2_plhlm"]
 [ext_resource type="Texture2D" uid="uid://dx3fc21edinlw" path="res://Assets/vents/niveau2_vents/murpierre.png" id="3_r4aep"]
 [ext_resource type="Texture2D" uid="uid://cvl8h3uohcrh6" path="res://Assets/vents/niveau2_vents/arche.png" id="4_6lrwr"]
@@ -32,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://pw17nlr2clmq" path="res://Assets/vents/niveau2_vents/tube8.png" id="27_65qdh"]
 [ext_resource type="Texture2D" uid="uid://71wvah156rsr" path="res://Assets/vents/niveau2_vents/tube9.png" id="28_tkiaj"]
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="29_u80fo"]
+[ext_resource type="Texture2D" uid="uid://cqh85iat07jk2" path="res://Assets/Spirit/Esprit Inca.png" id="34_vlaer"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5kic"]
 texture = ExtResource("1_plhlm")
@@ -12933,7 +12935,14 @@ texture = ExtResource("4_28ihb")
 sources/0 = SubResource("TileSetAtlasSource_kqc50")
 sources/1 = SubResource("TileSetAtlasSource_y4l7k")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_poa13"]
+size = Vector2(42, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlaer"]
+size = Vector2(104, 48.5)
+
 [node name="Node2D" type="Node2D" unique_id=444095406]
+script = ExtResource("1_poa13")
 
 [node name="floor" type="TileMapLayer" parent="." unique_id=671811682]
 
@@ -12990,3 +12999,27 @@ tile_set = SubResource("TileSet_sa1y6")
 [node name="banc" type="TileMapLayer" parent="decoration" unique_id=357077263]
 tile_map_data = PackedByteArray("AAATABAAAQAYAAAAABASABAAAQAZAAAAABATABEAAQAYAAEAABASABEAAQAZAAEAABATABIAAQAYAAIAABASABIAAQAZAAIAABATABMAAQAYAAMAABASABMAAQAZAAMAABAzABAAAQAZAAAAAAAyABAAAQAYAAAAAAAzABEAAQAZAAEAAAAyABEAAQAYAAEAAAAzABIAAQAZAAIAAAAyABIAAQAYAAIAAAAzABMAAQAZAAMAAAAyABMAAQAYAAMAAAAKABsAAQAKABIAAAAKABwAAQAKABMAAAALABsAAQALABIAAAALABwAAQALABMAAAAzAB8AAQAKABIAAAAzACAAAQAKABMAAAA0AB8AAQALABIAAAA0ACAAAQALABMAAAA9ABEAAQAKAA0AAAA9ABIAAQAKAA4AAAA9ABMAAQAKAA8AAAA+ABEAAQALAA0AAAA+ABIAAQALAA4AAAA+ABMAAQALAA8AAAAJABMAAQAKAA0AAAAJABQAAQAKAA4AAAAJABUAAQAKAA8AAAAKABMAAQALAA0AAAAKABQAAQALAA4AAAAKABUAAQALAA8AAAA2AA8AAQASABMAAAA2ABAAAQASABQAAAA2ABEAAQASABUAAAA3AA8AAQATABMAAAA3ABAAAQATABQAAAA3ABEAAQATABUAAAA+ABUAAQASABMAAAA+ABYAAQASABQAAAA+ABcAAQASABUAAAA/ABUAAQATABMAAAA/ABYAAQATABQAAAA/ABcAAQATABUAAAA0ABsAAQASABMAAAA0ABwAAQASABQAAAA0AB0AAQASABUAAAA1ABsAAQATABMAAAA1ABwAAQATABQAAAA1AB0AAQATABUAAAAPABcAAQASABMAAAAPABgAAQASABQAAAAPABkAAQASABUAAAAQABcAAQATABMAAAAQABgAAQATABQAAAAQABkAAQATABUAAAAGABAAAQASABMAAAAGABEAAQASABQAAAAGABIAAQASABUAAAAHABAAAQATABMAAAAHABEAAQATABQAAAAHABIAAQATABUAAAA=")
 tile_set = SubResource("TileSet_hft4i")
+
+[node name="HoldPosition" type="Marker2D" parent="." unique_id=67847521]
+position = Vector2(560, 543)
+
+[node name="SteleArea" type="Area2D" parent="." unique_id=396867061]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SteleArea" unique_id=1253942083]
+position = Vector2(418, 197)
+shape = SubResource("RectangleShape2D_poa13")
+
+[node name="IncaTriggerArea" type="Area2D" parent="." unique_id=1938205643]
+position = Vector2(543, 216)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IncaTriggerArea" unique_id=844664960]
+position = Vector2(17, 39.75)
+shape = SubResource("RectangleShape2D_vlaer")
+
+[node name="IncaGhost" type="Sprite2D" parent="." unique_id=365286795]
+position = Vector2(558, 102)
+scale = Vector2(0.48697925, 0.47628736)
+texture = ExtResource("34_vlaer")
+
+[connection signal="body_entered" from="SteleArea" to="." method="_on_stele_area_body_entered"]
+[connection signal="body_entered" from="IncaTriggerArea" to="." method="_on_inca_trigger_area_body_entered"]

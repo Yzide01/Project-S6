@@ -54,6 +54,9 @@ var last_direction: Vector2 = Vector2.DOWN
 func _ready() -> void:
 	# Par défaut, on s'assure que le joueur écoute bien les murs bas !
 	set_collision_mask_value(low_obstacle_layer, true)
+    # Le joueur écoute les signaux globaux du plugin de dialogue
+	DialogueManager.dialogue_started.connect(_on_dialogue_started)
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	# 1. Initialisation de l'inventaire
 	if inventory:
@@ -67,9 +70,22 @@ func _ready() -> void:
 	if sprite: base_sprite_y = sprite.position.y
 	if anim: base_anim_y = anim.position.y
 
+var is_in_dialogue: bool = false
 
+func _on_dialogue_started():
+	is_in_dialogue = true
+
+func _on_dialogue_ended():
+	is_in_dialogue = false
 
 func _physics_process(delta: float) -> void:
+	# On coupe les contrôles si un dialogue est ouvert
+	if is_in_dialogue:
+		velocity = Vector2.ZERO
+		if anim:
+			update_animation(Vector2.ZERO)
+		return # On bloque les contrôles
+
 	# Mettre à jour la hauteur simulée du sol en fonction des zones de terrain
 	calculate_floor_z()
 

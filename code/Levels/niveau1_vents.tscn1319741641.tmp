@@ -3182,25 +3182,16 @@ position = Vector2(1607, 284.75)
 shape = SubResource("RectangleShape2D_mxbew")
 
 [node name="WindSpirit" type="Sprite2D" parent="." unique_id=1182424470]
-top_level = true
-z_index = 100
-position = Vector2(642, 863.00006)
-scale = Vector2(0.3664389, 0.37993428)
-texture = ExtResource("20_2k05v")
+position = Vector2(679, 823)
+scale = Vector2(0.32195118, 0.34703937)
 
 [node name="SpiritSound" type="AudioStreamPlayer2D" parent="WindSpirit" unique_id=1294662608]
 position = Vector2(123.56165, 1.4405829)
 stream = ExtResource("21_2k05v")
 
 [node name="Sprite2D" type="Sprite2D" parent="WindSpirit" unique_id=1016879176]
-position = Vector2(2824.4817, -1321.2813)
+position = Vector2(-96.28789, 31.696692)
 texture = ExtResource("20_2k05v")
-
-[node name="MarkerIntro" type="Marker2D" parent="." unique_id=1962170996]
-position = Vector2(638, 862)
-
-[node name="MarkerHydraulis" type="Marker2D" parent="." unique_id=1263724594]
-position = Vector2(1663, 394)
 
 [connection signal="body_entered" from="BellowsArea" to="." method="_on_bellows_area_body_entered"]
 [connection signal="body_entered" from="HydraulisArea" to="." method="_on_hydraulis_area_body_entered"]

@@ -19,8 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://15bitoigpmqj" path="res://Assets/vents/niveau1_vents/orgue1.png" id="15_s7pgu"]
 [ext_resource type="Texture2D" uid="uid://cu2rj1ishcpll" path="res://Assets/vents/niveau1_vents/hydrolyse1.png" id="16_v844k"]
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="18_ep8ry"]
-[ext_resource type="Texture2D" uid="uid://uxwhtdnqthp4" path="res://Assets/Spirit/Esprit des vents sans fond.png" id="20_2k05v"]
-[ext_resource type="AudioStream" uid="uid://jlis2iwatvhm" path="res://Assets/Spirit/sounc vent.wav" id="21_2k05v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37hjs"]
 texture = ExtResource("1_y4hyp")
@@ -3125,12 +3123,6 @@ texture = ExtResource("16_v844k")
 [sub_resource type="TileSet" id="TileSet_mxan3"]
 sources/1 = SubResource("TileSetAtlasSource_ncv2p")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kfgp"]
-size = Vector2(251.5, 386.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxbew"]
-size = Vector2(264, 386.5)
-
 [node name="Node2D" type="Node2D" unique_id=1658413396]
 script = ExtResource("1_0kfgp")
 
@@ -3168,39 +3160,3 @@ limit_top = -144
 limit_right = 1920
 limit_bottom = 1152
 position_smoothing_enabled = true
-
-[node name="BellowsArea" type="Area2D" parent="." unique_id=1551443660]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BellowsArea" unique_id=652407968]
-position = Vector2(-323.75, 413.75)
-shape = SubResource("RectangleShape2D_0kfgp")
-
-[node name="HydraulisArea" type="Area2D" parent="." unique_id=87707697]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HydraulisArea" unique_id=410045266]
-position = Vector2(1607, 284.75)
-shape = SubResource("RectangleShape2D_mxbew")
-
-[node name="WindSpirit" type="Sprite2D" parent="." unique_id=1182424470]
-top_level = true
-z_index = 100
-position = Vector2(642, 863.00006)
-scale = Vector2(0.3664389, 0.37993428)
-texture = ExtResource("20_2k05v")
-
-[node name="SpiritSound" type="AudioStreamPlayer2D" parent="WindSpirit" unique_id=1294662608]
-position = Vector2(123.56165, 1.4405829)
-stream = ExtResource("21_2k05v")
-
-[node name="Sprite2D" type="Sprite2D" parent="WindSpirit" unique_id=1016879176]
-position = Vector2(2824.4817, -1321.2813)
-texture = ExtResource("20_2k05v")
-
-[node name="MarkerIntro" type="Marker2D" parent="." unique_id=1962170996]
-position = Vector2(638, 862)
-
-[node name="MarkerHydraulis" type="Marker2D" parent="." unique_id=1263724594]
-position = Vector2(1663, 394)
-
-[connection signal="body_entered" from="BellowsArea" to="." method="_on_bellows_area_body_entered"]
-[connection signal="body_entered" from="HydraulisArea" to="." method="_on_hydraulis_area_body_entered"]
