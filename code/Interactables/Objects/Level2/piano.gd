@@ -27,6 +27,9 @@ func _on_interact():
 		interactable_area.is_interactable = false # On désactive l'interaction
 		if audio_player:
 			audio_player.play() # La musique se lance !
+			
+		await get_tree().create_timer(10.0).timeout
+		SceneManager.changer_niveau("res://Levels/niveau1_percussion.tscn")
 
 # Cette fonction est appelée automatiquement par les partitions quand on les ramasse
 func ajouter_partition() -> void:
