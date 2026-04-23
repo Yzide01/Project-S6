@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://crbf0xp4440lp"]
+
+[ext_resource type="Script" uid="uid://bvwjbjmav0kss" path="res://scenes/BookUI.gd" id="1_h7dfs"]
+[ext_resource type="Script" uid="uid://c758645g28agj" path="res://scenes/onde_vibrante.gd" id="2_ogy4m"]
+[ext_resource type="Texture2D" uid="uid://b7hhimyp66l3f" path="res://Assets/cordes/niveau1_cordes/corde3.png" id="2_qjh8d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogy4m"]
+bg_color = Color(0.9019608, 0.8352941, 0.72156864, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.23921569, 0.14509805, 0.11764706, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_h7dfs"]
+color = Color(0.23921569, 0.14509805, 0.11764706, 1)
+thickness = 5
+vertical = true
+
+[node name="BookUI" type="CanvasLayer" unique_id=1635178096]
+script = ExtResource("1_h7dfs")
+
+[node name="Page1" type="Control" parent="." unique_id=2034200279]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Page1" unique_id=825529325]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 41.0
+offset_right = 891.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogy4m")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Page1/PanelContainer" unique_id=1490642222]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Page1/PanelContainer/MarginContainer" unique_id=1907134922]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="PageGauche" type="MarginContainer" parent="Page1/PanelContainer/MarginContainer/HBoxContainer" unique_id=1679283857]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Page1/PanelContainer/MarginContainer/HBoxContainer/PageGauche" unique_id=868447435]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Page1/PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer" unique_id=932996492]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 15
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "[center][b][font_size=30]LESSON I[/font_size][/b]
+[i][color=gray]The Voice of Objects[/color][/i][/center]
+
+The size of an object determines its [b]voice[/b]. In our world, everything that vibrates creates a sound.
+
+[b]The Rule:[/b]
+A short string vibrates [color=red]faster[/color] than a long one."
+fit_content = true
+
+[node name="SchemaFreq" type="ColorRect" parent="Page1/PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer" unique_id=2046358906]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.19966345, 0.13335153, 0.07846785, 1)
+
+[node name="OndeVibrante" type="Line2D" parent="Page1/PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer/SchemaFreq" unique_id=1908200424]
+z_index = 5
+scale = Vector2(0.07, 1)
+points = PackedVector2Array(-22, 71.259125, 366.99994, 71.03058, -22, 71.5)
+texture = ExtResource("2_qjh8d")
+texture_mode = 1
+script = ExtResource("2_ogy4m")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Page1/PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer" unique_id=406623727]
+layout_mode = 2
+size_flags_vertical = 15
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "[center][i]Observe the fast vibration above.[/i][/center]"
+fit_content = true
+
+[node name="TextureRect" type="TextureRect" parent="Page1/PanelContainer/MarginContainer/HBoxContainer/PageGauche/VBoxContainer" unique_id=1345106578]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Page1/PanelContainer/MarginContainer/HBoxContainer" unique_id=97392568]
+layout_mode = 2
+theme_override_constants/separation = 100
+theme_override_styles/separator = SubResource("StyleBoxLine_h7dfs")
+
+[node name="PageDroite" type="MarginContainer" parent="Page1/PanelContainer/MarginContainer/HBoxContainer" unique_id=202417045]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Page1/PanelContainer/MarginContainer/HBoxContainer/PageDroite" unique_id=335230461]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Page1/PanelContainer/MarginContainer/HBoxContainer/PageDroite/VBoxContainer" unique_id=1593045651]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 15
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 35
+theme_override_font_sizes/bold_font_size = 35
+bbcode_enabled = true
+text = "[center][b][font_size=25]HIGH PITCH[/font_size][/b][/center]
+
+A [b]short string[/b] vibrates very fast. 
+This creates a [color=red]High Frequency[/color].
+
+[i]The smaller the object, the higher the note.[/i]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Page1/PanelContainer/MarginContainer/HBoxContainer/PageDroite/VBoxContainer" unique_id=548186971]
+layout_mode = 2
+
+[node name="Page2" type="Control" parent="." unique_id=1052604676]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PageGauche" type="VBoxContainer" parent="Page2" unique_id=1158630004]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="IllustrationLecon" type="TextureRect" parent="Page2/PageGauche" unique_id=1999546965]
+layout_mode = 2
+
+[node name="TextLecon" type="RichTextLabel" parent="Page2/PageGauche" unique_id=1280958366]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][b]LESSON II: PROPAGATION & RESONANCE[/b][/center]
+
+\"To restore the melody of this ancient piano, you must understand how sound travels. Frequency defines its 'vision' of the world:
+
+• [color=cyan]High Pitch is an arrow[/color]: precise and direct, but fragile. It cannot travel long distances.
+• [color=blue]Low Pitch is a wave[/color]: powerful and deep. It travels far and encompasses everything, but lacks fine detail.
+
+Find the [b]three missing fragments[/b] of the score to master these vibrations and wake the strings.\""
+
+[node name="PageDroite" type="HBoxContainer" parent="Page2" unique_id=865622542]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="IllustrationArchive" type="TextureRect" parent="Page2/PageDroite" unique_id=1509788616]
+layout_mode = 2
+
+[node name="TextArchive" type="RichTextLabel" parent="Page2/PageDroite" unique_id=747076624]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][b]HISTORICAL ARCHIVES: The Monochord[/b][/center]
+
+\"In the 6th century BC, Pythagoras used a single stretched string, the Monochord, to prove that music is a mathematical science. 
+
+By dividing a string exactly in half (1:2 ratio), he obtained a perfect octave. This discovery proved that harmony is not magic, but the result of precise numerical proportions.
+
+The fragments you seek follow these ancient laws of resonance.\""
+
+[node name="Page3" type="Control" parent="." unique_id=2040999150]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PageGauche" type="VBoxContainer" parent="Page3" unique_id=280121831]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Page3/PageGauche" unique_id=542230555]
+layout_mode = 2
+text = "[center][b]LESSON III: MASS AND VIBRATION[/b][/center]
+
+\"In the Temple of Percussions, sound is a matter of weight. The spirit of the mountain teaches us a fundamental law of physics:
+
+• [color=orange]Low Mass (Empty):[/color] The air inside vibrates quickly. The sound is [b]High-Pitched[/b] and sharp.
+• [color=brown]High Mass (Full of Water):[/color] The weight slows down the vibrations. The sound becomes [b]Deep and Grave[/b].
+
+To open the Stone Gate, you must balance the water levels. Remember: [i]Weight dictates the voice of the bronze.[/i]\""
+
+[node name="PageDroite" type="VBoxContainer" parent="Page3" unique_id=1266183976]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Page3/PageDroite" unique_id=1622605644]
+layout_mode = 2
+text = "[center][b]HISTORICAL ARCHIVES: The Singing Stones[/b][/center]
+
+\"Long before bronze was cast, ancient civilizations used [b]Lithophones[/b]. These were tuned stones, shaped by hand to create scales.
+
+Archaeologists found that by changing the size and thickness of the rock, our ancestors could play complex melodies. Just like your bronze bowls, the geometry of the stone defined the geometry of the music.
+
+Nature was the first instrument; math was its first language.\""
