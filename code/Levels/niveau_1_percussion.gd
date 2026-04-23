@@ -72,3 +72,7 @@ func _play_sequence(pos, diag_path):
 		player.set_physics_process(true)
 		player.set_process_input(true)
 		print("DEBUG: Mélos est libre")
+
+
+func _on_terrain_entered(area: Area2D) -> void:
+	pass # Replace with function body.

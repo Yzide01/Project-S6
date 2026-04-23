@@ -41,6 +41,9 @@ var z_velocity: float = 0.0            # Vitesse actuelle sur l'axe Z
 var base_sprite_y: float = 0.0         # Position de base du sprite
 var base_anim_y: float = 0.0           # Position de base de l'animation
 
+var current_floor_z: float = 0.0       # Hauteur du sol sous les pieds
+var overlapping_terrains: Array = []   # Liste des Area2D (TerrainZone) actuelles
+
 # --- State machine ---
 enum State { NORMAL, CRAWLING, SPRINT, JUMPING }
 var current_state: State = State.NORMAL
@@ -49,6 +52,9 @@ var current_state: State = State.NORMAL
 var last_direction: Vector2 = Vector2.DOWN
 
 func _ready() -> void:
+	# Par défaut, on s'assure que le joueur écoute bien les murs bas !
+	set_collision_mask_value(low_obstacle_layer, true)
+
 	# 1. Initialisation de l'inventaire
 	if inventory:
 		inventory.use_item.connect(use_item)
@@ -64,7 +70,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("jump") and z_height <= 0.0:
+	# Mettre à jour la hauteur simulée du sol en fonction des zones de terrain
+	calculate_floor_z()
+
+	if Input.is_action_just_pressed("jump") and z_height <= current_floor_z:
 		attempt_jump()
 		
 	# Appliquer la gravité et la pseudo-3D
@@ -72,7 +81,7 @@ func _physics_process(delta: float) -> void:
 		
 	# --- State handling ---
 	# Impossible de changer de posture (crawl/sprint) si on est en l'air
-	if z_height <= 0.0:
+	if z_height <= current_floor_z:
 		if Input.is_action_pressed("crawl"):
 			current_state = State.CRAWLING
 		elif Input.is_action_pressed("sprint"):
@@ -196,20 +205,21 @@ func attempt_jump() -> void:
 	set_collision_mask_value(low_obstacle_layer, false)
 
 func apply_gravity(delta: float) -> void:
-	if current_state == State.JUMPING or z_height > 0.0:
+	if current_state == State.JUMPING or z_height > current_floor_z:
 		# Application de la vélocité et gravité sur l'axe Z
 		z_velocity -= gravity_z * delta
 		z_height += z_velocity * delta
 		
 		# Condition d'atterrissage
-		if z_height <= 0.0:
-			z_height = 0.0
+		if z_height <= current_floor_z:
+			z_height = current_floor_z
 			z_velocity = 0.0
 			
 			if current_state == State.JUMPING:
 				current_state = State.NORMAL
-				# Réactive la collision de la couche basse lors de l'atterrissage
-				set_collision_mask_value(low_obstacle_layer, true)
+			
+			# Réactive la collision de la couche basse lors de l'atterrissage (toujours !)
+			set_collision_mask_value(low_obstacle_layer, true)
 				
 		# Application du z_height sur le visuel (décale vers le haut)
 		# Note: les ombres (s'il y en a) ne bougent pas, car on ne modifie que les variables Y des sprites
@@ -217,3 +227,44 @@ func apply_gravity(delta: float) -> void:
 			sprite.position.y = base_sprite_y - z_height
 		if anim:
 			anim.position.y = base_anim_y - z_height
+
+# --- GESTION DU TERRAIN (PLATEAUX/ESCALIERS) ---
+
+func calculate_floor_z() -> void:
+	var target_floor_z = 0.0
+	
+	for area in overlapping_terrains:
+		if area.get("is_stairs"):
+			# Calcul de l'interpolation sur Y
+			var stair_bottom_y = area.get("stair_bottom_y")
+			var stair_top_y = area.get("stair_top_y")
+			var zh_bottom = area.get("z_height_bottom")
+			var zh_top = area.get("z_height_top")
+			
+			if stair_bottom_y != null and stair_top_y != null and zh_bottom != null and zh_top != null:
+				var t = clamp(inverse_lerp(stair_bottom_y, stair_top_y, global_position.y), 0.0, 1.0)
+				var interpolated_z = lerp(zh_bottom, zh_top, t)
+				target_floor_z = max(target_floor_z, interpolated_z)
+		else:
+			# Plateau normal
+			var t_z = area.get("terrain_z_height")
+			if t_z != null:
+				target_floor_z = max(target_floor_z, t_z)
+				
+	current_floor_z = target_floor_z
+	
+	# Si on atterrit ou qu'on descend d'un escalier de façon abrupte sans sauter
+	if current_state != State.JUMPING and z_height < current_floor_z:
+		z_height = current_floor_z
+
+func _on_terrain_entered(area: Area2D) -> void:
+	if area and not overlapping_terrains.has(area):
+		overlapping_terrains.append(area)
+
+func _on_terrain_exited(area: Area2D) -> void:
+	if area and overlapping_terrains.has(area):
+		overlapping_terrains.erase(area)
+
+
+func _on_terrain_detector_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
