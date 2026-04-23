@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="16_5sg2u"]
 [ext_resource type="Texture2D" uid="uid://c3y7rrtqp1sbn" path="res://Assets/Spirit/Esprit des percussions sans fond.png" id="16_jk20k"]
 [ext_resource type="AudioStream" uid="uid://tsk5r8hy4mcs" path="res://Assets/Sound/Trials/Bowl.wav" id="16_x6vnd"]
+[ext_resource type="AudioStream" uid="uid://clceoid0dmb1a" path="res://Assets/Sound/Ambiant sound/background_medium.wav" id="18_x6vnd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5dx0f"]
 texture = ExtResource("1_xy8x2")
@@ -8454,6 +8455,12 @@ polygon = PackedVector2Array(1881.5671, 403.00003, 1881.5671, 437.00003, 1972.85
 position = Vector2(-2121.0002, -11)
 scale = Vector2(1.119058, 0.99999857)
 polygon = PackedVector2Array(1895.3442, 403.00052, 1895.3442, 437.00055, 1972.8594, 436.0003, 1972.8594, 403.00027)
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=962040725]
+stream = ExtResource("18_x6vnd")
+autoplay = true
+bus = &"Ambiance"
+playback_type = 1
 
 [connection signal="area_entered" from="Player/TerrainDetector" to="." method="_on_terrain_entered"]
 [connection signal="area_entered" from="Player/TerrainDetector" to="Player" method="_on_terrain_exited"]

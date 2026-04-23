@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://cqwfsfoifyvuu" path="res://Assets/Sound/Trials/pizzicato3.wav" id="17_15k86"]
 [ext_resource type="AudioStream" uid="uid://ikvdqpsfuj25" path="res://Assets/Sound/Trials/pizzicato2.wav" id="18_v41tu"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="21_15k86"]
+[ext_resource type="AudioStream" uid="uid://dpwlsmodp0246" path="res://Assets/Sound/Ambiant sound/background_heavy.wav" id="22_v41tu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qyek1"]
 texture = ExtResource("2_7ikte")
@@ -3289,6 +3290,7 @@ position = Vector2(-24.500004, -118)
 [node name="Pluck_1" type="AudioStreamPlayer2D" parent="String_1" unique_id=627687143]
 position = Vector2(366, 295)
 stream = ExtResource("16_pytfw")
+bus = &"SFX"
 
 [node name="String_2" type="Node2D" parent="." unique_id=1502162149]
 position = Vector2(193, 0)
@@ -3309,6 +3311,7 @@ position = Vector2(-24.500004, -118)
 [node name="Pluck_2" type="AudioStreamPlayer2D" parent="String_2" unique_id=1693890853]
 position = Vector2(366, 287)
 stream = ExtResource("17_15k86")
+bus = &"SFX"
 
 [node name="String_3" type="Node2D" parent="." unique_id=1382963561]
 position = Vector2(386, -33)
@@ -3328,10 +3331,12 @@ position = Vector2(-32.500004, -81)
 [node name="Pluck_3" type="AudioStreamPlayer2D" parent="String_3" unique_id=107983221]
 position = Vector2(366, 311)
 stream = ExtResource("18_v41tu")
+bus = &"SFX"
 
 [node name="HintAudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=502577578]
 position = Vector2(551.5, 110)
 stream = ExtResource("16_dn6wu")
+bus = &"SFX"
 
 [node name="MagicDoor" type="Node2D" parent="." unique_id=876037793]
 position = Vector2(185, -199)
@@ -3360,3 +3365,9 @@ polygon = PackedVector2Array(-123, 94, -123, 734, -56, 787, 904, 773, 965, 734, 
 
 [node name="Mur porte" type="CollisionPolygon2D" parent="Murs" unique_id=1457461769]
 polygon = PackedVector2Array(128, 110, 1024, 110, 1088, 0, 1, 1)
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=649370803]
+stream = ExtResource("22_v41tu")
+autoplay = true
+bus = &"Ambiance"
+playback_type = 1

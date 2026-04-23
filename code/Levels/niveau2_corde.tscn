@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="9_7wtkx"]
 [ext_resource type="Script" uid="uid://bnqukdmcjx8k" path="res://Interactables/Objects/Level2/piano.gd" id="9_8ldkp"]
 [ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="9_ooyhu"]
+[ext_resource type="AudioStream" uid="uid://djv0n0g71xo8q" path="res://Assets/Sound/Trials/Bach-prelude-in-c-major-piano.mp3" id="13_j621k"]
+[ext_resource type="AudioStream" uid="uid://dpwlsmodp0246" path="res://Assets/Sound/Ambiant sound/background_heavy.wav" id="15_0psmx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jofdi"]
 texture = ExtResource("1_x61l1")
@@ -28786,6 +28788,9 @@ script = ExtResource("9_8ldkp")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="decoration/Piano" unique_id=350884930]
 position = Vector2(1, -2)
+stream = ExtResource("13_j621k")
+volume_db = -8.225
+bus = &"SFX"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/Piano" unique_id=1948714059]
 shape = SubResource("RectangleShape2D_8ldkp")
@@ -28809,3 +28814,9 @@ tile_set = SubResource("TileSet_4bauj")
 [node name="partitions" type="TileMapLayer" parent="decoration/piano" unique_id=764728955]
 tile_map_data = PackedByteArray("AABeAPH/AAAeAC4AAABeAPL/AAAeAC8AAABfAPH/AAAfAC4AAABfAPL/AAAfAC8AAAA1AKj/AAAeAC4AAAA1AKn/AAAeAC8AAAA2AKj/AAAfAC4AAAA2AKn/AAAfAC8AAACWAJL/AAAeAC4AAACWAJP/AAAeAC8AAACXAJL/AAAfAC4AAACXAJP/AAAfAC8AAAA=")
 tile_set = SubResource("TileSet_r1l3a")
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=1888982294]
+stream = ExtResource("15_0psmx")
+autoplay = true
+bus = &"Ambiance"
+playback_type = 1

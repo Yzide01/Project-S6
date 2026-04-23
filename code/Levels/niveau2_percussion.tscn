@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="10_mhj36"]
 [ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="12_ubdlm"]
 [ext_resource type="Texture2D" uid="uid://7bgx23y52m1" path="res://Assets/Spirit/Esprit des percussions.png" id="14_kvna6"]
+[ext_resource type="AudioStream" uid="uid://clceoid0dmb1a" path="res://Assets/Sound/Ambiant sound/background_medium.wav" id="15_ubdlm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tqqop"]
 texture = ExtResource("1_yx54n")
@@ -2280,6 +2281,12 @@ texture = ExtResource("14_kvna6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishTrigger" unique_id=1094683117]
 position = Vector2(575, 205.25)
 shape = SubResource("RectangleShape2D_ubdlm")
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=1956698847]
+stream = ExtResource("15_ubdlm")
+autoplay = true
+bus = &"Ambiance"
+playback_type = 1
 
 [connection signal="body_entered" from="EdgeTrigger" to="." method="_on_edge_trigger_body_entered"]
 [connection signal="body_entered" from="DrumTrigger" to="." method="_on_drum_trigger_body_entered"]
