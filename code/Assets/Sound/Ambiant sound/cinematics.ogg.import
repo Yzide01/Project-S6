@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c4b885drw2v6i"
+path="res://.godot/imported/cinematics.ogg-74165a705141d4b91201e9852d29922a.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sound/Ambiant sound/cinematics.ogg"
+dest_files=["res://.godot/imported/cinematics.ogg-74165a705141d4b91201e9852d29922a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

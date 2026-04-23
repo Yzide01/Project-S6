@@ -81,3 +81,5 @@ color = Color(0, 0, 0, 1)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1702744958]
 root_node = NodePath("../ColorRect")
 libraries/ = SubResource("AnimationLibrary_7lmbi")
+
+[node name="CinematicAudio" type="AudioStreamPlayer" parent="." unique_id=2020821378]

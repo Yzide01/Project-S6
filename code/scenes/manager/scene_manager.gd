@@ -3,7 +3,7 @@ extends CanvasLayer
 @onready var animation_player = $AnimationPlayer
 @onready var video_player = $VideoStreamPlayer
 @onready var black_screen = $ColorRect
-
+@onready var cinematic_audio = $CinematicAudio
 
 
 
@@ -37,37 +37,48 @@ func changer_niveau(chemin_scene: String) -> void:
 	
 	animation_player.play("fade_to_normal")
 
-# --- 2. NOUVELLE FONCTION : Jouer une cinématique entre deux niveaux ---
-func jouer_cinematique(chemin_video: String, chemin_scene_suivante: String) -> void:
+func jouer_cinematique(chemin_video: String, chemin_scene_suivante: String, chemin_audio: String = "") -> void:
 	scene_apres_video = chemin_scene_suivante
 	
-	# 1. Fondu au noir pour cacher l'ancien niveau
 	animation_player.play("fade_to_black")
 	await animation_player.animation_finished
 	
-	# 2. On charge le fichier .ogv, on l'affiche et on met Play
 	video_player.stream = load(chemin_video)
 	video_player.visible = true
+	var taille_ecran = get_viewport().get_visible_rect().size
+	video_player.size = taille_ecran
+		
+	if chemin_audio != "":
+		cinematic_audio.stream = load(chemin_audio)
+		
+		# 1. On force le volume au minimum (silence total)
+		cinematic_audio.volume_db = -60.0 
+		cinematic_audio.play()
+		
+		# 2. On crée le fondu d'entrée (Fade-in)
+		var audio_tween_in = create_tween()
+		# Fait passer le volume de -60 à 0 dB en 1 seconde
+		audio_tween_in.tween_property(cinematic_audio, "volume_db", 0.0, 1.0) 
+		
 	video_player.play()
 	
-	# 3. On enlève l'écran noir pour voir la vidéo
 	animation_player.play("fade_to_normal")
 
-# Appelée quand la vidéo arrive à la fin (ou est passée)
 func _on_video_finished() -> void:
-	video_player.stop() # On coupe tout de suite le son/image
+	# 1. On crée un fondu audio (baisse le volume jusqu'à -60dB en 0.5 secondes)
+	if cinematic_audio.playing:
+		var audio_tween = create_tween()
+		audio_tween.tween_property(cinematic_audio, "volume_db", -60.0, 0.5)
 	
-	# 1. On lance le fondu noir par dessus la dernière image de la vidéo
+	# 2. Le fondu visuel habituel
 	animation_player.play("fade_to_black")
 	await animation_player.animation_finished
 	
-	# 2. L'écran est totalement noir. On peut cacher la vidéo incognito !
 	video_player.visible = false 
+	video_player.stop()
+	cinematic_audio.stop() # On coupe définitivement le son une fois qu'on est dans le noir complet
 	
-	# 3. On charge la scène suivante "dans le noir"
 	get_tree().change_scene_to_file(scene_apres_video)
-	
-	# 4. On rouvre les rideaux sur le nouveau niveau
 	animation_player.play("fade_to_normal")
 
 # Permettre au joueur de passer la vidéo avec Espace

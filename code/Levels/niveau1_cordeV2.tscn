@@ -3287,6 +3287,7 @@ shape = SubResource("CircleShape2D_libwh")
 position = Vector2(-24.500004, -118)
 
 [node name="Pluck_1" type="AudioStreamPlayer2D" parent="String_1" unique_id=627687143]
+position = Vector2(366, 295)
 stream = ExtResource("16_pytfw")
 
 [node name="String_2" type="Node2D" parent="." unique_id=1502162149]
@@ -3306,6 +3307,7 @@ shape = SubResource("CircleShape2D_libwh")
 position = Vector2(-24.500004, -118)
 
 [node name="Pluck_2" type="AudioStreamPlayer2D" parent="String_2" unique_id=1693890853]
+position = Vector2(366, 287)
 stream = ExtResource("17_15k86")
 
 [node name="String_3" type="Node2D" parent="." unique_id=1382963561]
@@ -3324,6 +3326,7 @@ shape = SubResource("CircleShape2D_libwh")
 position = Vector2(-32.500004, -81)
 
 [node name="Pluck_3" type="AudioStreamPlayer2D" parent="String_3" unique_id=107983221]
+position = Vector2(366, 311)
 stream = ExtResource("18_v41tu")
 
 [node name="HintAudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=502577578]
