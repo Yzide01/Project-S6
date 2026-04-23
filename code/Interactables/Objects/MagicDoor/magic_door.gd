@@ -17,7 +17,7 @@ func _on_interact():
 		hint_requested.emit()
 	else:
 		print("Le joueur traverse la porte !")
-		# get_tree().change_scene_to_file("res://Levels/niveau2...") POUR PLUS TARD
+		SceneManager.changer_niveau("res://Levels/niveau2_corde.tscn")
 
 func unlock() -> void:
 	is_locked = false

@@ -76,5 +76,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect" unique_id=1702744958]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1702744958]
+root_node = NodePath("../ColorRect")
 libraries/ = SubResource("AnimationLibrary_7lmbi")
