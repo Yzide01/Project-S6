@@ -2260,6 +2260,9 @@ position = Vector2(-48, -132)
 position = Vector2(579, 634)
 shape = SubResource("RectangleShape2D_6onm5")
 
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1182257360]
+position = Vector2(570, 862)
+
 [node name="DrumTrigger" type="Area2D" parent="." unique_id=1634162440]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrumTrigger" unique_id=1187203832]

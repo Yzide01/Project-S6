@@ -12,6 +12,7 @@ var has_finished_level: bool = false
 @onready var wheel = $wheel
 @onready var altar_door = $altar
 @onready var spirit_sprite = $PercussionSpirit 
+@onready var spawn_point = $SpawnPoint # NOUVEAU : Référence au point de téléportation
 
 var intro_dialogue = load("res://Dialogues/Level4/Intro.dialogue")
 
@@ -31,22 +32,20 @@ func _on_edge_trigger_body_entered(body: Node2D) -> void:
 		is_dialogue_playing = true
 		has_talked_at_edge = true
 		
-		# ON BLOQUE MÉLOS
 		body.set_physics_process(false) 
 		
 		DialogueManager.show_example_dialogue_balloon(intro_dialogue, "start")
 		await DialogueManager.dialogue_ended
 		
-		# ON LIBÈRE MÉLOS
 		body.set_physics_process(true)
 		is_dialogue_playing = false
 
-# --- B. LA TIMBALE ET L'ESPRIT ---
+# --- B. LA TIMBALE ET L'ESPRIT (Mise à jour Téléportation) ---
 func _on_drum_trigger_body_entered(body: Node2D) -> void:
-	if body.name == "Player" and not is_dialogue_playing:
+	# AJOUT : "not is_solved". Si le puzzle est fini, on ne déclenche plus l'erreur !
+	if body.name == "Player" and not is_dialogue_playing and not is_solved:
 		is_dialogue_playing = true
 		
-		# ON BLOQUE MÉLOS
 		body.set_physics_process(false)
 		
 		DialogueManager.show_example_dialogue_balloon(intro_dialogue, "impact_fail")
@@ -65,22 +64,25 @@ func _on_drum_trigger_body_entered(body: Node2D) -> void:
 				await tween.finished
 				spirit_sprite.hide()
 		
-		# ON LIBÈRE MÉLOS
+		if spawn_point:
+			body.global_position = spawn_point.global_position
+		
 		body.set_physics_process(true)
 		is_dialogue_playing = false
 
 # --- C. LA ROUE (DÉCOUVERTE) ---
 func _on_wheel_trigger_body_entered(body: Node2D) -> void:
-	if body.name == "Player" and not has_seen_wheel and not is_dialogue_playing:
+	# AJOUT : "not is_solved". On ne découvre pas la roue si on a déjà résolu le niveau !
+	if body.name == "Player" and not has_seen_wheel and not is_dialogue_playing and not is_solved:
 		has_seen_wheel = true
 		is_dialogue_playing = true
 		
-		body.set_physics_process(false) # BLOQUE
+		body.set_physics_process(false) 
 		
 		DialogueManager.show_example_dialogue_balloon(intro_dialogue, "find_wheel")
 		await DialogueManager.dialogue_ended
 		
-		body.set_physics_process(true) # LIBÈRE
+		body.set_physics_process(true) 
 		is_dialogue_playing = false
 
 # --- D. VICTOIRE ---
@@ -89,7 +91,6 @@ func _on_pressure_stable():
 		is_solved = true
 		is_dialogue_playing = true
 		
-		# Ici on cherche le joueur car le signal wheel ne nous donne pas le 'body'
 		var player = get_tree().get_first_node_in_group("player") 
 		if player: player.set_physics_process(false)
 		
@@ -103,6 +104,10 @@ func _on_pressure_stable():
 			var int_comp = altar_door.get_node("Interactable")
 			int_comp.is_interactable = true
 			int_comp.interact_name = "Enter the Altar"
+			int_comp.interact = _on_altar_interacted
+			
+func _on_altar_interacted() -> void:        
+	SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")
 
 func _on_pressure_unstable():
 	is_solved = false
@@ -113,10 +118,10 @@ func _on_finish_trigger_body_entered(body: Node2D) -> void:
 		has_finished_level = true
 		is_dialogue_playing = true
 		
-		body.set_physics_process(false) # BLOQUE
+		body.set_physics_process(false)
 		
 		DialogueManager.show_example_dialogue_balloon(intro_dialogue, "across_the_gap")
 		await DialogueManager.dialogue_ended
 		
-		body.set_physics_process(true) # LIBÈRE
+		body.set_physics_process(true) 
 		is_dialogue_playing = false
