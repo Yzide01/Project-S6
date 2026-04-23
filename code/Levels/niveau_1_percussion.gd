@@ -32,6 +32,8 @@ func _check_solution():
 	if current == secret_combination:
 		is_solved = true
 		_play_sequence(outro_position, "res://Dialogues/Level3/Outro.dialogue")
+		await DialogueManager.dialogue_ended
+		SceneManager.changer_niveau("res://Levels/niveau2_percussion.tscn")
 
 func _play_sequence(pos, diag_path):
 	# A. CHERCHER ET BLOQUER LE JOUEUR
