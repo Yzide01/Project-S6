@@ -16,9 +16,11 @@ offset_bottom = 40.0
 
 [node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=1213860318]
 layout_mode = 2
+text = "Play"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=10296619]
 layout_mode = 2
+text = "Quit"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=820899210]
 layout_mode = 0
