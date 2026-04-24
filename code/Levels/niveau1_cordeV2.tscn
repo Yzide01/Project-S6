@@ -3366,6 +3366,12 @@ position = Vector2(37.499996, -70)
 [node name="BookUI" parent="." unique_id=1635178096 instance=ExtResource("21_15k86")]
 visible = false
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1014798217]
+limit_left = 29
+limit_top = 0
+limit_right = 1037
+limit_bottom = 640
+
 [node name="Murs" type="StaticBody2D" parent="." unique_id=600698090]
 
 [node name="Murs coté" type="CollisionPolygon2D" parent="Murs" unique_id=5613554]
@@ -3380,3 +3386,16 @@ stream = ExtResource("22_v41tu")
 autoplay = true
 bus = &"Ambiance"
 playback_type = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1195710093]
+z_index = -98
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -237.91501
+offset_top = -165.0
+offset_right = 1482.085
+offset_bottom = 922.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
