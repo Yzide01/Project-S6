@@ -1,0 +1,16 @@
+~ start
+Mélos: This door... it seems to react to my presence. There is no lock; I should try to interact with it to see if it opens.
+=> END
+
+~ hint
+Mélos: It is waiting for an answer. I must mimic that echo. These strings on the ground... if I jump on them, I can make them vibrate!
+Harmony Guide: [HINT] String length determines pitch. Long strings are heavy and slow. Short strings are light and fast. It is pure mathematics!
+=> END
+
+~ lesson
+Mélos: A page... it detached itself from the door's structure.
+Harmony Guide: [BOOK PAGE OPENED]
+Harmony Guide: LESSON I: THE DIMENSION OF SOUND. Length dictates the note.
+Harmony Guide: Long String = Low Frequency. Larger objects vibrate slower, creating a Deep sound.
+Harmony Guide: Short String = High Frequency. Smaller objects vibrate faster, creating a High sound.
+=> END

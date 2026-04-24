@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://gqh3v78b8670"]
+
+[ext_resource type="Script" uid="uid://7serowwlu334" path="res://scenes/manager/relais_cine_2.gd" id="1_2xhoq"]
+
+[node name="Node" type="Node" unique_id=1434375936]
+script = ExtResource("1_2xhoq")

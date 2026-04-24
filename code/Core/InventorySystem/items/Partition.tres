@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://swts0biscpn7"]
+
+[ext_resource type="Script" uid="uid://y2adiqmd6hk5" path="res://Core/InventorySystem/inventoryItem.gd" id="1_gnrlt"]
+[ext_resource type="Texture2D" uid="uid://ctmkj0xl1eqh0" path="res://Assets/cordes/niveau2_cordes/furniture_and_props.png" id="2_pkwhx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ccm4"]
+atlas = ExtResource("2_pkwhx")
+region = Rect2(578.81775, 708.07837, 25.200806, 21.43518)
+
+[resource]
+script = ExtResource("1_gnrlt")
+name = "Partition"
+texture = SubResource("AtlasTexture_7ccm4")
+metadata/_custom_type_script = "uid://y2adiqmd6hk5"

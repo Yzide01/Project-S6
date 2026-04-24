@@ -1,21 +1,19 @@
 extends InteractableObject
 
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var solid_wall_collision: CollisionShape2D = $SolidWall/CollisionShape2D
-@onready var animations = $AnimationPlayer
+@export var partitions_requises: int = 3
+var partitions_actuelles: int = 0
+@onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
-@export var itemRes: InventoryItem
+# Cette fonction sera appelée par les partitions quand on marche dessus
+func ajouter_partition() -> void:
+	partitions_actuelles += 1
+	print("Le piano a reçu une partition ! Total : ", partitions_actuelles)
 
-func _ready() -> void:
-	object_name = "Collectable"
-	
-func collect(inventory: Inventory):
-	inventory.insert(itemRes)
-	queue_free()
-
-func interact(_player: Node2D) -> void:
-	if not is_interactable:
-		return
-	animations.play("spin")
-	await animations.animation_finished
-	collect(_player.inventory)
+# L'interaction quand le joueur appuie sur la touche
+func interact(player: Node2D) -> void:
+	if partitions_actuelles >= partitions_requises:
+		print("Toutes les partitions sont là. Musique !")
+		is_interactable = false # On désactive pour ne pas relancer
+		audio_player.play()
+	else:
+		print("Il manque des partitions... J'en ai : ", partitions_actuelles)

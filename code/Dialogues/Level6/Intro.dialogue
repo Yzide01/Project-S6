@@ -1,0 +1,20 @@
+~ start
+The Guardian: It looks like a forest of stone... The air whistles without harmony here.
+The Guardian: These monumental flutes are broken. They must be rebuilt.
+=> END
+
+~ indice_stele
+The Guardian: "From the rumbling of the earth to the whistling of the summit."
+The Guardian: That means from longest to shortest. Low pitch to High pitch.
+=> END
+
+~ lecon_inca
+Incan Spirit: Stranger, listen to the lesson of the Andes.
+Incan Spirit: A long tube holds the breath: it creates a Low sound.
+Incan Spirit: A short tube releases the air quickly: it creates a High sound.
+=> END
+
+~ success
+The Guardian: Listen! The air is flowing perfectly.
+The Guardian: The melody is pure... the passage is open!
+=> END

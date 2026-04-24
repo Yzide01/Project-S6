@@ -1,26 +1,30 @@
 [gd_scene format=3 uid="uid://dhg2qy0amium8"]
 
 [ext_resource type="Texture2D" uid="uid://skpam71vlkm7" path="res://icon.svg" id="1_1vvux"]
-[ext_resource type="Script" uid="uid://c6vgnf4ruv5tt" path="res://door.gd" id="1_iu8q0"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iu8q0"]
-size = Vector2(135, 135)
+[ext_resource type="Script" uid="uid://77n7nl5lvq04" path="res://Interactables/Objects/Door/door.gd" id="1_iu8q0"]
+[ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="3_xti7a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cuixy"]
 size = Vector2(127, 127)
 
-[node name="Door" type="Area2D" unique_id=691378837]
+[sub_resource type="CircleShape2D" id="CircleShape2D_f86n3"]
+radius = 117.06836
+
+[node name="Door" type="StaticBody2D" unique_id=1863593916]
 script = ExtResource("1_iu8q0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1148161935]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_cuixy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2088845278]
 texture = ExtResource("1_1vvux")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=880015777]
-position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_iu8q0")
+[node name="Interactable" parent="." unique_id=1836534378 instance=ExtResource("3_xti7a")]
+interact_name = "Open/Close Door"
 
-[node name="SolidWall" type="StaticBody2D" parent="." unique_id=1863593916]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=267874980]
+shape = SubResource("CircleShape2D_f86n3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SolidWall" unique_id=1148161935]
-position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_cuixy")
+[node name="LabelPosition" type="Marker2D" parent="Interactable" unique_id=1149483111]
+position = Vector2(-49, -92)

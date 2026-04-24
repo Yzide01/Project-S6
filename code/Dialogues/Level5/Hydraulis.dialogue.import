@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dwmi05ylc4wtv"
+path="res://.godot/imported/Hydraulis.dialogue-6b538738467eadcd9de5e0bfbedcb721.tres"
+
+[deps]
+
+source_file="res://Dialogues/Level5/Hydraulis.dialogue"
+dest_files=["res://.godot/imported/Hydraulis.dialogue-6b538738467eadcd9de5e0bfbedcb721.tres"]
+
+[params]
+
+defaults=true
