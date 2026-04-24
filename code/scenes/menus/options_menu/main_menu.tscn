@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d2ceg0s2r6mit"]
+
+[ext_resource type="Script" uid="uid://dgcklt8hspyph" path="res://scenes/menus/options_menu/main_menu.gd" id="1_b6nna"]
+
+[node name="Control" type="Control" unique_id=1661663142]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_b6nna")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1256912820]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=1213860318]
+layout_mode = 2
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=10296619]
+layout_mode = 2
+text = "Quit"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=820899210]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

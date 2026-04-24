@@ -7,7 +7,7 @@ var is_locked: bool = true
 
 func _ready() -> void:
 	if interactable_area:
-		interactable_area.interact_name = "Écouter l'indice"
+		interactable_area.interact_name = "Magic door"
 		interactable_area.is_interactable = true 
 		interactable_area.interact = _on_interact
 
@@ -17,9 +17,9 @@ func _on_interact():
 		hint_requested.emit()
 	else:
 		print("Le joueur traverse la porte !")
-		# get_tree().change_scene_to_file("res://Levels/niveau2...") POUR PLUS TARD
+		SceneManager.changer_niveau("res://Levels/niveau2_corde.tscn")
 
 func unlock() -> void:
 	is_locked = false
 	if interactable_area:
-		interactable_area.interact_name = "Passer la porte"
+		interactable_area.interact_name = "Go through the door"

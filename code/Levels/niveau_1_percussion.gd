@@ -1,48 +1,80 @@
 extends Node2D
 
-# Solution : [2, 0, 1] (Full, Empty, Half)
+# --- CONFIGURATION ---
+@export var intro_position: Vector2
+@export var outro_position: Vector2
 @export var secret_combination: Array[int] = [2, 0, 1] 
+
+# --- RÉFÉRENCES ---
+@onready var spirit = $PercussionSpirit
+@onready var bowls = [$Bowl_1, $Bowl_2, $Bowl_3]
+
 var is_solved: bool = false
 
-@onready var bowl1 = $Bowl_1
-@onready var bowl2 = $Bowl_2
-@onready var bowl3 = $Bowl_3
-
 func _ready() -> void:
-	# On écoute les changements sur les bassins
-	if bowl1: bowl1.state_changed.connect(_check_solution)
-	if bowl2: bowl2.state_changed.connect(_check_solution)
-	if bowl3: bowl3.state_changed.connect(_check_solution)
+	# 1. Cacher l'esprit proprement au début
+	if spirit:
+		spirit.hide()
+		spirit.modulate.a = 0.0
 	
-	# Lancement de la séquence d'introduction
-	_play_intro_dialogue()
+	# 2. Brancher les bassins
+	for b in bowls:
+		if b and b.has_signal("state_changed"):
+			b.state_changed.connect(_check_solution)
+	
+	# 3. Lancer l'intro
+	await get_tree().create_timer(0.3).timeout
+	_play_sequence(intro_position, "res://Dialogues/Level3/Intro.dialogue")
 
-func _play_intro_dialogue():
-	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level3/Intro.dialogue"), "start")
 func _check_solution():
-	if is_solved: return # Ne rien faire si c'est déjà gagné
-	
-	var state1 = bowl1.current_mass_state if bowl1 else 0
-	var state2 = bowl2.current_mass_state if bowl2 else 0
-	var state3 = bowl3.current_mass_state if bowl3 else 0
-	
-	var current_state = [state1, state2, state3]
-	
-	if current_state == secret_combination:
+	if is_solved: return
+	var current = [bowls[0].current_mass_state, bowls[1].current_mass_state, bowls[2].current_mass_state]
+	if current == secret_combination:
 		is_solved = true
-		_play_victory_sequence()
+		_play_sequence(outro_position, "res://Dialogues/Level3/Outro.dialogue")
+		await DialogueManager.dialogue_ended
+		SceneManager.changer_niveau("res://Levels/niveau2_percussion.tscn")
+
+func _play_sequence(pos, diag_path):
+	# A. CHERCHER ET BLOQUER LE JOUEUR
+	var player = get_tree().get_first_node_in_group("player")
+	
+	if player:
+		# On coupe tout : Physique + Clavier + Processus
+		player.set_physics_process(false)
+		player.set_process_input(false)
+		player.process_mode = Node.PROCESS_MODE_DISABLED
+		print("DEBUG: Mélos est totalement bloqué")
+
+	# B. APPARITION DE L'ESPRIT (Valeurs corrigées 1.0 et 0.8)
+	if spirit:
+		spirit.global_position = pos
+		spirit.show()
+		var t = create_tween()
+		t.tween_property(spirit, "modulate:a", 1.0, 0.8) # 1.0 = visible
+		await t.finished
+
+	# C. DIALOGUE
+	if FileAccess.file_exists(diag_path):
+		DialogueManager.show_example_dialogue_balloon(load(diag_path), "start")
+		await DialogueManager.dialogue_ended
 	else:
-		# Optionnel : Petit indice si le joueur galère
-		# print("Wind Spirit: 'Focus on the mass! More water = more mass = lower frequency.'")
-		pass
+		print("ERREUR: Dialogue introuvable à ", diag_path)
+	
+	# D. DISPARITION DE L'ESPRIT
+	if spirit:
+		var t2 = create_tween()
+		t2.tween_property(spirit, "modulate:a", 0.0, 0.8) # 0.0 = invisible
+		await t2.finished
+		spirit.hide()
 
-func _play_victory_sequence():
-	
-	# Désactive les bassins pour que le joueur ne les dérègle plus
-	if bowl1 and bowl1.has_node("Interactable"): bowl1.get_node("Interactable").is_interactable = false
-	if bowl2 and bowl2.has_node("Interactable"): bowl2.get_node("Interactable").is_interactable = false
-	if bowl3 and bowl3.has_node("Interactable"): bowl3.get_node("Interactable").is_interactable = false
-	
-	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level3/Outro.dialogue"), "start")
+	# E. LIBÉRATION DU JOUEUR
+	if player:
+		player.process_mode = Node.PROCESS_MODE_INHERIT
+		player.set_physics_process(true)
+		player.set_process_input(true)
+		print("DEBUG: Mélos est libre")
 
-	
+
+func _on_terrain_entered(area: Area2D) -> void:
+	pass # Replace with function body.

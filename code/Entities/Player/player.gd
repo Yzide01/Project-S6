@@ -31,10 +31,18 @@ class_name Player extends CharacterBody2D
 # --- Animation ---
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
-# --- Jump Settings ---
-@export var tile_size: float = 64.0 # Taille d'une case en pixels (à ajuster selon ton jeu)
-@export var jump_height: float = 30.0 # Hauteur visuelle du saut (en pixels)
-@export var jump_duration: float = 0.35 # Durée de l'animation de saut en secondes
+# --- Pseudo-3D Jump Settings ---
+@export var jump_force: float = 250.0  # Force verticale initiale du saut (axe Z)
+@export var gravity_z: float = 800.0   # Gravité sur l'axe Z
+@export var low_obstacle_layer: int = 2 # Numéro de la couche des obstacles bas
+
+var z_height: float = 0.0              # Hauteur actuelle du joueur (0 = au sol)
+var z_velocity: float = 0.0            # Vitesse actuelle sur l'axe Z
+var base_sprite_y: float = 0.0         # Position de base du sprite
+var base_anim_y: float = 0.0           # Position de base de l'animation
+
+var current_floor_z: float = 0.0       # Hauteur du sol sous les pieds
+var overlapping_terrains: Array = []   # Liste des Area2D (TerrainZone) actuelles
 
 # --- State machine ---
 enum State { NORMAL, CRAWLING, SPRINT, JUMPING }
@@ -44,30 +52,58 @@ var current_state: State = State.NORMAL
 var last_direction: Vector2 = Vector2.DOWN
 
 func _ready() -> void:
+	# Par défaut, on s'assure que le joueur écoute bien les murs bas !
+	set_collision_mask_value(low_obstacle_layer, true)
+    # Le joueur écoute les signaux globaux du plugin de dialogue
+	DialogueManager.dialogue_started.connect(_on_dialogue_started)
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+
 	# 1. Initialisation de l'inventaire
-	inventory.use_item.connect(use_item)
+	if inventory:
+		inventory.use_item.connect(use_item)
 	
 	# 2. Initialisation de l'image du joueur (Ton code)
 	if tex_bas and sprite:
 		sprite.texture = tex_bas
+		
+	# Sauvegarder les positions de base pour le saut
+	if sprite: base_sprite_y = sprite.position.y
+	if anim: base_anim_y = anim.position.y
 
+var is_in_dialogue: bool = false
 
+func _on_dialogue_started():
+	is_in_dialogue = true
+
+func _on_dialogue_ended():
+	is_in_dialogue = false
 
 func _physics_process(delta: float) -> void:
-	if current_state == State.JUMPING:
-		_update_depth_scale() 
-		return
-	if Input.is_action_just_pressed("jump"):
+	# On coupe les contrôles si un dialogue est ouvert
+	if is_in_dialogue:
+		velocity = Vector2.ZERO
+		if anim:
+			update_animation(Vector2.ZERO)
+		return # On bloque les contrôles
+
+	# Mettre à jour la hauteur simulée du sol en fonction des zones de terrain
+	calculate_floor_z()
+
+	if Input.is_action_just_pressed("jump") and z_height <= current_floor_z:
 		attempt_jump()
-		return
+		
+	# Appliquer la gravité et la pseudo-3D
+	apply_gravity(delta)
 		
 	# --- State handling ---
-	if Input.is_action_pressed("crawl"):
-		current_state = State.CRAWLING
-	elif Input.is_action_pressed("sprint"):
-		current_state = State.SPRINT
-	else:
-		current_state = State.NORMAL
+	# Impossible de changer de posture (crawl/sprint) si on est en l'air
+	if z_height <= current_floor_z:
+		if Input.is_action_pressed("crawl"):
+			current_state = State.CRAWLING
+		elif Input.is_action_pressed("sprint"):
+			current_state = State.SPRINT
+		else:
+			current_state = State.NORMAL
 
 	# --- Speed selection ---
 	var active_speed: float = normal_speed
@@ -95,23 +131,8 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.lerp(desired_velocity, acceleration * delta)
 
 	move_and_slide()
-	
-	# --- Appliquer l'effet de profondeur ---
-	_update_depth_scale()
 
 
-# --- NOUVELLES FONCTIONS ---
-
-# 1. Fonction pour le rapetissement
-func _update_depth_scale() -> void:
-	# On calcule la profondeur (0.0 = fond, 1.0 = devant)
-	var depth = clamp((global_position.y - y_min) / (y_max - y_min), 0.0, 1.0)
-	
-	# On calcule la taille actuelle
-	var current_scale = lerp(scale_min, scale_max, depth)
-	
-	# On applique la taille sur le joueur
-	scale = Vector2(current_scale, current_scale)
 
 # 2. Fonction pour gérer le Sprite et les directions
 func _update_sprite_direction(dir: Vector2) -> void:
@@ -189,53 +210,77 @@ func update_animation(direction: Vector2) -> void:
 		State.NORMAL:
 			anim.speed_scale = 1.0  # Vitesse normale
 
-# --- MÉCANIQUE DE SAUT ---
+# --- MÉCANIQUE DE SAUT PSEUDO-3D ---
 
 func attempt_jump() -> void:
-	if last_direction == Vector2.ZERO:
-		return
-		
-	# Destination calcul
-	var jump_vector = last_direction * (tile_size * 2)
-	var target_global_position = global_position + jump_vector
-	
-	# Check landing
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsPointQueryParameters2D.new()
-	query.position = target_global_position
-	
-	# Change the number depending of the layer of the map (wall and hole)
-	query.collision_mask = 1 
-	
-	var result = space_state.intersect_point(query)
-	
-	# If lading point is a wall or a hole
-	if result.size() > 0:
-		print("Impossible Jump : more than one case")
-		return
-		
-	# If possible jump
-	execute_jump(target_global_position)
-
-
-func execute_jump(target_pos: Vector2) -> void:
+	z_velocity = jump_force
 	current_state = State.JUMPING
 	
-	var move_tween = create_tween()
-	# Move carractere toward destination
-	move_tween.tween_property(self, "global_position", target_pos, jump_duration).set_trans(Tween.TRANS_LINEAR)
+	# Désactive la collision avec les objets bas par-dessus lesquels on veut sauter
+	# On évite de désactiver layer 1 (murs principaux généralement)
+	set_collision_mask_value(low_obstacle_layer, false)
+
+func apply_gravity(delta: float) -> void:
+	if current_state == State.JUMPING or z_height > current_floor_z:
+		# Application de la vélocité et gravité sur l'axe Z
+		z_velocity -= gravity_z * delta
+		z_height += z_velocity * delta
 		
-	# At the end, retake a normal state
-	move_tween.tween_callback(func():
-		current_state = State.NORMAL
-	)
-	
-	# An other tween for the visual effect
-	if sprite:
-		var sprite_original_y = sprite.position.y
-		var arc_tween = create_tween()
+		# Condition d'atterrissage
+		if z_height <= current_floor_z:
+			z_height = current_floor_z
+			z_velocity = 0.0
+			
+			if current_state == State.JUMPING:
+				current_state = State.NORMAL
+			
+			# Réactive la collision de la couche basse lors de l'atterrissage (toujours !)
+			set_collision_mask_value(low_obstacle_layer, true)
 				
-		# Sprite arise
-		arc_tween.tween_property(sprite, "position:y", sprite_original_y - jump_height, jump_duration / 2.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		# Sprite go back down
-		arc_tween.tween_property(sprite, "position:y", sprite_original_y, jump_duration / 2.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		# Application du z_height sur le visuel (décale vers le haut)
+		# Note: les ombres (s'il y en a) ne bougent pas, car on ne modifie que les variables Y des sprites
+		if sprite:
+			sprite.position.y = base_sprite_y - z_height
+		if anim:
+			anim.position.y = base_anim_y - z_height
+
+# --- GESTION DU TERRAIN (PLATEAUX/ESCALIERS) ---
+
+func calculate_floor_z() -> void:
+	var target_floor_z = 0.0
+	
+	for area in overlapping_terrains:
+		if area.get("is_stairs"):
+			# Calcul de l'interpolation sur Y
+			var stair_bottom_y = area.get("stair_bottom_y")
+			var stair_top_y = area.get("stair_top_y")
+			var zh_bottom = area.get("z_height_bottom")
+			var zh_top = area.get("z_height_top")
+			
+			if stair_bottom_y != null and stair_top_y != null and zh_bottom != null and zh_top != null:
+				var t = clamp(inverse_lerp(stair_bottom_y, stair_top_y, global_position.y), 0.0, 1.0)
+				var interpolated_z = lerp(zh_bottom, zh_top, t)
+				target_floor_z = max(target_floor_z, interpolated_z)
+		else:
+			# Plateau normal
+			var t_z = area.get("terrain_z_height")
+			if t_z != null:
+				target_floor_z = max(target_floor_z, t_z)
+				
+	current_floor_z = target_floor_z
+	
+	# Si on atterrit ou qu'on descend d'un escalier de façon abrupte sans sauter
+	if current_state != State.JUMPING and z_height < current_floor_z:
+		z_height = current_floor_z
+
+func _on_terrain_entered(area: Area2D) -> void:
+	if area and not overlapping_terrains.has(area):
+		overlapping_terrains.append(area)
+
+func _on_terrain_exited(area: Area2D) -> void:
+	if area and overlapping_terrains.has(area):
+		overlapping_terrains.erase(area)
+
+
+func _on_terrain_detector_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
