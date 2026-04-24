@@ -4,7 +4,7 @@ extends Node2D
 
 func _ready() -> void:
 	if interactable_area:
-		interactable_area.interact_name = "Pick up sheet music" # Nom en anglais
+		interactable_area.interact_name = "Pick up sheet music" 
 		interactable_area.is_interactable = true 
 		interactable_area.interact = _on_interact
 

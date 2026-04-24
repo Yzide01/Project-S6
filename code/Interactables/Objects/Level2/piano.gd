@@ -12,7 +12,7 @@ const DIALOGUE_FILE = preload("res://Dialogues/Level2/level2.dialogue")
 
 func _ready() -> void:
 	if interactable_area:
-		interactable_area.interact_name = "Inspecter le piano"
+		interactable_area.interact_name = "Inspect the piano"
 		interactable_area.is_interactable = true 
 		interactable_area.interact = _on_interact
 
@@ -47,4 +47,4 @@ func ajouter_partition() -> void:
 func unlock() -> void:
 	is_locked = false
 	if interactable_area:
-		interactable_area.interact_name = "Jouer la mélodie"
+		interactable_area.interact_name = "Play the melody"

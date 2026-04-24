@@ -71,14 +71,14 @@ func _solve_puzzle() -> void:
 	if magic_door:
 		magic_door.unlock()
 	
-	# --- ON OUVRE LE LIVRE ICI ---
-	if has_node("BookUI"):
-		$BookUI.open_book(
-			"LESSON I: THE DIMENSION OF SOUND", 
-			"Length dictates the note.\n\nLong String = Low Frequency.\nLarger objects vibrate slower, creating a Deep sound.", 
-			"\n\nShort String = High Frequency.\nSmaller objects vibrate faster, creating a High sound."
-		)
-	# -----------------------------
+	## --- ON OUVRE LE LIVRE ICI ---
+	#if has_node("BookUI"):
+		#$BookUI.open_book(
+			#"LESSON I: THE DIMENSION OF SOUND", 
+			#"Length dictates the note.\n\nLong String = Low Frequency.\nLarger objects vibrate slower, creating a Deep sound.", 
+			#"\n\nShort String = High Frequency.\nSmaller objects vibrate faster, creating a High sound."
+		#)
+	## -----------------------------
 	
 	# Mise à jour avec le bon nom "Interactable" pour désactiver les cordes
 	if corde1 and corde1.has_node("Interactable"):

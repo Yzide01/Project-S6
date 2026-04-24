@@ -3159,6 +3159,7 @@ size = Vector2(34, 24)
 radius = 115.60818
 
 [node name="Node2D2" type="Node2D" unique_id=1365613925]
+position = Vector2(-45.085, 0)
 script = ExtResource("1_1p3ex")
 
 [node name="hole" type="TileMapLayer" parent="." unique_id=1999615324]
@@ -3285,7 +3286,7 @@ scale = Vector2(0.05, 0.8)
 shape = SubResource("CircleShape2D_libwh")
 
 [node name="LabelPosition" type="Marker2D" parent="String_1/Interactable" unique_id=2106683813]
-position = Vector2(-24.500004, -118)
+position = Vector2(-45.08499, -118)
 
 [node name="Pluck_1" type="AudioStreamPlayer2D" parent="String_1" unique_id=627687143]
 position = Vector2(366, 295)
@@ -3306,7 +3307,7 @@ scale = Vector2(0.05, 0.625)
 shape = SubResource("CircleShape2D_libwh")
 
 [node name="LabelPosition" type="Marker2D" parent="String_2/Interactable" unique_id=1402578905]
-position = Vector2(-24.500004, -118)
+position = Vector2(-45.085022, -118)
 
 [node name="Pluck_2" type="AudioStreamPlayer2D" parent="String_2" unique_id=1693890853]
 position = Vector2(366, 287)
@@ -3326,7 +3327,7 @@ scale = Vector2(0.05, 0.515)
 shape = SubResource("CircleShape2D_libwh")
 
 [node name="LabelPosition" type="Marker2D" parent="String_3/Interactable" unique_id=2090347736]
-position = Vector2(-32.500004, -81)
+position = Vector2(-45.085022, -86)
 
 [node name="Pluck_3" type="AudioStreamPlayer2D" parent="String_3" unique_id=107983221]
 position = Vector2(366, 311)
