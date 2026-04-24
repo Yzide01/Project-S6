@@ -2253,7 +2253,7 @@ scale = Vector2(0.44, 0.44)
 shape = SubResource("CircleShape2D_o1wam")
 
 [node name="LabelPosition" type="Marker2D" parent="altar/Interactable" unique_id=1754682069]
-position = Vector2(-48, -132)
+position = Vector2(58, -93)
 
 [node name="EdgeTrigger" type="Area2D" parent="." unique_id=1797769607]
 

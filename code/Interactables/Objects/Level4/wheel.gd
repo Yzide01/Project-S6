@@ -29,7 +29,7 @@ func _update_feedback():
 				pressure_destabilized.emit()
 				
 			1:
-				interactable.interact_name = "Pump manually (Air: UNSTABLE)"
+				interactable.interact_name = "Turn wheel (Air: UNSTABLE)"
 				if audio:
 					# Random pitch simulates human fatigue and chaotic pressure
 					audio.pitch_scale = randf_range(0.6, 1.4) 
@@ -37,7 +37,7 @@ func _update_feedback():
 				pressure_destabilized.emit()
 				
 			2:
-				interactable.interact_name = "Connect to underground river (Air: STABLE)"
+				interactable.interact_name = "Turn wheel (Air: STABLE)"
 				if audio:
 					# Perfect 1.0 pitch simulates the constant weight of water
 					audio.pitch_scale = 1.0 
