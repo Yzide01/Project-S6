@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://dh5ncmh4k4a2s"]
+
+[ext_resource type="Script" uid="uid://bwfjpi7g4lw0w" path="res://Core/CombatSystem/CombatManager.gd" id="1_ebjqp"]
+[ext_resource type="Texture2D" uid="uid://j2q3lh77u26y" path="res://Assets/Graphics/healthbarUnder.png" id="2_7x133"]
+[ext_resource type="PackedScene" uid="uid://c3e1tkqg70buk" path="res://Core/CombatSystem/enemy_battle_ui.tscn" id="2_67fl5"]
+[ext_resource type="Texture2D" uid="uid://ddmfmd06w8tr2" path="res://Assets/Graphics/healthbarProgress.png" id="3_lmsui"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jnk41"]
+load_path = "res://.godot/imported/cap1-removebg.png-cf477273779c58f04836be40e1f0a3bb.ctex"
+
+[node name="BattleScene" type="Control" unique_id=1649497863]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ebjqp")
+enemy_ui_scene = ExtResource("2_67fl5")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1768096063]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2159017, 0.21590173, 0.2159017, 1)
+
+[node name="BottomUI" type="Panel" parent="." unique_id=2123608443]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 507.0
+offset_right = 1150.0
+offset_bottom = 647.0
+
+[node name="InfoText" type="Label" parent="BottomUI" unique_id=1216508921]
+layout_mode = 0
+offset_right = 568.0
+offset_bottom = 138.0
+text = "Un Sbire du Silence apparait"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AttackButton" type="Button" parent="BottomUI" unique_id=941546043]
+layout_mode = 0
+offset_left = 653.0
+offset_right = 828.0
+offset_bottom = 140.0
+text = "Attack"
+
+[node name="RunButton" type="Button" parent="BottomUI" unique_id=205059806]
+layout_mode = 0
+offset_left = 894.0
+offset_right = 1069.0
+offset_bottom = 140.0
+text = "Run"
+
+[node name="PercussionButton" type="Button" parent="BottomUI" unique_id=1210487563]
+visible = false
+layout_mode = 0
+offset_left = 761.0
+offset_right = 901.0
+offset_bottom = 140.0
+text = "percussion"
+
+[node name="VentButton" type="Button" parent="BottomUI" unique_id=1117079599]
+visible = false
+layout_mode = 0
+offset_left = 929.0
+offset_right = 1069.0
+offset_bottom = 140.0
+text = "vent"
+
+[node name="CordeButton" type="Button" parent="BottomUI" unique_id=433536867]
+visible = false
+layout_mode = 0
+offset_left = 590.0
+offset_right = 730.0
+offset_bottom = 140.0
+text = "corde"
+
+[node name="Back" type="Button" parent="BottomUI" unique_id=1361421666]
+visible = false
+layout_mode = 0
+offset_left = 1101.0
+offset_top = 103.0
+offset_right = 1149.0
+offset_bottom = 140.0
+text = "back"
+
+[node name="EnemyContainer" type="HBoxContainer" parent="." unique_id=2138559791]
+layout_mode = 0
+offset_left = 621.0
+offset_top = 14.0
+offset_right = 1134.0
+offset_bottom = 316.0
+alignment = 1
+
+[node name="PlayerVisual" type="TextureRect" parent="." unique_id=953088116]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 286.0
+offset_right = 410.0
+offset_bottom = 506.0
+texture = SubResource("CompressedTexture2D_jnk41")
+expand_mode = 1
+
+[node name="PlayerHPBar" type="TextureProgressBar" parent="." unique_id=401387119]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 426.0
+offset_right = 198.0
+offset_bottom = 451.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_7x133")
+texture_progress = ExtResource("3_lmsui")

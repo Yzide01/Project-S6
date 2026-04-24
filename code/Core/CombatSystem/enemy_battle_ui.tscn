@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c3e1tkqg70buk"]
+
+[ext_resource type="Texture2D" uid="uid://j2q3lh77u26y" path="res://Assets/Graphics/healthbarUnder.png" id="1_fy581"]
+[ext_resource type="Script" uid="uid://rdd7f1t8a13g" path="res://Core/CombatSystem/enemy_battle_ui.gd" id="1_wausy"]
+[ext_resource type="Texture2D" uid="uid://ddmfmd06w8tr2" path="res://Assets/Graphics/healthbarProgress.png" id="2_wausy"]
+
+[node name="EnemyBattleUI" type="VBoxContainer" unique_id=404900519]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_wausy")
+
+[node name="NameLabel" type="Label" parent="." unique_id=1165427636]
+layout_mode = 2
+
+[node name="HPBar" type="TextureProgressBar" parent="." unique_id=941330223]
+layout_mode = 2
+texture_under = ExtResource("1_fy581")
+texture_progress = ExtResource("2_wausy")
+
+[node name="Sprite" type="TextureRect" parent="." unique_id=2040726999]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+stretch_mode = 5

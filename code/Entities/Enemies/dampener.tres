@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BaseEnemy" format=3 uid="uid://b0fjugi2o3u5c"]
+
+[ext_resource type="Script" uid="uid://cjtqj182cu3j8" path="res://Entities/Enemies/base_enemy.gd" id="1_fdm6m"]
+
+[resource]
+script = ExtResource("1_fdm6m")
+enemy_name = "Dampener"
+max_hp = 40
+rank = 2
+metadata/_custom_type_script = "uid://cjtqj182cu3j8"
