@@ -3,7 +3,7 @@ extends Node2D
 # --- CONFIGURATION ---
 @export var intro_position: Vector2
 @export var outro_position: Vector2
-@export var secret_combination: Array[int] = [2, 0, 1] 
+@export var secret_combination: Array[int] = [1, 0, 1] 
 
 # --- RÉFÉRENCES ---
 @onready var spirit = $PercussionSpirit
