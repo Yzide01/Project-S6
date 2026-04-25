@@ -8,11 +8,11 @@ var has_talked_at_edge: bool = false
 var has_seen_wheel: bool = false
 var spirit_has_appeared: bool = false
 var has_finished_level: bool = false
-
 @onready var wheel = $wheel
 @onready var altar_door = $altar
 @onready var spirit_sprite = $PercussionSpirit 
-@onready var spawn_point = $SpawnPoint # NOUVEAU : Référence au point de téléportation
+@onready var spawn_point = $SpawnPoint 
+@onready var tilemap = $tambours_ok
 
 var intro_dialogue = load("res://Dialogues/Level4/Intro.dialogue")
 
@@ -85,12 +85,14 @@ func _on_wheel_trigger_body_entered(body: Node2D) -> void:
 		body.set_physics_process(true) 
 		is_dialogue_playing = false
 
-# --- D. VICTOIRE ---
+
+			
 func _on_pressure_stable():
 	if not is_solved:
 		is_solved = true
 		is_dialogue_playing = true
-		
+		if tilemap:
+			tilemap.visible = true				
 		var player = get_tree().get_first_node_in_group("player") 
 		if player: player.set_physics_process(false)
 		

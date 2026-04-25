@@ -5,7 +5,9 @@ signal pressure_destabilized
 
 # 0 = Off, 1 = Manual Bellows (Unstable), 2 = Hydraulis (Stable)
 var pressure_state: int = 0 
+var count: int = 0 
 
+@onready var wheel_animated_sprite = $AnimatedSprite2D
 @onready var interactable = $Interactable
 @onready var audio = $Sound
 
@@ -19,6 +21,20 @@ func _on_interact():
 	# Cycle through the 3 states
 	pressure_state = (pressure_state + 1) % 3
 	_update_feedback()
+	count += 1 
+	
+	if count == 1:
+		if wheel_animated_sprite:
+			wheel_animated_sprite.speed_scale = 1.0
+			wheel_animated_sprite.play("tourner")
+			
+	elif count == 2:
+		if wheel_animated_sprite:
+			wheel_animated_sprite.speed_scale = 2.0
+			
+		# Optionnel : Si tu veux bloquer l'objet après la deuxième interaction
+		# if interactable_area:
+		# 	interactable_area.is_interactable = false
 
 func _update_feedback():
 	if interactable:
@@ -43,3 +59,4 @@ func _update_feedback():
 					audio.pitch_scale = 1.0 
 					audio.play()
 				pressure_stabilized.emit()
+				interactable.is_interactable = false
