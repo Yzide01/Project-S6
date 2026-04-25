@@ -26,7 +26,6 @@ func _ready() -> void:
 		wheel.pressure_stabilized.connect(_on_pressure_stable)
 		wheel.pressure_destabilized.connect(_on_pressure_unstable)
 
-# --- A. LE BORD DE LA FALAISE ---
 func _on_edge_trigger_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and not is_dialogue_playing and not has_talked_at_edge:
 		is_dialogue_playing = true
@@ -40,9 +39,7 @@ func _on_edge_trigger_body_entered(body: Node2D) -> void:
 		body.set_physics_process(true)
 		is_dialogue_playing = false
 
-# --- B. LA TIMBALE ET L'ESPRIT (Mise à jour Téléportation) ---
 func _on_drum_trigger_body_entered(body: Node2D) -> void:
-	# AJOUT : "not is_solved". Si le puzzle est fini, on ne déclenche plus l'erreur !
 	if body.name == "Player" and not is_dialogue_playing and not is_solved:
 		is_dialogue_playing = true
 		
@@ -70,9 +67,7 @@ func _on_drum_trigger_body_entered(body: Node2D) -> void:
 		body.set_physics_process(true)
 		is_dialogue_playing = false
 
-# --- C. LA ROUE (DÉCOUVERTE) ---
 func _on_wheel_trigger_body_entered(body: Node2D) -> void:
-	# AJOUT : "not is_solved". On ne découvre pas la roue si on a déjà résolu le niveau !
 	if body.name == "Player" and not has_seen_wheel and not is_dialogue_playing and not is_solved:
 		has_seen_wheel = true
 		is_dialogue_playing = true
@@ -114,7 +109,6 @@ func _on_altar_interacted() -> void:
 func _on_pressure_unstable():
 	is_solved = false
 
-# --- E. L'AUTRE CÔTÉ ---
 func _on_finish_trigger_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and not has_finished_level and not is_dialogue_playing:
 		has_finished_level = true
