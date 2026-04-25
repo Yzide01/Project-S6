@@ -7471,9 +7471,6 @@ texture = ExtResource("9_3lerf")
 [sub_resource type="TileSet" id="TileSet_fam7g"]
 sources/0 = SubResource("TileSetAtlasSource_xbafm")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3asa"]
-size = Vector2(34, 24)
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8jge5"]
 texture = ExtResource("7_1l2te")
 14:0/0 = 0
@@ -8345,6 +8342,9 @@ texture = ExtResource("3_i04dm")
 sources/0 = SubResource("TileSetAtlasSource_8jge5")
 sources/1 = SubResource("TileSetAtlasSource_kchmo")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3asa"]
+size = Vector2(34, 24)
+
 [node name="Node2D" type="Node2D" unique_id=1451406429]
 script = ExtResource("1_ntwyx")
 intro_position = Vector2(759, 428)
@@ -8555,6 +8555,10 @@ shape = SubResource("CircleShape2D_x6vnd")
 [node name="LabelPosition" type="Marker2D" parent="Bowl_3/Interactable2" unique_id=1944150849]
 position = Vector2(-14.5, -79)
 
+[node name="caillou" type="TileMapLayer" parent="." unique_id=577074584]
+tile_map_data = PackedByteArray("AAAXAAcAAQAIAAwAAAAXAAgAAQAIAA0AAAAYAAcAAQAJAAwAAAAYAAgAAQAJAA0AAAAZAAcAAQAKAAwAAAAZAAgAAQAKAA0AAAAaAAcAAQALAAwAAAAaAAgAAQALAA0AAAAiAAcAAQAIAAwAAAAiAAgAAQAIAA0AAAAjAAcAAQAJAAwAAAAjAAgAAQAJAA0AAAAkAAcAAQAKAAwAAAAkAAgAAQAKAA0AAAAlAAcAAQALAAwAAAAlAAgAAQALAA0AAAAtAAcAAQAIAAwAAAAtAAgAAQAIAA0AAAAuAAcAAQAJAAwAAAAuAAgAAQAJAA0AAAAvAAcAAQAKAAwAAAAvAAgAAQAKAA0AAAAwAAcAAQALAAwAAAAwAAgAAQALAA0AAAA=")
+tile_set = SubResource("TileSet_e0ch8")
+
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("11_rrpsy")]
 position = Vector2(578, 613)
 
@@ -8614,10 +8618,6 @@ polygon = PackedVector2Array(1881.5671, 403.00003, 1881.5671, 437.00003, 1972.85
 position = Vector2(-2121.0002, -11)
 scale = Vector2(1.119058, 0.99999857)
 polygon = PackedVector2Array(1895.3442, 403.00052, 1895.3442, 437.00055, 1972.8594, 436.0003, 1972.8594, 403.00027)
-
-[node name="caillou" type="TileMapLayer" parent="." unique_id=577074584]
-tile_map_data = PackedByteArray("AAAXAAcAAQAIAAwAAAAXAAgAAQAIAA0AAAAYAAcAAQAJAAwAAAAYAAgAAQAJAA0AAAAZAAcAAQAKAAwAAAAZAAgAAQAKAA0AAAAaAAcAAQALAAwAAAAaAAgAAQALAA0AAAAiAAcAAQAIAAwAAAAiAAgAAQAIAA0AAAAjAAcAAQAJAAwAAAAjAAgAAQAJAA0AAAAkAAcAAQAKAAwAAAAkAAgAAQAKAA0AAAAlAAcAAQALAAwAAAAlAAgAAQALAA0AAAAtAAcAAQAIAAwAAAAtAAgAAQAIAA0AAAAuAAcAAQAJAAwAAAAuAAgAAQAJAA0AAAAvAAcAAQAKAAwAAAAvAAgAAQAKAA0AAAAwAAcAAQALAAwAAAAwAAgAAQALAA0AAAA=")
-tile_set = SubResource("TileSet_e0ch8")
 
 [node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=962040725]
 stream = ExtResource("18_x6vnd")
