@@ -32,13 +32,15 @@ func remove_at_index(index: int) -> void:
 func insertSlot(index: int, inventorySlot: InventorySlot):
 	slots[index] = inventorySlot
 	updated.emit()
-	
+
+
 func use_item_at_index(index: int) -> void:
 	if index < 0 || index >= slots.size() || !slots[index].item: return
 	
 	var slot = slots[index]
 	use_item.emit(slot.item)
-	
+	if slot.item.name == "Book":
+		return
 	if slot.amount > 1:
 		slot.amount -= 1
 		updated.emit()
