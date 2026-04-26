@@ -1,6 +1,6 @@
 extends Node2D
 
-signal page_picked()
+signal page_picked
 
 @onready var interactable = $Interactable
 @onready var sprite = $Sprite2D

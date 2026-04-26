@@ -8,6 +8,7 @@ extends Node2D
 # --- RÉFÉRENCES ---
 @onready var spirit = $PercussionSpirit
 @onready var bowls = [$Bowl_1, $Bowl_2, $Bowl_3]
+@onready var book_page = $BookPage
 
 var is_solved: bool = false
 
@@ -33,6 +34,10 @@ func _check_solution():
 		is_solved = true
 		_play_sequence(outro_position, "res://Dialogues/Level3/Outro.dialogue")
 		await DialogueManager.dialogue_ended
+		await get_tree().create_timer(2.0).timeout
+		book_page.victory()
+		await book_page.page_picked
+		await get_tree().create_timer(3.0).timeout
 		SceneManager.changer_niveau("res://Levels/niveau2_percussion.tscn")
 
 func _play_sequence(pos, diag_path):
@@ -74,6 +79,7 @@ func _play_sequence(pos, diag_path):
 		player.set_physics_process(true)
 		player.set_process_input(true)
 		print("DEBUG: Mélos est libre")
+		
 
 
 func _on_terrain_entered(area: Area2D) -> void:

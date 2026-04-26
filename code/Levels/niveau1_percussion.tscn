@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbqlgivvmxm5v" path="res://Levels/niveau_1_percussion.gd" id="1_ntwyx"]
 [ext_resource type="Texture2D" uid="uid://dcgq6abtyukr8" path="res://Assets/percussions/niveau1_percussions/Tileset-Terrain2.png" id="1_xy8x2"]
+[ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="2_mbexe"]
 [ext_resource type="Script" uid="uid://csfd1t55ii2bp" path="res://Entities/Terrain/terrain_zone.gd" id="3_5sg2u"]
 [ext_resource type="Texture2D" uid="uid://c3w8ba0f6i10v" path="res://Assets/percussions/niveau1_percussions/Atlas-Props.png" id="3_i04dm"]
 [ext_resource type="Texture2D" uid="uid://dq3ce0fuw7lb" path="res://Assets/percussions/niveau1_percussions/water1.png" id="4_3lerf"]
@@ -7892,6 +7893,9 @@ position = Vector2(-14.5, -79)
 [node name="caillou" type="TileMapLayer" parent="." unique_id=577074584]
 tile_map_data = PackedByteArray("AAAXAAcAAQAIAAwAAAAXAAgAAQAIAA0AAAAYAAcAAQAJAAwAAAAYAAgAAQAJAA0AAAAZAAcAAQAKAAwAAAAZAAgAAQAKAA0AAAAaAAcAAQALAAwAAAAaAAgAAQALAA0AAAAiAAcAAQAIAAwAAAAiAAgAAQAIAA0AAAAjAAcAAQAJAAwAAAAjAAgAAQAJAA0AAAAkAAcAAQAKAAwAAAAkAAgAAQAKAA0AAAAlAAcAAQALAAwAAAAlAAgAAQALAA0AAAAtAAcAAQAIAAwAAAAtAAgAAQAIAA0AAAAuAAcAAQAJAAwAAAAuAAgAAQAJAA0AAAAvAAcAAQAKAAwAAAAvAAgAAQAKAA0AAAAwAAcAAQALAAwAAAAwAAgAAQALAA0AAAA=")
 tile_set = SubResource("TileSet_e0ch8")
+
+[node name="BookPage" parent="." unique_id=454720209 instance=ExtResource("2_mbexe")]
+position = Vector2(877, 317)
 
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("11_rrpsy")]
 position = Vector2(578, 613)
