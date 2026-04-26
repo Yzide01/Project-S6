@@ -38,10 +38,6 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://add
 
 import/blender/enabled=false
 
-[global_group]
-
-book_ui=""
-
 [input]
 
 crawl={

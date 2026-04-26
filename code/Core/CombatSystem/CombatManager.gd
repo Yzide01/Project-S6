@@ -41,6 +41,20 @@ func _ready() -> void:
 	vent_button.pressed.connect(_on_vent_pressed)
 	corde_button.pressed.connect(_on_corde_pressed)
 	back_button.pressed.connect(_on_back_pressed)
+	
+	# --- DÉBUT DU TEST EN ISOLATION ---
+	
+	var whisper_data = load("res://Entities/Enemies/whisper.tres")
+	var dampener_data = load("res://Entities/Enemies/dampener.tres")
+	
+	# 4. Lancement du combat
+	if whisper_data and dampener_data:
+		print("Lancement du combat de test...")
+		start_encounter([whisper_data, dampener_data])
+	else:
+		print("ERREUR : Les fichiers d'ennemis sont introuvables. Vérifie les chemins.")
+		
+	# --- FIN DU TEST EN ISOLATION ---
 
 func start_encounter(horde: Array[BaseEnemy]) -> void:
 	active_enemies.clear()

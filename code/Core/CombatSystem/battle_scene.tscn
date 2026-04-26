@@ -15,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_ebjqp")
 enemy_ui_scene = ExtResource("2_67fl5")
 
@@ -27,6 +28,7 @@ offset_top = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(0.2159017, 0.21590173, 0.2159017, 1)
 
 [node name="BottomUI" type="Panel" parent="." unique_id=2123608443]
@@ -40,6 +42,7 @@ offset_bottom = 647.0
 layout_mode = 0
 offset_right = 568.0
 offset_bottom = 138.0
+mouse_filter = 1
 text = "Un Sbire du Silence apparait"
 horizontal_alignment = 1
 vertical_alignment = 1

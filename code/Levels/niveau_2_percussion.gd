@@ -112,6 +112,8 @@ func _on_pressure_stable():
 		book_page.victory()
 			
 func _on_altar_interacted() -> void:
+	await get_tree().create_timer(0.2).timeout
+	
 	await start_combat([whisper_data, dampener_data])
 	
 	await get_tree().create_timer(2.0).timeout        
@@ -134,9 +136,24 @@ func _on_finish_trigger_body_entered(body: Node2D) -> void:
 		is_dialogue_playing = false
 
 func start_combat(horde: Array[BaseEnemy]) -> void:
+	var player = get_tree().get_first_node_in_group("player") 
+	if player: 
+		player.set_physics_process(false)
+	is_dialogue_playing = true
+	
+	var ui_layer = CanvasLayer.new()
+	ui_layer.layer = 1000 
+	add_child(ui_layer)
+	
 	current_battle_scene = battle_scene_packed.instantiate()
-	add_child(current_battle_scene)
+	ui_layer.add_child(current_battle_scene)
 	current_battle_scene.start_encounter(horde)
 	
 	await current_battle_scene.tree_exited
+	
+	ui_layer.queue_free()
 	current_battle_scene = null
+	
+	if player: 
+		player.set_physics_process(true)
+	is_dialogue_playing = false

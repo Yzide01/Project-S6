@@ -22,10 +22,20 @@ func _victory():
 	SceneManager.changer_niveau("res://Levels/niveau1_percussion.tscn")
 
 func start_combat(horde: Array[BaseEnemy]) -> void:
-	current_battle_scene = battle_scene_packed.instantiate()
+	get_tree().paused = true
 	
-	add_child(current_battle_scene)
+	var ui_layer = CanvasLayer.new()
+	ui_layer.layer = 1000
+	ui_layer.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(ui_layer)
+	
+	current_battle_scene = battle_scene_packed.instantiate()
+	current_battle_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	ui_layer.add_child(current_battle_scene)
 	current_battle_scene.start_encounter(horde)
 	
 	await current_battle_scene.tree_exited
+	
+	ui_layer.queue_free()
 	current_battle_scene = null
+	get_tree().paused = false
