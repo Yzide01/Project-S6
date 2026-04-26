@@ -2288,6 +2288,9 @@ autoplay = true
 bus = &"Ambiance"
 playback_type = 1
 
+[node name="Murs coté" type="CollisionPolygon2D" parent="." unique_id=1890970804]
+polygon = PackedVector2Array(-43, -184, -37, 1028, 1223, 1056, 1222, -13, 1152, -13, 1153, 976, 0, 976, 0, 9, 1152, 2, 1163, -166)
+
 [connection signal="body_entered" from="EdgeTrigger" to="." method="_on_edge_trigger_body_entered"]
 [connection signal="body_entered" from="DrumTrigger" to="." method="_on_drum_trigger_body_entered"]
 [connection signal="body_entered" from="FinishTrigger" to="." method="_on_finish_trigger_body_entered"]

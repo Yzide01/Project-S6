@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://k0jeknnm6shx"]
 
-[ext_resource type="Script" uid="uid://b6ufcrbo85332" path="res://Levels/niveau_1_vents.gd" id="1_0kfgp"]
+[ext_resource type="Script" path="res://Levels/niveau_1_vents.gd" id="1_0kfgp"]
 [ext_resource type="Texture2D" uid="uid://b0vrqaxj1mhss" path="res://Assets/vents/niveau1_vents/volcanic_rock2.png" id="1_e6ucy"]
 [ext_resource type="Texture2D" uid="uid://3txtxr52878v" path="res://Assets/vents/niveau1_vents/cliff4.png" id="1_y4hyp"]
 [ext_resource type="Texture2D" uid="uid://bfjsfwefjsf1w" path="res://Assets/vents/niveau1_vents/volcanic_rock1.png" id="2_45kih"]
@@ -3201,6 +3201,15 @@ position = Vector2(638, 862)
 
 [node name="MarkerHydraulis" type="Marker2D" parent="." unique_id=1263724594]
 position = Vector2(1663, 394)
+
+[node name="Murs" type="StaticBody2D" parent="." unique_id=1520994579]
+
+[node name="Murs coté" type="CollisionPolygon2D" parent="Murs" unique_id=641733660]
+position = Vector2(-450, 235)
+polygon = PackedVector2Array(-60, 924, 2396, 913, 2370, -238, 1068, -230, 1075, 51, 1789, 60, 1789, -129, 2188, -140, 2192, 253, 1791, 253, 1800, 127, 1068, 126, 1070, 498, 1177, 488, 1175, 895, 768, 893, 766, 496, 983, 500, 973, 259, 383, 250, 385, 369, -2, 381, 0, -13, 394, -14, 396, 181, 986, 188, 986, -224, -65, -234)
+
+[node name="Murs porte" type="CollisionPolygon2D" parent="Murs" unique_id=1075766019]
+polygon = PackedVector2Array(537, 7, 539, -92, 615, -88, 615, 8)
 
 [connection signal="body_entered" from="BellowsArea" to="." method="_on_bellows_area_body_entered"]
 [connection signal="body_entered" from="HydraulisArea" to="." method="_on_hydraulis_area_body_entered"]
