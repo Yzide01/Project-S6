@@ -43,7 +43,7 @@ layout_mode = 0
 offset_right = 568.0
 offset_bottom = 138.0
 mouse_filter = 1
-text = "Un Sbire du Silence apparait"
+text = "Watch out ! Silence Minion(s) appear(s) !"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -63,28 +63,31 @@ offset_bottom = 140.0
 text = "Run"
 
 [node name="PercussionButton" type="Button" parent="BottomUI" unique_id=1210487563]
+auto_translate_mode = 2
 visible = false
 layout_mode = 0
 offset_left = 761.0
 offset_right = 901.0
 offset_bottom = 140.0
-text = "percussion"
+text = "Percussion"
 
 [node name="VentButton" type="Button" parent="BottomUI" unique_id=1117079599]
+auto_translate_mode = 2
 visible = false
 layout_mode = 0
 offset_left = 929.0
 offset_right = 1069.0
 offset_bottom = 140.0
-text = "vent"
+text = "Wind"
 
 [node name="CordeButton" type="Button" parent="BottomUI" unique_id=433536867]
+auto_translate_mode = 2
 visible = false
 layout_mode = 0
 offset_left = 590.0
 offset_right = 730.0
 offset_bottom = 140.0
-text = "corde"
+text = "String"
 
 [node name="Back" type="Button" parent="BottomUI" unique_id=1361421666]
 visible = false
@@ -94,6 +97,28 @@ offset_top = 103.0
 offset_right = 1149.0
 offset_bottom = 140.0
 text = "back"
+
+[node name="QuizPanel" type="Panel" parent="BottomUI" unique_id=189596172]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = -202.0
+offset_right = 1016.0
+offset_bottom = -16.0
+
+[node name="QuestionText" type="Label" parent="BottomUI/QuizPanel" unique_id=517671168]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 573.0
+offset_bottom = 80.0
+
+[node name="AnswersContainer" type="VBoxContainer" parent="BottomUI/QuizPanel" unique_id=293128429]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 75.0
+offset_right = 599.0
+offset_bottom = 182.0
 
 [node name="EnemyContainer" type="HBoxContainer" parent="." unique_id=2138559791]
 layout_mode = 0
@@ -105,19 +130,19 @@ alignment = 1
 
 [node name="PlayerVisual" type="TextureRect" parent="." unique_id=953088116]
 layout_mode = 0
-offset_left = 260.0
+offset_left = 206.0
 offset_top = 286.0
-offset_right = 410.0
+offset_right = 356.0
 offset_bottom = 506.0
 texture = SubResource("CompressedTexture2D_jnk41")
 expand_mode = 1
 
 [node name="PlayerHPBar" type="TextureProgressBar" parent="." unique_id=401387119]
 layout_mode = 0
-offset_left = 71.0
-offset_top = 426.0
-offset_right = 198.0
-offset_bottom = 451.0
+offset_left = 47.0
+offset_top = 415.0
+offset_right = 174.0
+offset_bottom = 440.0
 nine_patch_stretch = true
 texture_under = ExtResource("2_7x133")
 texture_progress = ExtResource("3_lmsui")

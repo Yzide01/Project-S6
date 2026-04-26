@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dibvsr0u2n16d" path="res://Assets/percussions/niveau2_percussions/manivellehamster8.png" id="19_nm6hr"]
 [ext_resource type="Texture2D" uid="uid://b58j81xpxm0hv" path="res://Assets/percussions/niveau2_percussions/manivellehamster9.png" id="20_omrmp"]
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="21_dsl3q"]
+[ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="26_sntxp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tqqop"]
 texture = ExtResource("1_yx54n")
@@ -1932,6 +1933,9 @@ playback_type = 1
 
 [node name="Murs coté" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1890970804]
 polygon = PackedVector2Array(-43, -184, -37, 1028, 1223, 1056, 1222, -13, 1152, -13, 1153, 976, 0, 976, 0, 9, 1152, 2, 1163, -166)
+
+[node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("26_sntxp")]
+visible = false
 
 [connection signal="body_entered" from="EdgeTrigger" to="." method="_on_edge_trigger_body_entered"]
 [connection signal="body_entered" from="DrumTrigger" to="." method="_on_drum_trigger_body_entered"]

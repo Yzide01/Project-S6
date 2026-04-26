@@ -10,7 +10,7 @@ var book_content = {
 		"is_intro": true,
 		"left_lesson": "INTRODUCTION",
 		"left_text": "The world has fallen silent. Silence has devoured the echoes. Use this grimoire to master the laws of vibration and awaken the Spirits of Music.",
-		"img_left": "res://assets/Book/montagne.png",
+		"img_left": "res://Assets/Book/montagne.png",
 		"right_lesson": "THE LAW OF LENGTH",
 		"use_strings": true, 
 		"txt_long": "[b]Low Frequencies[/b]\nA long string vibrates slowly.",
@@ -22,22 +22,22 @@ var book_content = {
 		"is_intro": false,
 		"left_lesson": "THE PIANO",
 		"left_text": "A piano is a forest of strings. By striking the keys, you trigger hammers that bring mathematical ratios to life.",
-		"img_left": "res://assets/Book/piano_mechanism.png", 
+		"img_left": "res://Assets/Book/piano_mechanism.png", 
 		"right_lesson": "PYTHAGOREAN MONOCHORD",
 		"use_strings": false, 
 		"right_text": "By dividing a string in half (1/2), you create an Octave. By dividing it at 2/3, you find the Perfect Fifth.",
-		"img_right": "res://assets/Book/monocorde.png"
+		"img_right": "res://Assets/Book/monocorde.png"
 	},
 	3: {
 		"level_title": "RESONANT GEOMETRY",
 		"is_intro": false,
 		"left_lesson": "VIBRATING SURFACES",
 		"left_text": "When a surface vibrates, the air around it vibrates too to form sound waves. The vibration frequency depends on the object's overall mass.\n\nAn example of using this phenomenon is the 'Chladni' plate, where dust dances into sacred patterns.",
-		"img_left": "res://assets/Book/sable.png",
+		"img_left": "res://Assets/Book/sable.png",
 		"right_lesson": "CHLADNI PATTERNS",
 		"use_strings": false, 
 		"right_text": "Lower frequencies create simple forms. Higher ones create intricate webs. These patterns translate sound into visible form.",
-		"img_right": "res://assets/Book/sable2.png",
+		"img_right": "res://Assets/Book/sable2.png",
 		"is_large_r": true 
 	},
 	4: {
@@ -45,11 +45,11 @@ var book_content = {
 		"is_intro": false,
 		"left_lesson": "DRUM RESONANCE",
 		"left_text": "A drum is a trapped storm. The tighter the skin, the faster the strike, the higher the shout. The true power lies in the hollow body—the void where the sound grows and gains its weight.",
-		"img_left": "res://assets/Book/tambour.png",
+		"img_left": "res://Assets/Book/tambour.png",
 		"right_lesson": "THE FIRST RHYTHM",
 		"use_strings": false, 
 		"right_text": "Legends say the first bards didn't sing; they mimicked the heartbeat of the world. In the Great Silence, these drums were the only way to remind the soul it was alive.",
-		"img_right": "res://assets/Book/barde tambour.png",
+		"img_right": "res://Assets/Book/barde tambour.png",
 		"is_large_r": true 
 	}
 }

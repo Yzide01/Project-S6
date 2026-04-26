@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="11_0psmx"]
 [ext_resource type="AudioStream" uid="uid://djv0n0g71xo8q" path="res://Assets/Sound/Trials/Bach-prelude-in-c-major-piano.mp3" id="13_j621k"]
 [ext_resource type="AudioStream" uid="uid://dpwlsmodp0246" path="res://Assets/Sound/Ambiant sound/background_heavy.wav" id="15_0psmx"]
+[ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="18_q0jl7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jofdi"]
 texture = ExtResource("1_x61l1")

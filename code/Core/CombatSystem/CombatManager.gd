@@ -2,7 +2,7 @@ class_name CombatManager
 extends Control
 
 signal action_selected(action_name: String)
-
+var escaped: bool = false
 @onready var info_text: Label = $BottomUI/InfoText
 
 # Main menu
@@ -31,6 +31,62 @@ var player_resisting: float = 1.0
 var player_silenced: bool = false
 
 var active_enemies: Array[Dictionary] = []
+
+signal answer_selected(is_correct: bool)
+
+@onready var quiz_panel: Panel = $BottomUI/QuizPanel
+@onready var question_text: Label = $BottomUI/QuizPanel/QuestionText
+@onready var answers_container: VBoxContainer = $BottomUI/QuizPanel/AnswersContainer
+
+# La base de données de tes questions (bien rangée !)
+var quiz_data = {
+	"corde": {
+		1: [
+			{"q": "To get a lower (bass) sound, the string must be...", "opts": ["Longer", "Shorter"], "ans": 0},
+			{"q": "A very short string produces a sound that is...", "opts": ["High-pitched", "Deep", "Silent"], "ans": 0},
+			{"q": "True or False: Changing a string's length changes its note.", "opts": ["True", "False"], "ans": 0}
+		],
+		2: [
+			{"q": "If you cut a string's length in half, the sound becomes...", "opts": ["Higher", "Lower", "It stays the same"], "ans": 0},
+			{"q": "Slow and wide waves correspond to which type of sound?", "opts": ["Bass", "Treble"], "ans": 0},
+			{"q": "The faster a string vibrates, the _______ the pitch.", "opts": ["Higher", "Lower"], "ans": 0}
+		],
+		3: [
+			{"q": "What is the scientific term for the number of vibrations per second?", "opts": ["Frequency", "Amplitude", "Velocity"], "ans": 0}
+		]
+	},
+	"percussion": {
+		1: [
+			{"q": "Which object naturally produces the deepest sound?", "opts": ["A large drum", "A small triangle"], "ans": 0},
+			{"q": "True or False: Percussion instruments must be struck to create sound.", "opts": ["True", "False"], "ans": 0},
+			{"q": "A small bell produces a sound that is _______ than a large bass drum.", "opts": ["Higher", "Lower"], "ans": 0}
+		],
+		2: [
+			{"q": "To break a shield, the vibration should be...", "opts": ["Slow and powerful", "Fast and weak", "Silent"], "ans": 0},
+			{"q": "If a drum skin is tightened, the pitch becomes...", "opts": ["Higher", "Lower", "Deeper"], "ans": 0},
+			{"q": "Which material resonates best to break the Silence?", "opts": ["Metal", "Wood", "Cotton"], "ans": 0}
+		],
+		3: [
+			{"q": "Which physical phenomenon allows a strike to make an enemy tremble?", "opts": ["Resonance", "Combustion", "Gravity"], "ans": 0}
+		]
+	},
+	"vent": {
+		1: [
+			{"q": "In a flute, what is actually vibrating to create the sound?", "opts": ["The air inside", "The wood/metal body", "The player's fingers"], "ans": 0},
+			{"q": "To play a louder note, the Bard must increase...", "opts": ["Air pressure (Breath)", "Finger speed"], "ans": 0},
+			{"q": "True or False: A very long wind instrument produces a high-pitched sound.", "opts": ["True", "False"], "ans": 1}
+		],
+		2: [
+			{"q": "By covering holes on a flute, you make the air column...", "opts": ["Longer", "Shorter"], "ans": 0},
+			{"q": "A short air column vibrates _______ than a long one.", "opts": ["Faster", "Slower"], "ans": 0},
+			{"q": "What protects the Bard from enemy shockwaves?", "opts": ["Air pressure", "String length", "Drum weight"], "ans": 0}
+		],
+		3: [
+			{"q": "What is the technique called when you blow harder to reach a higher octave?", "opts": ["Overblowing (Octaviation)", "Muting", "Distortion"], "ans": 0}
+		]
+	}
+}
+
 
 func _ready() -> void:
 	_reset_menu()
@@ -92,15 +148,20 @@ func start_battle() -> void:
 	else:
 		await display_text("A Silence Minion appears!")
 	
-	while player_hp > 0 and get_alive_enemies_count() > 0:
+	# Ajout de "and not escaped"
+	while player_hp > 0 and get_alive_enemies_count() > 0 and not escaped:
 		await player_turn()
 		
-		if get_alive_enemies_count() <= 0:
+		# On arrête tout si les ennemis sont morts OU si on a fui
+		if get_alive_enemies_count() <= 0 or escaped:
 			break
 			
 		await enemy_turn()
 		
-	if player_hp > 0:
+	if escaped:
+		# Si on a fui, on détruit juste la scène de combat pour retourner au jeu
+		queue_free()
+	elif player_hp > 0:
 		await display_text("Victory! Music is back in the spotlight.")
 		end_battle(true)
 	else:
@@ -127,37 +188,109 @@ func player_turn() -> void:
 	match chosen_action:
 		"percussion":
 			var target = get_first_alive_enemy()
-			await display_text("The Bard uses Thunder Strike on " + target.name + "!")
-			if target.has_shield:
-				await display_text("The enemy's shield shatters!")
-				target.has_shield = false
+			# Le jeu se met en pause et affiche le QCM de percussions
+			var success = await ask_question("percussion", target.rank)
+			
+			if success:
+				await display_text("Correct! The Bard uses Thunder Strike on " + target.name + "!")
+				if target.has_shield:
+					await display_text("The enemy's shield shatters!")
+					target.has_shield = false
+				else:
+					target.hp -= 15
+					await display_text(target.name + " loses 15 HP.")
+					target.ui_node.update_hp(target.hp)
 			else:
-				target.hp -= 15
-				await display_text(target.name + " loses 15 HP.")
-				target.ui_node.update_hp(target.hp)
+				await display_text("Wrong answer! The Bard hesitates and misses the tempo...")
 				
 		"vent":
-			await display_text("The Bard sings a protective melody!")
-			player_resisting += 0.5
-			await display_text("Defense increased.")
+			var target = get_first_alive_enemy()
+			# On utilise le rang d'un ennemi pour la difficulté de la question de vent
+			var success = await ask_question("vent", target.rank)
 			
+			if success:
+				await display_text("Correct! The Bard sings a protective melody!")
+				player_resisting += 0.5
+				await display_text("Defense increased.")
+			else:
+				await display_text("Wrong answer! The Bard runs out of breath...")
+				
 		"corde":
-			await display_text("The Bard plays a Distracting Melody! It hits EVERYONE!")
-			for enemy in active_enemies:
-				if enemy.hp > 0:
-					if !enemy.has_shield:
-						enemy.hp -= 5
-						enemy.ui_node.update_hp(enemy.hp)
-						if randf() > 0.5:
-							enemy.stunned = true
-							await display_text(enemy.name + " is scared!")
-						await display_text(enemy.name + " loses 5 HP.")
+			var target = get_first_alive_enemy()
+			# On utilise le rang d'un ennemi pour la difficulté de la question de cordes
+			var success = await ask_question("corde", target.rank)
+			
+			if success:
+				await display_text("Correct! The Bard plays a Distracting Melody! It hits EVERYONE!")
+				for enemy in active_enemies:
+					if enemy.hp > 0:
+						if !enemy.has_shield:
+							enemy.hp -= 5
+							enemy.ui_node.update_hp(enemy.hp)
+							if randf() > 0.5:
+								enemy.stunned = true
+								await display_text(enemy.name + " is scared!")
+							await display_text(enemy.name + " loses 5 HP.")
+			else:
+				await display_text("Wrong answer! The strings are out of tune...")
 						
 		"run":
 			await display_text("You run away...")
-			player_hp = 0
+			escaped = true # Assure-toi d'avoir ajouté 'var escaped: bool = false' tout en haut du script !
+			return # On quitte le tour immédiatement pour ne pas crasher
 
 	update_ui()
+#
+## --- Player turn ---
+#func player_turn() -> void:
+	#if player_silenced:
+		#await display_text("The Bard is silenced and cannot play music this turn!")
+		#player_silenced = false
+		#return
+	#
+	#await display_text("What should the Bard do?")
+	#
+	#attack_button.show()
+	#run_button.show()
+	#
+	#var chosen_action = await self.action_selected 
+	#_reset_menu()
+	#
+	#match chosen_action:
+		#"percussion":
+			#var target = get_first_alive_enemy()
+			#await display_text("The Bard uses Thunder Strike on " + target.name + "!")
+			#if target.has_shield:
+				#await display_text("The enemy's shield shatters!")
+				#target.has_shield = false
+			#else:
+				#target.hp -= 15
+				#await display_text(target.name + " loses 15 HP.")
+				#target.ui_node.update_hp(target.hp)
+				#
+		#"vent":
+			#await display_text("The Bard sings a protective melody!")
+			#player_resisting += 0.5
+			#await display_text("Defense increased.")
+			#
+		#"corde":
+			#await display_text("The Bard plays a Distracting Melody! It hits EVERYONE!")
+			#for enemy in active_enemies:
+				#if enemy.hp > 0:
+					#if !enemy.has_shield:
+						#enemy.hp -= 5
+						#enemy.ui_node.update_hp(enemy.hp)
+						#if randf() > 0.5:
+							#enemy.stunned = true
+							#await display_text(enemy.name + " is scared!")
+						#await display_text(enemy.name + " loses 5 HP.")
+						#
+		#"run":
+			#await display_text("You run away...")
+			#escaped = true
+			#return
+#
+	#update_ui()
 
 # --- Enemy turn ---
 func enemy_turn() -> void:
@@ -274,3 +407,29 @@ func _reset_menu() -> void:
 	back_button.hide()
 	attack_button.hide()
 	run_button.hide()
+	
+	
+func ask_question(category: String, rank: int) -> bool:
+	var questions_list = quiz_data[category][rank]
+	var question = questions_list.pick_random()
+	
+	question_text.text = question["q"]
+	
+	# On nettoie les vieux boutons
+	for child in answers_container.get_children():
+		child.queue_free()
+		
+	# On génère les boutons de réponses
+	for i in range(question["opts"].size()):
+		var btn = Button.new()
+		btn.text = question["opts"][i]
+		var is_correct = (i == question["ans"])
+		# Quand on clique, ça envoie le signal avec True ou False
+		btn.pressed.connect(func(): answer_selected.emit(is_correct))
+		answers_container.add_child(btn)
+		
+	quiz_panel.show()
+	var success = await self.answer_selected # On met le code en pause jusqu'au clic !
+	quiz_panel.hide()
+	
+	return success
