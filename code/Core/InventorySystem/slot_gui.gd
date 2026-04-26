@@ -34,4 +34,3 @@ func clear() -> void:
 		itemStackGui = null
 		
 	backgroundSprite.frame = 0
-	

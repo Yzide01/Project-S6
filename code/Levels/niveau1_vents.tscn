@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://k0jeknnm6shx"]
 
-[ext_resource type="Script" path="res://Levels/niveau_1_vents.gd" id="1_0kfgp"]
+[ext_resource type="Script" uid="uid://b6ufcrbo85332" path="res://Levels/niveau_1_vents.gd" id="1_0kfgp"]
 [ext_resource type="Texture2D" uid="uid://b0vrqaxj1mhss" path="res://Assets/vents/niveau1_vents/volcanic_rock2.png" id="1_e6ucy"]
 [ext_resource type="Texture2D" uid="uid://3txtxr52878v" path="res://Assets/vents/niveau1_vents/cliff4.png" id="1_y4hyp"]
 [ext_resource type="Texture2D" uid="uid://bfjsfwefjsf1w" path="res://Assets/vents/niveau1_vents/volcanic_rock1.png" id="2_45kih"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="18_ep8ry"]
 [ext_resource type="Texture2D" uid="uid://uxwhtdnqthp4" path="res://Assets/Spirit/Esprit des vents sans fond.png" id="20_2k05v"]
 [ext_resource type="AudioStream" uid="uid://jlis2iwatvhm" path="res://Assets/Spirit/sounc vent.wav" id="21_2k05v"]
+[ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="22_5ttbj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37hjs"]
 texture = ExtResource("1_y4hyp")
@@ -3201,6 +3202,9 @@ position = Vector2(638, 862)
 
 [node name="MarkerHydraulis" type="Marker2D" parent="." unique_id=1263724594]
 position = Vector2(1663, 394)
+
+[node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("22_5ttbj")]
+visible = false
 
 [node name="Murs" type="StaticBody2D" parent="." unique_id=1520994579]
 

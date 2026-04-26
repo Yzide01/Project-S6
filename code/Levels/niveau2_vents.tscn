@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dmigh3n8mj6di" path="res://Assets/vents/niveau2_vents/Tileset-Terrain2.png" id="1_ea82f"]
 [ext_resource type="Texture2D" uid="uid://csodq2m2beue1" path="res://Assets/vents/niveau2_vents/TX Tileset Grass.png" id="1_plhlm"]
-[ext_resource type="Script" path="res://Levels/niveau_2_vents.gd" id="1_poa13"]
+[ext_resource type="Script" uid="uid://dyepjdlgvir1h" path="res://Levels/niveau_2_vents.gd" id="1_poa13"]
 [ext_resource type="Texture2D" uid="uid://cgxi67n2y8hbj" path="res://Assets/vents/niveau2_vents/altar 224x288 - standard.png" id="2_plhlm"]
 [ext_resource type="Texture2D" uid="uid://dx3fc21edinlw" path="res://Assets/vents/niveau2_vents/murpierre.png" id="3_r4aep"]
 [ext_resource type="Texture2D" uid="uid://cvl8h3uohcrh6" path="res://Assets/vents/niveau2_vents/arche.png" id="4_6lrwr"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://71wvah156rsr" path="res://Assets/vents/niveau2_vents/tube9.png" id="28_tkiaj"]
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="29_u80fo"]
 [ext_resource type="Texture2D" uid="uid://cqh85iat07jk2" path="res://Assets/Spirit/Esprit Inca.png" id="34_vlaer"]
+[ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="35_47yiv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5kic"]
 texture = ExtResource("1_plhlm")
@@ -13020,6 +13021,9 @@ shape = SubResource("RectangleShape2D_vlaer")
 position = Vector2(558, 102)
 scale = Vector2(0.48697925, 0.47628736)
 texture = ExtResource("34_vlaer")
+
+[node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("35_47yiv")]
+visible = false
 
 [node name="Murs coté" type="CollisionPolygon2D" parent="." unique_id=603520655]
 position = Vector2(0, -96)

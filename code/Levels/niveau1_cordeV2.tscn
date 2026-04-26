@@ -3367,7 +3367,7 @@ shape = SubResource("CircleShape2D_libwh")
 [node name="LabelPosition" type="Marker2D" parent="MagicDoor/Interactable" unique_id=1749386432]
 position = Vector2(37.499996, -70)
 
-[node name="BookUI" parent="." unique_id=1635178096 instance=ExtResource("21_15k86")]
+[node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("21_15k86")]
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1014798217]

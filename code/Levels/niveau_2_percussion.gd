@@ -1,5 +1,10 @@
 extends Node2D
 
+@export var battle_scene_packed: PackedScene
+@onready var whisper_data = preload("res://Entities/Enemies/whisper.tres")
+@onready var dampener_data = preload("res://Entities/Enemies/dampener.tres")
+var current_battle_scene: Node = null
+
 # --- VARIABLES ---
 var is_solved: bool = false
 var is_dialogue_playing: bool = false
@@ -13,6 +18,7 @@ var has_finished_level: bool = false
 @onready var spirit_sprite = $PercussionSpirit 
 @onready var spawn_point = $SpawnPoint 
 @onready var tilemap = $tambours_ok
+@onready var book_page = $BookPage
 
 var intro_dialogue = load("res://Dialogues/Level4/Intro.dialogue")
 
@@ -102,8 +108,15 @@ func _on_pressure_stable():
 			int_comp.is_interactable = true
 			int_comp.interact_name = "Enter the Altar"
 			int_comp.interact = _on_altar_interacted
+		await get_tree().create_timer(1.0).timeout
+		book_page.victory()
 			
-func _on_altar_interacted() -> void:        
+func _on_altar_interacted() -> void:
+	await get_tree().create_timer(0.2).timeout
+	
+	await start_combat([whisper_data, dampener_data])
+	
+	await get_tree().create_timer(2.0).timeout        
 	SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")
 
 func _on_pressure_unstable():
@@ -121,3 +134,26 @@ func _on_finish_trigger_body_entered(body: Node2D) -> void:
 		
 		body.set_physics_process(true) 
 		is_dialogue_playing = false
+
+func start_combat(horde: Array[BaseEnemy]) -> void:
+	var player = get_tree().get_first_node_in_group("player") 
+	if player: 
+		player.set_physics_process(false)
+	is_dialogue_playing = true
+	
+	var ui_layer = CanvasLayer.new()
+	ui_layer.layer = 1000 
+	add_child(ui_layer)
+	
+	current_battle_scene = battle_scene_packed.instantiate()
+	ui_layer.add_child(current_battle_scene)
+	current_battle_scene.start_encounter(horde)
+	
+	await current_battle_scene.tree_exited
+	
+	ui_layer.queue_free()
+	current_battle_scene = null
+	
+	if player: 
+		player.set_physics_process(true)
+	is_dialogue_playing = false

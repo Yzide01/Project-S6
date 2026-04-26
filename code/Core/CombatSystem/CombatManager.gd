@@ -42,20 +42,19 @@ func _ready() -> void:
 	corde_button.pressed.connect(_on_corde_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	
-	# --- DÉBUT DU CODE DE TEST ---
+	# --- DÉBUT DU TEST EN ISOLATION ---
 	
-	# 1. On charge le fichier de données de ton Murmure
-	# (Vérifie que le chemin correspond bien à l'endroit où tu as rangé murmure.tres)
-	var whisper_data = load("res://Entities/Enemies/whisper.tres") as BaseEnemy
+	var whisper_data = load("res://Entities/Enemies/whisper.tres")
+	var dampener_data = load("res://Entities/Enemies/dampener.tres")
 	
-	# 2. On crée un tableau (une horde) contenant 3 Murmures
-	var test_horde: Array[BaseEnemy] = [whisper_data, whisper_data, whisper_data]
-	
-	# 3. On lance le combat !
-	start_encounter(test_horde)
-	
-	# --- FIN DU CODE DE TEST ---
-
+	# 4. Lancement du combat
+	if whisper_data and dampener_data:
+		print("Lancement du combat de test...")
+		start_encounter([whisper_data, dampener_data])
+	else:
+		print("ERREUR : Les fichiers d'ennemis sont introuvables. Vérifie les chemins.")
+		
+	# --- FIN DU TEST EN ISOLATION ---
 
 func start_encounter(horde: Array[BaseEnemy]) -> void:
 	active_enemies.clear()
@@ -103,10 +102,12 @@ func start_battle() -> void:
 		
 	if player_hp > 0:
 		await display_text("Victory! Music is back in the spotlight.")
+		end_battle(true)
 	else:
 		var tween = create_tween()
 		tween.tween_property(player_visual, "modulate:a", 0.0, 1.0)
 		await display_text("Defeat... Silence has engulfed you.")
+		end_battle(false)
 
 # --- Player turn ---
 func player_turn() -> void:
@@ -233,6 +234,14 @@ func animate_player_damage() -> void:
 	tween.tween_property(player_visual, "modulate", Color.RED, 0.1)
 	tween.tween_property(player_visual, "modulate", Color.WHITE, 0.1)
 	tween.set_loops(2)
+	
+func end_battle(player_won: bool) -> void:
+	await get_tree().create_timer(1.0).timeout 
+	
+	if player_won:
+		queue_free()
+	else:
+		get_tree().reload_current_scene()
 
 # --- Display ---
 func display_text(text_to_show: String) -> void:
