@@ -72,6 +72,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Settings"
 
+[node name="SaveButton" type="Button" parent="VBoxContainer" unique_id=1645008375]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Save / Load"
+
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=502967908]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2

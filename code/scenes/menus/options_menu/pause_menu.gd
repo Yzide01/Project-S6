@@ -3,13 +3,17 @@ extends Control
 var current_options = null
 var options_scene = preload("res://scenes/menus/options_menu/master_options_menu_with_tabs.tscn")
 var level_selection_scene = preload("res://scenes/menus/level_selection/level_selection_menu.tscn")
+var save_menu_scene = preload("res://scenes/menus/save_menu/save_menu.tscn")
 var current_level_selection = null
+var current_save_menu = null
 
 func _ready():
 	$VBoxContainer/ResumeButton.pressed.connect(_on_resume_pressed)
 	$VBoxContainer/SettingButton.pressed.connect(_on_setting_pressed)
 	if $VBoxContainer.has_node("LevelSelectionButton"):
 		$VBoxContainer/LevelSelectionButton.pressed.connect(_on_level_selection_pressed)
+	if $VBoxContainer.has_node("SaveButton"):
+		$VBoxContainer/SaveButton.pressed.connect(_on_save_pressed)
 	$VBoxContainer/ExitButton.pressed.connect(_on_exit_pressed)
 
 	$VBoxContainer/ResumeButton.grab_focus()
@@ -29,6 +33,12 @@ func _input(event):
 		elif current_level_selection:
 			current_level_selection.queue_free()
 			current_level_selection = null
+			$VBoxContainer.show()
+			$VBoxContainer/ResumeButton.grab_focus()
+			get_viewport().set_input_as_handled()
+		elif current_save_menu:
+			current_save_menu.queue_free()
+			current_save_menu = null
 			$VBoxContainer.show()
 			$VBoxContainer/ResumeButton.grab_focus()
 			get_viewport().set_input_as_handled()
@@ -77,6 +87,18 @@ func _on_level_selection_closed():
 	if $VBoxContainer.has_node("LevelSelectionButton"):
 		$VBoxContainer/LevelSelectionButton.grab_focus()
 	current_level_selection = null
+
+func _on_save_pressed():
+	current_save_menu = save_menu_scene.instantiate()
+	add_child(current_save_menu)
+	$VBoxContainer.hide()
+	current_save_menu.tree_exited.connect(_on_save_menu_closed)
+
+func _on_save_menu_closed():
+	$VBoxContainer.show()
+	if $VBoxContainer.has_node("SaveButton"):
+		$VBoxContainer/SaveButton.grab_focus()
+	current_save_menu = null
 
 func _on_exit_pressed():
 	get_tree().quit()
