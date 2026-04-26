@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://3b4gc3oaunnw" path="res://Entities/Player/player.gd" id="1_onrkg"]
 [ext_resource type="Resource" uid="uid://uilb1xmhdr7n" path="res://Core/InventorySystem/playerInventory.tres" id="2_lu8i8"]
 [ext_resource type="PackedScene" uid="uid://0cslo8uxf46d" path="res://Interactables/Base/interacting_component.tscn" id="4_tekja"]
+[ext_resource type="PackedScene" uid="uid://cni72vkbksv45" path="res://Core/InventorySystem/Hotbar.tscn" id="5_4wf4l"]
 [ext_resource type="Texture2D" uid="uid://ymplbpettjao" path="res://Assets/spritesheet_barde_ok-sac_768.png.png" id="5_5c2io"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
@@ -486,3 +487,11 @@ shape = SubResource("RectangleShape2D_hqtel")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2025306507]
 sprite_frames = SubResource("SpriteFrames_d17g3")
 animation = &"idle_up"
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=536538805]
+
+[node name="Hotbar" parent="UI" unique_id=717867666 instance=ExtResource("5_4wf4l")]
+offset_left = 448.0
+offset_top = 670.0
+offset_right = 539.9998
+offset_bottom = 690.0
