@@ -1,5 +1,10 @@
 extends Node2D
 
+@export var battle_scene_packed: PackedScene
+@onready var whisper_data = preload("res://Entities/Enemies/whisper.tres")
+@onready var dampener_data = preload("res://Entities/Enemies/dampener.tres")
+var current_battle_scene: Node = null
+
 # --- VARIABLES ---
 var is_solved: bool = false
 var is_dialogue_playing: bool = false
@@ -106,7 +111,10 @@ func _on_pressure_stable():
 		await get_tree().create_timer(1.0).timeout
 		book_page.victory()
 			
-func _on_altar_interacted() -> void:        
+func _on_altar_interacted() -> void:
+	await start_combat([whisper_data, dampener_data])
+	
+	await get_tree().create_timer(2.0).timeout        
 	SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")
 
 func _on_pressure_unstable():
@@ -124,3 +132,11 @@ func _on_finish_trigger_body_entered(body: Node2D) -> void:
 		
 		body.set_physics_process(true) 
 		is_dialogue_playing = false
+
+func start_combat(horde: Array[BaseEnemy]) -> void:
+	current_battle_scene = battle_scene_packed.instantiate()
+	add_child(current_battle_scene)
+	current_battle_scene.start_encounter(horde)
+	
+	await current_battle_scene.tree_exited
+	current_battle_scene = null
