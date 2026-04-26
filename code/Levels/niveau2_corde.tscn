@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="11_0psmx"]
 [ext_resource type="AudioStream" uid="uid://djv0n0g71xo8q" path="res://Assets/Sound/Trials/Bach-prelude-in-c-major-piano.mp3" id="13_j621k"]
 [ext_resource type="AudioStream" uid="uid://dpwlsmodp0246" path="res://Assets/Sound/Ambiant sound/background_heavy.wav" id="15_0psmx"]
+[ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="18_q0jl7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jofdi"]
 texture = ExtResource("1_x61l1")
@@ -24290,6 +24291,9 @@ stream = ExtResource("15_0psmx")
 autoplay = true
 bus = &"Ambiance"
 playback_type = 1
+
+[node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("18_q0jl7")]
+visible = false
 
 [node name="Murs coté" type="CollisionPolygon2D" parent="." unique_id=399762706]
 polygon = PackedVector2Array(-80, -480, -66, 782, 1222, 800, 1293, -52, 1830, -171, 2447, -412, 2529, -1807, 2437, -1691, 2344, -1691, 2343, -429, 2265, -428, 2265, -1049, 1943, -1054, 1941, -1019, 1607, -1017, 1607, -668, 1385, -664, 1385, -402, 1574, -409, 1573, -171, 1258, -171, 1259, -406, 1307, -406, 1307, -666, 1173, -666, 1173, -187, 821, -187, 821, -5, 1157, -5, 1157, 661, -5, 661, -5, -4, -5, -357, 1100, -358, 1099, -667, 618, -668, 618, -826, 518, -826, 517, -763, 314, -762, 315, -998, 517, -998, 519, -903, 693, -901, 699, -745, 890, -744, 888, -1209, 828, -1211, 827, -1446, 1030, -1445, 1029, -1211, 967, -1210, 966, -742, 1530, -742, 1529, -1018, 1259, -1017, 1259, -1349, 1673, -1352, 1674, -1574, 1749, -1574, 1753, -1352, 1942, -1350, 1944, -1127, 2268, -1126, 2262, -1694, 2206, -1689, 2204, -1929, 2439, -1928, 2437, -1694, 2526, -1810, 2530, -1887, 2537, -1961, 2149, -1955, 1948, -1655, 826, -1646, 561, -1111, 285, -1184)
