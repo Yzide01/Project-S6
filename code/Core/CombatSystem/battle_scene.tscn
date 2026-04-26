@@ -98,6 +98,28 @@ offset_right = 1149.0
 offset_bottom = 140.0
 text = "back"
 
+[node name="QuizPanel" type="Panel" parent="BottomUI" unique_id=189596172]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = -202.0
+offset_right = 1016.0
+offset_bottom = -16.0
+
+[node name="QuestionText" type="Label" parent="BottomUI/QuizPanel" unique_id=517671168]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 573.0
+offset_bottom = 80.0
+
+[node name="AnswersContainer" type="VBoxContainer" parent="BottomUI/QuizPanel" unique_id=293128429]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 75.0
+offset_right = 599.0
+offset_bottom = 182.0
+
 [node name="EnemyContainer" type="HBoxContainer" parent="." unique_id=2138559791]
 layout_mode = 0
 offset_left = 621.0
@@ -108,19 +130,19 @@ alignment = 1
 
 [node name="PlayerVisual" type="TextureRect" parent="." unique_id=953088116]
 layout_mode = 0
-offset_left = 260.0
+offset_left = 206.0
 offset_top = 286.0
-offset_right = 410.0
+offset_right = 356.0
 offset_bottom = 506.0
 texture = SubResource("CompressedTexture2D_jnk41")
 expand_mode = 1
 
 [node name="PlayerHPBar" type="TextureProgressBar" parent="." unique_id=401387119]
 layout_mode = 0
-offset_left = 71.0
-offset_top = 426.0
-offset_right = 198.0
-offset_bottom = 451.0
+offset_left = 47.0
+offset_top = 415.0
+offset_right = 174.0
+offset_bottom = 440.0
 nine_patch_stretch = true
 texture_under = ExtResource("2_7x133")
 texture_progress = ExtResource("3_lmsui")
