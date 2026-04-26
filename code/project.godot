@@ -34,6 +34,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/maaacks_options_menus/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 crawl={

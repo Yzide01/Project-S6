@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BaseEnemy" format=3 uid="uid://dkcl578h4l51y"]
+
+[ext_resource type="Script" uid="uid://cjtqj182cu3j8" path="res://Entities/Enemies/base_enemy.gd" id="1_fnvs6"]
+
+[resource]
+script = ExtResource("1_fnvs6")
+enemy_name = "Devourer"
+max_hp = 25
+rank = 3
+metadata/_custom_type_script = "uid://cjtqj182cu3j8"

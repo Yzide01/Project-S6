@@ -83,3 +83,4 @@ root_node = NodePath("../ColorRect")
 libraries/ = SubResource("AnimationLibrary_7lmbi")
 
 [node name="CinematicAudio" type="AudioStreamPlayer" parent="." unique_id=2020821378]
+volume_db = 9.123

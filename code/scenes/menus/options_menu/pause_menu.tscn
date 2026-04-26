@@ -9,6 +9,7 @@ shader_parameter/lod = 2.0
 shader_parameter/tint_color = Color(0, 0, 0, 0.4)
 
 [node name="PauseMenu" type="Control" unique_id=391970233]
+auto_translate_mode = 2
 z_index = 100
 layout_mode = 3
 anchors_preset = 15
@@ -46,7 +47,7 @@ theme_override_constants/separation = 20
 [node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=1314904943]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "Jeu en Pause"
+text = "Game Paused"
 horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="VBoxContainer" unique_id=1486976357]
@@ -57,16 +58,16 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Reprendre"
+text = "Resume"
 
 [node name="SettingButton" type="Button" parent="VBoxContainer" unique_id=1034508199]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Paramètres"
+text = "Settings"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=502967908]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Quitter"
+text = "Quit Game"
