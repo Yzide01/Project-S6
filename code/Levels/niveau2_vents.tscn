@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dmigh3n8mj6di" path="res://Assets/vents/niveau2_vents/Tileset-Terrain2.png" id="1_ea82f"]
 [ext_resource type="Texture2D" uid="uid://csodq2m2beue1" path="res://Assets/vents/niveau2_vents/TX Tileset Grass.png" id="1_plhlm"]
-[ext_resource type="Script" uid="uid://dyepjdlgvir1h" path="res://Levels/niveau_2_vents.gd" id="1_poa13"]
+[ext_resource type="Script" path="res://Levels/niveau_2_vents.gd" id="1_poa13"]
 [ext_resource type="Texture2D" uid="uid://cgxi67n2y8hbj" path="res://Assets/vents/niveau2_vents/altar 224x288 - standard.png" id="2_plhlm"]
 [ext_resource type="Texture2D" uid="uid://dx3fc21edinlw" path="res://Assets/vents/niveau2_vents/murpierre.png" id="3_r4aep"]
 [ext_resource type="Texture2D" uid="uid://cvl8h3uohcrh6" path="res://Assets/vents/niveau2_vents/arche.png" id="4_6lrwr"]
@@ -13025,7 +13025,9 @@ texture = ExtResource("34_vlaer")
 [node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("35_47yiv")]
 visible = false
 
-[node name="Murs coté" type="CollisionPolygon2D" parent="." unique_id=603520655]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1494461008]
+
+[node name="Murs coté" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=603520655]
 position = Vector2(0, -96)
 polygon = PackedVector2Array(-90, -28, -66, 782, 1222, 800, 1222, -13, 1152, -13, 1152, 736, 0, 736, 0, 190, 529, 192, 528, 112, 541, 101, 582, 102, 593, 118, 592, 192, 1153, 192, 1155, 50, 821, -42)
 

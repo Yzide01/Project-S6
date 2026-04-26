@@ -44,6 +44,8 @@ var base_anim_y: float = 0.0           # Position de base de l'animation
 var current_floor_z: float = 0.0       # Hauteur du sol sous les pieds
 var overlapping_terrains: Array = []   # Liste des Area2D (TerrainZone) actuelles
 
+var spawn_position: Vector2            # Position de respawn au début du niveau
+
 # --- State machine ---
 enum State { NORMAL, CRAWLING, SPRINT, JUMPING }
 var current_state: State = State.NORMAL
@@ -52,6 +54,8 @@ var current_state: State = State.NORMAL
 var last_direction: Vector2 = Vector2.DOWN
 
 func _ready() -> void:
+	spawn_position = global_position # Sauvegarde de la position de départ
+	
 	# Par défaut, on s'assure que le joueur écoute bien les murs bas !
 	set_collision_mask_value(low_obstacle_layer, true)
 	# Le joueur écoute les signaux globaux du plugin de dialogue
@@ -284,3 +288,13 @@ func _on_terrain_exited(area: Area2D) -> void:
 
 func _on_terrain_detector_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
+
+func respawn() -> void:
+	# Réinitialiser la position
+	global_position = spawn_position
+	# Forcer le Z à repasser normal pour ne pas glitcher
+	z_height = 0.0
+	current_state = State.NORMAL
+	set_collision_mask_value(low_obstacle_layer, true)
+	# Si vous préférez recharger tout le niveau, décommentez la ligne du dessous :
+	# get_tree().reload_current_scene()
