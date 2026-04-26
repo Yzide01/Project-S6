@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cu87j28kdkb6r" path="res://Assets/cordes/niveau1_cordes/porte1.png" id="6_wxjbb"]
 [ext_resource type="Texture2D" uid="uid://mk4j1tlq3kjq" path="res://Assets/cordes/niveau1_cordes/deco.png" id="7_hxje7"]
 [ext_resource type="Texture2D" uid="uid://b7hhimyp66l3f" path="res://Assets/cordes/niveau1_cordes/corde3.png" id="8_1iv2h"]
+[ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="11_71q0v"]
 [ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="13_34tpl"]
 [ext_resource type="Script" uid="uid://bynd2qmwk8tuh" path="res://Interactables/Objects/String/strings_level_1.gd" id="13_libwh"]
 [ext_resource type="Script" uid="uid://patf78cxkiax" path="res://Interactables/Objects/MagicDoor/magic_door.gd" id="16_1p3ex"]
@@ -3186,6 +3187,9 @@ tile_set = SubResource("TileSet_mabw0")
 tile_map_data = PackedByteArray("AAAaAAEAAAAAAAAAAAAaAAIAAAAAAAEAAAAaAAMAAAAAAAIAAAAaAAQAAAAAAAMAAAAaAAUAAAAAAAQAAAAaAAYAAAAAAAUAAAAbAAEAAAABAAAAAAAbAAIAAAABAAEAAAAbAAMAAAABAAIAAAAbAAQAAAABAAMAAAAbAAUAAAABAAQAAAAbAAYAAAABAAUAAAAcAAEAAAACAAAAAAAcAAIAAAACAAEAAAAcAAMAAAACAAIAAAAcAAQAAAACAAMAAAAcAAUAAAACAAQAAAAcAAYAAAACAAUAAAAdAAEAAAADAAAAAAAdAAIAAAADAAEAAAAdAAMAAAADAAIAAAAdAAQAAAADAAMAAAAdAAUAAAADAAQAAAAdAAYAAAADAAUAAAAeAAEAAAAEAAAAAAAeAAIAAAAEAAEAAAAeAAMAAAAEAAIAAAAeAAQAAAAEAAMAAAAeAAUAAAAEAAQAAAAeAAYAAAAEAAUAAAAfAAEAAAAFAAAAAAAfAAIAAAAFAAEAAAAfAAMAAAAFAAIAAAAfAAQAAAAFAAMAAAAfAAUAAAAFAAQAAAAfAAYAAAAFAAUAAAAgAAEAAAAGAAAAAAAgAAIAAAAGAAEAAAAgAAMAAAAGAAIAAAAgAAQAAAAGAAMAAAAgAAUAAAAGAAQAAAAgAAYAAAAGAAUAAAAhAAEAAAAHAAAAAAAhAAIAAAAHAAEAAAAhAAMAAAAHAAIAAAAhAAQAAAAHAAMAAAAhAAUAAAAHAAQAAAAhAAYAAAAHAAUAAAAiAAEAAAAIAAAAAAAiAAIAAAAIAAEAAAAiAAMAAAAIAAIAAAAiAAQAAAAIAAMAAAAiAAUAAAAIAAQAAAAiAAYAAAAIAAUAAAAjAAEAAAAJAAAAAAAjAAIAAAAJAAEAAAAjAAMAAAAJAAIAAAAjAAQAAAAJAAMAAAAjAAUAAAAJAAQAAAAjAAYAAAAJAAUAAAAkAAEAAAAKAAAAAAAkAAIAAAAKAAEAAAAkAAMAAAAKAAIAAAAkAAQAAAAKAAMAAAAkAAUAAAAKAAQAAAAkAAYAAAAKAAUAAAAlAAEAAAALAAAAAAAlAAIAAAALAAEAAAAlAAMAAAALAAIAAAAlAAQAAAALAAMAAAAlAAUAAAALAAQAAAAlAAYAAAALAAUAAAAmAAEAAAAMAAAAAAAmAAIAAAAMAAEAAAAmAAMAAAAMAAIAAAAmAAQAAAAMAAMAAAAmAAUAAAAMAAQAAAAmAAYAAAAMAAUAAAAnAAEAAAANAAAAAAAnAAIAAAANAAEAAAAnAAMAAAANAAIAAAAnAAQAAAANAAMAAAAnAAUAAAANAAQAAAAnAAYAAAANAAUAAAAoAAEAAAAOAAAAAAAoAAIAAAAOAAEAAAAoAAMAAAAOAAIAAAAoAAQAAAAOAAMAAAAoAAUAAAAOAAQAAAAoAAYAAAAOAAUAAAApAAEAAAAPAAAAAAApAAIAAAAPAAEAAAApAAMAAAAPAAIAAAApAAQAAAAPAAMAAAApAAUAAAAPAAQAAAApAAYAAAAPAAUAAAA=")
 tile_set = SubResource("TileSet_v23kx")
 
+[node name="BookPage" parent="." unique_id=454720209 instance=ExtResource("11_71q0v")]
+position = Vector2(560, 453)
+
 [node name="decoration" type="TileMapLayer" parent="." unique_id=2011601815]
 
 [node name="clou1" type="TileMapLayer" parent="decoration" unique_id=357437466]
@@ -3277,7 +3281,7 @@ shape = SubResource("RectangleShape2D_pytfw")
 [node name="String_1" type="Node2D" parent="." unique_id=795057180]
 script = ExtResource("13_libwh")
 
-[node name="Interactable" parent="String_1" unique_id=1836534378 instance=ExtResource("13_34tpl")]
+[node name="Interactable" parent="String_1" unique_id=863501513 instance=ExtResource("13_34tpl")]
 position = Vector2(366.5, 309)
 interact_name = "Play String 1"
 
@@ -3392,10 +3396,10 @@ z_index = -98
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -237.91501
-offset_top = -165.0
-offset_right = 1482.085
-offset_bottom = 922.0
+offset_left = -244.91501
+offset_top = -149.0
+offset_right = 1475.085
+offset_bottom = 938.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)

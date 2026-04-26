@@ -9,6 +9,7 @@ var is_playing_hint: bool = false # Empêche le spam pendant le son
 @onready var corde3 = $String_3
 @onready var magic_door = $MagicDoor 
 @onready var audio_hint = $HintAudioPlayer 
+@onready var book_page = $BookPage
 
 func _ready() -> void:
 	if corde1: corde1.played.connect(_on_string_played)
@@ -68,6 +69,8 @@ func _on_string_played(id: int) -> void:
 
 func _solve_puzzle() -> void:
 	print("Énigme résolue ! La porte est déverrouillée.")
+	book_page.victory()
+
 	if magic_door:
 		magic_door.unlock()
 	
