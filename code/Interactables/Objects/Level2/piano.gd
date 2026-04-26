@@ -7,6 +7,7 @@ signal victory
 @onready var interactable_area = $Interactable
 @onready var audio_player = $AudioStreamPlayer2D
 @onready var book_page = $BookPage
+@onready var inventory: Inventory = preload("res://Core/InventorySystem/playerInventory.tres")
 
 # On charge ton fichier de dialogue (le chemin exact vient de ton fichier .import !)
 const DIALOGUE_FILE = preload("res://Dialogues/Level2/level2.dialogue")
@@ -22,6 +23,7 @@ func _on_interact():
 		# Le piano n'a pas encore toutes les partitions
 		DialogueManager.show_example_dialogue_balloon(DIALOGUE_FILE, "piano_inactive")
 	else:
+		delete_sheets()
 		# Le joueur a tout trouvé et interagit pour jouer
 		DialogueManager.show_example_dialogue_balloon(DIALOGUE_FILE, "piano_active")
 		
@@ -49,3 +51,14 @@ func unlock() -> void:
 	is_locked = false
 	if interactable_area:
 		interactable_area.interact_name = "Play the melody"
+
+func delete_sheets():
+	for i in range(inventory.slots.size()):
+		var slot = inventory.slots[i]
+		if slot.item and slot.item.name == "Partition":
+			slot.amount -= 3 
+			if slot.amount <= 0:
+				slot.item = null
+				slot.amount = 0
+			inventory.updated.emit()
+			break
