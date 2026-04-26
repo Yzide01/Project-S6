@@ -2,10 +2,14 @@ extends Control
 
 var current_options = null
 var options_scene = preload("res://scenes/menus/options_menu/master_options_menu_with_tabs.tscn")
+var level_selection_scene = preload("res://scenes/menus/level_selection/level_selection_menu.tscn")
+var current_level_selection = null
 
 func _ready():
 	$VBoxContainer/ResumeButton.pressed.connect(_on_resume_pressed)
 	$VBoxContainer/SettingButton.pressed.connect(_on_setting_pressed)
+	if $VBoxContainer.has_node("LevelSelectionButton"):
+		$VBoxContainer/LevelSelectionButton.pressed.connect(_on_level_selection_pressed)
 	$VBoxContainer/ExitButton.pressed.connect(_on_exit_pressed)
 
 	$VBoxContainer/ResumeButton.grab_focus()
@@ -19,6 +23,12 @@ func _input(event):
 		if current_options:
 			current_options.queue_free()
 			current_options = null
+			$VBoxContainer.show()
+			$VBoxContainer/ResumeButton.grab_focus()
+			get_viewport().set_input_as_handled()
+		elif current_level_selection:
+			current_level_selection.queue_free()
+			current_level_selection = null
 			$VBoxContainer.show()
 			$VBoxContainer/ResumeButton.grab_focus()
 			get_viewport().set_input_as_handled()
@@ -55,6 +65,18 @@ func _on_setting_pressed():
 	add_child(current_options)
 	$VBoxContainer.hide()
 	current_options.tree_exited.connect(_on_options_closed)
+
+func _on_level_selection_pressed():
+	current_level_selection = level_selection_scene.instantiate()
+	add_child(current_level_selection)
+	$VBoxContainer.hide()
+	current_level_selection.tree_exited.connect(_on_level_selection_closed)
+
+func _on_level_selection_closed():
+	$VBoxContainer.show()
+	if $VBoxContainer.has_node("LevelSelectionButton"):
+		$VBoxContainer/LevelSelectionButton.grab_focus()
+	current_level_selection = null
 
 func _on_exit_pressed():
 	get_tree().quit()
