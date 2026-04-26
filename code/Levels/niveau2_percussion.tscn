@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bquchvc2wlxuo" path="res://Assets/percussions/niveau2_percussions/manivellehamster7.png" id="18_uavks"]
 [ext_resource type="Texture2D" uid="uid://dibvsr0u2n16d" path="res://Assets/percussions/niveau2_percussions/manivellehamster8.png" id="19_nm6hr"]
 [ext_resource type="Texture2D" uid="uid://b58j81xpxm0hv" path="res://Assets/percussions/niveau2_percussions/manivellehamster9.png" id="20_omrmp"]
+[ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="21_dsl3q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tqqop"]
 texture = ExtResource("1_yx54n")
@@ -1849,6 +1850,9 @@ sprite_frames = SubResource("SpriteFrames_tjpxl")
 animation = &"tourner"
 frame = 6
 frame_progress = 0.52864695
+
+[node name="BookPage" parent="." unique_id=454720209 instance=ExtResource("21_dsl3q")]
+position = Vector2(648, 751)
 
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("10_mhj36")]
 z_index = 5

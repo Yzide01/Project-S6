@@ -13,6 +13,7 @@ var has_finished_level: bool = false
 @onready var spirit_sprite = $PercussionSpirit 
 @onready var spawn_point = $SpawnPoint 
 @onready var tilemap = $tambours_ok
+@onready var book_page = $BookPage
 
 var intro_dialogue = load("res://Dialogues/Level4/Intro.dialogue")
 
@@ -102,6 +103,8 @@ func _on_pressure_stable():
 			int_comp.is_interactable = true
 			int_comp.interact_name = "Enter the Altar"
 			int_comp.interact = _on_altar_interacted
+		await get_tree().create_timer(1.0).timeout
+		book_page.victory()
 			
 func _on_altar_interacted() -> void:        
 	SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")

@@ -54,7 +54,7 @@ var last_direction: Vector2 = Vector2.DOWN
 func _ready() -> void:
 	# Par défaut, on s'assure que le joueur écoute bien les murs bas !
 	set_collision_mask_value(low_obstacle_layer, true)
-    # Le joueur écoute les signaux globaux du plugin de dialogue
+	# Le joueur écoute les signaux globaux du plugin de dialogue
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 

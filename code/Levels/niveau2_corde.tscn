@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cc5b8mm41gaah"]
 
-[ext_resource type="Script" path="res://Levels/niveau_2_corde.gd" id="1_ooyhu"]
+[ext_resource type="Script" uid="uid://cb4ympujbgw8s" path="res://Levels/niveau_2_corde.gd" id="1_ooyhu"]
 [ext_resource type="Texture2D" uid="uid://bw8dxc4pejoaf" path="res://Assets/cordes/niveau2_cordes/mockup2.png" id="1_x61l1"]
 [ext_resource type="Texture2D" uid="uid://d3o3vlld8n185" path="res://Assets/cordes/niveau2_cordes/wood7.png" id="2_pinuy"]
 [ext_resource type="Texture2D" uid="uid://b5h5t0vnfvqeq" path="res://Assets/cordes/niveau2_cordes/wood8.png" id="3_qydiq"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="9_7wtkx"]
 [ext_resource type="Script" uid="uid://bnqukdmcjx8k" path="res://Interactables/Objects/Level2/piano.gd" id="9_8ldkp"]
 [ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="9_ooyhu"]
+[ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="11_0psmx"]
 [ext_resource type="AudioStream" uid="uid://djv0n0g71xo8q" path="res://Assets/Sound/Trials/Bach-prelude-in-c-major-piano.mp3" id="13_j621k"]
 [ext_resource type="AudioStream" uid="uid://dpwlsmodp0246" path="res://Assets/Sound/Ambiant sound/background_heavy.wav" id="15_0psmx"]
 
@@ -28772,15 +28773,8 @@ tile_set = SubResource("TileSet_308xt")
 tile_map_data = PackedByteArray("AAACAO3/AAAcACoAAAACAO7/AAAcACsAAAADAO3/AAAdACoAAAADAO7/AAAdACsAAAAwAPn/AAAcACoAABAvAPn/AAAdACoAABAwAPr/AAAcACsAABAvAPr/AAAdACsAABAHAAsAAAAcACoAABAGAAsAAAAdACoAABAHAAwAAAAcACsAABAGAAwAAAAdACsAABBGAB4AAAAcACoAABBFAB4AAAAdACoAABBGAB8AAAAcACsAABBFAB8AAAAdACsAABA7AKn/AAAaAC0AAAA8AKn/AAAbAC0AAAA9AKn/AAAcAC0AAAA+AKn/AAAdAC0AAABrAJ//AAAaAC0AAFBrAKD/AAAbAC0AAFBrAKH/AAAcAC0AAFBrAKL/AAAdAC0AAFCVAI3/AAAaAC0AAFCVAI7/AAAbAC0AAFCVAI//AAAcAC0AAFCVAJD/AAAdAC0AAFBuAL3/AAAaAC0AAABvAL3/AAAbAC0AAABwAL3/AAAcAC0AAABxAL3/AAAdAC0AAAA=")
 tile_set = SubResource("TileSet_r6hvp")
 
-[node name="Player" parent="decoration" unique_id=684339121 instance=ExtResource("9_7wtkx")]
-position = Vector2(578, 489)
-
-[node name="Camera2D" type="Camera2D" parent="decoration/Player" unique_id=341392266]
-limit_left = -144
-limit_top = -1984
-limit_right = 2688
-limit_bottom = 720
-position_smoothing_enabled = true
+[node name="BookPage" parent="decoration" unique_id=454720209 instance=ExtResource("11_0psmx")]
+position = Vector2(603, -236)
 
 [node name="Piano" type="StaticBody2D" parent="decoration" unique_id=2104161994 groups=["Piano"]]
 position = Vector2(382, -329)
@@ -28814,6 +28808,16 @@ tile_set = SubResource("TileSet_4bauj")
 [node name="partitions" type="TileMapLayer" parent="decoration/piano" unique_id=764728955]
 tile_map_data = PackedByteArray("AABeAPH/AAAeAC4AAABeAPL/AAAeAC8AAABfAPH/AAAfAC4AAABfAPL/AAAfAC8AAAA1AKj/AAAeAC4AAAA1AKn/AAAeAC8AAAA2AKj/AAAfAC4AAAA2AKn/AAAfAC8AAACWAJL/AAAeAC4AAACWAJP/AAAeAC8AAACXAJL/AAAfAC4AAACXAJP/AAAfAC8AAAA=")
 tile_set = SubResource("TileSet_r1l3a")
+
+[node name="Player" parent="." unique_id=684339121 instance=ExtResource("9_7wtkx")]
+position = Vector2(578, 489)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=341392266]
+limit_left = -144
+limit_top = -1984
+limit_right = 2688
+limit_bottom = 720
+position_smoothing_enabled = true
 
 [node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=1888982294]
 stream = ExtResource("15_0psmx")

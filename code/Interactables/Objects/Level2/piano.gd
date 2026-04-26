@@ -3,9 +3,10 @@ extends Node2D
 @export var partitions_requises: int = 3
 var partitions_actuelles: int = 0
 var is_locked: bool = true
-
+signal victory
 @onready var interactable_area = $Interactable
 @onready var audio_player = $AudioStreamPlayer2D
+@onready var book_page = $BookPage
 
 # On charge ton fichier de dialogue (le chemin exact vient de ton fichier .import !)
 const DIALOGUE_FILE = preload("res://Dialogues/Level2/level2.dialogue")
@@ -27,9 +28,9 @@ func _on_interact():
 		interactable_area.is_interactable = false # On désactive l'interaction
 		if audio_player:
 			audio_player.play() # La musique se lance !
-			
-		await get_tree().create_timer(10.0).timeout
-		SceneManager.changer_niveau("res://Levels/niveau1_percussion.tscn")
+		await DialogueManager.dialogue_ended
+		await get_tree().create_timer(1.0).timeout
+		victory.emit()
 
 # Cette fonction est appelée automatiquement par les partitions quand on les ramasse
 func ajouter_partition() -> void:
