@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var interactable_area = $Interactable
+@onready var sprite = $Sprite2D
 
 func _ready() -> void:
 	if interactable_area:
@@ -9,6 +10,7 @@ func _ready() -> void:
 		interactable_area.interact = _on_interact
 
 func _on_interact():
+	sprite.visible = false
 	var piano = get_tree().get_first_node_in_group("Piano")
 	
 	if piano:
