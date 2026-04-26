@@ -2,7 +2,7 @@ class_name CombatManager
 extends Control
 
 signal action_selected(action_name: String)
-
+var escaped: bool = false
 @onready var info_text: Label = $BottomUI/InfoText
 
 # Main menu
@@ -92,15 +92,20 @@ func start_battle() -> void:
 	else:
 		await display_text("A Silence Minion appears!")
 	
-	while player_hp > 0 and get_alive_enemies_count() > 0:
+	# Ajout de "and not escaped"
+	while player_hp > 0 and get_alive_enemies_count() > 0 and not escaped:
 		await player_turn()
 		
-		if get_alive_enemies_count() <= 0:
+		# On arrête tout si les ennemis sont morts OU si on a fui
+		if get_alive_enemies_count() <= 0 or escaped:
 			break
 			
 		await enemy_turn()
 		
-	if player_hp > 0:
+	if escaped:
+		# Si on a fui, on détruit juste la scène de combat pour retourner au jeu
+		queue_free()
+	elif player_hp > 0:
 		await display_text("Victory! Music is back in the spotlight.")
 		end_battle(true)
 	else:
@@ -155,7 +160,8 @@ func player_turn() -> void:
 						
 		"run":
 			await display_text("You run away...")
-			player_hp = 0
+			escaped = true
+			return
 
 	update_ui()
 

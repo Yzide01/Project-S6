@@ -43,7 +43,7 @@ layout_mode = 0
 offset_right = 568.0
 offset_bottom = 138.0
 mouse_filter = 1
-text = "Un Sbire du Silence apparait"
+text = "Watch out ! Silence Minion(s) appear(s) !"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -63,28 +63,31 @@ offset_bottom = 140.0
 text = "Run"
 
 [node name="PercussionButton" type="Button" parent="BottomUI" unique_id=1210487563]
+auto_translate_mode = 2
 visible = false
 layout_mode = 0
 offset_left = 761.0
 offset_right = 901.0
 offset_bottom = 140.0
-text = "percussion"
+text = "Percussion"
 
 [node name="VentButton" type="Button" parent="BottomUI" unique_id=1117079599]
+auto_translate_mode = 2
 visible = false
 layout_mode = 0
 offset_left = 929.0
 offset_right = 1069.0
 offset_bottom = 140.0
-text = "vent"
+text = "Wind"
 
 [node name="CordeButton" type="Button" parent="BottomUI" unique_id=433536867]
+auto_translate_mode = 2
 visible = false
 layout_mode = 0
 offset_left = 590.0
 offset_right = 730.0
 offset_bottom = 140.0
-text = "corde"
+text = "String"
 
 [node name="Back" type="Button" parent="BottomUI" unique_id=1361421666]
 visible = false
