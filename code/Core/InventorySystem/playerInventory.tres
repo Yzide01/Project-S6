@@ -1,10 +1,13 @@
 [gd_resource type="Resource" script_class="Inventory" format=3 uid="uid://uilb1xmhdr7n"]
 
 [ext_resource type="Script" uid="uid://du4y8584by058" path="res://Core/InventorySystem/inventorySlot.gd" id="2_bvn05"]
+[ext_resource type="Resource" uid="uid://dkafvraiv6k0f" path="res://Core/InventorySystem/items/Book.tres" id="3_tt0ho"]
 [ext_resource type="Script" uid="uid://dgss3pqumuiss" path="res://Core/InventorySystem/inventory.gd" id="4_f304s"]
 
 [sub_resource type="Resource" id="Resource_bvn05"]
 script = ExtResource("2_bvn05")
+item = ExtResource("3_tt0ho")
+amount = 1
 metadata/_custom_type_script = "uid://du4y8584by058"
 
 [sub_resource type="Resource" id="Resource_tt0ho"]
