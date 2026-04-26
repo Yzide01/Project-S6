@@ -5,12 +5,15 @@ func _ready():
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.2).set_trans(Tween.TRANS_SINE)
 	
-	$VBoxContainer/Slot1Button.pressed.connect(func(): _on_slot_pressed(1))
-	$VBoxContainer/Slot2Button.pressed.connect(func(): _on_slot_pressed(2))
-	$VBoxContainer/Slot3Button.pressed.connect(func(): _on_slot_pressed(3))
-	$VBoxContainer/BackButton.pressed.connect(_on_back_pressed)
-	
-	$VBoxContainer/Slot1Button.grab_focus()
+	if $VBoxContainer.has_node("Slot1Button"):
+		$VBoxContainer/Slot1Button.pressed.connect(func(): _on_slot_pressed(1))
+		$VBoxContainer/Slot1Button.grab_focus()
+	if $VBoxContainer.has_node("Slot2Button"):
+		$VBoxContainer/Slot2Button.pressed.connect(func(): _on_slot_pressed(2))
+	if $VBoxContainer.has_node("Slot3Button"):
+		$VBoxContainer/Slot3Button.pressed.connect(func(): _on_slot_pressed(3))
+	if $VBoxContainer.has_node("BackButton"):
+		$VBoxContainer/BackButton.pressed.connect(_on_back_pressed)
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):

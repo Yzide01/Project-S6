@@ -90,11 +90,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Level 2 - Winds"
 
-[node name="LevelTestButton" type="Button" parent="VBoxContainer" unique_id=1198564219]
+[node name="BattleButton" type="Button" parent="VBoxContainer" unique_id=230908731]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Test Level"
+text = "Turn-Based Battle"
 
 [node name="Control2" type="Control" parent="VBoxContainer" unique_id=1456008714]
 custom_minimum_size = Vector2(0, 20)

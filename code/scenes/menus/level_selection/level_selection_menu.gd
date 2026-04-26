@@ -6,16 +6,26 @@ func _ready():
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.2).set_trans(Tween.TRANS_SINE)
 	
 	# Connect buttons to their assigned levels
-	$VBoxContainer/Level1CordeButton.pressed.connect(func(): _load_level("res://Levels/niveau1_cordeV2.tscn"))
-	$VBoxContainer/Level1PercuButton.pressed.connect(func(): _load_level("res://Levels/niveau1_percussion.tscn"))
-	$VBoxContainer/Level1VentsButton.pressed.connect(func(): _load_level("res://Levels/niveau1_vents.tscn"))
-	$VBoxContainer/Level2CordeButton.pressed.connect(func(): _load_level("res://Levels/niveau2_corde.tscn"))
-	$VBoxContainer/Level2PercuButton.pressed.connect(func(): _load_level("res://Levels/niveau2_percussion.tscn"))
-	$VBoxContainer/Level2VentsButton.pressed.connect(func(): _load_level("res://Levels/niveau2_vents.tscn"))
-	$VBoxContainer/LevelTestButton.pressed.connect(func(): _load_level("res://Levels/niveau_test.tscn"))
+	if $VBoxContainer.has_node("Level1CordeButton"):
+		$VBoxContainer/Level1CordeButton.pressed.connect(func(): _load_level("res://Levels/niveau1_cordeV2.tscn"))
+		$VBoxContainer/Level1CordeButton.grab_focus()
+	if $VBoxContainer.has_node("Level1PercuButton"):
+		$VBoxContainer/Level1PercuButton.pressed.connect(func(): _load_level("res://Levels/niveau1_percussion.tscn"))
+	if $VBoxContainer.has_node("Level1VentsButton"):
+		$VBoxContainer/Level1VentsButton.pressed.connect(func(): _load_level("res://Levels/niveau1_vents.tscn"))
+	if $VBoxContainer.has_node("Level2CordeButton"):
+		$VBoxContainer/Level2CordeButton.pressed.connect(func(): _load_level("res://Levels/niveau2_corde.tscn"))
+	if $VBoxContainer.has_node("Level2PercuButton"):
+		$VBoxContainer/Level2PercuButton.pressed.connect(func(): _load_level("res://Levels/niveau2_percussion.tscn"))
+	if $VBoxContainer.has_node("Level2VentsButton"):
+		$VBoxContainer/Level2VentsButton.pressed.connect(func(): _load_level("res://Levels/niveau2_vents.tscn"))
+	if $VBoxContainer.has_node("LevelTestButton"):
+		$VBoxContainer/LevelTestButton.pressed.connect(func(): _load_level("res://Levels/niveau_test.tscn"))
+	if $VBoxContainer.has_node("BattleButton"):
+		$VBoxContainer/BattleButton.pressed.connect(func(): _load_level("res://Core/CombatSystem/battle_scene.tscn"))
 	
-	$VBoxContainer/BackButton.pressed.connect(_on_back_pressed)
-	$VBoxContainer/Level1CordeButton.grab_focus()
+	if $VBoxContainer.has_node("BackButton"):
+		$VBoxContainer/BackButton.pressed.connect(_on_back_pressed)
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):

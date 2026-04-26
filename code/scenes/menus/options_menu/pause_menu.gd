@@ -8,13 +8,16 @@ var current_level_selection = null
 var current_save_menu = null
 
 func _ready():
-	$VBoxContainer/ResumeButton.pressed.connect(_on_resume_pressed)
-	$VBoxContainer/SettingButton.pressed.connect(_on_setting_pressed)
+	if $VBoxContainer.has_node("ResumeButton"):
+		$VBoxContainer/ResumeButton.pressed.connect(_on_resume_pressed)
+	if $VBoxContainer.has_node("SettingButton"):
+		$VBoxContainer/SettingButton.pressed.connect(_on_setting_pressed)
 	if $VBoxContainer.has_node("LevelSelectionButton"):
 		$VBoxContainer/LevelSelectionButton.pressed.connect(_on_level_selection_pressed)
 	if $VBoxContainer.has_node("SaveButton"):
 		$VBoxContainer/SaveButton.pressed.connect(_on_save_pressed)
-	$VBoxContainer/ExitButton.pressed.connect(_on_exit_pressed)
+	if $VBoxContainer.has_node("ExitButton"):
+		$VBoxContainer/ExitButton.pressed.connect(_on_exit_pressed)
 
 	$VBoxContainer/ResumeButton.grab_focus()
 

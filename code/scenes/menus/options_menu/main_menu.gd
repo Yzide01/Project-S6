@@ -4,10 +4,12 @@ var save_menu_scene = preload("res://scenes/menus/save_menu/save_menu.tscn")
 var current_save_menu = null
 
 func _ready():
-	$VBoxContainer/PlayButton.pressed.connect(_on_play_pressed)
+	if $VBoxContainer.has_node("PlayButton"):
+		$VBoxContainer/PlayButton.pressed.connect(_on_play_pressed)
 	if $VBoxContainer.has_node("LoadButton"):
 		$VBoxContainer/LoadButton.pressed.connect(_on_load_pressed)
-	$VBoxContainer/QuitButton.pressed.connect(_on_quit_pressed)
+	if $VBoxContainer.has_node("QuitButton"):
+		$VBoxContainer/QuitButton.pressed.connect(_on_quit_pressed)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
