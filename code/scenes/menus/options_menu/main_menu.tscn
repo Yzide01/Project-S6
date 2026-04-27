@@ -69,6 +69,17 @@ theme_override_font_sizes/font_size = 32
 text = "Play"
 flat = true
 
+[node name="LoadButton" type="Button" parent="VBoxContainer" unique_id=1195974153]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85098, 0.85098, 0.85098, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.698039, 0.698039, 1)
+theme_override_font_sizes/font_size = 32
+text = "Load Game"
+flat = true
+
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=652548788]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2

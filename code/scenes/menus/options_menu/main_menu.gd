@@ -1,8 +1,15 @@
 extends Control
 
+var save_menu_scene = preload("res://scenes/menus/save_menu/save_menu.tscn")
+var current_save_menu = null
+
 func _ready():
-	$VBoxContainer/PlayButton.pressed.connect(_on_play_pressed)
-	$VBoxContainer/QuitButton.pressed.connect(_on_quit_pressed)
+	if $VBoxContainer.has_node("PlayButton"):
+		$VBoxContainer/PlayButton.pressed.connect(_on_play_pressed)
+	if $VBoxContainer.has_node("LoadButton"):
+		$VBoxContainer/LoadButton.pressed.connect(_on_load_pressed)
+	if $VBoxContainer.has_node("QuitButton"):
+		$VBoxContainer/QuitButton.pressed.connect(_on_quit_pressed)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
@@ -37,3 +44,15 @@ func _on_quit_pressed():
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.5).set_trans(Tween.TRANS_SINE)
 	await tween.finished
 	get_tree().quit()
+
+func _on_load_pressed():
+	current_save_menu = save_menu_scene.instantiate()
+	add_child(current_save_menu)
+	$VBoxContainer.hide()
+	current_save_menu.tree_exited.connect(_on_save_menu_closed)
+
+func _on_save_menu_closed():
+	$VBoxContainer.show()
+	if $VBoxContainer.has_node("LoadButton"):
+		$VBoxContainer/LoadButton.grab_focus()
+	current_save_menu = null
