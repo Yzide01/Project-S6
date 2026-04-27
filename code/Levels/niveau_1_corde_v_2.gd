@@ -19,6 +19,12 @@ func _ready() -> void:
 	if magic_door:
 		magic_door.hint_requested.connect(_on_door_hint_requested)
 
+	_play_intro_dialogue()
+
+func _play_intro_dialogue() -> void:
+	await get_tree().create_timer(0.5).timeout
+	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level1/level1.dialogue"), "intro")
+
 # --- LA FONCTION DE L'INDICE ---
 func _on_door_hint_requested() -> void:
 	if is_playing_hint:

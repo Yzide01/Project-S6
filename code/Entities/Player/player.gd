@@ -85,7 +85,7 @@ func _on_dialogue_ended():
 func _draw() -> void:
 	# Dessine une petite ombre au sol sous le joueur
 	var shadow_color = Color(0, 0, 0, 0.4)
-	draw_set_transform(Vector2(0, 20), 0.0, Vector2(1.0, 0.5))
+	draw_set_transform(Vector2(0, 25), 0.0, Vector2(1.0, 0.5))
 	draw_circle(Vector2.ZERO, 15.0, shadow_color)
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
