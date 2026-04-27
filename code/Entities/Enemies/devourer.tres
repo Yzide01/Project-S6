@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BaseEnemy" format=3 uid="uid://dkcl578h4l51y"]
 
 [ext_resource type="Script" uid="uid://cjtqj182cu3j8" path="res://Entities/Enemies/base_enemy.gd" id="1_fnvs6"]
-[ext_resource type="Texture2D" uid="uid://dg7pmqcrsqlya" path="res://Assets/ProjetS6_assets/TpT/Devoreur/inactif_5/0001.png" id="2_qnqja"]
+[ext_resource type="Texture2D" uid="uid://1o3ooidu3mti" path="res://Assets/ProjetS6_assets/TpT/Devoreur.png" id="2_qnqja"]
 
 [resource]
 script = ExtResource("1_fnvs6")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BaseEnemy" format=3 uid="uid://b0fjugi2o3u5c"]
 
 [ext_resource type="Script" uid="uid://cjtqj182cu3j8" path="res://Entities/Enemies/base_enemy.gd" id="1_fdm6m"]
-[ext_resource type="Texture2D" uid="uid://b14k0cjtp6msu" path="res://Assets/Graphics/Ninja Adventure - Asset Pack/Actor/Monsters/KappaRed/Faceset.png" id="2_r8xmu"]
+[ext_resource type="Texture2D" uid="uid://bjmqj8mr602dk" path="res://Assets/ProjetS6_assets/TpT/Etouffeur.png" id="2_r8xmu"]
 
 [resource]
 script = ExtResource("1_fdm6m")
