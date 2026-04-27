@@ -24257,6 +24257,66 @@ position = Vector2(1818.5, -2323)
 position = Vector2(2172, -2014)
 texture = SubResource("AtlasTexture_ckdfb")
 
+[node name="partition6" type="Node2D" parent="decoration" unique_id=2014890788]
+position = Vector2(-1289, 1806)
+script = ExtResource("8_ckdfb")
+
+[node name="Interactable" parent="decoration/partition6" unique_id=159893451 instance=ExtResource("9_ooyhu")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/partition6/Interactable" unique_id=366201580]
+position = Vector2(1806, -2324)
+scale = Vector2(0.05, 0.06)
+shape = SubResource("CircleShape2D_libwh")
+
+[node name="LabelPosition" type="Marker2D" parent="decoration/partition6/Interactable" unique_id=1615602448]
+position = Vector2(1818.5, -2323)
+
+[node name="Sprite2D" type="Sprite2D" parent="decoration/partition6" unique_id=507681690]
+position = Vector2(2172, -2014)
+texture = SubResource("AtlasTexture_ckdfb")
+
+[node name="partition7" type="Node2D" parent="decoration" unique_id=1609918929]
+position = Vector2(-1228, 1806)
+script = ExtResource("8_ckdfb")
+
+[node name="Interactable" parent="decoration/partition7" unique_id=1306818555 instance=ExtResource("9_ooyhu")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/partition7/Interactable" unique_id=1765233343]
+position = Vector2(1806, -2324)
+scale = Vector2(0.05, 0.06)
+shape = SubResource("CircleShape2D_libwh")
+
+[node name="LabelPosition" type="Marker2D" parent="decoration/partition7/Interactable" unique_id=1362423363]
+position = Vector2(1818.5, -2323)
+
+[node name="Sprite2D" type="Sprite2D" parent="decoration/partition7" unique_id=2109209703]
+position = Vector2(2172, -2014)
+texture = SubResource("AtlasTexture_ckdfb")
+
+[node name="partition8" type="Node2D" parent="decoration" unique_id=90147169]
+position = Vector2(-1163, 1806)
+script = ExtResource("8_ckdfb")
+
+[node name="Interactable" parent="decoration/partition8" unique_id=1030257224 instance=ExtResource("9_ooyhu")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="decoration/partition8/Interactable" unique_id=452244454]
+position = Vector2(1806, -2324)
+scale = Vector2(0.05, 0.06)
+shape = SubResource("CircleShape2D_libwh")
+
+[node name="LabelPosition" type="Marker2D" parent="decoration/partition8/Interactable" unique_id=82030298]
+position = Vector2(1818.5, -2323)
+
+[node name="Sprite2D" type="Sprite2D" parent="decoration/partition8" unique_id=2093121623]
+position = Vector2(2172, -2014)
+texture = SubResource("AtlasTexture_ckdfb")
+
 [node name="spiderweb" type="TileMapLayer" parent="decoration" unique_id=658335385]
 tile_map_data = PackedByteArray("AAAAAAAAAQACABAAAAAAAAEAAQACABEAAAABAAAAAQADABAAAAABAAEAAQADABEAAABEAAMAAQAGABEAAABEAAQAAQAGABIAAABEAAUAAQAGABMAAABFAAIAAQAHABAAAABFAAMAAQAHABEAAABFAAQAAQAHABIAAABFAAUAAQAHABMAAABDACUAAQAGABEAAABDACYAAQAGABIAAABDACcAAQAGABMAAABEACQAAQAHABAAAABEACUAAQAHABEAAABEACYAAQAHABIAAABEACcAAQAHABMAAAACACIAAQAIABIAAAACACMAAQAIABMAAAAmAOv/AQAOABEAAAAnAOr/AQAPABAAAAAnAOv/AQAPABEAAAAGAOr/AQAPABAAABAHAOv/AQAOABEAABAGAOv/AQAPABEAABABAPz/AQAPABAAABACAP3/AQAOABEAABABAP3/AQAPABEAABBfAOj/AQAKAA4AAABfAOn/AQAKAA8AAABgAOj/AQALAA4AAABRAPL/AQAKAA4AAFBRAPP/AQALAA4AAFBQAPL/AQAKAA8AAFA0AKf/AQAOAA4AAAA0AKj/AQAOAA8AAAA1AKf/AQAPAA4AAAA1AKj/AQAPAA8AAAA9ALD/AQAOAA4AAAA9ALH/AQAOAA8AAAA+ALD/AQAPAA4AAAA+ALH/AQAPAA8AAAAcAMP/AQAOAA4AAAAcAMT/AQAOAA8AAAAdAMP/AQAPAA4AAAAdAMT/AQAPAA8AAAAVAM3/AQAOAA4AAAAVAM7/AQAOAA8AAAAWAM3/AQAPAA4AAAAWAM7/AQAPAA8AAAAVAMH/AQAIAA0AAAAVAML/AQAIAA4AAAAVAMP/AQAIAA8AAAAWAML/AQAJAA4AAAAWAMP/AQAJAA8AAABFAND/AQAIAA0AAABGANH/AQAJAA4AAABGANL/AQAKABEAAABHANL/AQALABEAAACLAIj/AQACABIAAACLAIn/AQACABMAAACMAIj/AQADABIAAACMAIn/AQADABMAAACWAJT/AQAKABMAABCVAJT/AQALABMAABBfALX/AQAOABMAAABgALT/AQAPABIAAABgALX/AQAPABMAAABjALT/AQAPABIAABBkALX/AQAOABMAABBjALX/AQAPABMAABB0AK3/AQAKABEAAAB1AK3/AQALABEAAABPAK7/AQAKABEAAABQAK7/AQALABEAAABPAL7/AQAEABAAAABPAL//AQAEABEAAABQAL7/AQAFABAAAABQAL//AQAFABEAAAB3AL7/AQAEABAAAAB3AL//AQAEABEAAAB4AL7/AQAFABAAAAB4AL//AQAFABEAAAA=")
 tile_set = SubResource("TileSet_mtpig")
