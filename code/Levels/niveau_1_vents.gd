@@ -8,7 +8,7 @@ var hydraulis_dialogue = load("res://Dialogues/Level5/Hydraulis.dialogue")
 @onready var marker_intro = $MarkerIntro
 @onready var marker_hydraulis = $MarkerHydraulis
 @onready var exit_door = $ExitDoor
-
+@onready var door_closed = $door_closed
 
 var player: Node2D
 var bellows_seen: bool = false
@@ -97,4 +97,5 @@ func _play_sequence(dialogue_resource, title: String, target_marker: Marker2D):
 	
 func open_door() -> void:
 	if exit_door:
+		door_closed.visible = false
 		exit_door.unlock()
