@@ -22,6 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://uxwhtdnqthp4" path="res://Assets/Spirit/Esprit des vents sans fond.png" id="20_2k05v"]
 [ext_resource type="AudioStream" uid="uid://jlis2iwatvhm" path="res://Assets/Spirit/sounc vent.wav" id="21_2k05v"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="22_5ttbj"]
+[ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="23_erc7r"]
+[ext_resource type="Script" uid="uid://d2unn4o27vour" path="res://Interactables/Objects/Level5/bellows.gd" id="23_gbko3"]
+[ext_resource type="Script" uid="uid://bnx33lly7t2ld" path="res://Interactables/Objects/Level5/exit_door.gd" id="23_nhbly"]
+[ext_resource type="Script" uid="uid://dgqo2ml1t8kqi" path="res://Interactables/Objects/Level5/hydraulis.gd" id="25_mpn2m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37hjs"]
 texture = ExtResource("1_y4hyp")
@@ -3132,6 +3136,9 @@ size = Vector2(251.5, 386.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxbew"]
 size = Vector2(264, 386.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nhbly"]
+radius = 115.60818
+
 [node name="Node2D" type="Node2D" unique_id=1658413396]
 script = ExtResource("1_0kfgp")
 
@@ -3215,5 +3222,55 @@ polygon = PackedVector2Array(-60, 924, 2396, 913, 2370, -238, 1068, -230, 1075, 
 [node name="Murs porte" type="CollisionPolygon2D" parent="Murs" unique_id=1075766019]
 polygon = PackedVector2Array(537, 7, 539, -92, 615, -88, 615, 8)
 
+[node name="Bellows" type="Node2D" parent="." unique_id=2096150639]
+position = Vector2(-638, 19)
+script = ExtResource("23_gbko3")
+
+[node name="Interactable" parent="Bellows" unique_id=1836534378 instance=ExtResource("23_erc7r")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bellows/Interactable" unique_id=567160562]
+position = Vector2(-7.5, -45)
+scale = Vector2(0.71, 0.589)
+shape = SubResource("CircleShape2D_nhbly")
+
+[node name="LabelPosition" type="Marker2D" parent="Bellows/Interactable" unique_id=1592941261]
+position = Vector2(37.499996, -70)
+
+[node name="Hydraulis" type="Node2D" parent="." unique_id=1309271304]
+position = Vector2(1184, -63)
+script = ExtResource("25_mpn2m")
+
+[node name="Interactable" parent="Hydraulis" unique_id=2083063808 instance=ExtResource("23_erc7r")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hydraulis/Interactable" unique_id=1923623150]
+position = Vector2(-7.5, -45)
+scale = Vector2(0.5, 0.58)
+shape = SubResource("CircleShape2D_nhbly")
+
+[node name="LabelPosition" type="Marker2D" parent="Hydraulis/Interactable" unique_id=221266885]
+position = Vector2(37.499996, -70)
+
+[node name="ExitDoor" type="Node2D" parent="." unique_id=1618540096]
+position = Vector2(216, -307)
+script = ExtResource("23_nhbly")
+
+[node name="Interactable" parent="ExitDoor" unique_id=1003475448 instance=ExtResource("23_erc7r")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDoor/Interactable" unique_id=1380591894]
+position = Vector2(-7.5, -45)
+scale = Vector2(-0.33, 0.48)
+shape = SubResource("CircleShape2D_nhbly")
+
+[node name="LabelPosition" type="Marker2D" parent="ExitDoor/Interactable" unique_id=1239797890]
+position = Vector2(37.499996, -70)
+
 [connection signal="body_entered" from="BellowsArea" to="." method="_on_bellows_area_body_entered"]
 [connection signal="body_entered" from="HydraulisArea" to="." method="_on_hydraulis_area_body_entered"]
+[connection signal="pumped_air" from="Bellows" to="." method="_on_medieval_organ_interacted"]
+[connection signal="played_hydraulis" from="Hydraulis" to="." method="_on_hydraulis_interacted"]
