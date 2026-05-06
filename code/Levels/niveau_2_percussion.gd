@@ -147,7 +147,9 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	
 	current_battle_scene = battle_scene_packed.instantiate()
 	ui_layer.add_child(current_battle_scene)
-	current_battle_scene.start_encounter(horde)
+	
+	var intro = "You unlocked Percussions! Use Thunder Strike to shatter shields or deal heavy damage.\nWatch out for the Dampener. It looks sturdy and soundproof; I probably wouldn't do much damage to it, especially not while it has its shield up. But it looks slow to me, so I shouldn't take too much damage."
+	current_battle_scene.start_encounter([dampener_data, whisper_data], ["corde", "percussion"], intro)
 	
 	await current_battle_scene.tree_exited
 	

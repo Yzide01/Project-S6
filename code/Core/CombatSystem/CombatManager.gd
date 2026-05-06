@@ -22,6 +22,7 @@ var escaped: bool = false
 
 # HP bar
 @onready var player_hp_bar: TextureProgressBar = $PlayerHPBar
+@onready var player_hp_text: Label = $PlayerHPBar/PlayerHPText
 
 # --- Fight variables ---
 var player_max_hp: int = 100
@@ -31,6 +32,10 @@ var player_resisting: float = 1.0
 var player_silenced: bool = false
 
 var active_enemies: Array[Dictionary] = []
+
+var available_skills: Array[String] = []
+var intro_message: String = ""
+signal target_selected(enemy_index: int)
 
 signal answer_selected(is_correct: bool)
 
@@ -98,21 +103,10 @@ func _ready() -> void:
 	corde_button.pressed.connect(_on_corde_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	
-	# --- DÉBUT DU TEST EN ISOLATION ---
-	
-	var whisper_data = load("res://Entities/Enemies/whisper.tres")
-	var dampener_data = load("res://Entities/Enemies/dampener.tres")
-	
-	# 4. Lancement du combat
-	if whisper_data and dampener_data:
-		print("Lancement du combat de test...")
-		start_encounter([whisper_data, dampener_data])
-	else:
-		print("ERREUR : Les fichiers d'ennemis sont introuvables. Vérifie les chemins.")
-		
-	# --- FIN DU TEST EN ISOLATION ---
 
-func start_encounter(horde: Array[BaseEnemy]) -> void:
+func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text: String) -> void:
+	available_skills = skills
+	intro_message = intro_text
 	active_enemies.clear()
 	player_hp = player_max_hp
 	player_resisting = 1.0
@@ -143,6 +137,10 @@ func start_encounter(horde: Array[BaseEnemy]) -> void:
 
 # --- fight loop ---
 func start_battle() -> void:
+	if intro_message != "":
+		await display_text(intro_message)
+		await get_tree().create_timer(3).timeout
+	
 	if get_alive_enemies_count() > 1:
 		await display_text("A group of Silence Minions appears!")
 	else:
@@ -187,7 +185,7 @@ func player_turn() -> void:
 	
 	match chosen_action:
 		"percussion":
-			var target = get_first_alive_enemy()
+			var target = await choose_target()
 			# Le jeu se met en pause et affiche le QCM de percussions
 			var success = await ask_question("percussion", target.rank)
 			
@@ -348,6 +346,8 @@ func enemy_turn() -> void:
 func update_ui() -> void:
 	var tween = create_tween()
 	tween.tween_property(player_hp_bar, "value", float(player_hp), 0.3)
+	if player_hp_text:
+		player_hp_text.text = str(player_hp) + " / " + str(player_max_hp)
 
 func get_alive_enemies_count() -> int:
 	var count = 0
@@ -390,11 +390,16 @@ func _on_run_pressed(): action_selected.emit("run")
 func _on_attack_pressed() -> void:
 	attack_button.hide()
 	run_button.hide()
-	percussion_button.show()
-	vent_button.show()
-	corde_button.show()
+
 	back_button.show()
 	info_text.text = "Choose an instrument:"
+	
+	if "percussion" in available_skills:
+		percussion_button.show()
+	if "vent" in available_skills:
+		vent_button.show()
+	if "corde" in available_skills:
+		corde_button.show()
 
 func _on_back_pressed() -> void:
 	_reset_menu()
@@ -433,3 +438,27 @@ func ask_question(category: String, rank: int) -> bool:
 	quiz_panel.hide()
 	
 	return success
+
+func choose_target() -> Dictionary:
+	if get_alive_enemies_count() == 1:
+		return get_first_alive_enemy()
+		
+	info_text.text = "Choose a target!"
+
+	for child in answers_container.get_children():
+		child.queue_free()
+
+	for i in range(active_enemies.size()):
+		var enemy = active_enemies[i]
+		if enemy.hp > 0:
+			var btn = Button.new()
+			btn.text = enemy.name
+			btn.set_meta("index", i)
+			btn.pressed.connect(func(): target_selected.emit(btn.get_meta("index")))
+			answers_container.add_child(btn)
+			
+	quiz_panel.show()
+	var chosen_index = await self.target_selected
+	quiz_panel.hide()
+	
+	return active_enemies[chosen_index]

@@ -32,7 +32,9 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	current_battle_scene = battle_scene_packed.instantiate()
 	current_battle_scene.process_mode = Node.PROCESS_MODE_ALWAYS
 	ui_layer.add_child(current_battle_scene)
-	current_battle_scene.start_encounter(horde)
+	
+	var intro = "You only have your Strings, this attack doesn't deal much damage, but it lets you thin out the crowd—and who knows, maybe it'll scare them off\nThe Whisper is a fragile minion, but its silence is deadly."
+	current_battle_scene.start_encounter([whisper_data], ["corde"], intro)
 	
 	await current_battle_scene.tree_exited
 	

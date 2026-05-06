@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://ddmfmd06w8tr2" path="res://Assets/Graphics/healthbarProgress.png" id="2_wausy"]
 
 [node name="EnemyBattleUI" type="VBoxContainer" unique_id=404900519]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 100.0
+offset_bottom = 141.0
 script = ExtResource("1_wausy")
 
 [node name="NameLabel" type="Label" parent="." unique_id=1165427636]
@@ -14,10 +14,17 @@ layout_mode = 2
 
 [node name="HPBar" type="TextureProgressBar" parent="." unique_id=941330223]
 layout_mode = 2
+size_flags_vertical = 8
 texture_under = ExtResource("1_fy581")
 texture_progress = ExtResource("2_wausy")
+
+[node name="HPText" type="Label" parent="." unique_id=2054704801]
+layout_mode = 2
+vertical_alignment = 1
 
 [node name="Sprite" type="TextureRect" parent="." unique_id=2040726999]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 stretch_mode = 5
