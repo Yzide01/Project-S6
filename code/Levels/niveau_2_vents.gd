@@ -12,6 +12,8 @@ var stele_read: bool = false
 var inca_met: bool = false
 var puzzle_completed: bool = false
 
+var current_target: int = 5 
+
 func _ready() -> void:
 	# 1. Initialisation visuelle
 	if spirit_winds:
@@ -31,15 +33,11 @@ func start_level_intro():
 	await get_tree().create_timer(1.0).timeout
 	await _play_dialogue("start")
 
-# --- DÉCLENCHEURS (SIGNAUX) ---
-
-# Signal connecté depuis l'Area2D de la Stèle
 func _on_stele_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and not stele_read:
 		stele_read = true 
 		await _play_dialogue("indice_stele")
 
-# Signal connecté depuis l'Area2D devant la flûte
 func _on_inca_trigger_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and not inca_met:
 		inca_met = true
@@ -54,9 +52,43 @@ func _on_inca_trigger_area_body_entered(body: Node2D) -> void:
 		# Dialogue de leçon sur les longueurs
 		await _play_dialogue("lecon_inca")
 
-# --- SÉQUENCE DE VICTOIRE ---
 
-# Cette fonction sera appelée par le système de jeu quand l'énigme sera résolue
+func check_tube(size: int, tube_node: Node2D) -> void:
+	if puzzle_completed: return
+	
+	if size == current_target:
+		# Bonne séquence
+		print("Bon tube touché : ", size)
+		# On cache le tube et on bloque son interaction
+		tube_node.hide()
+		var interactable = tube_node.get_node_or_null("Interactable")
+		if interactable:
+			interactable.is_interactable = false
+		
+		current_target -= 1
+		
+		# Si on a cliqué sur les 5 dans le bon ordre
+		if current_target == 0:
+			_on_puzzle_completed()
+	else:
+		# Mauvaise séquence !
+		print("Erreur ! Le joueur a touché le tube ", size, " au lieu de ", current_target)
+		
+		# dialogue à mettre
+
+		
+		reset_puzzle()
+
+func reset_puzzle() -> void:
+	current_target = 5
+	print("Réinitialisation du puzzle...")
+	# On réaffiche tous les tubes (assure-toi qu'ils sont dans le groupe "tubes")
+	for tube in get_tree().get_nodes_in_group("tubes"):
+		tube.show()
+		var interactable = tube.get_node_or_null("Interactable")
+		if interactable:
+			interactable.is_interactable = true
+
 func _on_puzzle_completed():
 	if puzzle_completed: return
 	puzzle_completed = true
@@ -70,9 +102,13 @@ func _on_puzzle_completed():
 		t.tween_property(inca_ghost, "modulate:a", 0.0, 2.0)
 	
 	# Logique d'ouverture de porte ou passage au niveau suivant ici
-	print("Level 6 Complete")
+	print("Level 6 Complete - Porte ouverte !")
+	
+	var exit_door = $Door # Si tu as une porte, mets son nom ici
+	if exit_door and exit_door.has_method("unlock"):
+		exit_door.unlock()
 
-# --- SYSTÈME DE DIALOGUE ---
+
 
 func _play_dialogue(title: String):
 	player = get_tree().get_root().find_child("Player", true, false)
