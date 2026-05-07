@@ -9,6 +9,8 @@ extends Node2D
 @onready var dampener_data = preload("res://Entities/Enemies/dampener.tres")
 var current_battle_scene: Node = null
 
+
+
 func _ready() -> void:
 	piano.victory.connect(_victory)
 
@@ -16,7 +18,10 @@ func _victory():
 	book_page.victory()
 	await book_page.page_picked
 	
-	await start_combat([whisper_data])
+	var ma_horde: Array[BaseEnemy] = []
+	ma_horde.append(whisper_data)
+	
+	await start_combat(ma_horde)
 	
 	await get_tree().create_timer(3.0).timeout
 	SceneManager.changer_niveau("res://Levels/niveau1_percussion.tscn")
@@ -34,7 +39,11 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	ui_layer.add_child(current_battle_scene)
 	
 	var intro = "You only have your Strings, this attack doesn't deal much damage, but it lets you thin out the crowd—and who knows, maybe it'll scare them off\nThe Whisper is a fragile minion, but its silence is deadly."
-	current_battle_scene.start_encounter([whisper_data], ["corde"], intro)
+	
+	var mes_instruments: Array[String] = []
+	mes_instruments.append("corde")
+	
+	current_battle_scene.start_encounter(horde, mes_instruments, intro)
 	
 	await current_battle_scene.tree_exited
 	
