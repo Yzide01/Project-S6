@@ -37,6 +37,9 @@ var available_skills: Array[String] = []
 var intro_message: String = ""
 signal target_selected(enemy_index: int)
 
+# --- AI for fight ---
+var combat_turn_count: int = 0
+
 signal answer_selected(is_correct: bool)
 
 @onready var quiz_panel: Panel = $BottomUI/QuizPanel
@@ -111,6 +114,7 @@ func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text:
 	player_hp = player_max_hp
 	player_resisting = 1.0
 	player_silenced = false
+	combat_turn_count = 0
 	player_hp_bar.max_value = player_max_hp
 	player_hp_bar.value = player_hp
 	update_ui()
@@ -292,6 +296,8 @@ func player_turn() -> void:
 
 # --- Enemy turn ---
 func enemy_turn() -> void:
+	combat_turn_count += 1
+	
 	for enemy in active_enemies:
 		if enemy.hp <= 0:
 			continue
@@ -301,22 +307,15 @@ func enemy_turn() -> void:
 			enemy.stunned = false
 			continue
 		
-		var possible_attacks = []
-		if enemy.rank >= 1:
-			possible_attacks.append("white_noise")
-		if enemy.rank >= 2:
-			possible_attacks.append("mute")
-		if enemy.rank >= 3:
-			possible_attacks.append("absolute_void")
-			
-		var chosen_attack = possible_attacks.pick_random()
+		var chosen_attack = get_utility_ai_decision(enemy)
 		
 		match chosen_attack:
 			"white_noise":
 				await display_text(enemy.name + " launches White Noise!")
 				var degats = int(7 / player_resisting)
-				if enemy.rank == 2:
-					degats = int(3 / player_resisting)
+				if enemy.rank == 2: degats = int(3 / player_resisting)
+				elif enemy.rank == 3: degats = int(12 / player_resisting)
+					
 				player_hp -= degats
 				update_ui()
 				animate_player_damage()
@@ -324,7 +323,7 @@ func enemy_turn() -> void:
 				
 			"mute":
 				await display_text(enemy.name + " casts Mute!")
-				if randf() > 0.3:
+				if randf() > 0.5:
 					player_silenced = true
 					await display_text("The Bard's voice is muffled!")
 				else:
@@ -341,6 +340,7 @@ func enemy_turn() -> void:
 		
 		if player_hp <= 0:
 			break
+			
 
 # --- Utilities ---
 func update_ui() -> void:
@@ -462,3 +462,58 @@ func choose_target() -> Dictionary:
 	quiz_panel.hide()
 	
 	return active_enemies[chosen_index]
+	
+
+# --- AI ---
+
+func get_utility_ai_decision(enemy: Dictionary) -> String:
+	var best_action = "white_noise"
+	var highest_score = -1.0
+	
+	var actions_scores = {}
+	
+	if enemy.rank >= 1:
+		actions_scores["white_noise"] = evaluate_white_noise(enemy)
+	if enemy.rank >= 2:
+		actions_scores["mute"] = evaluate_mute(enemy)
+	if enemy.rank >= 3:
+		actions_scores["absolute_void"] = evaluate_absolute_void(enemy)
+		
+	for action in actions_scores:
+		var score = actions_scores[action]
+		score += randf_range(-5.0, 5.0)
+		
+		if score > highest_score:
+			highest_score = score
+			best_action = action
+			
+	return best_action
+
+func evaluate_white_noise(enemy: Dictionary) -> float:
+	var score = 50.0 
+
+	if player_hp <= 15:
+		score += 45.0
+		
+	return score
+
+func evaluate_mute(enemy: Dictionary) -> float:
+	var score = 0.0
+	
+	if not player_silenced:
+		score = 80.0 
+	else:
+		score = 0.0 
+		
+	return score
+
+func evaluate_absolute_void(enemy: Dictionary) -> float:
+	var score = 0.0
+	
+	if combat_turn_count > 0 and combat_turn_count % 3 == 0:
+		score = 100.0
+		
+	elif player_silenced:
+		score = 85.0 
+		
+	return score
