@@ -80,9 +80,14 @@ var book_content = {
 
 
 func _ready():
-	# On connecte le signal de l'Autoload à la fonction update_view
-	Progression.page_unlocked_signal.connect(update_view)
-	
+	for i in range(6, 0, -1):
+		if Progression.unlocked_pages.get("page_" + str(i), false):
+			current_page = i
+			break
+			
+	if not Progression.page_unlocked_signal.is_connected(update_view):
+		Progression.page_unlocked_signal.connect(update_view)
+		
 	await get_tree().process_frame
 	update_view()
 

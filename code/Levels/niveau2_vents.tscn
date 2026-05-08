@@ -39,6 +39,7 @@
 [ext_resource type="AudioStream" uid="uid://cqwfsfoifyvuu" path="res://Assets/Sound/Trials/pizzicato3.wav" id="34_1owwv"]
 [ext_resource type="Texture2D" uid="uid://cqh85iat07jk2" path="res://Assets/Spirit/Esprit Inca.png" id="34_vlaer"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="35_47yiv"]
+[ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="37_ifnn0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5kic"]
 texture = ExtResource("1_plhlm")
@@ -13146,6 +13147,10 @@ bus = &"SFX"
 [node name="Sprite2D" type="Sprite2D" parent="Flute1" unique_id=2018549565]
 position = Vector2(0, -32)
 texture = ExtResource("18_rw6pm")
+
+[node name="BookPage" parent="." unique_id=454720209 instance=ExtResource("37_ifnn0")]
+position = Vector2(562, 457)
+page_id = "page_6"
 
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("29_u80fo")]
 position = Vector2(560, 559)

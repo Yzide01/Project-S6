@@ -1,14 +1,13 @@
 extends Node2D
 
-# --- CONFIGURATION DES CHEMINS ---
 var level6_dialogue = load("res://Dialogues/Level6/Intro.dialogue")
 
 @export var battle_scene_packed: PackedScene
 
-# TES 3 ENNEMIS (Vérifie bien le chemin pour le 3ème !)
 @onready var whisper_data = preload("res://Entities/Enemies/whisper.tres")
 @onready var dampener_data = preload("res://Entities/Enemies/dampener.tres")
 @onready var devourer_data = preload("res://Entities/Enemies/devourer.tres") 
+@onready var book_page = $BookPage
 
 @onready var spirit_winds = $WindSpirit
 @onready var inca_ghost = $IncaGhost            
@@ -24,7 +23,6 @@ var is_dialogue_playing: bool = false
 var current_target: int = 5 
 
 func _ready() -> void:
-	# 1. Initialisation visuelle
 	if spirit_winds:
 		spirit_winds.hide()
 		spirit_winds.modulate.a = 0.0
@@ -33,10 +31,8 @@ func _ready() -> void:
 		inca_ghost.hide()
 		inca_ghost.modulate.a = 0.0
 	
-	# 2. Lancement de l'introduction automatique
 	start_level_intro()
 
-# --- SÉQUENCES AUTOMATIQUES ---
 
 func start_level_intro():
 	await get_tree().create_timer(1.0).timeout
@@ -88,18 +84,20 @@ func reset_puzzle() -> void:
 		if interactable:
 			interactable.is_interactable = true
 
-# --- SÉQUENCE DE VICTOIRE & COMBAT ---
 
 func _on_puzzle_completed():
 	if puzzle_completed: return
 	puzzle_completed = true
 	
 	await _play_dialogue("success")
-	
+
 	if inca_ghost:
 		var t = create_tween()
 		t.tween_property(inca_ghost, "modulate:a", 0.0, 2.0)
-	
+	book_page.victory()
+	await get_tree().create_timer(10.0).timeout
+
+
 	# Création forcée de la horde avec les 3 ennemis !
 	var ma_horde: Array[BaseEnemy] = []
 	ma_horde.append(whisper_data)

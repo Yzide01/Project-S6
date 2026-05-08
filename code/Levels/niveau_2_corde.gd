@@ -40,7 +40,7 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	
 	var intro = "You only have your Strings, this attack doesn't deal much damage, but it lets you thin out the crowd—and who knows, maybe it'll scare them off\nThe Whisper is a fragile minion, but its silence is deadly."
 	
-	var mes_instruments: Array[String] = []
+	var mes_instruments: Array[String] = [] 
 	mes_instruments.append("corde")
 	
 	current_battle_scene.start_encounter(horde, mes_instruments, intro)

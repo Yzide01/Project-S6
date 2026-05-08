@@ -9,6 +9,7 @@ var hydraulis_dialogue = load("res://Dialogues/Level5/Hydraulis.dialogue")
 @onready var marker_hydraulis = $MarkerHydraulis
 @onready var exit_door = $ExitDoor
 @onready var door_closed = $door_closed
+@onready var book_page = $BookPage
 
 var player: Node2D
 var bellows_seen: bool = false
@@ -49,6 +50,9 @@ func _on_hydraulis_interacted() -> void:
 		# Succès ! L'air a été pompé ET stabilisé
 		pressure_timer.stop()
 		print("Mélos: The water caught the chaotic air! The pressure is now perfectly stable. The mechanism is activating!")
+		await get_tree().create_timer(1.5).timeout
+
+		book_page.victory()
 		open_door()
 		
 func _on_pressure_lost() -> void:
