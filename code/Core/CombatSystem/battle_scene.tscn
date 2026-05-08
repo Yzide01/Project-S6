@@ -376,9 +376,9 @@ offset_bottom = 687.0
 [node name="InfoText" type="Label" parent="BottomUI" unique_id=1216508921]
 layout_mode = 0
 offset_left = 5.0
-offset_top = -2.0
+offset_top = -12.0
 offset_right = 573.0
-offset_bottom = 136.0
+offset_bottom = 126.0
 mouse_filter = 1
 text = "Watch out ! Silence Minion(s) appear(s) !"
 horizontal_alignment = 1

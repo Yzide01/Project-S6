@@ -2,6 +2,7 @@ class_name CombatManager
 extends Control
 
 signal action_selected(action_name: String)
+signal intro_terminee
 var escaped: bool = false
 @onready var info_text: Label = $BottomUI/InfoText
 
@@ -103,7 +104,10 @@ func _ready() -> void:
 	corde_button.pressed.connect(_on_corde_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	
-
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed):
+		intro_terminee.emit()
+		
 func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text: String) -> void:
 	available_skills = skills
 	intro_message = intro_text
@@ -136,28 +140,81 @@ func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text:
 	start_battle()
 
 # --- fight loop ---
+#func start_battle() -> void:
+	## CORRECTION 1 : On attend le clic pour l'intro !
+	#if intro_message != "":
+		#info_text.text = intro_message + "\n\n[ Click or press Space to continue ]"
+		#await intro_terminee
+	#
+	#if get_alive_enemies_count() > 1:
+		#await display_text("A group of Silence Minions appears!")
+	#else:
+		#await display_text("A Silence Minion appears!")
+	#
+	#while player_hp > 0 and get_alive_enemies_count() > 0 and not escaped:
+		#await player_turn()
+		#
+		#if get_alive_enemies_count() <= 0 or escaped:
+			#break
+			#
+		#await enemy_turn()
+		#
+	#if escaped:
+		#queue_free()
+	#elif player_hp > 0:
+		#await display_text("Victory! Music is back in the spotlight.")
+		#end_battle(true)
+	#else:
+		#var tween = create_tween()
+		#tween.tween_property(player_visual, "modulate:a", 0.0, 1.0)
+		#await display_text("Defeat... Silence has engulfed you.")
+		#end_battle(false)
+
+# --- fight loop ---
 func start_battle() -> void:
+	# 1. GESTION DU LONG TEXTE D'INTRODUCTION (Au centre de l'écran)
 	if intro_message != "":
-		await display_text(intro_message)
-		await get_tree().create_timer(3).timeout
+		# On crée un fond sombre semi-transparent pour bien lire
+		var dark_bg = ColorRect.new()
+		dark_bg.color = Color(0, 0, 0, 0.85) 
+		dark_bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+		add_child(dark_bg)
+		
+		# On crée un grand Label pour le texte
+		var big_intro = Label.new()
+		big_intro.text = intro_message + "\n\n[ Click or press Space to continue ]"
+		big_intro.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		big_intro.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		big_intro.autowrap_mode = TextServer.AUTOWRAP_WORD
+		big_intro.set_anchors_preset(Control.PRESET_FULL_RECT)
+		
+		# On ajoute des marges pour que le texte ne touche pas les bords de l'écran
+		big_intro.offset_left = 100
+		big_intro.offset_right = -100
+		
+		dark_bg.add_child(big_intro)
+		
+		# On met le jeu en pause jusqu'à ce que le joueur clique
+		await intro_terminee
+		
+		# On supprime ce grand affichage, on passe au combat normal !
+		dark_bg.queue_free() 
 	
+	# 2. GESTION DES PETITS TEXTES DE COMBAT (En bas de l'écran)
 	if get_alive_enemies_count() > 1:
 		await display_text("A group of Silence Minions appears!")
 	else:
 		await display_text("A Silence Minion appears!")
 	
-	# Ajout de "and not escaped"
 	while player_hp > 0 and get_alive_enemies_count() > 0 and not escaped:
 		await player_turn()
 		
-		# On arrête tout si les ennemis sont morts OU si on a fui
 		if get_alive_enemies_count() <= 0 or escaped:
 			break
 			
 		await enemy_turn()
 		
 	if escaped:
-		# Si on a fui, on détruit juste la scène de combat pour retourner au jeu
 		queue_free()
 	elif player_hp > 0:
 		await display_text("Victory! Music is back in the spotlight.")
@@ -167,6 +224,7 @@ func start_battle() -> void:
 		tween.tween_property(player_visual, "modulate:a", 0.0, 1.0)
 		await display_text("Defeat... Silence has engulfed you.")
 		end_battle(false)
+
 
 # --- Player turn ---
 func player_turn() -> void:
@@ -186,7 +244,6 @@ func player_turn() -> void:
 	match chosen_action:
 		"percussion":
 			var target = await choose_target()
-			# Le jeu se met en pause et affiche le QCM de percussions
 			var success = await ask_question("percussion", target.rank)
 			
 			if success:
@@ -203,7 +260,6 @@ func player_turn() -> void:
 				
 		"vent":
 			var target = get_first_alive_enemy()
-			# On utilise le rang d'un ennemi pour la difficulté de la question de vent
 			var success = await ask_question("vent", target.rank)
 			
 			if success:
@@ -215,7 +271,6 @@ func player_turn() -> void:
 				
 		"corde":
 			var target = get_first_alive_enemy()
-			# On utilise le rang d'un ennemi pour la difficulté de la question de cordes
 			var success = await ask_question("corde", target.rank)
 			
 			if success:
@@ -234,61 +289,10 @@ func player_turn() -> void:
 						
 		"run":
 			await display_text("You run away...")
-			escaped = true # Assure-toi d'avoir ajouté 'var escaped: bool = false' tout en haut du script !
-			return # On quitte le tour immédiatement pour ne pas crasher
+			escaped = true 
+			return
 
 	update_ui()
-#
-## --- Player turn ---
-#func player_turn() -> void:
-	#if player_silenced:
-		#await display_text("The Bard is silenced and cannot play music this turn!")
-		#player_silenced = false
-		#return
-	#
-	#await display_text("What should the Bard do?")
-	#
-	#attack_button.show()
-	#run_button.show()
-	#
-	#var chosen_action = await self.action_selected 
-	#_reset_menu()
-	#
-	#match chosen_action:
-		#"percussion":
-			#var target = get_first_alive_enemy()
-			#await display_text("The Bard uses Thunder Strike on " + target.name + "!")
-			#if target.has_shield:
-				#await display_text("The enemy's shield shatters!")
-				#target.has_shield = false
-			#else:
-				#target.hp -= 15
-				#await display_text(target.name + " loses 15 HP.")
-				#target.ui_node.update_hp(target.hp)
-				#
-		#"vent":
-			#await display_text("The Bard sings a protective melody!")
-			#player_resisting += 0.5
-			#await display_text("Defense increased.")
-			#
-		#"corde":
-			#await display_text("The Bard plays a Distracting Melody! It hits EVERYONE!")
-			#for enemy in active_enemies:
-				#if enemy.hp > 0:
-					#if !enemy.has_shield:
-						#enemy.hp -= 5
-						#enemy.ui_node.update_hp(enemy.hp)
-						#if randf() > 0.5:
-							#enemy.stunned = true
-							#await display_text(enemy.name + " is scared!")
-						#await display_text(enemy.name + " loses 5 HP.")
-						#
-		#"run":
-			#await display_text("You run away...")
-			#escaped = true
-			#return
-#
-	#update_ui()
 
 # --- Enemy turn ---
 func enemy_turn() -> void:
@@ -420,21 +424,18 @@ func ask_question(category: String, rank: int) -> bool:
 	
 	question_text.text = question["q"]
 	
-	# On nettoie les vieux boutons
 	for child in answers_container.get_children():
 		child.queue_free()
 		
-	# On génère les boutons de réponses
 	for i in range(question["opts"].size()):
 		var btn = Button.new()
 		btn.text = question["opts"][i]
 		var is_correct = (i == question["ans"])
-		# Quand on clique, ça envoie le signal avec True ou False
 		btn.pressed.connect(func(): answer_selected.emit(is_correct))
 		answers_container.add_child(btn)
 		
 	quiz_panel.show()
-	var success = await self.answer_selected # On met le code en pause jusqu'au clic !
+	var success = await self.answer_selected
 	quiz_panel.hide()
 	
 	return success
@@ -444,6 +445,9 @@ func choose_target() -> Dictionary:
 		return get_first_alive_enemy()
 		
 	info_text.text = "Choose a target!"
+
+	# CORRECTION 2 : On efface le texte de la question QCM !
+	question_text.text = "Select an enemy to attack:"
 
 	for child in answers_container.get_children():
 		child.queue_free()
