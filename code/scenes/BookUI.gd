@@ -51,7 +51,32 @@ var book_content = {
 		"right_text": "Legends say the first bards didn't sing; they mimicked the heartbeat of the world. In the Great Silence, these drums were the only way to remind the soul it was alive.",
 		"img_right": "res://Assets/Book/barde tambour.png",
 		"is_large_r": true 
+		},
+	5: {
+		"level_title": "THE HYDRAULIC PRESSURE",
+		"is_intro": false,
+		"left_lesson": "THE HYDRAULIS",
+		"left_text": "The Great Organ does not breathe with lungs of leather, but with the weight of water. To wake it, you must channel the flow to maintain constant pressure. \n\nTime is your enemy: once the mechanism is engaged, you have only 15 seconds before the air escapes.",
+		"img_left": "res://Assets/Book/hydraulis_diagram.png", 
+		"right_lesson": "TEMPORAL RESONANCE",
+		"use_strings": false, 
+		"right_text": "The air pressure reaches its peak for only a brief moment. You have 15 seconds to align the vibrations with the gate's frequency.\n\nStrike the Hydraulis before the water recedes, or the silence will reclaim the path.",
+		"img_right": "res://Assets/Book/pressure_gauge.png",
+		"is_large_r": true 
+	},
+	6: {
+		"level_title": "THE BREATH OF PROPORTION",
+		"is_intro": false,
+		"left_lesson": "AIR COLUMN RESONANCE",
+		"left_text": "The pitch of a pipe is not decided by its material, but by the volume of air it imprisons. \n\nTo master the Breath, remember this: the longer the path, the deeper the soul of the sound. To open the path, you must align the voices from the longest echo to the shortest whisper.",
+		"img_left": "res://Assets/Book/tube.png", 
+		"right_lesson": "THE SYRINX ECHOES",
+		"use_strings": false, 
+		"right_text": "Legend says the first flute was born from reeds of different lengths. Ancient bards used these 'Syrinx' to communicate with the spirits of the wind. \n\nThey discovered that nature's harmony follows a descending order, where each tube must speak in turn to create a perfect scale.",
+		"img_right": "res://Assets/Book/flute.png",
+		"is_large_r": true 
 	}
+	
 }
 
 func _ready():
@@ -115,17 +140,15 @@ func update_view():
 
 func _apply_img_settings(img_node: TextureRect, is_large: bool):
 	if img_node:
-		var target_height = 280 if is_large else 160
+		# 280 pour l'orgue de droite, 180 pour le mécanisme de gauche
+		var target_height = 280 if is_large else 180 
+		
 		img_node.custom_minimum_size = Vector2(0, target_height)
 		img_node.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		img_node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		
-		# FORCE : Fill et Expand pour compenser les erreurs de scène
-		img_node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		if is_large:
-			img_node.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		else:
-			img_node.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		# Pour que le pixel art reste bien net
+		img_node.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
 func _setup_strings_ui(data):
 	var l_long = find_child("LabelLong", true, false)
