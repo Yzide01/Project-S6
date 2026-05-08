@@ -46,6 +46,7 @@ func _on_edge_trigger_body_entered(body: Node2D) -> void:
 		is_dialogue_playing = false
 
 func _on_drum_trigger_body_entered(body: Node2D) -> void:
+	# CORRECTION DU BUG DES TAMBOURS : On ne lance le dialogue que si le puzzle n'est PAS résolu (is_solved est false)
 	if body.name == "Player" and not is_dialogue_playing and not is_solved:
 		is_dialogue_playing = true
 		
@@ -85,15 +86,13 @@ func _on_wheel_trigger_body_entered(body: Node2D) -> void:
 		
 		body.set_physics_process(true) 
 		is_dialogue_playing = false
-
-
 			
 func _on_pressure_stable():
 	if not is_solved:
 		is_solved = true
 		is_dialogue_playing = true
 		if tilemap:
-			tilemap.visible = true				
+			tilemap.visible = true                
 		var player = get_tree().get_first_node_in_group("player") 
 		if player: player.set_physics_process(false)
 		
@@ -114,7 +113,12 @@ func _on_pressure_stable():
 func _on_altar_interacted() -> void:
 	await get_tree().create_timer(0.2).timeout
 	
-	await start_combat([whisper_data, dampener_data])
+	# CORRECTION DU COMBAT (Partie 1) : Création forcée du tableau d'ennemis
+	var ma_horde: Array[BaseEnemy] = []
+	ma_horde.append(whisper_data)
+	ma_horde.append(dampener_data)
+	
+	await start_combat(ma_horde)
 	
 	await get_tree().create_timer(2.0).timeout        
 	SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")
@@ -149,7 +153,14 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	ui_layer.add_child(current_battle_scene)
 	
 	var intro = "You unlocked Percussions! Use Thunder Strike to shatter shields or deal heavy damage.\nWatch out for the Dampener. It looks sturdy and soundproof; I probably wouldn't do much damage to it, especially not while it has its shield up. But it looks slow to me, so I shouldn't take too much damage."
-	current_battle_scene.start_encounter([dampener_data, whisper_data], ["corde", "percussion"], intro)
+	
+	# CORRECTION DU COMBAT (Partie 2) : Création forcée du tableau d'instruments
+	var mes_instruments: Array[String] = []
+	mes_instruments.append("corde")
+	mes_instruments.append("percussion")
+	
+	# On passe 'horde' et 'mes_instruments' qui sont parfaitement typés !
+	current_battle_scene.start_encounter(horde, mes_instruments, intro)
 	
 	await current_battle_scene.tree_exited
 	
