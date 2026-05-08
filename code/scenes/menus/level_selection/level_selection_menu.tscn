@@ -60,29 +60,29 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Level 1 - Strings"
 
-[node name="Level1PercuButton" type="Button" parent="VBoxContainer" unique_id=1234771559]
-custom_minimum_size = Vector2(400, 50)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Level 1 - Percussion"
-
-[node name="Level1VentsButton" type="Button" parent="VBoxContainer" unique_id=2133747742]
-custom_minimum_size = Vector2(400, 50)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Level 1 - Winds"
-
-[node name="Level2CordeButton" type="Button" parent="VBoxContainer" unique_id=1243996615]
+[node name="Level2CordeButton" type="Button" parent="VBoxContainer" unique_id=1234771559]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Level 2 - Strings"
 
-[node name="Level2PercuButton" type="Button" parent="VBoxContainer" unique_id=1638051959]
+[node name="Level1PercuButton" type="Button" parent="VBoxContainer" unique_id=2133747742]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Level 2 - Percussion"
+text = "Level 1 - Percussions"
+
+[node name="Level2PercuButton" type="Button" parent="VBoxContainer" unique_id=1243996615]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Level 2 - Percussions"
+
+[node name="Level1VentsButton" type="Button" parent="VBoxContainer" unique_id=1638051959]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Level 1 - Winds"
 
 [node name="Level2VentsButton" type="Button" parent="VBoxContainer" unique_id=1456296870]
 custom_minimum_size = Vector2(400, 50)
