@@ -24331,6 +24331,7 @@ tile_set = SubResource("TileSet_r6hvp")
 
 [node name="BookPage" parent="decoration" unique_id=454720209 instance=ExtResource("11_0psmx")]
 position = Vector2(603, -236)
+page_id = "page_2"
 
 [node name="Piano" type="StaticBody2D" parent="decoration" unique_id=2104161994 groups=["Piano"]]
 position = Vector2(382, -329)

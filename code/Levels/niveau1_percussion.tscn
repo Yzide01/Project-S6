@@ -7897,6 +7897,7 @@ tile_set = SubResource("TileSet_e0ch8")
 
 [node name="BookPage" parent="." unique_id=454720209 instance=ExtResource("2_mbexe")]
 position = Vector2(877, 317)
+page_id = "page_3"
 
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("11_rrpsy")]
 position = Vector2(578, 613)

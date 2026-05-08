@@ -76,15 +76,21 @@ var book_content = {
 		"img_right": "res://Assets/Book/flute.png",
 		"is_large_r": true 
 	}
-	
 }
 
+
 func _ready():
+	# On connecte le signal de l'Autoload à la fonction update_view
+	Progression.page_unlocked_signal.connect(update_view)
+	
 	await get_tree().process_frame
 	update_view()
 
 func _process(_delta):
-	if self.visible and book_content[current_page].get("use_strings", false):
+	var page_key = "page_" + str(current_page)
+	var is_unlocked = Progression.unlocked_pages.get(page_key, false)
+	
+	if self.visible and is_unlocked and book_content[current_page].get("use_strings", false):
 		_redraw_all_waves()
 
 func _unhandled_input(event):
@@ -104,20 +110,36 @@ func update_view():
 	var img_r = find_child("IllustrationRight", true, false)
 	var container_cordes = find_child("ContainerCordes", true, false)
 
+	var page_key = "page_" + str(current_page)
+	var is_unlocked = Progression.unlocked_pages.get(page_key, false)
+
+	if not is_unlocked:
+		if title_l: title_l.text = "LEVEL " + str(current_page) + " - ???"
+		if text_l:
+			text_l.fit_content = true
+			text_l.text = "[center][b]MISSING PAGE[/b][/center]\n\nThis page has been torn from the grimoire. You must find it to reveal its secrets."
+		
+		if img_l: img_l.hide()
+		if img_r: img_r.hide()
+		if text_r: text_r.hide()
+		if container_cordes: container_cordes.hide()
+		return
+
 	if book_content.has(current_page):
 		var data = book_content[current_page]
 		
 		if title_l: title_l.text = "LEVEL " + str(current_page) + " - " + data["level_title"]
 
 		if text_l: 
+			text_l.show()
 			text_l.fit_content = true
-			# CORRECTION ICI : Pas de "Lesson 1" pour l'introduction
 			if data.get("is_intro", false):
 				text_l.text = "[center][b]" + data["left_lesson"] + "[/b][/center]\n\n" + data["left_text"]
 			else:
 				text_l.text = "[center][b]LESSON " + str(current_page) + ": " + data["left_lesson"] + "[/b][/center]\n\n" + data["left_text"]
 		
 		if img_l:
+			img_l.show()
 			img_l.texture = load(data["img_left"])
 			_apply_img_settings(img_l, false)
 
@@ -140,14 +162,11 @@ func update_view():
 
 func _apply_img_settings(img_node: TextureRect, is_large: bool):
 	if img_node:
-		# 280 pour l'orgue de droite, 180 pour le mécanisme de gauche
 		var target_height = 280 if is_large else 180 
 		
 		img_node.custom_minimum_size = Vector2(0, target_height)
 		img_node.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		img_node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		
-		# Pour que le pixel art reste bien net
 		img_node.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
 func _setup_strings_ui(data):
