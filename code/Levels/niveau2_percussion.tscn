@@ -1920,7 +1920,7 @@ texture = ExtResource("14_kvna6")
 [node name="FinishTrigger" type="Area2D" parent="." unique_id=1115739708]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishTrigger" unique_id=1094683117]
-position = Vector2(575, 205.25)
+position = Vector2(575, 167)
 shape = SubResource("RectangleShape2D_ubdlm")
 
 [node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=1956698847]

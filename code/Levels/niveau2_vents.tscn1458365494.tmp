@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dmigh3n8mj6di" path="res://Assets/vents/niveau2_vents/Tileset-Terrain2.png" id="1_ea82f"]
 [ext_resource type="Texture2D" uid="uid://csodq2m2beue1" path="res://Assets/vents/niveau2_vents/TX Tileset Grass.png" id="1_plhlm"]
 [ext_resource type="Script" uid="uid://dyepjdlgvir1h" path="res://Levels/niveau_2_vents.gd" id="1_poa13"]
-[ext_resource type="PackedScene" uid="uid://dh5ncmh4k4a2s" path="res://Core/CombatSystem/battle_scene.tscn" id="2_ioixd"]
 [ext_resource type="Texture2D" uid="uid://cgxi67n2y8hbj" path="res://Assets/vents/niveau2_vents/altar 224x288 - standard.png" id="2_plhlm"]
 [ext_resource type="Texture2D" uid="uid://dx3fc21edinlw" path="res://Assets/vents/niveau2_vents/murpierre.png" id="3_r4aep"]
 [ext_resource type="Texture2D" uid="uid://cvl8h3uohcrh6" path="res://Assets/vents/niveau2_vents/arche.png" id="4_6lrwr"]
@@ -12951,7 +12950,6 @@ size = Vector2(104, 48.5)
 
 [node name="level6" type="Node2D" unique_id=444095406 groups=["level6"]]
 script = ExtResource("1_poa13")
-battle_scene_packed = ExtResource("2_ioixd")
 
 [node name="floor" type="TileMapLayer" parent="." unique_id=671811682]
 
