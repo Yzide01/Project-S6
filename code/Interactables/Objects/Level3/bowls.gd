@@ -1,4 +1,5 @@
 extends Node2D
+signal played
 
 signal state_changed
 var current_mass_state: int = 0 
@@ -19,6 +20,7 @@ func _ready() -> void:
 	_update_feedback()
 	
 func _on_interact():
+	played.emit()
 	_update_feedback()
 	if audio: audio.play()
 
