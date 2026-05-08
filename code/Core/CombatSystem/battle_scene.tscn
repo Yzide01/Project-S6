@@ -460,9 +460,9 @@ offset_bottom = 182.0
 [node name="EnemyContainer" type="HBoxContainer" parent="." unique_id=2138559791]
 layout_mode = 0
 offset_left = 616.0
-offset_top = 102.0
+offset_top = 183.0
 offset_right = 986.0
-offset_bottom = 355.0
+offset_bottom = 436.0
 alignment = 1
 
 [node name="PlayerHPBar" type="TextureProgressBar" parent="." unique_id=401387119]
