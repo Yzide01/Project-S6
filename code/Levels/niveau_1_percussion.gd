@@ -33,17 +33,24 @@ var water_ready: bool = false
 func _on_water_changed():
 	current_tune.clear()
 	
-	# Check the current water levels
+	# Vérification des niveaux d'eau : Vide (0/Grave) - Plein (1/Aigu) - Vide (0/Grave)
 	var current_water = [bowls[0].current_mass_state, bowls[1].current_mass_state, bowls[2].current_mass_state]
 	
 	if current_water == secret_combination and not water_ready:
 		water_ready = true
-		print("SUCCESS: Water levels are perfect! Now play the tune.")
 		
-	# TODO: INSERER DIALOGUE POUR DIRE QUE L'EAU EST PRETE
+		# --- DÉCLENCHEMENT DU DIALOGUE ---
+		# On charge le fichier .dialogue dédié à cette étape
+		var dialogue_resource = load("res://Dialogues/Level3/WaterReady.dialogue")
+		if dialogue_resource:
+			# On lance le dialogue à la section "start"
+			DialogueManager.show_example_dialogue_balloon(dialogue_resource, "start")
+		else:
+			push_error("Fichier de dialogue introuvable !")
+			
 	elif current_water != secret_combination:
 		water_ready = false
-
+		
 func _on_bowl_played(bowl_index: int):
 	if is_solved:
 		return
