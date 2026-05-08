@@ -1752,7 +1752,7 @@ texture = ExtResource("4_5dvem")
 sources/0 = SubResource("TileSetAtlasSource_3y4kk")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o1wam"]
-radius = 115.60818
+radius = 161.76324
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tjpxl"]
 animations = [{
@@ -1797,6 +1797,9 @@ points = PackedVector2Array(54, -5, 29, -24, -16, -25, -45, -14, -53, 11, 31, 18
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubdlm"]
 size = Vector2(560, 73.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_stg0q"]
+radius = 81.27115
 
 [node name="Node2D" type="Node2D" unique_id=28935177]
 script = ExtResource("1_6onm5")
@@ -1938,6 +1941,15 @@ polygon = PackedVector2Array(-43, -184, -37, 1028, 1223, 1056, 1222, -13, 1152, 
 [node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("26_sntxp")]
 visible = false
 
+[node name="wheel_trigger_simple" type="Area2D" parent="." unique_id=1120140629]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheel_trigger_simple" unique_id=1999539062]
+position = Vector2(212, 776)
+shape = SubResource("CircleShape2D_stg0q")
+
+[connection signal="body_entered" from="wheel/Interactable" to="." method="_on_interactable_body_entered"]
 [connection signal="body_entered" from="EdgeTrigger" to="." method="_on_edge_trigger_body_entered"]
 [connection signal="body_entered" from="DrumTrigger" to="." method="_on_drum_trigger_body_entered"]
 [connection signal="body_entered" from="FinishTrigger" to="." method="_on_finish_trigger_body_entered"]
+[connection signal="body_entered" from="wheel_trigger_simple" to="." method="_on_wheel_trigger_simple_body_entered"]

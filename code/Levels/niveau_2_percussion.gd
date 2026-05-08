@@ -3,16 +3,15 @@ extends Node2D
 @export var battle_scene_packed: PackedScene
 @onready var whisper_data = preload("res://Entities/Enemies/whisper.tres")
 @onready var dampener_data = preload("res://Entities/Enemies/dampener.tres")
-var current_battle_scene: Node = null
 
-# --- VARIABLES ---
+# --- VARIABLES D'ÉTAT ---
 var is_solved: bool = false
 var is_dialogue_playing: bool = false
-
 var has_talked_at_edge: bool = false
 var has_seen_wheel: bool = false
 var spirit_has_appeared: bool = false
-var has_finished_level: bool = false
+
+# --- RÉFÉRENCES NOEUDS ---
 @onready var wheel = $wheel
 @onready var altar_door = $altar
 @onready var spirit_sprite = $PercussionSpirit 
@@ -23,150 +22,136 @@ var has_finished_level: bool = false
 var intro_dialogue = load("res://Dialogues/Level4/Intro.dialogue")
 
 func _ready() -> void:
+	# 1. État initial du visuel
 	if spirit_sprite:
 		spirit_sprite.modulate.a = 0.0
 		spirit_sprite.hide()
+	
+	# 2. Désactiver l'autel au début
 	if altar_door and altar_door.has_node("Interactable"):
 		altar_door.get_node("Interactable").is_interactable = false
-	if wheel:
+	
+	# 3. Connexion du puzzle de la roue
+	if wheel and not wheel.pressure_stabilized.is_connected(_on_pressure_stable):
 		wheel.pressure_stabilized.connect(_on_pressure_stable)
-		wheel.pressure_destabilized.connect(_on_pressure_unstable)
 
+	# 4. Branchement automatique des zones de détection
+	_force_connect("EdgeTrigger", _on_edge_trigger_body_entered)
+	_force_connect("wheel_trigger_simple", _on_wheel_trigger_simple_body_entered)
+	_force_connect("DrumTrigger", _on_drum_trigger_body_entered)
+	_force_connect("FinishTrigger", _on_finish_trigger_body_entered)
+
+func _force_connect(node_name: String, callback: Callable):
+	var target = find_child(node_name, true, false)
+	if target:
+		if not target.body_entered.is_connected(callback):
+			target.body_entered.connect(callback)
+			print("SYSTÈME : ", node_name, " prêt.")
+	else:
+		push_warning("Nœud " + node_name + " introuvable dans la scène.")
+
+# --- GESTION DES ZONES DE DIALOGUE ---
+
+# Dialogue de la roue (déclenche find_wheel)
+func _on_wheel_trigger_simple_body_entered(body: Node2D) -> void:
+	if _is_player(body) and not has_seen_wheel and not is_dialogue_playing and not is_solved:
+		has_seen_wheel = true
+		_play_safe_text("find_wheel", body)
+
+# Dialogue du bord (déclenche start)
 func _on_edge_trigger_body_entered(body: Node2D) -> void:
-	if body.name == "Player" and not is_dialogue_playing and not has_talked_at_edge:
-		is_dialogue_playing = true
+	if _is_player(body) and not has_talked_at_edge and not is_dialogue_playing:
 		has_talked_at_edge = true
-		
-		body.set_physics_process(false) 
-		
-		DialogueManager.show_example_dialogue_balloon(intro_dialogue, "start")
-		await DialogueManager.dialogue_ended
-		
-		body.set_physics_process(true)
-		is_dialogue_playing = false
+		_play_safe_text("start", body)
 
+# Dialogue de chute + Apparition de l'Esprit
 func _on_drum_trigger_body_entered(body: Node2D) -> void:
-	# CORRECTION DU BUG DES TAMBOURS : On ne lance le dialogue que si le puzzle n'est PAS résolu (is_solved est false)
-	if body.name == "Player" and not is_dialogue_playing and not is_solved:
+	if _is_player(body) and not is_dialogue_playing and not is_solved:
 		is_dialogue_playing = true
 		
-		body.set_physics_process(false)
+		# 1. Dialogue "Ouch"
+		await _play_safe_text("impact_fail", body)
 		
-		DialogueManager.show_example_dialogue_balloon(intro_dialogue, "impact_fail")
-		await DialogueManager.dialogue_ended
-		
-		if not spirit_has_appeared:
+		# 2. L'esprit arrive
+		if not spirit_has_appeared and spirit_sprite:
 			spirit_has_appeared = true
-			if spirit_sprite:
-				spirit_sprite.modulate.a = 1.0
-				spirit_sprite.show()
-				DialogueManager.show_example_dialogue_balloon(intro_dialogue, "spirit_appears")
-				await DialogueManager.dialogue_ended
-				
-				var tween = create_tween()
-				tween.tween_property(spirit_sprite, "modulate:a", 0.0, 1.5)
-				await tween.finished
-				spirit_sprite.hide()
+			spirit_sprite.show()
+			var tw = create_tween()
+			tw.tween_property(spirit_sprite, "modulate:a", 1.0, 0.5)
+			
+			await _play_safe_text("spirit_appears", body)
+			
+			var tw2 = create_tween()
+			tw2.tween_property(spirit_sprite, "modulate:a", 0.0, 0.8)
+			await tw2.finished
+			spirit_sprite.hide()
 		
-		if spawn_point:
+		# 3. On ramène le joueur au début
+		if spawn_point: 
 			body.global_position = spawn_point.global_position
 		
-		body.set_physics_process(true)
 		is_dialogue_playing = false
 
-func _on_wheel_trigger_body_entered(body: Node2D) -> void:
-	if body.name == "Player" and not has_seen_wheel and not is_dialogue_playing and not is_solved:
-		has_seen_wheel = true
-		is_dialogue_playing = true
-		
-		body.set_physics_process(false) 
-		
-		DialogueManager.show_example_dialogue_balloon(intro_dialogue, "find_wheel")
-		await DialogueManager.dialogue_ended
-		
-		body.set_physics_process(true) 
-		is_dialogue_playing = false
-			
+# Dialogue après avoir traversé
+func _on_finish_trigger_body_entered(body: Node2D) -> void:
+	if _is_player(body) and not is_dialogue_playing:
+		_play_safe_text("across_the_gap", body)
+
+# --- LOGIQUE PUZZLE ET VICTOIRE ---
+
 func _on_pressure_stable():
 	if not is_solved:
 		is_solved = true
-		is_dialogue_playing = true
-		if tilemap:
-			tilemap.visible = true                
-		var player = get_tree().get_first_node_in_group("player") 
-		if player: player.set_physics_process(false)
+		if tilemap: tilemap.visible = true 
 		
-		DialogueManager.show_example_dialogue_balloon(intro_dialogue, "victory")
-		await DialogueManager.dialogue_ended
+		var p = get_tree().get_first_node_in_group("Player") 
+		await _play_safe_text("victory", p)
 		
-		if player: player.set_physics_process(true)
-		is_dialogue_playing = false
-		
-		if altar_door and altar_door.has_node("Interactable"):
-			var int_comp = altar_door.get_node("Interactable")
-			int_comp.is_interactable = true
-			int_comp.interact_name = "Enter the Altar"
-			int_comp.interact = _on_altar_interacted
-		await get_tree().create_timer(1.0).timeout
-		book_page.victory()
-			
-func _on_altar_interacted() -> void:
-	await get_tree().create_timer(0.2).timeout
-	
-	# CORRECTION DU COMBAT (Partie 1) : Création forcée du tableau d'ennemis
-	var ma_horde: Array[BaseEnemy] = []
-	ma_horde.append(whisper_data)
-	ma_horde.append(dampener_data)
-	
+		_setup_altar()
+		if book_page: book_page.victory()
+
+func _setup_altar():
+	if altar_door and altar_door.has_node("Interactable"):
+		var interact_comp = altar_door.get_node("Interactable")
+		interact_comp.is_interactable = true
+		interact_comp.interact = _on_altar_interacted
+
+# --- COMBAT ET CHANGEMENT DE NIVEAU ---
+
+func _on_altar_interacted():
+	var ma_horde: Array[BaseEnemy] = [whisper_data, dampener_data]
 	await start_combat(ma_horde)
-	
-	await get_tree().create_timer(2.0).timeout        
+	# On part vers le niveau suivant après le combat
 	SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")
 
-func _on_pressure_unstable():
-	is_solved = false
-
-func _on_finish_trigger_body_entered(body: Node2D) -> void:
-	if body.name == "Player" and not has_finished_level and not is_dialogue_playing:
-		has_finished_level = true
-		is_dialogue_playing = true
-		
-		body.set_physics_process(false)
-		
-		DialogueManager.show_example_dialogue_balloon(intro_dialogue, "across_the_gap")
-		await DialogueManager.dialogue_ended
-		
-		body.set_physics_process(true) 
-		is_dialogue_playing = false
-
 func start_combat(horde: Array[BaseEnemy]) -> void:
-	var player = get_tree().get_first_node_in_group("player") 
-	if player: 
-		player.set_physics_process(false)
+	var p = get_tree().get_first_node_in_group("Player")
+	if p: p.set_physics_process(false)
+	
+	var ui = CanvasLayer.new()
+	ui.layer = 1000
+	add_child(ui)
+	
+	var combat = battle_scene_packed.instantiate()
+	ui.add_child(combat)
+	
+	combat.start_encounter(horde, ["corde", "percussion"], "The spirit tests your rhythm!")
+	
+	await combat.tree_exited
+	ui.queue_free()
+	if p: p.set_physics_process(true)
+
+# --- FONCTIONS UTILITAIRES ---
+
+func _play_safe_text(section: String, player: Node2D):
 	is_dialogue_playing = true
+	if player: player.set_physics_process(false)
 	
-	var ui_layer = CanvasLayer.new()
-	ui_layer.layer = 1000 
-	add_child(ui_layer)
+	DialogueManager.show_example_dialogue_balloon(intro_dialogue, section)
+	await DialogueManager.dialogue_ended
 	
-	current_battle_scene = battle_scene_packed.instantiate()
-	ui_layer.add_child(current_battle_scene)
-	
-	var intro = "You unlocked Percussions! Use Thunder Strike to shatter shields or deal heavy damage.\nWatch out for the Dampener. It looks sturdy and soundproof; I probably wouldn't do much damage to it, especially not while it has its shield up. But it looks slow to me, so I shouldn't take too much damage."
-	
-	# CORRECTION DU COMBAT (Partie 2) : Création forcée du tableau d'instruments
-	var mes_instruments: Array[String] = []
-	mes_instruments.append("corde")
-	mes_instruments.append("percussion")
-	
-	# On passe 'horde' et 'mes_instruments' qui sont parfaitement typés !
-	current_battle_scene.start_encounter(horde, mes_instruments, intro)
-	
-	await current_battle_scene.tree_exited
-	
-	ui_layer.queue_free()
-	current_battle_scene = null
-	
-	if player: 
-		player.set_physics_process(true)
+	if player: player.set_physics_process(true)
 	is_dialogue_playing = false
+
+func _is_player(body: Node2D) -> bool:
+	return body.is_in_group("Player") or body.name.to_lower().contains("player")

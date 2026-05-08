@@ -3,25 +3,26 @@ Mélos: Oh no, a giant gap! How am I supposed to cross this?
 => END
 
 ~ impact_fail
-Mélos: Ugh, it's like jumping into mud... This drum is way too loose.
+Mélos: Ouch... There's no bounce at all. It's like jumping on a wet sponge.
+Mélos: These drums are way too loose to jump on.
 => END
 
 ~ spirit_appears
 Percussion Spirit: You thought rhythm was just background noise, little Mélos? Rhythm is pure energy!
-Percussion Spirit: Look at these membranes. They are like your spirit: without tension, they are dead.
-Mélos: I’ll bring the life back to them. I just need to find a way to tighten these skins!
+Percussion Spirit: Look at these skins. Without tension, they are hollow and lifeless.
+Mélos: I'll bring the life back to them. I just need to find a way to tighten them up!
 => END
 
 ~ find_wheel
-Mélos: This massive wheel... It must be the mechanism to tighten the drums.
+Mélos: This massive wheel... It must be the mechanism to tighten the drum skins.
 => END
 
 ~ victory
-Mélos: Perfect! The pressure is stable and the drums are tight.
+Mélos: Perfect! The tension is back and the drums are firm.
 Mélos: I can finally reach the altar!
 => END
 
 ~ across_the_gap
-Mélos: I made it! The drums' resonance was perfect.
+Mélos: I made it! That was some serious bounce.
 Mélos: Now, let's see what's inside this altar...
 => END
