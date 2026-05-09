@@ -18,6 +18,7 @@ var spirit_has_appeared: bool = false
 @onready var spawn_point = $SpawnPoint 
 @onready var tilemap = $tambours_ok
 @onready var book_page = $BookPage
+@onready var finished = false
 
 var intro_dialogue = load("res://Dialogues/Level4/Intro.dialogue")
 
@@ -94,7 +95,8 @@ func _on_drum_trigger_body_entered(body: Node2D) -> void:
 
 # Dialogue après avoir traversé
 func _on_finish_trigger_body_entered(body: Node2D) -> void:
-	if _is_player(body) and not is_dialogue_playing:
+	if _is_player(body) and not is_dialogue_playing and not finished:
+		finished = true
 		_play_safe_text("across_the_gap", body)
 
 # --- LOGIQUE PUZZLE ET VICTOIRE ---
@@ -134,8 +136,8 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	
 	var combat = battle_scene_packed.instantiate()
 	ui.add_child(combat)
-	
-	combat.start_encounter(horde, ["corde", "percussion"], "The spirit tests your rhythm!")
+	var mes_instruments: Array[String] = ["corde", "percussion"]
+	combat.start_encounter(horde, mes_instruments, "The spirit tests your rhythm!")
 	
 	await combat.tree_exited
 	ui.queue_free()
