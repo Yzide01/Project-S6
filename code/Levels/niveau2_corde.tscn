@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="11_0psmx"]
 [ext_resource type="AudioStream" uid="uid://djv0n0g71xo8q" path="res://Assets/Sound/Trials/Bach-prelude-in-c-major-piano.mp3" id="13_j621k"]
 [ext_resource type="AudioStream" uid="uid://dpwlsmodp0246" path="res://Assets/Sound/Ambiant sound/background_heavy.wav" id="15_0psmx"]
+[ext_resource type="Script" uid="uid://s44uoroyfdfh" path="res://Interactables/Objects/Level2/exit.gd" id="16_so6ro"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="18_q0jl7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jofdi"]
@@ -24116,6 +24117,9 @@ texture = ExtResource("7_df1gw")
 sources/1 = SubResource("TileSetAtlasSource_p67ms")
 sources/2 = SubResource("TileSetAtlasSource_arpyr")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_oe6hv"]
+radius = 115.60818
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q0jl7"]
 size = Vector2(1169, 117)
 
@@ -24364,6 +24368,22 @@ position = Vector2(66.515, -50)
 [node name="piano" type="TileMapLayer" parent="decoration" unique_id=936717173]
 tile_map_data = PackedByteArray("AAAUAOb/AQAAAAAAAAAUAOf/AQAAAAEAAAAUAOj/AQAAAAIAAAAUAOn/AQAAAAMAAAAUAOr/AQAAAAQAAAAUAOv/AQAAAAUAAAAUAOz/AQAAAAYAAAAUAO3/AQAAAAcAAAAVAOb/AQABAAAAAAAVAOf/AQABAAEAAAAVAOj/AQABAAIAAAAVAOn/AQABAAMAAAAVAOr/AQABAAQAAAAVAOv/AQABAAUAAAAVAOz/AQABAAYAAAAVAO3/AQABAAcAAAAWAOb/AQACAAAAAAAWAOf/AQACAAEAAAAWAOj/AQACAAIAAAAWAOn/AQACAAMAAAAWAOr/AQACAAQAAAAWAOv/AQACAAUAAAAWAOz/AQACAAYAAAAWAO3/AQACAAcAAAAXAOb/AQADAAAAAAAXAOf/AQADAAEAAAAXAOj/AQADAAIAAAAXAOn/AQADAAMAAAAXAOr/AQADAAQAAAAXAOv/AQADAAUAAAAXAOz/AQADAAYAAAAXAO3/AQADAAcAAAAYAOb/AQAEAAAAAAAYAOf/AQAEAAEAAAAYAOj/AQAEAAIAAAAYAOn/AQAEAAMAAAAYAOr/AQAEAAQAAAAYAOv/AQAEAAUAAAAYAOz/AQAEAAYAAAAYAO3/AQAEAAcAAAAZAOb/AQAFAAAAAAAZAOf/AQAFAAEAAAAZAOj/AQAFAAIAAAAZAOn/AQAFAAMAAAAZAOr/AQAFAAQAAAAZAOv/AQAFAAUAAAAZAOz/AQAFAAYAAAAZAO3/AQAFAAcAAAAaAOb/AQAGAAAAAAAaAOf/AQAGAAEAAAAaAOj/AQAGAAIAAAAaAOn/AQAGAAMAAAAaAOr/AQAGAAQAAAAaAOv/AQAGAAUAAAAaAOz/AQAGAAYAAAAaAO3/AQAGAAcAAAAbAOb/AQAHAAAAAAAbAOf/AQAHAAEAAAAbAOj/AQAHAAIAAAAbAOn/AQAHAAMAAAAbAOr/AQAHAAQAAAAbAOv/AQAHAAUAAAAbAOz/AQAHAAYAAAAbAO3/AQAHAAcAAAA=")
 tile_set = SubResource("TileSet_4bauj")
+
+[node name="Exit" type="Node2D" parent="." unique_id=13970936]
+position = Vector2(1945, -699)
+script = ExtResource("16_so6ro")
+
+[node name="Interactable" parent="Exit" unique_id=1203915225 instance=ExtResource("9_ooyhu")]
+position = Vector2(366.5, 309)
+interact_name = "Exit level 2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit/Interactable" unique_id=1627150690]
+position = Vector2(-7.5, -45)
+scale = Vector2(-0.33, 0.48)
+shape = SubResource("CircleShape2D_oe6hv")
+
+[node name="LabelPosition" type="Marker2D" parent="Exit/Interactable" unique_id=415401923]
+position = Vector2(37.499996, -70)
 
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("9_7wtkx")]
 position = Vector2(578, 489)
