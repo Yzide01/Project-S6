@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var book_page = $decoration/BookPage
 @onready var piano = $decoration/Piano
-
+@onready var exit = $Exit
 @onready var whisper_data = preload("res://Entities/Enemies/whisper.tres")
 var current_battle_scene: Node = null
 var has_spoken_about_zone: bool = false
@@ -13,21 +13,30 @@ var page_collected: bool = false
 func _ready() -> void:
 	if piano:
 		piano.victory.connect(_victory)
+		
+	# 1. On connecte le signal de la sortie à notre nouvelle fonction
+	if exit:
+		exit.start_level_combat.connect(_on_exit_interacted_for_combat)
 
 # --- VICTOIRE AU PIANO ---
 func _victory():
 	if book_page:
 		book_page.victory()
-		# On attend que le joueur récupère la page
+		
+		# 2. On attend que le joueur récupère la page d'abord
 		await book_page.page_picked
 		page_collected = true
-		# Message de confirmation (assure-toi d'avoir ~ page_collected dans ton .dialogue)
+		
+		# 3. ENSUITE on débloque la sortie
+		exit.unlock()
+		
+		# Message de confirmation
 		_play_dialogue("page_collected")
 
-# --- ZONE DE SORTIE (DÉCLENCHE LE COMBAT) ---
-func _on_exit_zone_body_entered(body: Node2D) -> void:
-	# On vérifie que c'est le Player et qu'il a la page
-	if (body.name == "Player" or body.is_in_group("Player")) and page_collected:
+# --- QUAND LE JOUEUR CLIQUE SUR LA SORTIE ---
+func _on_exit_interacted_for_combat() -> void:
+	# Double sécurité pour être sûr que tout est bon
+	if page_collected:
 		var ma_horde: Array[BaseEnemy] = [whisper_data]
 		start_combat(ma_horde)
 
@@ -45,7 +54,7 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	ui_layer.add_child(current_battle_scene)
 	
 	var mes_instruments: Array[String] = ["corde"]
-	var intro = "The Whisper is fragile, but its silence is deadly."
+	var intro = "You only have your Strings, this attack doesn't deal much damage, but it lets you thin out the crowd—and who knows, maybe it'll scare them off\nThe Whisper is a fragile minion, but its silence is deadly."
 	
 	current_battle_scene.start_encounter(horde, mes_instruments, intro)
 	
@@ -53,6 +62,7 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	ui_layer.queue_free()
 	
 	get_tree().paused = false
+	
 	# On change de niveau après la fin du combat
 	SceneManager.changer_niveau("res://Levels/niveau1_percussion.tscn")
 
