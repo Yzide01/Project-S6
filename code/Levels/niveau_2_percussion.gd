@@ -137,7 +137,8 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	var combat = battle_scene_packed.instantiate()
 	ui.add_child(combat)
 	var mes_instruments: Array[String] = ["corde", "percussion"]
-	combat.start_encounter(horde, mes_instruments, "The spirit tests your rhythm!")
+	var intro = "You unlocked Percussions! Use Thunder Strike to shatter shields or deal heavy damage.\nWatch out for the Dampener. It looks sturdy and soundproof; I probably wouldn't do much damage to it, especially not while it has its shield up. But it looks slow to me, so I shouldn't take too much damage."
+	combat.start_encounter(horde, mes_instruments, intro)
 	
 	await combat.tree_exited
 	ui.queue_free()

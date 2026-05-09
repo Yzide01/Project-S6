@@ -1890,7 +1890,7 @@ position = Vector2(-4, -510)
 
 [node name="Interactable" parent="altar" unique_id=719652897 instance=ExtResource("12_ubdlm")]
 position = Vector2(555, 684)
-interact_name = "Bridge"
+interact_name = "Altar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="altar/Interactable" unique_id=1074280145]
 position = Vector2(23.999996, -56.999996)
@@ -1898,7 +1898,7 @@ scale = Vector2(0.44, 0.44)
 shape = SubResource("CircleShape2D_o1wam")
 
 [node name="LabelPosition" type="Marker2D" parent="altar/Interactable" unique_id=1754682069]
-position = Vector2(58, -93)
+position = Vector2(32, -90)
 
 [node name="EdgeTrigger" type="Area2D" parent="." unique_id=1797769607]
 
