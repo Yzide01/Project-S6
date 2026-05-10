@@ -3153,11 +3153,17 @@ texture = ExtResource("7_hxje7")
 [sub_resource type="TileSet" id="TileSet_kt3u6"]
 sources/0 = SubResource("TileSetAtlasSource_3hfkw")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pytfw"]
-size = Vector2(34, 24)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_libwh"]
 radius = 115.60818
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ocnxt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocnxt"]
+atlas = ExtResource("7_hxje7")
+region = Rect2(24.800003, 164, 44.800003, 58.399994)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pytfw"]
+size = Vector2(34, 24)
 
 [node name="Node2D2" type="Node2D" unique_id=1365613925]
 position = Vector2(-45.085, 0)
@@ -3269,6 +3275,33 @@ tile_set = SubResource("TileSet_sh6gj")
 tile_map_data = PackedByteArray("AAA3AAkAAAAbAAQAAAA3AAoAAAAbAAUAAAA4AAYAAAAcAAEAAAA4AAcAAAAcAAIAAAA4AAgAAAAcAAMAAAA4AAkAAAAcAAQAAAA4AAoAAAAcAAUAAAA5AAYAAAAdAAEAAAA5AAcAAAAdAAIAAAA5AAgAAAAdAAMAAAA5AAkAAAAdAAQAAAA5AAoAAAAdAAUAAAA6AAgAAAAeAAMAAAA6AAkAAAAeAAQAAAA6AAoAAAAeAAUAAAA=")
 tile_set = SubResource("TileSet_kt3u6")
 
+[node name="MagicDoor" type="Node2D" parent="." unique_id=876037793]
+position = Vector2(185, -199)
+script = ExtResource("16_1p3ex")
+
+[node name="Interactable" parent="MagicDoor" unique_id=848183643 instance=ExtResource("13_34tpl")]
+position = Vector2(366.5, 309)
+interact_name = "Play String 3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagicDoor/Interactable" unique_id=752321495]
+position = Vector2(-7.5, -45)
+scale = Vector2(-0.33, 0.48)
+shape = SubResource("CircleShape2D_libwh")
+
+[node name="LabelPosition" type="Marker2D" parent="MagicDoor/Interactable" unique_id=1749386432]
+position = Vector2(37.499996, -70)
+
+[node name="Sprite2D2" type="Sprite2D" parent="MagicDoor" unique_id=1084169975]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(360.06375, 265.13)
+scale = Vector2(73.957504, 84.26)
+texture = SubResource("CanvasTexture_ocnxt")
+
+[node name="Sprite2D" type="Sprite2D" parent="MagicDoor" unique_id=740028359]
+position = Vector2(358.085, 267)
+scale = Vector2(2.5909092, 1.6206895)
+texture = SubResource("AtlasTexture_ocnxt")
+
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("1_co52r")]
 position = Vector2(560, 515)
 
@@ -3350,22 +3383,6 @@ stream = ExtResource("16_dn6wu")
 volume_db = 1.944
 max_distance = 4000.0
 bus = &"SFX"
-
-[node name="MagicDoor" type="Node2D" parent="." unique_id=876037793]
-position = Vector2(185, -199)
-script = ExtResource("16_1p3ex")
-
-[node name="Interactable" parent="MagicDoor" unique_id=848183643 instance=ExtResource("13_34tpl")]
-position = Vector2(366.5, 309)
-interact_name = "Play String 3"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MagicDoor/Interactable" unique_id=752321495]
-position = Vector2(-7.5, -45)
-scale = Vector2(-0.33, 0.48)
-shape = SubResource("CircleShape2D_libwh")
-
-[node name="LabelPosition" type="Marker2D" parent="MagicDoor/Interactable" unique_id=1749386432]
-position = Vector2(37.499996, -70)
 
 [node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("21_15k86")]
 visible = false
