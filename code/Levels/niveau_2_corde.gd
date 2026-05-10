@@ -9,6 +9,8 @@ extends Node2D
 var current_battle_scene: Node = null
 var has_spoken_about_zone: bool = false
 var page_collected: bool = false
+@onready var inventory: Inventory = preload("res://Core/InventorySystem/playerInventory.tres")
+@onready var vial: InventoryItem = preload("res://Core/InventorySystem/items/Vial.tres")
 
 func _ready() -> void:
 	if piano:
@@ -20,6 +22,9 @@ func _ready() -> void:
 
 # --- VICTOIRE AU PIANO ---
 func _victory():
+	inventory.insert(vial)
+	inventory.insert(vial)
+
 	if book_page:
 		book_page.victory()
 		
