@@ -48,4 +48,6 @@ func _on_back_pressed():
 
 func _load_level(level_path):
 	get_tree().paused = false
+	if PauseMenuManager.has_method("close_pause_menu"):
+		PauseMenuManager.close_pause_menu()
 	SceneManager.changer_niveau(level_path)

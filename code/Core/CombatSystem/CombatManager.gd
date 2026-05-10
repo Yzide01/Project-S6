@@ -107,6 +107,16 @@ func _ready() -> void:
 	corde_button.pressed.connect(_on_corde_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	
+	call_deferred("_check_test_mode")
+
+func _check_test_mode() -> void:
+	if active_enemies.is_empty():
+		var test_enemy = BaseEnemy.new()
+		test_enemy.enemy_name = "Test Minion"
+		test_enemy.max_hp = 30
+		test_enemy.rank = 1
+		start_encounter([test_enemy], ["percussion", "vent", "corde"], "Test Encounter Started!")
+	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed):
 		intro_terminee.emit()
