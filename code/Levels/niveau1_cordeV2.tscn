@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://ikvdqpsfuj25" path="res://Assets/Sound/Trials/pizzicato2.wav" id="18_v41tu"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="21_15k86"]
 [ext_resource type="AudioStream" uid="uid://dpwlsmodp0246" path="res://Assets/Sound/Ambiant sound/background_heavy.wav" id="22_v41tu"]
+[ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="24_k1njg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qyek1"]
 texture = ExtResource("2_7ikte")
@@ -3451,3 +3452,5 @@ offset_bottom = 975.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Mask" parent="." unique_id=1462240249 instance=ExtResource("24_k1njg")]

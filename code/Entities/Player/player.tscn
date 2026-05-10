@@ -475,6 +475,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=684339121]
+z_index = 20
 script = ExtResource("1_onrkg")
 inventory = ExtResource("2_lu8i8")
 
@@ -485,6 +486,7 @@ shape = SubResource("RectangleShape2D_hqtel")
 [node name="InteractingComponent" parent="." unique_id=65921056 instance=ExtResource("4_tekja")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2025306507]
+z_index = 20
 sprite_frames = SubResource("SpriteFrames_d17g3")
 animation = &"idle_up"
 

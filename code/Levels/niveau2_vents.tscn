@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="35_47yiv"]
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="37_ifnn0"]
 [ext_resource type="Script" uid="uid://cxcrnjdnbywl2" path="res://Interactables/Objects/Level6/exit.gd" id="38_coj8c"]
+[ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="42_tkihi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5kic"]
 texture = ExtResource("1_plhlm")
@@ -13373,6 +13374,8 @@ shape = SubResource("CircleShape2D_tkihi")
 
 [node name="LabelPosition" type="Marker2D" parent="Exit/Interactable" unique_id=1304737648]
 position = Vector2(17.5, -60)
+
+[node name="Mask" parent="." unique_id=1462240249 instance=ExtResource("42_tkihi")]
 
 [connection signal="body_entered" from="SteleArea" to="." method="_on_stele_area_body_entered"]
 [connection signal="body_entered" from="IncaTriggerArea" to="." method="_on_inca_trigger_area_body_entered"]

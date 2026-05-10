@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://b58j81xpxm0hv" path="res://Assets/percussions/niveau2_percussions/manivellehamster9.png" id="20_omrmp"]
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="21_dsl3q"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="26_sntxp"]
+[ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="28_uavks"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tqqop"]
 texture = ExtResource("1_yx54n")
@@ -2072,6 +2073,8 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wheel_trigger_simple" unique_id=1999539062]
 position = Vector2(212, 776)
 shape = SubResource("CircleShape2D_stg0q")
+
+[node name="Mask" parent="." unique_id=1462240249 instance=ExtResource("28_uavks")]
 
 [connection signal="body_entered" from="wheel/Interactable" to="." method="_on_interactable_body_entered"]
 [connection signal="body_entered" from="EdgeTrigger" to="." method="_on_edge_trigger_body_entered"]

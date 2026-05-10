@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://tsk5r8hy4mcs" path="res://Assets/Sound/Trials/Bowl.wav" id="16_x6vnd"]
 [ext_resource type="AudioStream" uid="uid://clceoid0dmb1a" path="res://Assets/Sound/Ambiant sound/background_medium.wav" id="18_x6vnd"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="24_xbafm"]
+[ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="25_fam7g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5dx0f"]
 texture = ExtResource("1_xy8x2")
@@ -8118,6 +8119,8 @@ playback_type = 1
 
 [node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("24_xbafm")]
 visible = false
+
+[node name="Mask" parent="." unique_id=1462240249 instance=ExtResource("25_fam7g")]
 
 [connection signal="area_entered" from="Player/TerrainDetector" to="." method="_on_terrain_entered"]
 [connection signal="area_entered" from="Player/TerrainDetector" to="Player" method="_on_terrain_exited"]

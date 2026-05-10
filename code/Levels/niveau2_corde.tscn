@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dpwlsmodp0246" path="res://Assets/Sound/Ambiant sound/background_heavy.wav" id="15_0psmx"]
 [ext_resource type="Script" uid="uid://s44uoroyfdfh" path="res://Interactables/Objects/Level2/exit.gd" id="16_so6ro"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="18_q0jl7"]
+[ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="20_oe6hv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jofdi"]
 texture = ExtResource("1_x61l1")
@@ -24524,5 +24525,7 @@ shape = SubResource("RectangleShape2D_q0jl7")
 
 [node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("18_q0jl7")]
 visible = false
+
+[node name="Mask" parent="." unique_id=1462240249 instance=ExtResource("20_oe6hv")]
 
 [connection signal="body_entered" from="ExplorationZone" to="." method="_on_exploration_zone_body_entered"]
