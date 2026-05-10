@@ -85,7 +85,7 @@ func _on_dialogue_ended():
 func _draw() -> void:
 	# Dessine une petite ombre au sol sous le joueur
 	var shadow_color = Color(0, 0, 0, 0.4)
-	draw_set_transform(Vector2(0, 25), 0.0, Vector2(1.0, 0.5))
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.0, 0.5))
 	draw_circle(Vector2.ZERO, 15.0, shadow_color)
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
@@ -245,8 +245,10 @@ func apply_gravity(delta: float) -> void:
 			if current_state == State.JUMPING:
 				current_state = State.NORMAL
 			
-			# Réactive la collision de la couche basse lors de l'atterrissage (toujours !)
-			set_collision_mask_value(low_obstacle_layer, true)
+			# Réactive la collision de la couche basse UNIQUEMENT si on est au sol
+			if current_floor_z <= 0.1:
+				set_collision_mask_value(low_obstacle_layer, true)
+
 				
 		# Application du z_height sur le visuel (décale vers le haut)
 		# Note: les ombres (s'il y en a) ne bougent pas, car on ne modifie que les variables Y des sprites
@@ -276,8 +278,39 @@ func calculate_floor_z() -> void:
 			# Plateau normal
 			var t_z = area.get("terrain_z_height")
 			if t_z != null:
-				target_floor_z = max(target_floor_z, t_z)
+				target_floor_z = max(target_floor_z, float(t_z))
 				
+	# --- AJOUT: Lecture de la hauteur depuis la TileMap (Custom Data) ---
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsPointQueryParameters2D.new()
+	query.position = global_position
+	# Vérifie les collisions sur le masque des obstacles bas (Layer 2)
+	query.collision_mask = 1 << (low_obstacle_layer - 1)
+	# Important: intersect_point détecte les Area et les Bodies
+	var result = space_state.intersect_point(query)
+	
+	for res in result:
+		var collider = res.collider
+		# Pour Godot 4.3+ (TileMapLayer)
+		if collider is TileMapLayer:
+			var local_pos = collider.to_local(global_position)
+			var map_pos = collider.local_to_map(local_pos)
+			var tile_data = collider.get_cell_tile_data(map_pos)
+			if tile_data:
+				var z = tile_data.get_custom_data("terrain_z_height")
+				if z != null:
+					target_floor_z = max(target_floor_z, float(z))
+		# Pour Godot 4.0 - 4.2 (TileMap)
+		elif collider is TileMap:
+			var local_pos = collider.to_local(global_position)
+			var map_pos = collider.local_to_map(local_pos)
+			for layer in collider.get_layers_count():
+				var tile_data = collider.get_cell_tile_data(layer, map_pos)
+				if tile_data:
+					var z = tile_data.get_custom_data("terrain_z_height")
+					if z != null:
+						target_floor_z = max(target_floor_z, float(z))
+	
 	current_floor_z = target_floor_z
 	
 	# Si on atterrit ou qu'on descend d'un escalier de façon abrupte sans sauter
