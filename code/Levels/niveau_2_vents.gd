@@ -12,7 +12,7 @@ var level6_dialogue = load("res://Dialogues/Level6/Intro.dialogue")
 @onready var spirit_winds = $WindSpirit
 @onready var inca_ghost = $IncaGhost            
 @onready var inca_trigger_area = $IncaTriggerArea 
-
+@onready var exit = $Exit
 var player: Node2D
 var current_battle_scene: Node = null
 var stele_read: bool = false
@@ -30,8 +30,11 @@ func _ready() -> void:
 	if inca_ghost:
 		inca_ghost.hide()
 		inca_ghost.modulate.a = 0.0
-	
+		
+	if exit:
+		exit.start_level_combat.connect(_on_exit_interacted_for_combat)
 	start_level_intro()
+	
 
 
 func start_level_intro():
@@ -88,29 +91,29 @@ func reset_puzzle() -> void:
 func _on_puzzle_completed():
 	if puzzle_completed: return
 	puzzle_completed = true
-	
+	exit.unlock()
 	await _play_dialogue("success")
 
 	if inca_ghost:
 		var t = create_tween()
 		t.tween_property(inca_ghost, "modulate:a", 0.0, 2.0)
 	book_page.victory()
-	await get_tree().create_timer(10.0).timeout
+	#await get_tree().create_timer(10.0).timeout
 
 
 	# Création forcée de la horde avec les 3 ennemis !
-	var ma_horde: Array[BaseEnemy] = []
-	ma_horde.append(whisper_data)
-	ma_horde.append(dampener_data)
-	ma_horde.append(devourer_data)
-	
-	await start_combat(ma_horde)
+	#var ma_horde: Array[BaseEnemy] = []
+	#ma_horde.append(whisper_data)
+	#ma_horde.append(dampener_data)
+	#ma_horde.append(devourer_data)
+	#
+	#await start_combat(ma_horde)
 	
 	print("Level 6 Complete - Porte ouverte !")
-	var exit_door = $Door
-	if exit_door and exit_door.has_method("unlock"):
-		exit_door.unlock()
 
+func _on_exit_interacted_for_combat() -> void:
+	var ma_horde: Array[BaseEnemy] = [whisper_data, dampener_data,devourer_data]
+	start_combat(ma_horde)
 
 func start_combat(horde: Array[BaseEnemy]) -> void:
 	player = get_tree().get_root().find_child("Player", true, false)

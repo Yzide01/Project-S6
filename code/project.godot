@@ -24,6 +24,7 @@ DialogueManager="*uid://c3rodes2l3gxb"
 AppConfig="*uid://cjke6crjg14a0"
 SceneManager="*uid://cm3mvudx0t8ex"
 Progression="*uid://b577my7hld2dj"
+VialScene="*uid://cwp8tin0sauhr"
 
 [display]
 

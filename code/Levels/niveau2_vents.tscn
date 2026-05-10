@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://cqh85iat07jk2" path="res://Assets/Spirit/Esprit Inca.png" id="34_vlaer"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="35_47yiv"]
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="37_ifnn0"]
+[ext_resource type="Script" uid="uid://cxcrnjdnbywl2" path="res://Interactables/Objects/Level6/exit.gd" id="38_coj8c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5kic"]
 texture = ExtResource("1_plhlm")
@@ -13121,6 +13122,9 @@ size = Vector2(42, 74)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vlaer"]
 size = Vector2(104, 48.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tkihi"]
+radius = 115.60818
+
 [node name="level6" type="Node2D" unique_id=444095406 groups=["level6"]]
 script = ExtResource("1_poa13")
 battle_scene_packed = ExtResource("2_ioixd")
@@ -13353,6 +13357,22 @@ visible = false
 [node name="Murs coté" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=603520655]
 position = Vector2(0, -96)
 polygon = PackedVector2Array(-90, -28, -66, 782, 1222, 800, 1222, -13, 1152, -13, 1152, 736, 0, 736, 0, 190, 529, 192, 528, 112, 541, 101, 582, 102, 593, 118, 592, 192, 1153, 192, 1155, 50, 821, -42)
+
+[node name="Exit" type="Node2D" parent="." unique_id=541727231]
+position = Vector2(201, -234)
+script = ExtResource("38_coj8c")
+
+[node name="Interactable" parent="Exit" unique_id=1148813812 instance=ExtResource("33_x27wi")]
+position = Vector2(366.5, 309)
+interact_name = "Exit level 6"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit/Interactable" unique_id=1556871219]
+position = Vector2(-7.5, -45)
+scale = Vector2(-0.33, 0.48)
+shape = SubResource("CircleShape2D_tkihi")
+
+[node name="LabelPosition" type="Marker2D" parent="Exit/Interactable" unique_id=1304737648]
+position = Vector2(17.5, -60)
 
 [connection signal="body_entered" from="SteleArea" to="." method="_on_stele_area_body_entered"]
 [connection signal="body_entered" from="IncaTriggerArea" to="." method="_on_inca_trigger_area_body_entered"]
