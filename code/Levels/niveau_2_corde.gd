@@ -31,7 +31,7 @@ func _victory():
 		exit.unlock()
 		
 		# Message de confirmation
-		_play_dialogue("page_collected")
+		#_play_dialogue("page_collected")
 
 # --- QUAND LE JOUEUR CLIQUE SUR LA SORTIE ---
 func _on_exit_interacted_for_combat() -> void:
