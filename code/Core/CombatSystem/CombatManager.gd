@@ -121,7 +121,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed):
 		intro_terminee.emit()
 		
-func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text: String) -> void:
+func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text: String, level_id: int = 1) -> void:
 	available_skills = skills
 	intro_message = intro_text
 	active_enemies.clear()
@@ -150,6 +150,15 @@ func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text:
 			"rank": enemy_data.rank,
 			"ui_node": enemy_ui
 		})
+		
+	# We hide all backgrounds
+	$Backgrounds/level1.hide()
+	$Backgrounds/level2.hide()
+	$Backgrounds/level3.hide()
+	# We display the right background
+	if level_id == 1: $Backgrounds/level1.show()
+	elif level_id == 2: $Backgrounds/level2.show()
+	elif level_id == 3: $Backgrounds/level3.show()
 		
 	start_battle()
 

@@ -347,16 +347,21 @@ mouse_filter = 2
 script = ExtResource("1_ebjqp")
 enemy_ui_scene = ExtResource("2_67fl5")
 
-[node name="level1" type="Sprite2D" parent="." unique_id=1556558368]
+[node name="Backgrounds" type="Control" parent="." unique_id=125969919]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="level1" type="Sprite2D" parent="Backgrounds" unique_id=1556558368]
 position = Vector2(541, 358)
 scale = Vector2(1.0037037, 1)
 texture = ExtResource("3_585wu")
 
-[node name="level2" type="Sprite2D" parent="." unique_id=1747629471]
+[node name="level2" type="Sprite2D" parent="Backgrounds" unique_id=1747629471]
 position = Vector2(542, 358)
 texture = ExtResource("4_kogg5")
 
-[node name="level3" type="Sprite2D" parent="." unique_id=771488785]
+[node name="level3" type="Sprite2D" parent="Backgrounds" unique_id=771488785]
 position = Vector2(542.50006, 355.49997)
 scale = Vector2(1.0064816, 1.0013889)
 texture = ExtResource("5_cwemx")
