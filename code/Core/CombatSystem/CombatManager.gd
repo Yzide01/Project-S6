@@ -109,13 +109,43 @@ func _ready() -> void:
 	
 	call_deferred("_check_test_mode")
 
-func _check_test_mode() -> void:
+func _check_test_mode(level: int = 2) -> void:
 	if active_enemies.is_empty():
-		var test_enemy = BaseEnemy.new()
-		test_enemy.enemy_name = "Test Minion"
-		test_enemy.max_hp = 30
-		test_enemy.rank = 1
-		start_encounter([test_enemy], ["percussion", "vent", "corde"], "Test Encounter Started!")
+		var horde: Array[BaseEnemy] = []
+		var intro_message = ""
+
+		# --- LEVEL 1 : Le Murmure seul ---
+		if level >= 1:
+			intro_message = "Un Murmure s'approche..."
+			horde.append(_create_enemy_data("Murmure", 25, 1))
+
+		# --- LEVEL 2 : On AJOUTE l'Étouffeur ---
+		if level >= 2:
+			intro_message = "Un Murmure et un Étouffeur vous bloquent la route !"
+			horde.append(_create_enemy_data("Etouffeur", 60, 2))
+
+		# --- LEVEL 3 : On AJOUTE le Dévoreur ---
+		if level >= 3:
+			intro_message = "Le trio du Silence est au complet : le Dévoreur est là !"
+			horde.append(_create_enemy_data("Devoreur", 150, 3))
+
+		# We launch the combat
+		start_encounter(horde, ["percussion", "vent", "corde"], intro_message, level)
+
+		#var test_enemy = BaseEnemy.new()
+		#test_enemy.enemy_name = "Test Minion"
+		#test_enemy.max_hp = 30
+		#test_enemy.rank = 1
+		#start_encounter([test_enemy], ["percussion", "vent", "corde"], "Test Encounter Started!")
+
+# Fonction utilitaire pour éviter de répéter le code de création
+func _create_enemy_data(nom: String, hp: int, rank: int) -> BaseEnemy:
+	var e = BaseEnemy.new()
+	e.enemy_name = nom
+	e.max_hp = hp
+	e.rank = rank
+	return e
+
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed):
@@ -139,7 +169,7 @@ func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text:
 	for enemy_data in horde:
 		var enemy_ui = enemy_ui_scene.instantiate() as EnemyBattleUI
 		enemy_container.add_child(enemy_ui)
-		enemy_ui.setup(enemy_data.enemy_name, enemy_data.max_hp, enemy_data.texture)
+		enemy_ui.setup(enemy_data.enemy_name, enemy_data.max_hp, enemy_data.enemy_name)
 		
 		active_enemies.append({
 			"name": enemy_data.enemy_name,

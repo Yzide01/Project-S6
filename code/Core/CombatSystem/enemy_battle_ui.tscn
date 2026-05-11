@@ -878,24 +878,24 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 
-[node name="murmure_inactif" type="AnimatedSprite2D" parent="Container" unique_id=1614354267]
-position = Vector2(120.06796, 130.7111)
-scale = Vector2(1.686438, 1.8326387)
+[node name="Murmure" type="AnimatedSprite2D" parent="Container" unique_id=1614354267]
+position = Vector2(130.56798, 130.7111)
+scale = Vector2(1.8505007, 1.8326387)
 sprite_frames = SubResource("SpriteFrames_t37yk")
 autoplay = "default"
 frame = 40
 frame_progress = 0.45692605
 
-[node name="etouffeur_inactif" type="AnimatedSprite2D" parent="Container" unique_id=766892192]
-position = Vector2(123, 75)
-scale = Vector2(0.41354173, 0.4590278)
+[node name="Etouffeur" type="AnimatedSprite2D" parent="Container" unique_id=766892192]
+position = Vector2(187, 95.00001)
+scale = Vector2(0.45520836, 0.5161458)
 sprite_frames = SubResource("SpriteFrames_fpi0r")
 autoplay = "default"
 frame = 57
 frame_progress = 0.6401987
 
-[node name="devoreur_inactif" type="AnimatedSprite2D" parent="Container" unique_id=474992866]
-position = Vector2(140.75002, 104.5)
-scale = Vector2(0.33776042, 0.28611112)
+[node name="Devoreur" type="AnimatedSprite2D" parent="Container" unique_id=474992866]
+position = Vector2(178, 76)
+scale = Vector2(0.4065104, 0.4351852)
 sprite_frames = SubResource("SpriteFrames_0ym6v")
 autoplay = "default"

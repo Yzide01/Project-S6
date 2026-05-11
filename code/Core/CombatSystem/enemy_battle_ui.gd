@@ -8,14 +8,20 @@ extends VBoxContainer
 
 var enemy_max_hp: int = 0
 
-func setup(enemy_name: String, max_hp: int, texture: Texture2D) -> void:
+func setup(enemy_name: String, max_hp: int, enemy_id: String) -> void:
 	enemy_max_hp = max_hp
 	name_label.text = enemy_name
 	hp_bar.max_value = max_hp
 	hp_bar.value = max_hp
 	hp_text.text = str(max_hp) + " / " + str(max_hp)
-	if texture:
-		sprite.texture = texture
+	for child in $Container.get_children():
+		if child is AnimatedSprite2D:
+			if child.name == enemy_id:
+				child.show()
+				child.play("default")
+			else:
+				child.hide()
+				child.stop()
 
 func update_hp(new_hp: int) -> void:
 	var tween = create_tween()
