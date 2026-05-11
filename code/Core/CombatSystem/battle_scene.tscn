@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://bwfjpi7g4lw0w" path="res://Core/CombatSystem/CombatManager.gd" id="1_ebjqp"]
 [ext_resource type="Texture2D" uid="uid://j2q3lh77u26y" path="res://Assets/Graphics/healthbarUnder.png" id="2_7x133"]
 [ext_resource type="PackedScene" uid="uid://c3e1tkqg70buk" path="res://Core/CombatSystem/enemy_battle_ui.tscn" id="2_67fl5"]
-[ext_resource type="Texture2D" uid="uid://q2pupggssf0q" path="res://Assets/TBC/tpt_background.png" id="3_jnk41"]
+[ext_resource type="Texture2D" uid="uid://6iskq6v0bq18" path="res://Assets/TBC/tpt_background2.png" id="3_585wu"]
 [ext_resource type="Texture2D" uid="uid://ddmfmd06w8tr2" path="res://Assets/Graphics/healthbarProgress.png" id="3_lmsui"]
 [ext_resource type="Texture2D" uid="uid://q3fi8ml8xc6g" path="res://Assets/TBC/Melos/inactif_5/0001.png" id="4_585wu"]
+[ext_resource type="Texture2D" uid="uid://dlpoq4wlxdk2e" path="res://Assets/TBC/tpt_background_2c.png" id="4_kogg5"]
 [ext_resource type="Texture2D" uid="uid://pk8qppybfpnv" path="res://Assets/TBC/Melos/inactif_5/0002.png" id="5_76fba"]
+[ext_resource type="Texture2D" uid="uid://bmd7r3ygf0bpq" path="res://Assets/TBC/tpt_background_3c.png" id="5_cwemx"]
 [ext_resource type="Texture2D" uid="uid://cb6ax7lhti7o1" path="res://Assets/TBC/Melos/inactif_5/0003.png" id="6_kogg5"]
 [ext_resource type="Texture2D" uid="uid://bhi0q1uknu3ph" path="res://Assets/TBC/Melos/inactif_5/0004.png" id="7_cwemx"]
 [ext_resource type="Texture2D" uid="uid://cefuodt5rclk1" path="res://Assets/TBC/Melos/inactif_5/0005.png" id="8_18nv8"]
@@ -345,10 +347,19 @@ mouse_filter = 2
 script = ExtResource("1_ebjqp")
 enemy_ui_scene = ExtResource("2_67fl5")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1556558368]
+[node name="level1" type="Sprite2D" parent="." unique_id=1556558368]
 position = Vector2(541, 358)
 scale = Vector2(1.0037037, 1)
-texture = ExtResource("3_jnk41")
+texture = ExtResource("3_585wu")
+
+[node name="level2" type="Sprite2D" parent="." unique_id=1747629471]
+position = Vector2(542, 358)
+texture = ExtResource("4_kogg5")
+
+[node name="level3" type="Sprite2D" parent="." unique_id=771488785]
+position = Vector2(542.50006, 355.49997)
+scale = Vector2(1.0064816, 1.0013889)
+texture = ExtResource("5_cwemx")
 
 [node name="PlayerVisual" type="TextureRect" parent="." unique_id=953088116]
 layout_mode = 0
@@ -459,10 +470,10 @@ offset_bottom = 182.0
 
 [node name="EnemyContainer" type="HBoxContainer" parent="." unique_id=2138559791]
 layout_mode = 0
-offset_left = 616.0
-offset_top = 183.0
+offset_left = 101.0
+offset_top = 37.0
 offset_right = 986.0
-offset_bottom = 436.0
+offset_bottom = 379.0
 alignment = 1
 
 [node name="PlayerHPBar" type="TextureProgressBar" parent="." unique_id=401387119]
