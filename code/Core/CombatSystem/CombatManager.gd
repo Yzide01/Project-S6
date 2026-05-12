@@ -109,25 +109,25 @@ func _ready() -> void:
 	
 	call_deferred("_check_test_mode")
 
-func _check_test_mode(level: int = 2) -> void:
+func _check_test_mode(level: int = 3) -> void:
 	if active_enemies.is_empty():
 		var horde: Array[BaseEnemy] = []
 		var intro_message = ""
 
-		# --- LEVEL 1 : Le Murmure seul ---
+		# --- LEVEL 1 : The Whisper alone ---
 		if level >= 1:
-			intro_message = "Un Murmure s'approche..."
-			horde.append(_create_enemy_data("Murmure", 25, 1))
+			intro_message = "A whisper is approaching..."
+			horde.append(_create_enemy_data("Whisper", 25, 1))
 
-		# --- LEVEL 2 : On AJOUTE l'Étouffeur ---
+		# --- LEVEL 2 : We ADD the Silencer ---
 		if level >= 2:
-			intro_message = "Un Murmure et un Étouffeur vous bloquent la route !"
-			horde.append(_create_enemy_data("Etouffeur", 60, 2))
+			intro_message = "A Whisperer and a Silencer are blocking your path!"
+			horde.append(_create_enemy_data("Silencer", 60, 2))
 
-		# --- LEVEL 3 : On AJOUTE le Dévoreur ---
+		# --- LEVEL 3 : We ADD the Devourer ---
 		if level >= 3:
-			intro_message = "Le trio du Silence est au complet : le Dévoreur est là !"
-			horde.append(_create_enemy_data("Devoreur", 150, 3))
+			intro_message = "The Silence Trio is now complete: the Devourer is here!"
+			horde.append(_create_enemy_data("Devourer", 150, 3))
 
 		# We launch the combat
 		start_encounter(horde, ["percussion", "vent", "corde"], intro_message, level)

@@ -362,16 +362,16 @@ position = Vector2(542, 358)
 texture = ExtResource("4_kogg5")
 
 [node name="level3" type="Sprite2D" parent="Backgrounds" unique_id=771488785]
-position = Vector2(542.50006, 355.49997)
-scale = Vector2(1.0064816, 1.0013889)
+position = Vector2(542.5001, 360)
+scale = Vector2(1.0064816, 1.013889)
 texture = ExtResource("5_cwemx")
 
 [node name="EnemyContainer" type="HBoxContainer" parent="." unique_id=2138559791]
 layout_mode = 0
-offset_left = 59.0
-offset_top = 10.0
-offset_right = 944.0
-offset_bottom = 352.0
+offset_left = 82.0
+offset_top = 21.0
+offset_right = 962.0
+offset_bottom = 266.0
 alignment = 1
 
 [node name="PlayerVisual" type="TextureRect" parent="." unique_id=953088116]
