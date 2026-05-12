@@ -688,11 +688,12 @@ frame = 40
 frame_progress = 0.45692605
 
 [node name="Silencer" type="AnimatedSprite2D" parent="Container" unique_id=766892192]
+visible = false
 position = Vector2(167.00002, 159)
 scale = Vector2(1.6535188, 1.7446272)
 sprite_frames = SubResource("SpriteFrames_fpi0r")
 autoplay = "default"
-frame_progress = 0.7670027
+frame_progress = 0.6011057
 
 [node name="Devourer" type="AnimatedSprite2D" parent="Container" unique_id=474992866]
 visible = false
