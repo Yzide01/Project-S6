@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="35_47yiv"]
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="37_ifnn0"]
 [ext_resource type="Script" uid="uid://cxcrnjdnbywl2" path="res://Interactables/Objects/Level6/exit.gd" id="38_coj8c"]
+[ext_resource type="AudioStream" uid="uid://ceixjm0ne730y" path="res://Assets/Sound/Ambiant sound/background_light.wav" id="41_yu2rv"]
 [ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="42_tkihi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5kic"]
@@ -13358,6 +13359,12 @@ visible = false
 [node name="Murs coté" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=603520655]
 position = Vector2(0, -96)
 polygon = PackedVector2Array(-90, -28, -66, 782, 1222, 800, 1222, -13, 1152, -13, 1152, 736, 0, 736, 0, 190, 529, 192, 528, 112, 541, 101, 582, 102, 593, 118, 592, 192, 1153, 192, 1155, 50, 821, -42)
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=1446243399]
+stream = ExtResource("41_yu2rv")
+autoplay = true
+bus = &"Ambiance"
+playback_type = 1
 
 [node name="Exit" type="Node2D" parent="." unique_id=541727231]
 position = Vector2(201, -234)
