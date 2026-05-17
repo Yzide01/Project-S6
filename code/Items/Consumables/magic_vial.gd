@@ -18,7 +18,7 @@ func use(player: Node) -> void:
 	if SceneManager.vial_use_count == 1:
 		target_sat = 0.35  # 1ère fiole -> Pastel
 	elif SceneManager.vial_use_count == 2:
-		target_sat = 0.80  # 2ème fiole -> Chaleureux
+		target_sat = 0.70  # 2ème fiole -> Chaleureux
 	else:
 		target_sat = 1.0   # 3ème fiole et plus -> Couleur totale
 	

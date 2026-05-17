@@ -13,16 +13,17 @@ var level6_dialogue = load("res://Dialogues/Level6/Intro.dialogue")
 @onready var inca_ghost = $IncaGhost            
 @onready var inca_trigger_area = $IncaTriggerArea 
 @onready var exit = $Exit
+@onready var flute = $flupe_pan
 var player: Node2D
 var current_battle_scene: Node = null
 var stele_read: bool = false
 var inca_met: bool = false
 var puzzle_completed: bool = false
 var is_dialogue_playing: bool = false
-
 var current_target: int = 5 
 
 func _ready() -> void:
+	flute.visible = false
 	if spirit_winds:
 		spirit_winds.hide()
 		spirit_winds.modulate.a = 0.0
@@ -89,6 +90,7 @@ func reset_puzzle() -> void:
 
 
 func _on_puzzle_completed():
+	flute.visible = true
 	if puzzle_completed: return
 	puzzle_completed = true
 	exit.unlock()
