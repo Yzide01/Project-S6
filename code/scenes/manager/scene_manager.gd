@@ -20,7 +20,7 @@ extends CanvasLayer
 
 # Mémoire pour savoir où aller après la vidéo
 var scene_apres_video: String = ""
-
+var vial_use_count: int = 0
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# On s'assure que le fondu noir ne bloque pas les clics pendant le jeu
@@ -74,11 +74,11 @@ func _on_video_finished() -> void:
 	# 2. Le fondu visuel habituel
 	animation_player.play("fade_to_black")
 	await animation_player.animation_finished
-	
+		
 	video_player.visible = false 
 	video_player.stop()
 	
-	get_tree().change_scene_to_file(scene_apres_video)
+	#get_tree().change_scene_to_file(scene_apres_video)
 	
 	if scene_apres_video != "":
 		# S'il y a un niveau prévu, on y va

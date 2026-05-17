@@ -24,6 +24,10 @@ func _ready() -> void:
 func _victory():
 	inventory.insert(vial)
 	inventory.insert(vial)
+	inventory.insert(vial)
+	inventory.insert(vial)
+	inventory.insert(vial)
+	inventory.insert(vial)
 
 	if book_page:
 		book_page.victory()
