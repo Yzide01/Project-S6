@@ -22,6 +22,7 @@ extends CanvasLayer
 var scene_apres_video: String = ""
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	# On s'assure que le fondu noir ne bloque pas les clics pendant le jeu
 	black_screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
@@ -76,9 +77,16 @@ func _on_video_finished() -> void:
 	
 	video_player.visible = false 
 	video_player.stop()
-	cinematic_audio.stop() # On coupe définitivement le son une fois qu'on est dans le noir complet
 	
 	get_tree().change_scene_to_file(scene_apres_video)
+	
+	if scene_apres_video != "":
+		# S'il y a un niveau prévu, on y va
+		get_tree().change_scene_to_file(scene_apres_video)
+	else:
+		# Sinon, on reste dans le niveau et on enlève la pause !
+		get_tree().paused = false
+	cinematic_audio.stop() # On coupe définitivement le son une fois qu'on est dans le noir complet
 	animation_player.play("fade_to_normal")
 
 # Permettre au joueur de passer la vidéo avec Espace
@@ -88,3 +96,18 @@ func _input(event: InputEvent) -> void:
 			# Cette ligne dit à Godot : "J'ai géré cet appui sur Espace, ne le dis pas aux autres !"
 			get_viewport().set_input_as_handled() 
 			_on_video_finished()
+
+
+func jouer_cinematique_sur_place(chemin_video: String) -> void:
+	scene_apres_video = "" # Très important : on précise qu'on ne veut pas changer de niveau
+	get_tree().paused = true # On met le jeu en pause
+	
+	animation_player.play("fade_to_black")
+	await animation_player.animation_finished
+	
+	video_player.stream = load(chemin_video)
+	video_player.visible = true
+	video_player.size = get_viewport().get_visible_rect().size
+	video_player.play()
+	
+	animation_player.play("fade_to_normal")

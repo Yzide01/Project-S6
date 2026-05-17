@@ -1,11 +1,18 @@
 extends Node
 
+# 1. On charge ton inventaire pour pouvoir écouter ses signaux
+@onready var inventory: Inventory = preload("res://Core/InventorySystem/playerInventory.tres")
+
 var video_layer: CanvasLayer
 var video_player: VideoStreamPlayer
 
 func _ready() -> void:
-	# PROCESS_MODE_ALWAYS permet à la vidéo de jouer même si le jeu est en pause
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# --- LA PIÈCE MANQUANTE : On écoute le signal de l'inventaire ---
+	if inventory and not inventory.use_item.is_connected(_on_item_used):
+		inventory.use_item.connect(_on_item_used)
+	# ---------------------------------------------------------------
 	
 	# Création d'une couche UI au-dessus de tout le reste
 	video_layer = CanvasLayer.new()
@@ -18,6 +25,13 @@ func _ready() -> void:
 	video_player.expand = true
 	video_layer.add_child(video_player)
 	video_layer.hide()
+
+# --- LA FONCTION DÉCLENCHÉE PAR LE SIGNAL ---
+func _on_item_used(item) -> void:
+	# Si l'objet utilisé possède une fonction "use_item" (comme ta MagicVial), on l'exécute !
+	if item and item.has_method("use_item"):
+		item.use_item()
+# --------------------------------------------
 
 func utiliser_fiole(chemin_video: String) -> void:
 	# 1. On fige le jeu
