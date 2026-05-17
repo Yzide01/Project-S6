@@ -13,7 +13,7 @@ var level6_dialogue = load("res://Dialogues/Level6/Intro.dialogue")
 @onready var inca_ghost = $IncaGhost            
 @onready var inca_trigger_area = $IncaTriggerArea 
 @onready var exit = $Exit
-@onready var flute = $flupe_pan
+@onready var flute = $flute_pan
 var player: Node2D
 var current_battle_scene: Node = null
 var stele_read: bool = false
