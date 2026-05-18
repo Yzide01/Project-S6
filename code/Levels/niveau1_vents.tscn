@@ -3303,7 +3303,7 @@ texture = ExtResource("16_v844k")
 sources/1 = SubResource("TileSetAtlasSource_ncv2p")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0kfgp"]
-size = Vector2(251.5, 386.5)
+size = Vector2(316.5, 386.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxbew"]
 size = Vector2(264, 386.5)
@@ -3311,7 +3311,13 @@ size = Vector2(264, 386.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_nhbly"]
 radius = 115.60818
 
-[node name="Node2D" type="Node2D" unique_id=1658413396]
+[sub_resource type="LabelSettings" id="LabelSettings_y7tgd"]
+font_size = 39
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.59000003)
+shadow_offset = Vector2(0, 0)
+
+[node name="Node2D2" type="Node2D" unique_id=1658413396]
 script = ExtResource("1_0kfgp")
 
 [node name="cliff" type="TileMapLayer" parent="." unique_id=1558435994]
@@ -3369,7 +3375,7 @@ position_smoothing_enabled = true
 [node name="BellowsArea" type="Area2D" parent="." unique_id=1551443660]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BellowsArea" unique_id=652407968]
-position = Vector2(-323.75, 413.75)
+position = Vector2(-291.25, 413.75)
 shape = SubResource("RectangleShape2D_0kfgp")
 
 [node name="HydraulisArea" type="Area2D" parent="." unique_id=87707697]
@@ -3454,6 +3460,18 @@ stream = ExtResource("28_y7tgd")
 autoplay = true
 bus = &"Ambiance"
 playback_type = 1
+
+[node name="TimerCanvas" type="CanvasLayer" parent="." unique_id=1868667441]
+
+[node name="TimerLabel" type="Label" parent="TimerCanvas" unique_id=1247336468]
+offset_left = 349.0
+offset_top = -12.0
+offset_right = 557.0
+offset_bottom = 94.0
+text = "TIMER"
+label_settings = SubResource("LabelSettings_y7tgd")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ExitDoor" type="Node2D" parent="." unique_id=1618540096]
 position = Vector2(216, -307)
