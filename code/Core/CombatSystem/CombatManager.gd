@@ -433,6 +433,7 @@ func end_battle(player_won: bool) -> void:
 	if player_won:
 		queue_free()
 	else:
+		get_tree().paused = false
 		get_tree().reload_current_scene()
 
 # --- Display ---

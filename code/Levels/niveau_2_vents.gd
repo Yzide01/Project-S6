@@ -179,7 +179,6 @@ func _on_exit_interacted_for_combat() -> void:
 		#return
 		
 	SceneManager.jouer_cinematique(endgame_video_path, "res://scenes/credits/credits.tscn")
-
 func start_combat(niveau_id: int) -> void:
 	if not is_inside_tree(): return
 	
@@ -191,26 +190,24 @@ func start_combat(niveau_id: int) -> void:
 	
 	current_battle_scene = battle_scene_packed.instantiate()
 	current_battle_scene.process_mode = Node.PROCESS_MODE_ALWAYS
-	
-	# ⚠️ IMPORTANT : On l'ajoute à la scène AVANT d'appeler la fonction
 	ui_layer.add_child(current_battle_scene)
 	
-	# On lance ta nouvelle fonction avec le numéro du combat !
 	current_battle_scene._check_test_mode(niveau_id)
 	
-	await current_battle_scene.tree_exited
-	ui_layer.queue_free()
-	
-	get_tree().paused = false
-	
-	# --- RAPPEL --- 
-	# N'oublie pas de laisser ici ton code pour changer de scène 
-	# ou lancer la cinématique de fin selon le niveau !
-	
+	# Wait for battle to finish ONLY ONCE (Removed the duplicate lines)
 	await current_battle_scene.tree_exited
 	
-	ui_layer.queue_free()
+	if is_instance_valid(ui_layer):
+		ui_layer.queue_free()
+	
 	current_battle_scene = null
+	
+	# --- ANTI-CRASH FIX ---
+	# If player died, the level was reloaded. This ghost script must abort here!
+	if not is_inside_tree():
+		return
+		
+	get_tree().paused = false
 	
 	if player: 
 		player.set_physics_process(true)
