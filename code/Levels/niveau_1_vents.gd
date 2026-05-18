@@ -6,7 +6,7 @@ var hydraulis_dialogue = load("res://Dialogues/Level5/Hydraulis.dialogue")
 
 @onready var spirit = $WindSpirit
 @onready var marker_intro = $MarkerIntro
-@onready var marker_hydraulis = $MarkerHydraulis
+@onready var marker_bellows = $MarkerIntro # Ajuste le nom si tu crées un MarkerBellows dédié
 @onready var exit_door = $ExitDoor
 @onready var door_closed = $door_closed
 @onready var book_page = $BookPage
@@ -21,8 +21,8 @@ func _ready() -> void:
 	if spirit:
 		spirit.hide()
 		spirit.modulate.a = 0.0
-		# On le force à être devant tout le monde
 		spirit.z_index = 100 
+	
 	pressure_timer = Timer.new()
 	pressure_timer.one_shot = true
 	pressure_timer.timeout.connect(_on_pressure_lost)
@@ -37,17 +37,15 @@ func _ready() -> void:
 
 func _on_medieval_organ_interacted() -> void:
 	is_pressurized = true
-	pressure_timer.start(15.0) # Le joueur a 15 secondes pour aller à l'Hydraulis
+	pressure_timer.start(15.0) 
 	
-	print("Mélos: The massive bellows pumped air into the underground pipes! But the pressure is too chaotic, the door only shakes...")
-	print("Mélos: Quick! Find a way to stabilize the air before it leaks out!")
+	print("Mélos: The massive bellows pumped air into the underground pipes! But the pressure is too chaotic.")
+	print("Mélos: Quick! You have 15 seconds to reach the Hydraulis and stabilize the air with water pressure before it leaks!")
 
 func _on_hydraulis_interacted() -> void:
 	if not is_pressurized:
-		# Si le joueur n'a pas pompé l'air d'abord
-		print("Mélos: The water mechanism is ready, but there is no air in the pipes. We need a massive pump to fill the system first.")
+		print("Mélos: The water mechanism is ready, but there is no air in the pipes.")
 	else:
-		# Succès ! L'air a été pompé ET stabilisé
 		pressure_timer.stop()
 		print("Mélos: The water caught the chaotic air! The pressure is now perfectly stable. The mechanism is activating!")
 		await get_tree().create_timer(1.5).timeout
@@ -57,32 +55,61 @@ func _on_hydraulis_interacted() -> void:
 		
 func _on_pressure_lost() -> void:
 	is_pressurized = false
-	print("Mélos: The air leaked out... The system is empty again. We need to use the bellows.")
-	# Ajouter un son de dégonflement / pneu qui se vide
-	
+	hydraulis_seen = false
+	bellows_seen = false
+	print("Mélos: The air leaked out... The system is empty again. We need to pump the bellows at the Organ once more.")
+
 func _on_hydraulis_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and not hydraulis_seen:
-		hydraulis_seen = true
-		_play_sequence(hydraulis_dialogue, "start", marker_hydraulis)
-
-
+		if not is_pressurized:
+			hydraulis_seen = true 
+			await _play_sequence(hydraulis_dialogue, "start", null)
 
 func _on_bellows_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and not bellows_seen:
 		bellows_seen = true
-		DialogueManager.show_example_dialogue_balloon(bellows_dialogue, "start")	
+		
+		# 1. On bloque le joueur et on joue la première réplique de Mélos (sans l'Esprit)
+		player = get_tree().get_root().find_child("Player", true, false)
+		if player: player.process_mode = Node.PROCESS_MODE_DISABLED
+		
+		if bellows_dialogue:
+			DialogueManager.show_example_dialogue_balloon(bellows_dialogue, "start")
+			await DialogueManager.dialogue_ended # On attend que le joueur ferme cette boîte !
+			
+		# 2. Dès que la boîte ferme, on fait apparaître l'Esprit avec le Tween
+		if marker_bellows and spirit:
+			spirit.global_position = marker_bellows.global_position
+			spirit.show()
+			if spirit.has_node("SpiritSound"):
+				spirit.get_node("SpiritSound").play()
+			var t = create_tween()
+			t.tween_property(spirit, "modulate:a", 1.0, 0.5)
+			await t.finished
+			
+		# 3. Maintenant que l'Esprit est là, on lance la suite où il parle ("partie_esprit")
+		if bellows_dialogue:
+			DialogueManager.show_example_dialogue_balloon(bellows_dialogue, "partie_esprit")
+			await DialogueManager.dialogue_ended
+			
+		# 4. Le dialogue est fini, on fait disparaître l'Esprit
+		if marker_bellows and spirit:
+			var t2 = create_tween()
+			t2.tween_property(spirit, "modulate:a", 0.0, 0.5)
+			await t2.finished
+			spirit.hide()
+			
+		if player: player.process_mode = Node.PROCESS_MODE_INHERIT
+
 func _play_sequence(dialogue_resource, title: String, target_marker: Marker2D):
 	player = get_tree().get_root().find_child("Player", true, false)
 	if player: player.process_mode = Node.PROCESS_MODE_DISABLED
 
 	if target_marker and spirit:
-		# ON FORCE LA POSITION ET LE RENDU
 		spirit.global_position = target_marker.global_position
 		spirit.show()
-		
 		if spirit.has_node("SpiritSound"):
 			spirit.get_node("SpiritSound").play()
-		
 		var t = create_tween()
 		t.tween_property(spirit, "modulate:a", 1.0, 0.5)
 		await t.finished

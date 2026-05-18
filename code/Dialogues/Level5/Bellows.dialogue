@@ -1,4 +1,10 @@
 ~ start
-Mélos: These bellows are massive. They seem to be pushing huge amounts of air, but it's so unstable...
-Mélos: The pressure spikes and then drops instantly. It's too chaotic to open the passage.
+Mélos: These bellows are massive. They can push huge amounts of air, but the pipes are leaky...
+=> END
+
+~ partie_esprit
+Wind Spirit: *Fuuuu... Shhh...* Beware, the air escapes quickly! 
+Wind Spirit: Once the mechanism is engaged, you will have exactly 15 seconds to reach the Hydraulis down there.
+Wind Spirit: Use the water pressure to stabilize the system before the wind is lost!
+Mélos: 15 seconds?! Alright, I have to be extremely fast.
 => END

@@ -3395,14 +3395,15 @@ position = Vector2(123.56165, 1.4405829)
 stream = ExtResource("21_2k05v")
 
 [node name="Sprite2D" type="Sprite2D" parent="WindSpirit" unique_id=1016879176]
-position = Vector2(2824.4817, -1321.2813)
+position = Vector2(-2761.7156, -984.3809)
 texture = ExtResource("20_2k05v")
+flip_h = true
 
 [node name="MarkerIntro" type="Marker2D" parent="." unique_id=1962170996]
 position = Vector2(638, 862)
 
 [node name="MarkerHydraulis" type="Marker2D" parent="." unique_id=1263724594]
-position = Vector2(1663, 394)
+position = Vector2(-381, 508)
 
 [node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("22_5ttbj")]
 visible = false
