@@ -11,7 +11,7 @@ var has_talked_at_edge: bool = false
 var has_seen_wheel: bool = false
 var spirit_has_appeared: bool = false
 var won = false
-
+var current_battle_scene: Node = null
 # --- RÉFÉRENCES NOEUDS ---
 @onready var wheel = $wheel
 @onready var altar_door = $altar
@@ -126,8 +126,7 @@ func _setup_altar():
 
 func _on_altar_interacted():
 	if won == false:
-		var ma_horde: Array[BaseEnemy] = [whisper_data, dampener_data]
-		await start_combat(ma_horde)
+		await start_combat(2)
 		
 		# SÉCURITÉ : Si le joueur meurt et que le niveau redémarre, on bloque la suite
 		#if not is_inside_tree():
@@ -177,24 +176,35 @@ func _give_vial_sequence():
 	is_dialogue_playing = false
 	if p: p.set_physics_process(true)
 
-func start_combat(horde: Array[BaseEnemy]) -> void:
-	var p = get_tree().get_first_node_in_group("Player")
-	if p: p.set_physics_process(false)
-	
-	var ui = CanvasLayer.new()
-	ui.layer = 1000
-	add_child(ui)
-	
-	var combat = battle_scene_packed.instantiate()
-	ui.add_child(combat)
-	var mes_instruments: Array[String] = ["corde", "percussion"]
-	var intro = "You unlocked Percussions! Use Thunder Strike to shatter shields or deal heavy damage.\nWatch out for the Dampener. It looks sturdy and soundproof; I probably wouldn't do much damage to it, especially not while it has its shield up. But it looks slow to me, so I shouldn't take too much damage."
-	combat.start_encounter(horde, mes_instruments, intro)
-	
-	await combat.tree_exited
-	ui.queue_free()
-	if p: p.set_physics_process(true)
 
+
+	
+func start_combat(niveau_id: int) -> void:
+	if not is_inside_tree(): return
+	
+	get_tree().paused = true
+	
+	var ui_layer = CanvasLayer.new()
+	ui_layer.layer = 100
+	add_child(ui_layer)
+	
+	current_battle_scene = battle_scene_packed.instantiate()
+	current_battle_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# ⚠️ IMPORTANT : On l'ajoute à la scène AVANT d'appeler la fonction
+	ui_layer.add_child(current_battle_scene)
+	
+	# On lance ta nouvelle fonction avec le numéro du combat !
+	current_battle_scene._check_test_mode(niveau_id)
+	
+	await current_battle_scene.tree_exited
+	ui_layer.queue_free()
+	
+	get_tree().paused = false
+	
+	# --- RAPPEL --- 
+	# N'oublie pas de laisser ici ton code pour changer de scène 
+	# ou lancer la cinématique de fin selon le niveau !
 # --- FONCTIONS UTILITAIRES ---
 
 func _play_safe_text(section: String, player: Node2D):

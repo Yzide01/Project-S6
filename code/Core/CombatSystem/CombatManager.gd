@@ -130,14 +130,20 @@ func _check_test_mode(level: int = 3) -> void:
 			horde.append(_create_enemy_data("Devourer", 150, 3))
 
 		# We launch the combat
-		start_encounter(horde, ["percussion", "vent", "corde"], intro_message, level)
 
 		#var test_enemy = BaseEnemy.new()
 		#test_enemy.enemy_name = "Test Minion"
 		#test_enemy.max_hp = 30
 		#test_enemy.rank = 1
 		#start_encounter([test_enemy], ["percussion", "vent", "corde"], "Test Encounter Started!")
+		var unlocked_skills: Array[String] = ["corde"]
+		if level >= 2:
+			unlocked_skills.append("percussion")
+		if level >= 3:
+			unlocked_skills.append("vent")
 
+		# We launch the combat
+		start_encounter(horde, unlocked_skills, intro_message, level)
 # Fonction utilitaire pour éviter de répéter le code de création
 func _create_enemy_data(nom: String, hp: int, rank: int) -> BaseEnemy:
 	var e = BaseEnemy.new()
