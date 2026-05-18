@@ -492,15 +492,18 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="level1" type="Sprite2D" parent="Backgrounds" unique_id=1556558368]
+visible = false
 position = Vector2(541, 358)
 scale = Vector2(1.0037037, 1)
 texture = ExtResource("3_0jhdy")
 
 [node name="level2" type="Sprite2D" parent="Backgrounds" unique_id=1747629471]
-position = Vector2(542, 358)
+position = Vector2(540, 359.5)
+scale = Vector2(1.0037037, 1.0041667)
 texture = ExtResource("4_ik0mx")
 
 [node name="level3" type="Sprite2D" parent="Backgrounds" unique_id=771488785]
+visible = false
 position = Vector2(542.5001, 360)
 scale = Vector2(1.0064816, 1.013889)
 texture = ExtResource("5_ujkq1")
