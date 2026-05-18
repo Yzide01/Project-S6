@@ -13207,7 +13207,7 @@ position = Vector2(10.914978, -22)
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute3" unique_id=147350620]
 position = Vector2(0, -1.085022)
 stream = ExtResource("36_qr1xm")
-volume_db = 6.553
+volume_db = -1.193
 max_distance = 4000.0
 bus = &"SFX"
 
@@ -13235,7 +13235,7 @@ position = Vector2(10.914978, -22)
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute4" unique_id=630790976]
 position = Vector2(0, -1.085022)
 stream = ExtResource("37_beqno")
-volume_db = 6.553
+volume_db = -1.242
 max_distance = 4000.0
 bus = &"SFX"
 
@@ -13262,7 +13262,7 @@ position = Vector2(10.914978, -22)
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute5" unique_id=2129019911]
 position = Vector2(0, -1.085022)
 stream = ExtResource("38_6cfvu")
-volume_db = 6.553
+volume_db = -1.485
 max_distance = 4000.0
 bus = &"SFX"
 
@@ -13290,7 +13290,7 @@ position = Vector2(10.914978, -22)
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute2" unique_id=1561128764]
 position = Vector2(0, -1.085022)
 stream = ExtResource("39_ers2h")
-volume_db = 6.553
+volume_db = -0.806
 max_distance = 4000.0
 bus = &"SFX"
 
@@ -13324,7 +13324,7 @@ position = Vector2(10.914978, -22)
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute1" unique_id=998389683]
 position = Vector2(0, -1.085022)
 stream = ExtResource("37_u1rk6")
-volume_db = 6.553
+volume_db = -0.717
 max_distance = 4000.0
 bus = &"SFX"
 

@@ -108,7 +108,6 @@ func reset_puzzle() -> void:
 		var interactable = tube.get_node_or_null("Interactable")
 		if interactable:
 			interactable.is_interactable = true
-
 func _on_puzzle_completed():
 	if puzzle_completed: return
 	puzzle_completed = true
@@ -118,59 +117,68 @@ func _on_puzzle_completed():
 	# --- SÉQUENCE VISUELLE DE FIN ---
 	var fade_tween = create_tween().set_parallel(true)
 	
-	# 1. On affiche l'esprit Inca AVEC SA FLÛTE ($flute_pan2) et l'objet au milieu ($flute_pan)
 	if flute_inca:
 		flute_inca.show()
-		flute_inca.visible = true
 		fade_tween.tween_property(flute_inca, "modulate:a", 1.0, 1.0)
 		
 	if flute:
 		flute.show()
-		flute.visible = true
 		fade_tween.tween_property(flute, "modulate:a", 1.0, 1.0)
 		
 	await fade_tween.finished
 	
-	# On lance la musique et la première partie du dialogue de victoire
-	audio.play()
+	# On s'assure que le volume est normal, puis on lance la musique
+	if audio:
+		audio.volume_db = 0.0
+		audio.play()
+		
 	await _play_dialogue("success")
 
-	# 2. PILE ICI : L'Inca a fini sa réplique, l'Esprit des Vents ($WindSpirit) apparaît pour son "Shhh"
+	# L'Esprit des Vents ($WindSpirit) apparaît pour son "Shhh"
 	if spirit_winds:
 		spirit_winds.show()
-		spirit_winds.visible = true
 		var t_wind = create_tween()
 		t_wind.tween_property(spirit_winds, "modulate:a", 1.0, 0.6)
 		await t_wind.finished
 
-	# 3. On lance la suite du dialogue (l'Esprit des Vents remercie le joueur)
 	await _play_dialogue("suite_success")
 
 	# --- DISPARITION FINALE DES ESPRITS ---
 	var final_fade = create_tween().set_parallel(true)
 	
 	if flute_inca: 
-		final_fade.tween_property(flute_inca, "modulate:a", 0.0, 1.5) # L'esprit Inca s'en va
+		final_fade.tween_property(flute_inca, "modulate:a", 0.0, 1.5)
 	if spirit_winds: 
-		final_fade.tween_property(spirit_winds, "modulate:a", 0.0, 1.5) # L'esprit des Vents s'en va
+		final_fade.tween_property(spirit_winds, "modulate:a", 0.0, 1.5)
+		
+	# 🎵 NOUVEAU : On baisse le son en même temps qu'ils disparaissent !
+	if audio and audio.playing:
+		final_fade.tween_property(audio, "volume_db", -60.0, 1.5)
 		
 	await final_fade.finished
+	
+	# On coupe l'audio pour de bon
+	if audio:
+		audio.stop()
 	
 	if flute_inca: flute_inca.hide()
 	if spirit_winds: spirit_winds.hide()
 	if inca_ghost: inca_ghost.hide()
 	
-	# Le nœud "flute" ($flute_pan, l'objet au milieu) RESTE visible à 100% sur la carte !
-	
 	book_page.victory()
-	print("Level 6 Complete - Esprits disparus, flûte au sol préservée !")
 
 func _on_exit_interacted_for_combat() -> void:
-	var ma_horde: Array[BaseEnemy] = [whisper_data, dampener_data, devourer_data]
-	start_combat(3)
+	# On coupe la musique ambiante du niveau par sécurité avant le combat
+	if audio: audio.stop() 
 	
-	SceneManager.jouer_cinematique(endgame_video_path, "res://scenes/credits.tscn")
-
+	# ⚠️ CORRECTION : Le "await" est vital ici !
+	await start_combat(3)
+	
+	## Sécurité : Si le joueur perd et que la scène redémarre, on ne lance pas la fin
+	#if not is_inside_tree():
+		#return
+		
+	SceneManager.jouer_cinematique(endgame_video_path, "res://scenes/credits/credits.tscn")
 
 func start_combat(niveau_id: int) -> void:
 	if not is_inside_tree(): return
