@@ -10,11 +10,14 @@ var is_dialogue_playing: bool = false
 var has_talked_at_edge: bool = false
 var has_seen_wheel: bool = false
 var spirit_has_appeared: bool = false
+var won = false
 
 # --- RÉFÉRENCES NOEUDS ---
 @onready var wheel = $wheel
 @onready var altar_door = $altar
 @onready var spirit_sprite = $PercussionSpirit 
+@onready var spirit_sprite2 = $PercussionSpirit2
+
 @onready var spawn_point = $SpawnPoint 
 @onready var tilemap = $tambours_ok
 @onready var book_page = $BookPage
@@ -120,11 +123,59 @@ func _setup_altar():
 
 # --- COMBAT ET CHANGEMENT DE NIVEAU ---
 
+
 func _on_altar_interacted():
-	var ma_horde: Array[BaseEnemy] = [whisper_data, dampener_data]
-	await start_combat(ma_horde)
-	# On part vers le niveau suivant après le combat
-	SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")
+	if won == false:
+		var ma_horde: Array[BaseEnemy] = [whisper_data, dampener_data]
+		await start_combat(ma_horde)
+		
+		# SÉCURITÉ : Si le joueur meurt et que le niveau redémarre, on bloque la suite
+		if not is_inside_tree():
+			return
+			
+		# On lance la séquence de récompense avec l'esprit
+		await _give_vial_sequence()
+		
+		var won = true
+	if won == true:
+		SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")
+
+	
+func _give_vial_sequence():
+	var p = get_tree().get_first_node_in_group("Player")
+	if p: p.set_physics_process(false)
+	is_dialogue_playing = true
+	
+	# 1. L'esprit apparaît devant l'autel
+	if spirit_sprite:
+		spirit_sprite.show()
+		var tw = create_tween()
+		tw.tween_property(spirit_sprite, "modulate:a", 1.0, 0.5)
+		await tw.finished
+		
+	# 2. Lancement du dialogue (Assure-toi d'avoir une balise "outro" ou "give_vial" dans ton fichier Dialogue)
+	DialogueManager.show_example_dialogue_balloon(intro_dialogue, "outro")
+	await DialogueManager.dialogue_ended
+	
+	# 3. Ajout direct de la Fiole Magique dans l'inventaire du joueur !
+	var vial_item = load("res://Core/InventorySystem/items/Vial.tres")
+	var player_inv = load("res://Core/InventorySystem/playerInventory.tres")
+	
+	if player_inv and vial_item:
+		player_inv.insert(vial_item)
+		print("🧪 Fiole magique reçue et ajoutée à l'inventaire !")
+	else:
+		push_error("Erreur : Impossible de charger l'inventaire ou la fiole.")
+		
+	# 4. L'esprit disparaît
+	if spirit_sprite:
+		var tw2 = create_tween()
+		tw2.tween_property(spirit_sprite, "modulate:a", 0.0, 0.5)
+		await tw2.finished
+		spirit_sprite.hide()
+		
+	is_dialogue_playing = false
+	if p: p.set_physics_process(true)
 
 func start_combat(horde: Array[BaseEnemy]) -> void:
 	var p = get_tree().get_first_node_in_group("Player")

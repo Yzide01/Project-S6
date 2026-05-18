@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dibvsr0u2n16d" path="res://Assets/percussions/niveau2_percussions/manivellehamster8.png" id="19_nm6hr"]
 [ext_resource type="Texture2D" uid="uid://b58j81xpxm0hv" path="res://Assets/percussions/niveau2_percussions/manivellehamster9.png" id="20_omrmp"]
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="21_dsl3q"]
+[ext_resource type="Texture2D" uid="uid://c3y7rrtqp1sbn" path="res://Assets/Spirit/Esprit des percussions sans fond.png" id="26_nm6hr"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="26_sntxp"]
 [ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="28_uavks"]
 
@@ -2046,6 +2047,12 @@ visible = false
 position = Vector2(840, 512)
 scale = Vector2(0.14257073, 0.14872815)
 texture = ExtResource("14_kvna6")
+
+[node name="PercussionSpirit2" type="Sprite2D" parent="." unique_id=1920002623]
+visible = false
+position = Vector2(779.00006, 94)
+scale = Vector2(0.298, 0.311)
+texture = ExtResource("26_nm6hr")
 
 [node name="FinishTrigger" type="Area2D" parent="." unique_id=1115739708]
 
