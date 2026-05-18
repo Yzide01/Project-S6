@@ -1,11 +1,11 @@
 ~ start
-The Guardian: It looks like a forest of stone... The air whistles without harmony here.
-The Guardian: Look at these monumental structures. Something important was broken here.
+Mélos: It looks like a forest of stone... The air whistles without harmony here.
+Mélos: Look at these monumental structures. Something important was broken here.
 => END
 
 ~ indice_stele
-The Guardian: "From the rumbling of the earth to the whistling of the summit."
-The Guardian: That means from longest to shortest. From Low pitch to High pitch.
+Mélos: "From the rumbling of the earth to the whistling of the summit."
+Mélos: That means from longest to shortest. From Low pitch to High pitch.
 => END
 
 ~ lecon_inca
@@ -16,11 +16,11 @@ Incan Spirit: Gather the five pipes in order, from the longest to the shortest, 
 => END
 
 ~ success
-The Guardian: Listen! The air is flowing perfectly through the tubes.
+Mélos: Listen! The air is flowing perfectly through the tubes.
 Incan Spirit: You have repaired my flute! The sacred scale echoes once again in the mountains.
 => END
 
 ~ suite_success
 Wind Spirit: *Fuuuushhh... Shhh...* Thank you, creators of wind. The harmony is reclaimed!
-The Guardian: The melody is pure... the final passage is open!
+Mélos: The melody is pure... the final passage is open!
 => END

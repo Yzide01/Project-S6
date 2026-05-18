@@ -27,12 +27,10 @@ Mélos: I made it! That was some serious bounce.
 Mélos: Now, let's see what's inside this altar...
 => END
 
-~ outro
+~ outro_percussions
 Mélos: This is incredible... The enemy horde has been defeated! The land's true rhythm is finally echoing with strength again.
 Percussion Spirit: Phenomenal work, mortal! You've got a serious sense of tempo. Without your help, the silence would have completely choked my drums out.
-Percussion Spirit: As promised for your victory, I'm giving you this magic vial. It has been added to your inventory!
-Mélos: What is it? It looks like liquid light shifting inside...
-Percussion Spirit: It's a potion infused with ancient color resonances. This world turned completely gray because of the Spirit of Silence, who drained every single spark of color and life to plunge these lands into oblivion.
-Percussion Spirit: To use it and bring the colors back, open your inventory, scroll to select the potion, and press A to drink it.
+Percussion Spirit: As promised for your victory, here is the second magic vial to restore even more colors to this world. It has been added to your inventory!
+Mélos: Awesome! With this, the colors will grow even stronger.
 Percussion Spirit: Let its power protect your mind from the gray void ahead. The drums and the rhythm will be your shield now. Farewell, creator of harmony!
 => END
