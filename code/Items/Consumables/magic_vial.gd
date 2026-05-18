@@ -25,7 +25,7 @@ func proceder_changement_couleur(player: Node) -> void:
 	SceneManager.vial_use_count += 1
 	var target_sat = 0.0
 	if SceneManager.vial_use_count == 1: target_sat = 0.35
-	elif SceneManager.vial_use_count == 2: target_sat = 0.70
+	elif SceneManager.vial_use_count == 2: target_sat = 1.0
 	else: target_sat = 1.0
 	
 	var filtres = player.get_tree().get_nodes_in_group("world_filter")

@@ -36,13 +36,18 @@
 [ext_resource type="PackedScene" uid="uid://dasathemdxaea" path="res://Entities/Player/player.tscn" id="29_u80fo"]
 [ext_resource type="Script" uid="uid://tm40f01orrk1" path="res://Interactables/Objects/Level6/flute.gd" id="33_1owwv"]
 [ext_resource type="PackedScene" uid="uid://c8tppgxm1duog" path="res://Interactables/Base/interactable.tscn" id="33_x27wi"]
-[ext_resource type="AudioStream" uid="uid://cqwfsfoifyvuu" path="res://Assets/Sound/Trials/pizzicato3.wav" id="34_1owwv"]
 [ext_resource type="Texture2D" uid="uid://cqh85iat07jk2" path="res://Assets/Spirit/Esprit Inca.png" id="34_vlaer"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="35_47yiv"]
+[ext_resource type="AudioStream" uid="uid://c1l0e6ac32pl4" path="res://Assets/Sound/Trials/flute3.wav" id="36_qr1xm"]
+[ext_resource type="AudioStream" uid="uid://bx71bvfy4e8gs" path="res://Assets/Sound/Trials/flute4.wav" id="37_beqno"]
 [ext_resource type="PackedScene" uid="uid://umhbmfxrs4ri" path="res://Interactables/Objects/Book/book_page.tscn" id="37_ifnn0"]
+[ext_resource type="AudioStream" uid="uid://cix83vupeqxf1" path="res://Assets/Sound/Trials/flute1.wav" id="37_u1rk6"]
+[ext_resource type="AudioStream" uid="uid://cqac3r7lx4elu" path="res://Assets/Sound/Trials/flute5.wav" id="38_6cfvu"]
 [ext_resource type="Script" uid="uid://cxcrnjdnbywl2" path="res://Interactables/Objects/Level6/exit.gd" id="38_coj8c"]
+[ext_resource type="AudioStream" uid="uid://du2rem3fu1quv" path="res://Assets/Sound/Trials/flute2.wav" id="39_ers2h"]
 [ext_resource type="AudioStream" uid="uid://ceixjm0ne730y" path="res://Assets/Sound/Ambiant sound/background_light.wav" id="41_yu2rv"]
 [ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="42_tkihi"]
+[ext_resource type="AudioStream" uid="uid://oalbsgfiyebr" path="res://Assets/Sound/Trials/level6.wav" id="45_0ll2m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5kic"]
 texture = ExtResource("1_plhlm")
@@ -13199,7 +13204,7 @@ position = Vector2(10.914978, -22)
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute3" unique_id=147350620]
 position = Vector2(0, -1.085022)
-stream = ExtResource("34_1owwv")
+stream = ExtResource("36_qr1xm")
 volume_db = 6.553
 max_distance = 4000.0
 bus = &"SFX"
@@ -13227,7 +13232,7 @@ position = Vector2(10.914978, -22)
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute4" unique_id=630790976]
 position = Vector2(0, -1.085022)
-stream = ExtResource("34_1owwv")
+stream = ExtResource("37_beqno")
 volume_db = 6.553
 max_distance = 4000.0
 bus = &"SFX"
@@ -13254,7 +13259,7 @@ position = Vector2(10.914978, -22)
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute5" unique_id=2129019911]
 position = Vector2(0, -1.085022)
-stream = ExtResource("34_1owwv")
+stream = ExtResource("38_6cfvu")
 volume_db = 6.553
 max_distance = 4000.0
 bus = &"SFX"
@@ -13282,7 +13287,7 @@ position = Vector2(10.914978, -22)
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute2" unique_id=1561128764]
 position = Vector2(0, -1.085022)
-stream = ExtResource("34_1owwv")
+stream = ExtResource("39_ers2h")
 volume_db = 6.553
 max_distance = 4000.0
 bus = &"SFX"
@@ -13316,7 +13321,7 @@ position = Vector2(10.914978, -22)
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Flute1" unique_id=998389683]
 position = Vector2(0, -1.085022)
-stream = ExtResource("34_1owwv")
+stream = ExtResource("37_u1rk6")
 volume_db = 6.553
 max_distance = 4000.0
 bus = &"SFX"
@@ -13383,6 +13388,10 @@ shape = SubResource("CircleShape2D_tkihi")
 position = Vector2(17.5, -60)
 
 [node name="Mask" parent="." unique_id=1462240249 instance=ExtResource("42_tkihi")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=768540474]
+position = Vector2(558, 259)
+stream = ExtResource("45_0ll2m")
 
 [connection signal="body_entered" from="SteleArea" to="." method="_on_stele_area_body_entered"]
 [connection signal="body_entered" from="IncaTriggerArea" to="." method="_on_inca_trigger_area_body_entered"]

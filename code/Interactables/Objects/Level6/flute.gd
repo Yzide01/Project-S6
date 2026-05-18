@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var audio = $Sound
 @export var tube_size: int = 1 
 @onready var interactable_area = $Interactable
 
@@ -12,3 +13,4 @@ func _on_interact() -> void:
 	var level = get_tree().get_first_node_in_group("level6")
 	if level and level.has_method("check_tube"):
 		level.check_tube(tube_size, self)
+	audio.play()

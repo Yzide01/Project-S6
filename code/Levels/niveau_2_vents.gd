@@ -3,6 +3,7 @@ extends Node2D
 var level6_dialogue = load("res://Dialogues/Level6/Intro.dialogue")
 
 @export var battle_scene_packed: PackedScene
+@onready var audio = $AudioStreamPlayer2D
 
 @onready var whisper_data = preload("res://Entities/Enemies/whisper.tres")
 @onready var dampener_data = preload("res://Entities/Enemies/dampener.tres")
@@ -94,6 +95,8 @@ func _on_puzzle_completed():
 	if puzzle_completed: return
 	puzzle_completed = true
 	exit.unlock()
+	await get_tree().create_timer(1.0).timeout
+	audio.play()
 	await _play_dialogue("success")
 
 	if inca_ghost:
