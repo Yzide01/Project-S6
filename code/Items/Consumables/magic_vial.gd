@@ -1,7 +1,7 @@
 extends InventoryItem
 class_name MagicVial
 
-@export var video_path: String = "res://Assets/Videos/vial_scene.ogv"
+@export var video_path: String = "res://Assets/Videos/vial_scene_sr.ogv"
 @export var endgame_video_path: String = "res://Assets/Videos/final_vial_scene.ogv"
 
 func use(player: Node) -> void:
