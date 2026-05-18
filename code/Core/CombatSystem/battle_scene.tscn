@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://bwfjpi7g4lw0w" path="res://Core/CombatSystem/CombatManager.gd" id="1_ebjqp"]
 [ext_resource type="Texture2D" uid="uid://j2q3lh77u26y" path="res://Assets/Graphics/healthbarUnder.png" id="2_7x133"]
 [ext_resource type="PackedScene" uid="uid://c3e1tkqg70buk" path="res://Core/CombatSystem/enemy_battle_ui.tscn" id="2_67fl5"]
-[ext_resource type="Texture2D" uid="uid://6iskq6v0bq18" path="res://Assets/TBC/tpt_background2.png" id="3_585wu"]
+[ext_resource type="Texture2D" uid="uid://djm04uu1b7f4e" path="res://Assets/TBC/tpt_bckg2.png" id="3_0jhdy"]
 [ext_resource type="Texture2D" uid="uid://ddmfmd06w8tr2" path="res://Assets/Graphics/healthbarProgress.png" id="3_lmsui"]
 [ext_resource type="Texture2D" uid="uid://q3fi8ml8xc6g" path="res://Assets/TBC/Melos/inactif_5/0001.png" id="4_585wu"]
-[ext_resource type="Texture2D" uid="uid://dlpoq4wlxdk2e" path="res://Assets/TBC/tpt_background_2c.png" id="4_kogg5"]
+[ext_resource type="Texture2D" uid="uid://rsuxabry08r0" path="res://Assets/TBC/tpt_bckg1.png" id="4_ik0mx"]
 [ext_resource type="Texture2D" uid="uid://pk8qppybfpnv" path="res://Assets/TBC/Melos/inactif_5/0002.png" id="5_76fba"]
-[ext_resource type="Texture2D" uid="uid://bmd7r3ygf0bpq" path="res://Assets/TBC/tpt_background_3c.png" id="5_cwemx"]
+[ext_resource type="Texture2D" uid="uid://8x3f2xqopfi3" path="res://Assets/TBC/tpt_bckg3.png" id="5_ujkq1"]
 [ext_resource type="Texture2D" uid="uid://cb6ax7lhti7o1" path="res://Assets/TBC/Melos/inactif_5/0003.png" id="6_kogg5"]
 [ext_resource type="Texture2D" uid="uid://bhi0q1uknu3ph" path="res://Assets/TBC/Melos/inactif_5/0004.png" id="7_cwemx"]
 [ext_resource type="Texture2D" uid="uid://cefuodt5rclk1" path="res://Assets/TBC/Melos/inactif_5/0005.png" id="8_18nv8"]
@@ -88,8 +88,8 @@
 [ext_resource type="Texture2D" uid="uid://c0vgkjc5kcr6e" path="res://Assets/TBC/Melos/inactif_5/0079.png" id="82_n72lr"]
 [ext_resource type="Texture2D" uid="uid://beyx5u5lobac6" path="res://Assets/TBC/Melos/inactif_5/0080.png" id="83_el8d6"]
 [ext_resource type="Texture2D" uid="uid://4qlgls5t4v03" path="res://Assets/TBC/bulle.png" id="86_0jhdy"]
-[ext_resource type="Texture2D" uid="uid://cjt2h0f0tsaos" path="res://Assets/TBC/button1.png" id="86_cwemx"]
-[ext_resource type="Texture2D" uid="uid://b8d7w8ussgans" path="res://Assets/TBC/button.png" id="87_18nv8"]
+[ext_resource type="Texture2D" uid="uid://bccdotidqhsn3" path="res://Assets/TBC/button1.png" id="86_cwemx"]
+[ext_resource type="Texture2D" uid="uid://dfhuie7cql4nw" path="res://Assets/TBC/button.png" id="87_18nv8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eb06d"]
 animations = [{
@@ -494,23 +494,22 @@ offset_bottom = 40.0
 [node name="level1" type="Sprite2D" parent="Backgrounds" unique_id=1556558368]
 position = Vector2(541, 358)
 scale = Vector2(1.0037037, 1)
-texture = ExtResource("3_585wu")
+texture = ExtResource("3_0jhdy")
 
 [node name="level2" type="Sprite2D" parent="Backgrounds" unique_id=1747629471]
 position = Vector2(542, 358)
-texture = ExtResource("4_kogg5")
+texture = ExtResource("4_ik0mx")
 
 [node name="level3" type="Sprite2D" parent="Backgrounds" unique_id=771488785]
 position = Vector2(542.5001, 360)
 scale = Vector2(1.0064816, 1.013889)
-texture = ExtResource("5_cwemx")
+texture = ExtResource("5_ujkq1")
 
 [node name="EnemyContainer" type="HBoxContainer" parent="." unique_id=2138559791]
 layout_mode = 0
-offset_left = 82.0
-offset_top = 21.0
-offset_right = 962.0
-offset_bottom = 266.0
+offset_top = 12.0
+offset_right = 1079.0
+offset_bottom = 316.0
 alignment = 1
 
 [node name="PlayerVisual" type="TextureRect" parent="." unique_id=953088116]

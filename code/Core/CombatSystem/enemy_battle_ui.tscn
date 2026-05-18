@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://rdd7f1t8a13g" path="res://Core/CombatSystem/enemy_battle_ui.gd" id="1_wausy"]
 [ext_resource type="Texture2D" uid="uid://ddmfmd06w8tr2" path="res://Assets/Graphics/healthbarProgress.png" id="2_wausy"]
 [ext_resource type="Texture2D" uid="uid://dt4gqbirnfau1" path="res://Assets/TBC/Murmure/inactif_5/0001.png" id="4_c3rle"]
+[ext_resource type="Texture2D" uid="uid://la60kabpd6pc" path="res://Assets/TBC/cercle1.png" id="4_mnlqf"]
 [ext_resource type="Texture2D" uid="uid://bo80g3lg8xu1v" path="res://Assets/TBC/Murmure/inactif_5/0002.png" id="5_dx61j"]
 [ext_resource type="Texture2D" uid="uid://v8yfak28w6yc" path="res://Assets/TBC/Murmure/inactif_5/0003.png" id="6_t4yb3"]
 [ext_resource type="Texture2D" uid="uid://dlds6vbfe50y" path="res://Assets/TBC/Murmure/inactif_5/0004.png" id="7_qkwq8"]
@@ -675,12 +676,17 @@ layout_mode = 2
 vertical_alignment = 1
 
 [node name="Container" type="Control" parent="." unique_id=51375283]
-custom_minimum_size = Vector2(250, 250)
+custom_minimum_size = Vector2(375, 300)
 layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Container" unique_id=67155678]
+position = Vector2(186, 310)
+scale = Vector2(1, 1.2214533)
+texture = ExtResource("4_mnlqf")
 
 [node name="Whisper" type="AnimatedSprite2D" parent="Container" unique_id=1614354267]
 visible = false
-position = Vector2(130.56798, 130.7111)
+position = Vector2(155.00002, 112.999985)
 scale = Vector2(1.8505007, 1.8326387)
 sprite_frames = SubResource("SpriteFrames_t37yk")
 autoplay = "default"
@@ -689,7 +695,7 @@ frame_progress = 0.45692605
 
 [node name="Silencer" type="AnimatedSprite2D" parent="Container" unique_id=766892192]
 visible = false
-position = Vector2(167.00002, 159)
+position = Vector2(185.00002, 140)
 scale = Vector2(1.6535188, 1.7446272)
 sprite_frames = SubResource("SpriteFrames_fpi0r")
 autoplay = "default"
