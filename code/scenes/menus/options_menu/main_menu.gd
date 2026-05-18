@@ -33,8 +33,8 @@ func _ready():
 	$VBoxContainer/PlayButton.grab_focus()
 
 func _on_play_pressed():
-	if has_node("ColorRect"):
-		$ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if has_node("Background"):
+		$Background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	# Fade out beautifully before playing the cinematic
 	var tween = create_tween().set_parallel(true) # Parallel ici aussi !
@@ -57,8 +57,8 @@ func _on_play_pressed():
 
 func _on_quit_pressed():
 	# Disable UI clicks while closing
-	if has_node("ColorRect"):
-		$ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if has_node("Background"):
+		$Background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 	# Fade out beautifully before quitting
 	var tween = create_tween().set_parallel(true)
