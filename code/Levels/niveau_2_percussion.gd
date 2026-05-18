@@ -136,7 +136,7 @@ func _on_altar_interacted():
 		await _give_vial_sequence()
 		
 		won = true
-	if won == true:
+	else:
 		SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")
 
 	

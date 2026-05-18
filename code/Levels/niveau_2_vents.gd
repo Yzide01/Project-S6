@@ -16,6 +16,7 @@ var level6_dialogue = load("res://Dialogues/Level6/Intro.dialogue")
 @onready var exit = $Exit
 @onready var flute = $flute_pan
 @onready var flute_inca = $flute_pan2 # Ton nœud de l'Inca avec sa flûte !
+@export var endgame_video_path: String = "res://Assets/Videos/final_vial_scene.ogv"
 
 var player: Node2D
 var current_battle_scene: Node = null
@@ -166,25 +167,37 @@ func _on_puzzle_completed():
 
 func _on_exit_interacted_for_combat() -> void:
 	var ma_horde: Array[BaseEnemy] = [whisper_data, dampener_data, devourer_data]
-	start_combat(ma_horde)
+	start_combat(3)
+	
+	SceneManager.jouer_cinematique(endgame_video_path, "res://scenes/credits.tscn")
 
-func start_combat(horde: Array[BaseEnemy]) -> void:
-	player = get_tree().get_root().find_child("Player", true, false)
-	if player: 
-		player.set_physics_process(false)
-	is_dialogue_playing = true
+
+func start_combat(niveau_id: int) -> void:
+	if not is_inside_tree(): return
+	
+	get_tree().paused = true
 	
 	var ui_layer = CanvasLayer.new()
-	ui_layer.layer = 1000 
+	ui_layer.layer = 100
 	add_child(ui_layer)
 	
 	current_battle_scene = battle_scene_packed.instantiate()
+	current_battle_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# ⚠️ IMPORTANT : On l'ajoute à la scène AVANT d'appeler la fonction
 	ui_layer.add_child(current_battle_scene)
 	
-	var intro = "The final trial! You must face all three types of enemies at once. Use your Strings, Percussions, and your newly unlocked Winds to secure victory!"
+	# On lance ta nouvelle fonction avec le numéro du combat !
+	current_battle_scene._check_test_mode(niveau_id)
 	
-	var mes_instruments: Array[String] = ["corde", "percussion", "vent"]
-	current_battle_scene.start_encounter(horde, mes_instruments, intro)
+	await current_battle_scene.tree_exited
+	ui_layer.queue_free()
+	
+	get_tree().paused = false
+	
+	# --- RAPPEL --- 
+	# N'oublie pas de laisser ici ton code pour changer de scène 
+	# ou lancer la cinématique de fin selon le niveau !
 	
 	await current_battle_scene.tree_exited
 	
