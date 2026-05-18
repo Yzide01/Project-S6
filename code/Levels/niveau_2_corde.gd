@@ -37,51 +37,28 @@ func _victory():
 		await book_page.page_picked
 		page_collected = true
 		
-		# On bloque les mouvements du joueur pendant la séquence
-		var p = get_tree().get_first_node_in_group("Player")
-		if p: p.set_physics_process(false)
-		
-		# 2. Apparition de l'esprit
-		if spirit_sprite:
-			spirit_sprite.show()
-			var tw = create_tween()
-			tw.tween_property(spirit_sprite, "modulate:a", 1.0, 0.5)
-			await tw.finished
-		
-		# 3. Dialogue de reconnaissance
-		await _play_dialogue_async("reconnaissance")
-		
-		# 4. L'esprit donne 1 fiole magique
-		if inventory and vial:
-			inventory.insert(vial)
-			print("🧪 Fiole magique reçue !")
-			
-		# 5. Disparition de l'esprit
-		if spirit_sprite:
-			var tw2 = create_tween()
-			tw2.tween_property(spirit_sprite, "modulate:a", 0.0, 0.5)
-			await tw2.finished
-			spirit_sprite.hide()
 			
 		await get_tree().create_timer(0.5).timeout
 		
 		# 6. Dialogue du joueur
 		await _play_dialogue_async("page_collected")
 		
-		# On rend les contrôles au joueur
-		if p: p.set_physics_process(true)
-		
-		# 7. ENSUITE on débloque la sortie
 		exit.unlock()
 
+var won = false
 
 # --- QUAND LE JOUEUR CLIQUE SUR LA SORTIE ---
 func _on_exit_interacted_for_combat() -> void:
+	if won == true:
+		SceneManager.changer_niveau("res://Levels/niveau1_percussion.tscn")
+		return
 	if page_collected:
 		var ma_horde: Array[BaseEnemy] = [whisper_data]
 		start_combat(ma_horde)
 
+
 func start_combat(horde: Array[BaseEnemy]) -> void:
+		
 	if not is_inside_tree(): return
 	
 	get_tree().paused = true
@@ -104,7 +81,35 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	
 	get_tree().paused = false
 	
-	SceneManager.changer_niveau("res://Levels/niveau1_percussion.tscn")
+	# On bloque les mouvements du joueur pendant la séquence
+	var p = get_tree().get_first_node_in_group("Player")
+	if p: p.set_physics_process(false)
+	
+	# 2. Apparition de l'esprit
+	if spirit_sprite:
+		spirit_sprite.show()
+		var tw = create_tween()
+		tw.tween_property(spirit_sprite, "modulate:a", 1.0, 0.5)
+		await tw.finished
+	
+	# 3. Dialogue de reconnaissance
+	await _play_dialogue_async("reconnaissance")
+	
+	# 4. L'esprit donne 1 fiole magique
+	if inventory and vial:
+		inventory.insert(vial)
+		print("🧪 Fiole magique reçue !")
+		
+	# 5. Disparition de l'esprit
+	if spirit_sprite:
+		var tw2 = create_tween()
+		tw2.tween_property(spirit_sprite, "modulate:a", 0.0, 0.5)
+		await tw2.finished
+		spirit_sprite.hide()
+	# On rend les contrôles au joueur
+	if p: p.set_physics_process(true)
+	won = true
+	
 
 # --- ZONE D'EXPLORATION ---
 func _on_exploration_zone_body_entered(body: Node2D) -> void:
