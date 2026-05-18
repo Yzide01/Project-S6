@@ -1,20 +1,26 @@
 ~ start
 The Guardian: It looks like a forest of stone... The air whistles without harmony here.
-The Guardian: These monumental flutes are broken. They must be rebuilt.
+The Guardian: Look at these monumental structures. Something important was broken here.
 => END
 
 ~ indice_stele
 The Guardian: "From the rumbling of the earth to the whistling of the summit."
-The Guardian: That means from longest to shortest. Low pitch to High pitch.
+The Guardian: That means from longest to shortest. From Low pitch to High pitch.
 => END
 
 ~ lecon_inca
-Incan Spirit: Stranger, listen to the lesson of the Andes.
-Incan Spirit: A long tube holds the breath: it creates a Low sound.
-Incan Spirit: A short tube releases the air quickly: it creates a High sound.
+Incan Spirit: Stranger, my soul wanders because my sacred Syrinx has been scattered by the silence.
+Incan Spirit: I need your help to reconstruct its voice, from the deepest breath to the highest whisper.
+Incan Spirit: Remember the law of the Andes: a long tube holds the air and sings Low; a short tube releases it quickly and sings High.
+Incan Spirit: Gather the five pipes in order, from the longest to the shortest, to restore the harmony.
 => END
 
 ~ success
-The Guardian: Listen! The air is flowing perfectly.
-The Guardian: The melody is pure... the passage is open!
+The Guardian: Listen! The air is flowing perfectly through the tubes.
+Incan Spirit: You have repaired my flute! The sacred scale echoes once again in the mountains.
+=> END
+
+~ suite_success
+Wind Spirit: *Fuuuushhh... Shhh...* Thank you, creators of wind. The harmony is reclaimed!
+The Guardian: The melody is pure... the final passage is open!
 => END

@@ -47,7 +47,9 @@
 [ext_resource type="AudioStream" uid="uid://du2rem3fu1quv" path="res://Assets/Sound/Trials/flute2.wav" id="39_ers2h"]
 [ext_resource type="AudioStream" uid="uid://ceixjm0ne730y" path="res://Assets/Sound/Ambiant sound/background_light.wav" id="41_yu2rv"]
 [ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="42_tkihi"]
+[ext_resource type="Texture2D" uid="uid://fndyheb3yvty" path="res://Assets/Spirit/Esprit Inca sans flute.png" id="43_beqno"]
 [ext_resource type="AudioStream" uid="uid://oalbsgfiyebr" path="res://Assets/Sound/Trials/level6.wav" id="45_0ll2m"]
+[ext_resource type="Texture2D" uid="uid://uxwhtdnqthp4" path="res://Assets/Spirit/Esprit des vents sans fond.png" id="45_6cfvu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5kic"]
 texture = ExtResource("1_plhlm")
@@ -13352,9 +13354,21 @@ position = Vector2(14.25, 54.3125)
 shape = SubResource("RectangleShape2D_vlaer")
 
 [node name="IncaGhost" type="Sprite2D" parent="." unique_id=365286795]
-position = Vector2(558, 102)
-scale = Vector2(0.48697925, 0.47628736)
+position = Vector2(368.5, 248.00002)
+scale = Vector2(0.17073172, 0.16671364)
+texture = ExtResource("43_beqno")
+
+[node name="flute_pan2" type="Sprite2D" parent="." unique_id=947324236]
+visible = false
+position = Vector2(368.52747, 249.31033)
+scale = Vector2(0.46325558, 0.46444267)
 texture = ExtResource("34_vlaer")
+
+[node name="WindSpirit" type="Sprite2D" parent="." unique_id=1285635878]
+visible = false
+position = Vector2(751, 248)
+scale = Vector2(0.19863398, 0.21526353)
+texture = ExtResource("45_6cfvu")
 
 [node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("35_47yiv")]
 visible = false
