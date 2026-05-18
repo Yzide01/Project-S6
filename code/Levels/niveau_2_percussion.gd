@@ -130,8 +130,8 @@ func _on_altar_interacted():
 		await start_combat(ma_horde)
 		
 		# SÉCURITÉ : Si le joueur meurt et que le niveau redémarre, on bloque la suite
-		if not is_inside_tree():
-			return
+		#if not is_inside_tree():
+			#return
 			
 		# On lance la séquence de récompense avec l'esprit
 		await _give_vial_sequence()
@@ -147,10 +147,10 @@ func _give_vial_sequence():
 	is_dialogue_playing = true
 	
 	# 1. L'esprit apparaît devant l'autel
-	if spirit_sprite:
-		spirit_sprite.show()
+	if spirit_sprite2:
+		spirit_sprite2.show()
 		var tw = create_tween()
-		tw.tween_property(spirit_sprite, "modulate:a", 1.0, 0.5)
+		tw.tween_property(spirit_sprite2, "modulate:a", 1.0, 0.5)
 		await tw.finished
 		
 	# 2. Lancement du dialogue (Assure-toi d'avoir une balise "outro" ou "give_vial" dans ton fichier Dialogue)
