@@ -109,24 +109,24 @@ func _ready() -> void:
 	
 	call_deferred("_check_test_mode")
 
-func _check_test_mode(level: int = 3) -> void:
+func _check_test_mode(level: int = 1) -> void:
 	if active_enemies.is_empty():
 		var horde: Array[BaseEnemy] = []
 		var intro_message = ""
 
 		# --- LEVEL 1 : The Whisper alone ---
 		if level >= 1:
-			intro_message = "A whisper is approaching..."
+			intro_message = "You only have your Strings, this attack doesn't deal much damage, but it lets you thin out the crowd—and who knows, maybe it'll scare them off\nThe Whisper is a fragile minion, but its silence is deadly."
 			horde.append(_create_enemy_data("Whisper", 25, 1))
 
 		# --- LEVEL 2 : We ADD the Silencer ---
 		if level >= 2:
-			intro_message = "A Whisperer and a Silencer are blocking your path!"
+			intro_message = "You unlocked Percussions! Use Thunder Strike to shatter shields or deal heavy damage.\nWatch out for the Dampener. It looks sturdy and soundproof; I probably wouldn't do much damage to it, especially not while it has its shield up. But it looks slow to me, so I shouldn't take too much damage."
 			horde.append(_create_enemy_data("Silencer", 60, 2))
 
 		# --- LEVEL 3 : We ADD the Devourer ---
 		if level >= 3:
-			intro_message = "The Silence Trio is now complete: the Devourer is here!"
+			intro_message = "The final trial! You must face all three types of enemies at once. Use your Strings, Percussions, and your newly unlocked Winds to secure victory!"
 			horde.append(_create_enemy_data("Devourer", 150, 3))
 
 		# We launch the combat
