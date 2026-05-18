@@ -5,7 +5,7 @@ extends Node2D
 @onready var book_page = $decoration/BookPage
 @onready var piano = $decoration/Piano
 @onready var exit = $Exit
-
+@onready var interact_exit = $Exit/Interactable
 # --- AJOUT DE L'ESPRIT ICI (Vérifie le nom du nœud !) ---
 @onready var spirit_sprite = $Spirit 
 
@@ -38,7 +38,7 @@ func _victory():
 		page_collected = true
 		
 			
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(2).timeout
 		
 		# 6. Dialogue du joueur
 		await _play_dialogue_async("page_collected")
@@ -52,13 +52,10 @@ func _on_exit_interacted_for_combat() -> void:
 	if won == true:
 		SceneManager.changer_niveau("res://Levels/niveau1_percussion.tscn")
 		return
-	if page_collected:
-		var ma_horde: Array[BaseEnemy] = [whisper_data]
-		start_combat(ma_horde)
+	if page_collected: # (ou ta condition)
+		await start_combat(1) # Lance le combat de niveau 1
 
-
-func start_combat(horde: Array[BaseEnemy]) -> void:
-		
+func start_combat(niveau_id: int) -> void:
 	if not is_inside_tree(): return
 	
 	get_tree().paused = true
@@ -69,18 +66,24 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	
 	current_battle_scene = battle_scene_packed.instantiate()
 	current_battle_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# ⚠️ IMPORTANT : On l'ajoute à la scène AVANT d'appeler la fonction
 	ui_layer.add_child(current_battle_scene)
 	
-	var mes_instruments: Array[String] = ["corde"]
-	var intro = "You only have your Strings, this attack doesn't deal much damage, but it lets you thin out the crowd—and who knows, maybe it'll scare them off\nThe Whisper is a fragile minion, but its silence is deadly."
-	
-	current_battle_scene.start_encounter(horde, mes_instruments, intro)
+	# On lance ta nouvelle fonction avec le numéro du combat !
+	current_battle_scene._check_test_mode(niveau_id)
 	
 	await current_battle_scene.tree_exited
 	ui_layer.queue_free()
 	
 	get_tree().paused = false
 	
+
+	exit.hide()
+
+	if interact_exit:
+		interact_exit.is_interactable = false
+
 	# On bloque les mouvements du joueur pendant la séquence
 	var p = get_tree().get_first_node_in_group("Player")
 	if p: p.set_physics_process(false)
@@ -109,6 +112,10 @@ func start_combat(horde: Array[BaseEnemy]) -> void:
 	# On rend les contrôles au joueur
 	if p: p.set_physics_process(true)
 	won = true
+	exit.show()
+
+	if interact_exit:
+		interact_exit.is_interactable = true
 	
 
 # --- ZONE D'EXPLORATION ---
