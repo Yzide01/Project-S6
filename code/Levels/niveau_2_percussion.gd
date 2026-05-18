@@ -135,7 +135,7 @@ func _on_altar_interacted():
 		# On lance la séquence de récompense avec l'esprit
 		await _give_vial_sequence()
 		
-		var won = true
+		won = true
 	if won == true:
 		SceneManager.changer_niveau("res://Levels/niveau1_vents.tscn")
 
