@@ -39,8 +39,9 @@ func _victory():
 		# 3. ENSUITE on débloque la sortie
 		exit.unlock()
 		
+		await get_tree().create_timer(2.0).timeout
 		# Message de confirmation
-		#_play_dialogue("page_collected")
+		_play_dialogue("page_collected")
 
 # --- QUAND LE JOUEUR CLIQUE SUR LA SORTIE ---
 func _on_exit_interacted_for_combat() -> void:

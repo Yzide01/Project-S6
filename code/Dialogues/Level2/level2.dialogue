@@ -1,31 +1,30 @@
 ~ piano_inactive
-The Guardian: The piano is silent. It's missing three specific pieces of sheet music.
+Mélos: The piano is silent. It's missing three specific pieces of sheet music.
 => END
 
 ~ explore_zone
-The Guardian: I have a strange feeling about this area... It feels like there is another room hidden behind.
-The Guardian: I should try to explore it.
+Mélos: I have a strange feeling about this area... It feels like there is another room hidden behind.
+Mélos: I should try to explore it.
 => END
 
 ~ find_fragment_1
-The Guardian: I found the first fragment! The melody is beginning to reappear in my mind.
+Mélos: I found the first fragment! The melody is beginning to reappear in my mind.
 => END
 
 ~ find_fragment_2
-The Guardian: The second fragment. The rhythm is getting stronger.
+Mélos: The second fragment. The rhythm is getting stronger.
 => END
 
 ~ find_fragment_3
-The Guardian: That's it! The score is complete. 
-The Guardian: Now, let's see if this piano remembers how to sing.
+Mélos: That's it! The score is complete. 
+Mélos: Now, let's see if this piano remembers how to sing.
 => END
 
 ~ piano_active
-The Guardian: The score is placed. The strings are vibrating with anticipation.
-The Guardian: It's time to play.
+Mélos: The score is placed. The strings are vibrating with anticipation.
+Mélos: It's time to play.
 => END
 
 ~ page_collected
-The Guardian: A new page for the grimoire! I should read it carefully later.
-The Guardian: Now, I should find a way out of here.
+Mélos: Now, I should find a way out of here.
 => END
