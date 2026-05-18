@@ -8123,5 +8123,10 @@ visible = false
 
 [node name="Mask" parent="." unique_id=1462240249 instance=ExtResource("25_fam7g")]
 
+[node name="Murs-eau" type="StaticBody2D" parent="." unique_id=457315122]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Murs-eau" unique_id=157874140]
+polygon = PackedVector2Array(359, 274, 393, 307, 409, 307, 442, 277, 442, 261, 415, 228, 414, 128, 414, 81, 555, 79, 560, 233, 535, 260, 534, 276, 568, 308, 588, 309, 621, 274, 621, 260, 591, 227, 590, 81, 731, 81, 735, 233, 711, 261, 712, 277, 743, 307, 765, 308, 796, 276, 795, 261, 765, 227, 764, 83, 768, -43, 382, -44, 385, 151, 384, 233, 360, 262, 359, 273)
+
 [connection signal="area_entered" from="Player/TerrainDetector" to="." method="_on_terrain_entered"]
 [connection signal="area_entered" from="Player/TerrainDetector" to="Player" method="_on_terrain_exited"]
