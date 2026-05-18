@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://s44uoroyfdfh" path="res://Interactables/Objects/Level2/exit.gd" id="16_so6ro"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="18_q0jl7"]
 [ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="20_oe6hv"]
+[ext_resource type="Texture2D" uid="uid://cxp5qsu1b82q3" path="res://Assets/Spirit/esprit corde sans background.png" id="21_m6k1c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jofdi"]
 texture = ExtResource("1_x61l1")
@@ -24527,5 +24528,10 @@ shape = SubResource("RectangleShape2D_q0jl7")
 visible = false
 
 [node name="Mask" parent="." unique_id=1462240249 instance=ExtResource("20_oe6hv")]
+
+[node name="Spirit" type="Sprite2D" parent="." unique_id=1607358180]
+position = Vector2(693, -245)
+scale = Vector2(0.064, 0.064)
+texture = ExtResource("21_m6k1c")
 
 [connection signal="body_entered" from="ExplorationZone" to="." method="_on_exploration_zone_body_entered"]
