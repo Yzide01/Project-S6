@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d2ceg0s2r6mit"]
 
 [ext_resource type="Script" uid="uid://dgcklt8hspyph" path="res://scenes/menus/options_menu/main_menu.gd" id="1_b6nna"]
+[ext_resource type="AudioStream" uid="uid://df1q7136v2n0q" path="res://Assets/Sound/menu.wav" id="2_w3pe8"]
 
 [node name="MainMenu" type="Control" unique_id=1404343601]
 layout_mode = 3
@@ -10,6 +11,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b6nna")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1205425790]
+stream = ExtResource("2_w3pe8")
+volume_db = -16.392
+autoplay = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1445864950]
 layout_mode = 1
