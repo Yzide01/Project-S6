@@ -3,7 +3,7 @@ class_name MagicVial
 
 @export var video_path: String = "res://Assets/Videos/vial_scene_sr.ogv"
 @export var endgame_video_path: String = "res://Assets/Videos/final_vial_scene.ogv"
-
+var diag_path = "Dialogues/Vial/vial.dialogue"
 func use(player: Node) -> void:
 	var current_scene_name = player.get_tree().current_scene.name.to_lower()
 	
@@ -11,7 +11,8 @@ func use(player: Node) -> void:
 		lancer_fin_du_jeu()
 		return
 	
-	proceder_changement_couleur(player)
+	await proceder_changement_couleur(player)
+	DialogueManager.show_example_dialogue_balloon(load(diag_path), "start")
 
 func lancer_fin_du_jeu() -> void:
 	print("Lancement de la cinématique finale")
