@@ -323,7 +323,7 @@ func player_turn() -> void:
 					await display_text("The enemy's shield shatters!")
 					target.has_shield = false
 				else:
-					target.hp -= 15
+					target.hp = max(0, target.hp - 15)
 					await display_text(target.name + " loses 15 HP.")
 					target.ui_node.update_hp(target.hp)
 			else:
@@ -349,7 +349,7 @@ func player_turn() -> void:
 				for enemy in active_enemies:
 					if enemy.hp > 0:
 						if !enemy.has_shield:
-							enemy.hp -= 5
+							enemy.hp = max(0, enemy.hp - 5)
 							enemy.ui_node.update_hp(enemy.hp)
 							if randf() > 0.5:
 								enemy.stunned = true
@@ -387,14 +387,14 @@ func enemy_turn() -> void:
 				if enemy.rank == 2: degats = int(3 / player_resisting)
 				elif enemy.rank == 3: degats = int(12 / player_resisting)
 					
-				player_hp -= degats
+				player_hp = max(0, player_hp - degats)
 				update_ui()
 				animate_player_damage()
 				await display_text("You lose " + str(degats) + " HP.")
 				
 			"mute":
 				await display_text(enemy.name + " casts Mute!")
-				if randf() > 0.5:
+				if randf() > 0.7:
 					player_silenced = true
 					await display_text("The Bard's voice is muffled!")
 				else:
@@ -404,7 +404,7 @@ func enemy_turn() -> void:
 				await display_text(enemy.name + " channels Absolute Void!")
 				await display_text("The colors are being sucked away...")
 				var degats = int(25 / player_resisting)
-				player_hp -= degats
+				player_hp = max(0, player_hp - degats)
 				update_ui()
 				animate_player_damage()
 				await display_text("You lose a massive " + str(degats) + " HP.")
@@ -488,6 +488,10 @@ func _reset_menu() -> void:
 	
 func ask_question(category: String, rank: int) -> bool:
 	var questions_list = quiz_data[category][rank]
+	
+	if questions_list.is_empty():
+		return true
+	
 	var question = questions_list.pick_random()
 	
 	question_text.text = question["q"]
@@ -505,6 +509,9 @@ func ask_question(category: String, rank: int) -> bool:
 	quiz_panel.show()
 	var success = await self.answer_selected
 	quiz_panel.hide()
+	
+	if success:
+		questions_list.erase(question)
 	
 	return success
 
