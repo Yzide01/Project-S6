@@ -3359,7 +3359,7 @@ offset_right = 1322.0
 offset_bottom = 327.0
 
 [node name="BookPage" parent="." unique_id=454720209 instance=ExtResource("19_mpn2m")]
-position = Vector2(1322, 327)
+position = Vector2(1182, 327)
 page_id = "page_5"
 
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("18_ep8ry")]

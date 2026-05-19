@@ -3,7 +3,7 @@ extends Node2D
 var intro_dialogue = load("res://Dialogues/Level5/Intro.dialogue")
 var bellows_dialogue = load("res://Dialogues/Level5/Bellows.dialogue")
 var hydraulis_dialogue = load("res://Dialogues/Level5/Hydraulis.dialogue")
-
+var winfail_dialogue = load("res://Dialogues/Level5/Outro.dialogue")
 @onready var spirit = $WindSpirit
 @onready var marker_intro = $MarkerIntro
 @onready var marker_bellows = $MarkerIntro # Ajuste le nom si tu crées un MarkerBellows dédié
@@ -68,7 +68,8 @@ func _on_hydraulis_interacted() -> void:
 			timer_label.hide()
 			
 		print("Mélos: The water caught the chaotic air! The pressure is now perfectly stable. The mechanism is activating!")
-		await get_tree().create_timer(1.5).timeout
+		await DialogueManager.show_example_dialogue_balloon(winfail_dialogue, "start")
+		await get_tree().create_timer(3).timeout
 
 		book_page.victory()
 		open_door()
@@ -81,7 +82,8 @@ func _on_pressure_lost() -> void:
 	# On cache le chrono car le temps est écoulé
 	if timer_label:
 		timer_label.hide()
-		
+	await DialogueManager.show_example_dialogue_balloon(winfail_dialogue, "fail")
+
 	print("Mélos: The air leaked out... The system is empty again. We need to pump the bellows at the Organ once more.")
 
 func _on_hydraulis_area_body_entered(body: Node2D) -> void:

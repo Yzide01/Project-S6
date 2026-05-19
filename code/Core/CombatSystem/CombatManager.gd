@@ -229,42 +229,54 @@ func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text:
 		#await display_text("Defeat... Silence has engulfed you.")
 		#end_battle(false)
 
-# --- fight loop ---
+# --- fight loop ---# --- fight loop ---
 func start_battle() -> void:
-	# 1. GESTION DU LONG TEXTE D'INTRODUCTION (Au centre de l'écran)
+	# 1. GESTION DE L'ÉCRAN NOIR ET DE L'ANNONCE EN FONDU
 	if intro_message != "":
-		# On crée un fond sombre semi-transparent pour bien lire
+		# On crée le fond noir opaque qui va recouvrir l'écran
 		var dark_bg = ColorRect.new()
-		dark_bg.color = Color(0, 0, 0, 0.85) 
+		dark_bg.color = Color(0, 0, 0, 1.0) # Noir total au départ
 		dark_bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 		add_child(dark_bg)
 		
-		# On crée un grand Label pour le texte
+		# On crée le texte d'avertissement au centre
 		var big_intro = Label.new()
-		big_intro.text = intro_message + "\n\n[ Click or press Space to continue ]"
+		big_intro.text = "Silence minions are approaching...\n\n" + intro_message + "\n\n[ Click or press Space to continue ]"
 		big_intro.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		big_intro.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		big_intro.autowrap_mode = TextServer.AUTOWRAP_WORD
 		big_intro.set_anchors_preset(Control.PRESET_FULL_RECT)
 		
-		# On ajoute des marges pour que le texte ne touche pas les bords de l'écran
+		# On applique des marges de sécurité pour le texte
 		big_intro.offset_left = 100
 		big_intro.offset_right = -100
 		
 		dark_bg.add_child(big_intro)
 		
-		# On met le jeu en pause jusqu'à ce que le joueur clique
+		# On commence l'écran en transparent pour faire un fondu entrant élégant (0.5 seconde)
+		dark_bg.modulate.a = 0.0
+		var tween_in = create_tween()
+		tween_in.tween_property(dark_bg, "modulate:a", 1.0, 0.5)
+		await tween_in.finished
+		
+		# On attend le clic ou l'appui sur Espace du joueur pour continuer
 		await intro_terminee
 		
-		# On supprime ce grand affichage, on passe au combat normal !
+		# Le joueur a validé : on fait un magnifique fondu sortant (1.0 seconde)
+		var tween_out = create_tween()
+		tween_out.tween_property(dark_bg, "modulate:a", 0.0, 1.0)
+		await tween_out.finished
+		
+		# On détruit l'écran d'introduction, le combat au tour par tour commence !
 		dark_bg.queue_free() 
 	
-	# 2. GESTION DES PETITS TEXTES DE COMBAT (En bas de l'écran)
+	# 2. GESTION DES PETITS TEXTES DE COMBAT EN BAS DE L'ÉCRAN
 	if get_alive_enemies_count() > 1:
 		await display_text("A group of Silence Minions appears!")
 	else:
 		await display_text("A Silence Minion appears!")
 	
+	# (Le reste de ta boucle 'while' et de ta fonction reste inchangé !)
 	while player_hp > 0 and get_alive_enemies_count() > 0 and not escaped:
 		await player_turn()
 		
@@ -433,10 +445,10 @@ func end_battle(player_won: bool) -> void:
 	if player_won:
 		queue_free()
 	else:
-		get_tree().paused = false
+		get_tree().paused = false 
+		
 		get_tree().reload_current_scene()
 
-# --- Display ---
 func display_text(text_to_show: String) -> void:
 	info_text.text = text_to_show
 	await get_tree().create_timer(1.5).timeout
