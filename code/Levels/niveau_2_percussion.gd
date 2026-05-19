@@ -129,8 +129,8 @@ func _on_altar_interacted():
 		await start_combat(2)
 		
 		# SÉCURITÉ : Si le joueur meurt et que le niveau redémarre, on bloque la suite
-		#if not is_inside_tree():
-			#return
+		if not is_inside_tree() or is_queued_for_deletion():
+			return
 			
 		# On lance la séquence de récompense avec l'esprit
 		await _give_vial_sequence()
@@ -199,7 +199,8 @@ func start_combat(niveau_id: int) -> void:
 	
 	await current_battle_scene.tree_exited
 	ui_layer.queue_free()
-	
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	get_tree().paused = false
 	
 	# --- RAPPEL --- 

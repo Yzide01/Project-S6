@@ -177,8 +177,11 @@ func _on_exit_interacted_for_combat() -> void:
 	## Sécurité : Si le joueur perd et que la scène redémarre, on ne lance pas la fin
 	#if not is_inside_tree():
 		#return
-		
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	SceneManager.jouer_cinematique(endgame_video_path, "res://scenes/credits/credits.tscn")
+
+
 func start_combat(niveau_id: int) -> void:
 	if not is_inside_tree(): return
 	
