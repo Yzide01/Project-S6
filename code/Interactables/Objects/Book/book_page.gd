@@ -19,8 +19,11 @@ func victory():
 	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Book_Pages/page.dialogue"), "page_appear")
 
 func _on_interact():
-	Progression.unlock_page(page_id)
-	interactable.is_interactable = false
-	sprite.visible = false
-	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Book_Pages/page.dialogue"), "page_taken")
-	page_picked.emit()
+	if interactable.is_interactable == true:
+		Progression.unlock_page(page_id)
+		interactable.is_interactable = false
+		sprite.visible = false
+		DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Book_Pages/page.dialogue"), "page_taken")
+		page_picked.emit()
+	else:
+		return
