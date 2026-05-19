@@ -24530,6 +24530,7 @@ visible = false
 [node name="Mask" parent="." unique_id=1462240249 instance=ExtResource("20_oe6hv")]
 
 [node name="Spirit" type="Sprite2D" parent="." unique_id=1607358180]
+z_index = 15
 position = Vector2(2406.9998, -545.99994)
 scale = Vector2(0.064, 0.064)
 texture = ExtResource("21_m6k1c")
