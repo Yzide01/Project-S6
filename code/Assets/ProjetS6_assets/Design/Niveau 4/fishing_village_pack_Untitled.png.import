@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bctgiggnnovq7"
 path.s3tc="res://.godot/imported/fishing_village_pack_Untitled.png-48baa74a3820efb02d918b0a81a3776e.s3tc.ctex"
+path.etc2="res://.godot/imported/fishing_village_pack_Untitled.png-48baa74a3820efb02d918b0a81a3776e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Assets/ProjetS6_assets/Design/Niveau 4/fishing_village_pack_Untitled.png"
-dest_files=["res://.godot/imported/fishing_village_pack_Untitled.png-48baa74a3820efb02d918b0a81a3776e.s3tc.ctex"]
+dest_files=["res://.godot/imported/fishing_village_pack_Untitled.png-48baa74a3820efb02d918b0a81a3776e.s3tc.ctex", "res://.godot/imported/fishing_village_pack_Untitled.png-48baa74a3820efb02d918b0a81a3776e.etc2.ctex"]
 
 [params]
 

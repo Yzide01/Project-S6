@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cw8tcx512e1yd"
 path.s3tc="res://.godot/imported/Screenshot from 2023-11-03 10-01-38.png-1fe5c1ff6b95f1d13aff99069005c256.s3tc.ctex"
+path.etc2="res://.godot/imported/Screenshot from 2023-11-03 10-01-38.png-1fe5c1ff6b95f1d13aff99069005c256.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/ProjetS6_assets/Design/Niveau 4/got_wood/Screenshot from 2023-11-03 10-01-38.png"
-dest_files=["res://.godot/imported/Screenshot from 2023-11-03 10-01-38.png-1fe5c1ff6b95f1d13aff99069005c256.s3tc.ctex"]
+dest_files=["res://.godot/imported/Screenshot from 2023-11-03 10-01-38.png-1fe5c1ff6b95f1d13aff99069005c256.s3tc.ctex", "res://.godot/imported/Screenshot from 2023-11-03 10-01-38.png-1fe5c1ff6b95f1d13aff99069005c256.etc2.ctex"]
 
 [params]
 

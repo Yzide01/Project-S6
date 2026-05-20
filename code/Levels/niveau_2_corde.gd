@@ -127,15 +127,25 @@ func _on_exploration_zone_body_entered(body: Node2D) -> void:
 
 # --- FONCTIONS DE DIALOGUES ---
 
+# --- FONCTIONS DE DIALOGUES ---
+
 # Dialogue qui ne bloque pas le jeu (quand on marche dans une zone)
 func _play_dialogue(section_name: String):
 	var diag_path = "res://Dialogues/Level2/level2.dialogue"
-	if FileAccess.file_exists(diag_path):
-		DialogueManager.show_example_dialogue_balloon(load(diag_path), section_name)
+	var dialogue_res = load(diag_path)
+	
+	if dialogue_res:
+		DialogueManager.show_example_dialogue_balloon(dialogue_res, section_name)
+	else:
+		push_error("Dialogue introuvable: ", diag_path)
 
-# NOUVEAU : Dialogue qui met le script en pause le temps que le joueur lise
+# Dialogue qui met le script en pause le temps que le joueur lise
 func _play_dialogue_async(section_name: String):
 	var diag_path = "res://Dialogues/Level2/level2.dialogue"
-	if FileAccess.file_exists(diag_path):
-		DialogueManager.show_example_dialogue_balloon(load(diag_path), section_name)
+	var dialogue_res = load(diag_path)
+	
+	if dialogue_res:
+		DialogueManager.show_example_dialogue_balloon(dialogue_res, section_name)
 		await DialogueManager.dialogue_ended
+	else:
+		push_error("Dialogue introuvable: ", diag_path)

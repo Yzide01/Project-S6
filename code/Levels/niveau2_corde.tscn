@@ -24376,7 +24376,8 @@ position = Vector2(2172, -2014)
 texture = SubResource("AtlasTexture_ckdfb")
 
 [node name="partition6" type="Node2D" parent="decoration" unique_id=2014890788]
-position = Vector2(-1289, 1806)
+visible = false
+position = Vector2(-1257, 1916)
 script = ExtResource("8_ckdfb")
 
 [node name="Interactable" parent="decoration/partition6" unique_id=159893451 instance=ExtResource("9_ooyhu")]
@@ -24396,7 +24397,8 @@ position = Vector2(2172, -2014)
 texture = SubResource("AtlasTexture_ckdfb")
 
 [node name="partition7" type="Node2D" parent="decoration" unique_id=1609918929]
-position = Vector2(-1228, 1806)
+visible = false
+position = Vector2(-1196, 1916)
 script = ExtResource("8_ckdfb")
 
 [node name="Interactable" parent="decoration/partition7" unique_id=1306818555 instance=ExtResource("9_ooyhu")]
@@ -24416,7 +24418,8 @@ position = Vector2(2172, -2014)
 texture = SubResource("AtlasTexture_ckdfb")
 
 [node name="partition8" type="Node2D" parent="decoration" unique_id=90147169]
-position = Vector2(-1163, 1806)
+visible = false
+position = Vector2(-1131, 1916)
 script = ExtResource("8_ckdfb")
 
 [node name="Interactable" parent="decoration/partition8" unique_id=1030257224 instance=ExtResource("9_ooyhu")]

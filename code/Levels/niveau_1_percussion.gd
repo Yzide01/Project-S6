@@ -74,13 +74,17 @@ func _on_bowl_played(bowl_index: int):
 
 func _trigger_victory():
 	is_solved = true
-	_play_sequence(outro_position, "res://Dialogues/Level3/Outro.dialogue")
-	await DialogueManager.dialogue_ended
+	# ⚠️ CORRECTION : On await directement la séquence entière, et on supprime l'ancien "await DialogueManager..." qui faisait crasher
+	await _play_sequence(outro_position, "res://Dialogues/Level3/Outro.dialogue")
 	await get_tree().create_timer(2.0).timeout
-	book_page.victory()
-	await book_page.page_picked
+	
+	if book_page:
+		book_page.victory()
+		await book_page.page_picked
+		
 	await get_tree().create_timer(3.0).timeout
 	SceneManager.changer_niveau("res://Levels/niveau2_percussion.tscn")
+
 
 func _play_sequence(pos, diag_path):
 	var player = get_tree().get_first_node_in_group("player")
@@ -97,9 +101,13 @@ func _play_sequence(pos, diag_path):
 		t.tween_property(spirit, "modulate:a", 1.0, 0.8)
 		await t.finished
 
-	if FileAccess.file_exists(diag_path):
-		DialogueManager.show_example_dialogue_balloon(load(diag_path), "start")
+	# ⚠️ CORRECTION : On utilise `load()` au lieu de `FileAccess`
+	var dialogue_res = load(diag_path)
+	if dialogue_res:
+		DialogueManager.show_example_dialogue_balloon(dialogue_res, "start")
 		await DialogueManager.dialogue_ended
+	else:
+		push_error("Dialogue introuvable à l'export: ", diag_path)
 
 	if spirit:
 		var t2 = create_tween()
