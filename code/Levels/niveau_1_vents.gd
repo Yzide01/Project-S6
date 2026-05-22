@@ -13,6 +13,7 @@ var winfail_dialogue = load("res://Dialogues/Level5/Outro.dialogue")
 
 # --- NOUVEAU : Référence à l'interface du chrono ---
 @onready var timer_label = $TimerCanvas/TimerLabel
+@onready var bellows_sound = $BellowsSound
 
 var player: Node2D
 var bellows_seen: bool = false
@@ -49,7 +50,7 @@ func _process(_delta: float) -> void:
 func _on_medieval_organ_interacted() -> void:
 	is_pressurized = true
 	pressure_timer.start(15.0) 
-	
+	if bellows_sound: bellows_sound.play()
 	# On affiche le chrono à l'écran !
 	if timer_label:
 		timer_label.show()
@@ -62,7 +63,7 @@ func _on_hydraulis_interacted() -> void:
 		print("Mélos: The water mechanism is ready, but there is no air in the pipes.")
 	else:
 		pressure_timer.stop()
-		
+		if bellows_sound: bellows_sound.stop()
 		# On cache le chrono car l'énigme est réussie
 		if timer_label:
 			timer_label.hide()
@@ -78,7 +79,7 @@ func _on_pressure_lost() -> void:
 	is_pressurized = false
 	hydraulis_seen = false
 	bellows_seen = false
-	
+	if bellows_sound: bellows_sound.stop()
 	# On cache le chrono car le temps est écoulé
 	if timer_label:
 		timer_label.hide()

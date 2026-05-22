@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://d2unn4o27vour" path="res://Interactables/Objects/Level5/bellows.gd" id="23_gbko3"]
 [ext_resource type="Script" uid="uid://bnx33lly7t2ld" path="res://Interactables/Objects/Level5/exit_door.gd" id="23_nhbly"]
 [ext_resource type="Script" uid="uid://dgqo2ml1t8kqi" path="res://Interactables/Objects/Level5/hydraulis.gd" id="25_mpn2m"]
+[ext_resource type="AudioStream" uid="uid://b2aqnf1pxq304" path="res://Assets/Sound/Trials/organ.mp3" id="28_dif3q"]
 [ext_resource type="AudioStream" uid="uid://ceixjm0ne730y" path="res://Assets/Sound/Ambiant sound/background_light.wav" id="28_y7tgd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37hjs"]
@@ -3454,6 +3455,11 @@ shape = SubResource("CircleShape2D_nhbly")
 
 [node name="LabelPosition" type="Marker2D" parent="Hydraulis/Interactable" unique_id=221266885]
 position = Vector2(37.499996, -70)
+
+[node name="BellowsSound" type="AudioStreamPlayer" parent="." unique_id=1993421870]
+stream = ExtResource("28_dif3q")
+bus = &"Ambiance"
+playback_type = 1
 
 [node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=1118867421]
 stream = ExtResource("28_y7tgd")
