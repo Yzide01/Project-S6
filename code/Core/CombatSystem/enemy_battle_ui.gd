@@ -6,6 +6,11 @@ extends VBoxContainer
 @onready var sprite: TextureRect = $Sprite
 @onready var hp_text: Label = $HPText
 
+
+@onready var anim_container: Control = $Container 
+@onready var shield: AnimatedSprite2D = $Container/shield
+
+
 var enemy_max_hp: int = 0
 
 func setup(enemy_name: String, max_hp: int, enemy_id: String) -> void:
@@ -31,3 +36,13 @@ func update_hp(new_hp: int) -> void:
 	if new_hp <= 0:
 		# here we manage the death animation
 		modulate.a = 0.3
+
+func play_shield_break() -> void:
+	print("La fonction play_shield_break est bien appelée !")
+	if shield :
+		print("Le noeud shield a été trouvé !")
+		shield.show()
+		shield.set_frame_and_progress(0, 0.0)
+		shield.play("shield")
+		await shield.animation_finished
+		shield.hide()

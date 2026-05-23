@@ -109,7 +109,7 @@ func _ready() -> void:
 	
 	call_deferred("_check_test_mode")
 
-func _check_test_mode(level: int = 1) -> void:
+func _check_test_mode(level: int = 2) -> void:
 	if active_enemies.is_empty():
 		var horde: Array[BaseEnemy] = []
 		var intro_message = ""
@@ -319,9 +319,15 @@ func player_turn() -> void:
 			
 			if success:
 				await display_text("Correct! The Bard uses Thunder Strike on " + target.name + "!")
+				
 				if target.has_shield:
 					await display_text("The enemy's shield shatters!")
 					target.has_shield = false
+					
+					# Here I added the shield animation code
+					if target.ui_node.has_method("play_shield_break"):          
+						target.ui_node.play_shield_break()
+					
 				else:
 					target.hp = max(0, target.hp - 15)
 					await display_text(target.name + " loses 15 HP.")
