@@ -2002,7 +2002,6 @@ page_id = "page_4"
 
 [node name="Player" parent="." unique_id=684339121 instance=ExtResource("10_mhj36")]
 z_index = 5
-y_sort_enabled = true
 position = Vector2(570, 853)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1434734459]
