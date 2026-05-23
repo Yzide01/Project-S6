@@ -177,6 +177,9 @@ func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text:
 		enemy_container.add_child(enemy_ui)
 		enemy_ui.setup(enemy_data.enemy_name, enemy_data.max_hp, enemy_data.enemy_name)
 		
+		if enemy_data.rank == 2:
+			enemy_ui.enable_shield()
+		
 		active_enemies.append({
 			"name": enemy_data.enemy_name,
 			"hp": enemy_data.max_hp,

@@ -168,6 +168,8 @@
 [ext_resource type="Texture2D" uid="uid://clthbvkrcvbiu" path="res://Assets/TBC/Devoreur/inactif_5/0051.png" id="167_o1cts"]
 [ext_resource type="Texture2D" uid="uid://b6fdbjnvr4g1x" path="res://Assets/TBC/shield/shield6.png" id="167_t3kg1"]
 [ext_resource type="Texture2D" uid="uid://c6ng1wsqbkkby" path="res://Assets/TBC/shield/shield7.png" id="168_eo04y"]
+[ext_resource type="Texture2D" uid="uid://dphqjmni1ogwo" path="res://Assets/TBC/shield/idle_shield1.png" id="169_nx8jl"]
+[ext_resource type="Texture2D" uid="uid://bc7uhas2cuyyv" path="res://Assets/TBC/shield/idle_shield2.png" id="170_vmp2l"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t37yk"]
 animations = [{
@@ -693,6 +695,20 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_d1im5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("169_nx8jl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("170_vmp2l")
+}],
+"loop": true,
+"name": &"idle_shield",
+"speed": 2.0
+}]
+
 [node name="EnemyBattleUI" type="VBoxContainer" unique_id=404900519]
 offset_right = 100.0
 offset_bottom = 141.0
@@ -746,9 +762,17 @@ autoplay = "default"
 frame = 26
 frame_progress = 0.8379249
 
-[node name="shield" type="AnimatedSprite2D" parent="Container" unique_id=1773553216]
+[node name="Shield_anim" type="AnimatedSprite2D" parent="Container" unique_id=1773553216]
 visible = false
 position = Vector2(190.49998, 62.5)
 scale = Vector2(1.8549999, 2.125)
 sprite_frames = SubResource("SpriteFrames_f6kvo")
 animation = &"shield"
+
+[node name="shield" type="AnimatedSprite2D" parent="Container" unique_id=625607216]
+visible = false
+position = Vector2(192.5, 58.5625)
+scale = Vector2(1.965, 2.3943748)
+sprite_frames = SubResource("SpriteFrames_d1im5")
+animation = &"idle_shield"
+frame_progress = 0.7583802

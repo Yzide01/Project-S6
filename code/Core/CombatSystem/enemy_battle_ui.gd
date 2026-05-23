@@ -8,8 +8,8 @@ extends VBoxContainer
 
 
 @onready var anim_container: Control = $Container 
+@onready var Shield_anim: AnimatedSprite2D = $Container/Shield_anim
 @onready var shield: AnimatedSprite2D = $Container/shield
-
 
 var enemy_max_hp: int = 0
 
@@ -37,12 +37,22 @@ func update_hp(new_hp: int) -> void:
 		# here we manage the death animation
 		modulate.a = 0.3
 
-func play_shield_break() -> void:
-	print("La fonction play_shield_break est bien appelée !")
-	if shield :
-		print("Le noeud shield a été trouvé !")
+func enable_shield() -> void:
+	if shield:
 		shield.show()
-		shield.set_frame_and_progress(0, 0.0)
-		shield.play("shield")
-		await shield.animation_finished
+		shield.play("idle_shield") # Shield intact
+
+func disable_shield() -> void:
+	if shield:
+		shield.stop()
 		shield.hide()
+
+func play_shield_break() -> void:
+	disable_shield()
+	if Shield_anim :
+		Shield_anim.show()
+		Shield_anim.set_frame_and_progress(0, 0.0)
+		Shield_anim.play("shield")
+		await Shield_anim.animation_finished
+		Shield_anim.hide()
+	
