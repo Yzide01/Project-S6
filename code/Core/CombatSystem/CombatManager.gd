@@ -109,7 +109,7 @@ func _ready() -> void:
 	
 	call_deferred("_check_test_mode")
 
-func _check_test_mode(level: int = 2) -> void:
+func _check_test_mode(level: int = 1) -> void:
 	if active_enemies.is_empty():
 		var horde: Array[BaseEnemy] = []
 		var intro_message = ""
