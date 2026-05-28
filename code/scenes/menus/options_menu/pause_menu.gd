@@ -16,6 +16,8 @@ func _ready():
 		$VBoxContainer/LevelSelectionButton.pressed.connect(_on_level_selection_pressed)
 	if $VBoxContainer.has_node("SaveButton"):
 		$VBoxContainer/SaveButton.pressed.connect(_on_save_pressed)
+	if $VBoxContainer.has_node("LoadButton"):
+		$VBoxContainer/LoadButton.pressed.connect(_on_load_pressed)
 	if $VBoxContainer.has_node("ExitButton"):
 		$VBoxContainer/ExitButton.pressed.connect(_on_exit_pressed)
 
@@ -93,6 +95,14 @@ func _on_level_selection_closed():
 
 func _on_save_pressed():
 	current_save_menu = save_menu_scene.instantiate()
+	current_save_menu.mode = "save"
+	add_child(current_save_menu)
+	$VBoxContainer.hide()
+	current_save_menu.tree_exited.connect(_on_save_menu_closed)
+
+func _on_load_pressed():
+	current_save_menu = save_menu_scene.instantiate()
+	current_save_menu.mode = "load"
 	add_child(current_save_menu)
 	$VBoxContainer.hide()
 	current_save_menu.tree_exited.connect(_on_save_menu_closed)

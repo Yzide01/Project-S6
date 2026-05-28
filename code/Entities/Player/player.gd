@@ -56,6 +56,11 @@ var last_direction: Vector2 = Vector2.DOWN
 func _ready() -> void:
 	spawn_position = global_position # Sauvegarde de la position de départ
 	
+	# Restore saved position if needed
+	if SaveManager.restore_player_position:
+		global_position = Vector2(SaveManager.loaded_player_x, SaveManager.loaded_player_y)
+		SaveManager.restore_player_position = false
+	
 	# Par défaut, on s'assure que le joueur écoute bien les murs bas !
 	set_collision_mask_value(low_obstacle_layer, true)
 	# Le joueur écoute les signaux globaux du plugin de dialogue

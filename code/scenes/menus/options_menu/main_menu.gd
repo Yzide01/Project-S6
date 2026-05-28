@@ -72,6 +72,7 @@ func _on_quit_pressed():
 
 func _on_load_pressed():
 	current_save_menu = save_menu_scene.instantiate()
+	current_save_menu.mode = "load"
 	add_child(current_save_menu)
 	$VBoxContainer.hide()
 	current_save_menu.tree_exited.connect(_on_save_menu_closed)
