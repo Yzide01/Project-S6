@@ -3,6 +3,9 @@ extends ColorRect
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
+	# Cache ce ColorRect car on applique le shader directement aux objets
+	visible = false
+	
 	var mat = material as ShaderMaterial
 	if not mat: return
 	
@@ -16,10 +19,23 @@ func _ready() -> void:
 		current_sat = 1.0
 		
 	mat.set_shader_parameter("saturation", current_sat)
+	
+	call_deferred("_apply_material_to_world")
 
-func _process(_delta: float) -> void:
-	# Garde le filtre ajusté à l'écran
-	var cam_transform = get_canvas_transform()
-	if cam_transform.get_scale().x != 0 and cam_transform.get_scale().y != 0:
-		size = get_viewport_rect().size / cam_transform.get_scale()
-		global_position = -cam_transform.get_origin() / cam_transform.get_scale()
+func _apply_material_to_world():
+	if get_parent():
+		_apply_recursive(get_parent())
+
+func _apply_recursive(node: Node):
+	if node is CanvasLayer:
+		return # Ne pas affecter l'UI
+		
+	if node.name == "Player" or node.name == "player" or node.is_in_group("player"):
+		return # Ne pas affecter le joueur
+		
+	if node is CanvasItem and node != self:
+		if node.material == null:
+			node.material = self.material
+			
+	for child in node.get_children():
+		_apply_recursive(child)

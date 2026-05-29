@@ -480,7 +480,6 @@ script = ExtResource("1_onrkg")
 inventory = ExtResource("2_lu8i8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=126583999]
-position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_hqtel")
 
 [node name="InteractingComponent" parent="." unique_id=65921056 instance=ExtResource("4_tekja")]
@@ -489,6 +488,7 @@ shape = SubResource("RectangleShape2D_hqtel")
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_d17g3")
 animation = &"idle_up"
+offset = Vector2(0, -30)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=536538805]
 
