@@ -58,37 +58,37 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Level 1 - Strings"
+text = "The Resonance Triad - Strings"
 
 [node name="Level2CordeButton" type="Button" parent="VBoxContainer" unique_id=1234771559]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Level 2 - Strings"
+text = "The Shattered Cadenza - Strings"
 
 [node name="Level1PercuButton" type="Button" parent="VBoxContainer" unique_id=2133747742]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Level 1 - Percussions"
+text = "The Cascade Carillon - Percussions"
 
 [node name="Level2PercuButton" type="Button" parent="VBoxContainer" unique_id=1243996615]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Level 2 - Percussions"
+text = "The Echoing Membranes - Percussions"
 
 [node name="Level1VentsButton" type="Button" parent="VBoxContainer" unique_id=1638051959]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Level 1 - Winds"
+text = "The 15-Second Bellows - Winds"
 
 [node name="Level2VentsButton" type="Button" parent="VBoxContainer" unique_id=1456296870]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Level 2 - Winds"
+text = "The Breath of the Andes - Winds"
 
 [node name="BattleButton" type="Button" parent="VBoxContainer" unique_id=230908731]
 custom_minimum_size = Vector2(400, 50)
