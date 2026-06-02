@@ -207,7 +207,7 @@ func start_combat(niveau_id: int) -> void:
 	
 	# --- ANTI-CRASH FIX ---
 	# If player died, the level was reloaded. This ghost script must abort here!
-	if not is_inside_tree():
+	if not is_inside_tree() or is_queued_for_deletion():
 		return
 		
 	get_tree().paused = false
@@ -229,3 +229,25 @@ func _play_dialogue(title: String):
 	
 	if player: 
 		player.process_mode = Node.PROCESS_MODE_INHERIT
+
+# --- GESTION DE LA SAUVEGARDE DE L'ÉTAT DU NIVEAU ---
+func get_level_state() -> Dictionary:
+	return {
+		"puzzle_completed": puzzle_completed,
+		"inca_met": inca_met
+	}
+
+func restore_level_state(state: Dictionary) -> void:
+	puzzle_completed = state.get("puzzle_completed", false)
+	inca_met = state.get("inca_met", false)
+	
+	if puzzle_completed:
+		if exit: exit.unlock()
+		for tube in get_tree().get_nodes_in_group("tubes"):
+			tube.hide()
+			var interactable = tube.get_node_or_null("Interactable")
+			if interactable:
+				interactable.is_interactable = false
+		
+		# On supprime le livre s'il a déjà été récupéré
+		if book_page: book_page.queue_free()

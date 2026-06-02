@@ -40,6 +40,7 @@ signal target_selected(enemy_index: int)
 
 # --- AI for fight ---
 var combat_turn_count: int = 0
+var current_level_id: int = 1
 
 signal answer_selected(is_correct: bool)
 
@@ -98,6 +99,7 @@ var quiz_data = {
 
 
 func _ready() -> void:
+	add_to_group("combat_manager")
 	_reset_menu()
 	
 	attack_button.pressed.connect(_on_attack_pressed)
@@ -110,6 +112,7 @@ func _ready() -> void:
 	call_deferred("_check_test_mode")
 
 func _check_test_mode(level: int = 1) -> void:
+	current_level_id = level
 	if active_enemies.is_empty():
 		var horde: Array[BaseEnemy] = []
 		var intro_message = ""

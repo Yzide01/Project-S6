@@ -154,3 +154,20 @@ func open_door() -> void:
 	if exit_door:
 		door_closed.visible = false
 		exit_door.unlock()
+
+# --- GESTION DE LA SAUVEGARDE DE L'ÉTAT DU NIVEAU ---
+func get_level_state() -> Dictionary:
+	return {
+		"bellows_seen": bellows_seen,
+		"hydraulis_seen": hydraulis_seen,
+		"is_pressurized": is_pressurized,
+		"door_opened": not door_closed.visible if door_closed else false
+	}
+
+func restore_level_state(state: Dictionary) -> void:
+	bellows_seen = state.get("bellows_seen", false)
+	hydraulis_seen = state.get("hydraulis_seen", false)
+	is_pressurized = state.get("is_pressurized", false)
+	
+	if state.get("door_opened", false):
+		open_door()

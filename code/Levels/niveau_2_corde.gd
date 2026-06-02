@@ -74,10 +74,16 @@ func start_combat(niveau_id: int) -> void:
 	current_battle_scene._check_test_mode(niveau_id)
 	
 	await current_battle_scene.tree_exited
-	ui_layer.queue_free()
+	
+	if is_instance_valid(ui_layer):
+		ui_layer.queue_free()
+	
+	current_battle_scene = null
+	
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	
 	get_tree().paused = false
-	
 
 	exit.hide()
 
@@ -149,3 +155,22 @@ func _play_dialogue_async(section_name: String):
 		await DialogueManager.dialogue_ended
 	else:
 		push_error("Dialogue introuvable: ", diag_path)
+
+# --- GESTION DE LA SAUVEGARDE DE L'ÉTAT DU NIVEAU ---
+func get_level_state() -> Dictionary:
+	return {
+		"page_collected": page_collected,
+		"won": won
+	}
+
+func restore_level_state(state: Dictionary) -> void:
+	page_collected = state.get("page_collected", false)
+	won = state.get("won", false)
+	
+	if page_collected:
+		if exit: exit.unlock()
+		if book_page: book_page.queue_free()
+		
+	if won:
+		if exit: exit.show()
+		if interact_exit: interact_exit.is_interactable = true

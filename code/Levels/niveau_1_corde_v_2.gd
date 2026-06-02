@@ -3,6 +3,7 @@ extends Node2D
 @export var secret_combination: Array[int] = [1, 3, 2]
 var current_sequence: Array[int] = []
 var is_playing_hint: bool = false # Empêche le spam pendant le son
+var is_solved: bool = false
 
 @onready var corde1 = $String_1
 @onready var corde2 = $String_2
@@ -74,6 +75,8 @@ func _on_string_played(id: int) -> void:
 
 
 func _solve_puzzle() -> void:
+	if is_solved: return
+	is_solved = true
 	print("Énigme résolue ! La porte est déverrouillée.")
 	book_page.victory()
 
@@ -98,5 +101,12 @@ func _solve_puzzle() -> void:
 		corde3.get_node("Interactable").is_interactable = false
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+# --- GESTION DE LA SAUVEGARDE DE L'ÉTAT DU NIVEAU ---
+func get_level_state() -> Dictionary:
+	return {
+		"is_solved": is_solved
+	}
+
+func restore_level_state(state: Dictionary) -> void:
+	if state.get("is_solved", false):
+		_solve_puzzle()

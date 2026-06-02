@@ -220,3 +220,21 @@ func _play_safe_text(section: String, player: Node2D):
 
 func _is_player(body: Node2D) -> bool:
 	return body.is_in_group("Player") or body.name.to_lower().contains("player")
+
+# --- GESTION DE LA SAUVEGARDE DE L'ÉTAT DU NIVEAU ---
+func get_level_state() -> Dictionary:
+	return {
+		"is_solved": is_solved,
+		"won": won,
+		"finished": finished
+	}
+
+func restore_level_state(state: Dictionary) -> void:
+	is_solved = state.get("is_solved", false)
+	won = state.get("won", false)
+	finished = state.get("finished", false)
+	
+	if is_solved:
+		if tilemap: tilemap.visible = true
+		_setup_altar()
+		if book_page: book_page.queue_free()

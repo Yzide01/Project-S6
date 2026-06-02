@@ -122,3 +122,14 @@ func _play_sequence(pos, diag_path):
 
 func _on_terrain_entered(area: Area2D) -> void:
 	pass
+
+# --- GESTION DE LA SAUVEGARDE DE L'ÉTAT DU NIVEAU ---
+func get_level_state() -> Dictionary:
+	return {
+		"is_solved": is_solved
+	}
+
+func restore_level_state(state: Dictionary) -> void:
+	if state.get("is_solved", false):
+		is_solved = true
+		SceneManager.changer_niveau("res://Levels/niveau2_percussion.tscn")

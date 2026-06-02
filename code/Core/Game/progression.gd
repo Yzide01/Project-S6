@@ -15,7 +15,7 @@ func unlock_page(page_id: String) -> void:
 	if unlocked_pages.has(page_id):
 		unlocked_pages[page_id] = true
 		page_unlocked_signal.emit() # On prévient que quelque chose a changé
-		save_to_sqlite()
-
-func save_to_sqlite():
-	pass
+		
+		# Auto-sauvegarde de la progression globale
+		if SaveManager and SaveManager.has_method("save_game"):
+			SaveManager.save_game()
