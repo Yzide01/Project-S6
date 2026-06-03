@@ -12,6 +12,9 @@ extends Node2D
 var is_solved: bool = false
 var current_tune: Array[int] = []
 
+
+
+
 func _ready() -> void:
 	if spirit:
 		spirit.hide()
@@ -31,7 +34,9 @@ func _ready() -> void:
 		if generic: DialogueManager.show_example_dialogue_balloon(generic, "start")
 		return
 	_play_sequence(intro_position, "res://Dialogues/Level3/Intro.dialogue")
+	
 
+		
 var water_ready: bool = false
 
 func _on_water_changed():
