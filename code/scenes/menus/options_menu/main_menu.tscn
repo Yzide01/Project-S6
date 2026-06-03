@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dgcklt8hspyph" path="res://scenes/menus/options_menu/main_menu.gd" id="1_b6nna"]
 [ext_resource type="AudioStream" uid="uid://df1q7136v2n0q" path="res://Assets/Sound/menu.wav" id="2_w3pe8"]
-[ext_resource type="Texture2D" path="res://Assets/chromestesia.png" id="3_bg"]
+[ext_resource type="Texture2D" uid="uid://djxwsoosh8s78" path="res://Assets/chromestesia.png" id="3_bg"]
 
 [node name="MainMenu" type="Control" unique_id=1404343601]
 layout_mode = 3
