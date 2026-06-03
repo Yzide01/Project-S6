@@ -85,13 +85,13 @@ var quiz_data = {
 	"vent": {
 		1: [
 			{"q": "In a flute, what is actually vibrating to create the sound?", "opts": ["The air inside", "The wood/metal body", "The player's fingers"], "ans": 0},
-			{"q": "To play a louder note, the Bard must increase...", "opts": ["Air pressure (Breath)", "Finger speed"], "ans": 0},
+			{"q": "To play a louder note, Melos must increase...", "opts": ["Air pressure (Breath)", "Finger speed"], "ans": 0},
 			{"q": "True or False: A very long wind instrument produces a high-pitched sound.", "opts": ["True", "False"], "ans": 1}
 		],
 		2: [
 			{"q": "By covering holes on a flute, you make the air column...", "opts": ["Longer", "Shorter"], "ans": 0},
 			{"q": "A short air column vibrates _______ than a long one.", "opts": ["Faster", "Slower"], "ans": 0},
-			{"q": "What protects the Bard from enemy shockwaves?", "opts": ["Air pressure", "String length", "Drum weight"], "ans": 0}
+			{"q": "What protects Melos from enemy shockwaves?", "opts": ["Air pressure", "String length", "Drum weight"], "ans": 0}
 		],
 		3: [
 			{"q": "What is the technique called when you blow harder to reach a higher octave?", "opts": ["Overblowing (Octaviation)", "Muting", "Distortion"], "ans": 0}
@@ -268,11 +268,11 @@ func start_battle() -> void:
 # --- Player turn ---
 func player_turn() -> void:
 	if player_silenced:
-		await display_text("The Bard is silenced and cannot play music this turn!")
+		await display_text("Melos is silenced and cannot play music this turn!")
 		player_silenced = false
 		return
 	
-	await display_text("What should the Bard do?")
+	await display_text("What should Melos do?")
 	
 	attack_button.show()
 	run_button.show()
@@ -286,7 +286,7 @@ func player_turn() -> void:
 			var success = await ask_question("percussion", target.rank)
 			
 			if success:
-				await display_text("Correct! The Bard uses Thunder Strike on " + target.name + "!")
+				await display_text("Correct! Melos uses Thunder Strike on " + target.name + "!")
 				
 				if target.has_shield:
 					await display_text("The enemy's shield shatters!")
@@ -302,25 +302,25 @@ func player_turn() -> void:
 					hit.play()
 					target.ui_node.update_hp(target.hp)
 			else:
-				await display_text("Wrong answer! The Bard hesitates and misses the tempo...")
+				await display_text("Wrong answer! Melos hesitates and misses the tempo...")
 				
 		"vent":
 			var target = get_first_alive_enemy()
 			var success = await ask_question("vent", target.rank)
 			
 			if success:
-				await display_text("Correct! The Bard sings a protective melody!")
+				await display_text("Correct! Melos sings a protective melody!")
 				player_resisting += 0.5
 				await display_text("Defense increased.")
 			else:
-				await display_text("Wrong answer! The Bard runs out of breath...")
+				await display_text("Wrong answer! Melos runs out of breath...")
 				
 		"corde":
 			var target = get_first_alive_enemy()
 			var success = await ask_question("corde", target.rank)
 			
 			if success:
-				await display_text("Correct! The Bard plays a Distracting Melody! It hits EVERYONE!")
+				await display_text("Correct! The Melos plays a Distracting Melody! It hits EVERYONE!")
 				for enemy in active_enemies:
 					if enemy.hp > 0:
 						if !enemy.has_shield:
@@ -372,9 +372,9 @@ func enemy_turn() -> void:
 				await display_text(enemy.name + " casts Mute!")
 				if randf() > 0.7:
 					player_silenced = true
-					await display_text("The Bard's voice is muffled!")
+					await display_text("Melos's voice is muffled!")
 				else:
-					await display_text("The Bard resists the silence.")
+					await display_text("Melos resists the silence.")
 					
 			"absolute_void":
 				await display_text(enemy.name + " channels Absolute Void!")
@@ -452,7 +452,7 @@ func _on_attack_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	_reset_menu()
-	await display_text("What should the Bard do?")
+	await display_text("What should Melos do?")
 
 func _reset_menu() -> void:
 	percussion_button.hide()
