@@ -3275,7 +3275,7 @@ tile_map_data = PackedByteArray("AAAaAAEAAAAAAAAAAAAaAAIAAAAAAAEAAAAaAAMAAAAAAAI
 tile_set = SubResource("TileSet_v23kx")
 
 [node name="BookPage" parent="." unique_id=454720209 instance=ExtResource("11_71q0v")]
-position = Vector2(560, 453)
+position = Vector2(655.08496, 159)
 
 [node name="decoration" type="TileMapLayer" parent="." unique_id=2011601815]
 
