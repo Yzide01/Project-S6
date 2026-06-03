@@ -23,7 +23,11 @@ func _ready() -> void:
 	_play_intro_dialogue()
 
 func _play_intro_dialogue() -> void:
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.8).timeout
+	if is_solved:
+		var generic = load("res://Dialogues/Generic/LevelCompleted.dialogue")
+		if generic: DialogueManager.show_example_dialogue_balloon(generic, "start")
+		return
 	DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/Level1/level1.dialogue"), "intro")
 
 # --- HINT FUNCTION ---

@@ -25,7 +25,11 @@ func _ready() -> void:
 			if b.has_signal("played"):
 				b.played.connect(_on_bowl_played.bind(i))
 
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.8).timeout
+	if is_solved:
+		var generic = load("res://Dialogues/Generic/LevelCompleted.dialogue")
+		if generic: DialogueManager.show_example_dialogue_balloon(generic, "start")
+		return
 	_play_sequence(intro_position, "res://Dialogues/Level3/Intro.dialogue")
 
 var water_ready: bool = false

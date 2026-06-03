@@ -36,6 +36,10 @@ func _ready() -> void:
 
 	if intro_dialogue:
 		await get_tree().create_timer(1.0).timeout
+		if not door_closed.visible:
+			var generic = load("res://Dialogues/Generic/LevelCompleted.dialogue")
+			if generic: DialogueManager.show_example_dialogue_balloon(generic, "start")
+			return
 		await _play_sequence(intro_dialogue, "start", null)
 		await _play_sequence(intro_dialogue, "partie_2", marker_intro)
 

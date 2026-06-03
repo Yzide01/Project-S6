@@ -53,6 +53,10 @@ func _ready() -> void:
 
 func start_level_intro():
 	await get_tree().create_timer(1.0).timeout
+	if puzzle_completed:
+		var generic = load("res://Dialogues/Generic/LevelCompleted.dialogue")
+		if generic: DialogueManager.show_example_dialogue_balloon(generic, "start")
+		return
 	await _play_dialogue("start")
 
 func _on_stele_area_body_entered(body: Node2D) -> void:
