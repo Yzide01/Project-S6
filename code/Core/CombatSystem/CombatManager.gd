@@ -21,6 +21,9 @@ var escaped: bool = false
 
 @onready var player_visual: TextureRect = $PlayerVisual
 
+# Sound
+@onready var hit = $Hit
+
 # HP bar
 @onready var player_hp_bar: TextureProgressBar = $PlayerHPBar
 @onready var player_hp_text: Label = $PlayerHPBar/PlayerHPText
@@ -289,11 +292,13 @@ func player_turn() -> void:
 					target.has_shield = false
 					
 					if target.ui_node.has_method("play_shield_break"):          
+						hit.play()
 						target.ui_node.play_shield_break()
 					
 				else:
 					target.hp = max(0, target.hp - 15)
 					await display_text(target.name + " loses 15 HP.")
+					hit.play()
 					target.ui_node.update_hp(target.hp)
 			else:
 				await display_text("Wrong answer! The Bard hesitates and misses the tempo...")
@@ -319,6 +324,7 @@ func player_turn() -> void:
 					if enemy.hp > 0:
 						if !enemy.has_shield:
 							enemy.hp = max(0, enemy.hp - 5)
+							hit.play()
 							enemy.ui_node.update_hp(enemy.hp)
 							if randf() > 0.5:
 								enemy.stunned = true
@@ -404,6 +410,7 @@ func get_first_alive_enemy() -> Dictionary:
 
 func animate_player_damage() -> void:
 	var tween = create_tween()
+	hit.play()
 	tween.tween_property(player_visual, "modulate", Color.RED, 0.1)
 	tween.tween_property(player_visual, "modulate", Color.WHITE, 0.1)
 	tween.set_loops(2)

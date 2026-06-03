@@ -3284,7 +3284,27 @@ tile_map_data = PackedByteArray("AAALAAYAAAAOAAMAAAALAAcAAAAOAAQAAAARAAYAAAAOAAM
 tile_set = SubResource("TileSet_wlfds")
 
 [node name="cordes" type="TileMapLayer" parent="decoration" unique_id=386180202]
-tile_map_data = PackedByteArray("AAALAAcAAAAAAAAAAAALAAgAAAAAAAEAAAARAAcAAAAAAAAAAAARAAgAAAAAAAEAAAAXAAcAAAAAAAAAAAAXAAgAAAAAAAEAAAALAAkAAAAAAAEAAAALAAoAAAAAAAEAAAALAAsAAAAAAAEAAAARAAkAAAAAAAEAAAARAAoAAAAAAAEAAAAXAAkAAAAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAALAAcAAAAAAAAAAAALAAgAAAAAAAEAAAALAAkAAAAAAAEAAAALAAoAAAAAAAEAAAALAAsAAAAAAAEAAAA=")
+tile_set = SubResource("TileSet_tbssq")
+
+[node name="cordes2" type="TileMapLayer" parent="decoration" unique_id=382504659]
+tile_map_data = PackedByteArray("AAARAAcAAAAAAAAAAAARAAgAAAAAAAEAAAARAAkAAAAAAAEAAAARAAoAAAAAAAEAAAA=")
+tile_set = SubResource("TileSet_tbssq")
+
+[node name="cordes3" type="TileMapLayer" parent="decoration" unique_id=16266132]
+tile_map_data = PackedByteArray("AAAXAAcAAAAAAAAAAAAXAAgAAAAAAAEAAAAXAAkAAAAAAAEAAAA=")
+tile_set = SubResource("TileSet_tbssq")
+
+[node name="cordes4" type="TileMapLayer" parent="decoration" unique_id=1439496036]
+tile_map_data = PackedByteArray("AAALAAcAAAAAAAAAAAALAAgAAAAAAAEAAAALAAkAAAAAAAEAAAALAAoAAAAAAAEAAAALAAsAAAAAAAEAAAA=")
+tile_set = SubResource("TileSet_tbssq")
+
+[node name="cordes5" type="TileMapLayer" parent="decoration" unique_id=391465734]
+tile_map_data = PackedByteArray("AAARAAcAAAAAAAAAAAARAAgAAAAAAAEAAAARAAkAAAAAAAEAAAARAAoAAAAAAAEAAAA=")
+tile_set = SubResource("TileSet_tbssq")
+
+[node name="cordes6" type="TileMapLayer" parent="decoration" unique_id=1152132219]
+tile_map_data = PackedByteArray("AAAXAAcAAAAAAAAAAAAXAAgAAAAAAAEAAAAXAAkAAAAAAAEAAAA=")
 tile_set = SubResource("TileSet_tbssq")
 
 [node name="clou2" type="TileMapLayer" parent="decoration" unique_id=1135661915]
