@@ -152,6 +152,14 @@ func restore_level_state(state: Dictionary) -> void:
 	page_collected = state.get("page_collected", false)
 	won = state.get("won", false)
 	
+	if not page_collected:
+		if inventory:
+			for slot in inventory.slots:
+				if slot and slot.item and slot.item.name == "Partition":
+					slot.item = null
+					slot.amount = 0
+			inventory.updated.emit()
+	
 	if page_collected:
 		if exit: exit.unlock()
 		if book_page: book_page.queue_free()
