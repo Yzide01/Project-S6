@@ -8,6 +8,7 @@ signal victory
 @onready var audio_player = $AudioStreamPlayer2D
 @onready var book_page = $BookPage
 @onready var inventory: Inventory = preload("res://Core/InventorySystem/playerInventory.tres")
+var finished = false
 
 const DIALOGUE_FILE = preload("res://Dialogues/Level2/level2.dialogue")
 
@@ -20,7 +21,10 @@ func _ready() -> void:
 func _on_interact():
 	if is_locked:
 		DialogueManager.show_example_dialogue_balloon(DIALOGUE_FILE, "piano_inactive")
+	elif finished:
+		pass
 	else:
+		finished = true
 		delete_sheets()
 		DialogueManager.show_example_dialogue_balloon(DIALOGUE_FILE, "piano_active")
 		

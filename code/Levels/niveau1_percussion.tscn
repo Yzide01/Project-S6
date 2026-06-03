@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://c3y7rrtqp1sbn" path="res://Assets/Spirit/Esprit des percussions sans fond.png" id="16_jk20k"]
 [ext_resource type="AudioStream" uid="uid://tsk5r8hy4mcs" path="res://Assets/Sound/Trials/Bowl.wav" id="16_x6vnd"]
 [ext_resource type="AudioStream" uid="uid://clceoid0dmb1a" path="res://Assets/Sound/Ambiant sound/background_medium.wav" id="18_x6vnd"]
+[ext_resource type="Script" uid="uid://be0065k7fv7n2" path="res://Interactables/Objects/Level3/stele_indice.gd" id="23_j6odt"]
 [ext_resource type="PackedScene" uid="uid://crbf0xp4440lp" path="res://scenes/BookUI.tscn" id="24_xbafm"]
 [ext_resource type="PackedScene" uid="uid://cjfgvdyda2af" path="res://scenes/manager/mask.tscn" id="25_fam7g"]
 
@@ -6955,6 +6956,9 @@ texture = ExtResource("9_3lerf")
 [sub_resource type="TileSet" id="TileSet_fam7g"]
 sources/0 = SubResource("TileSetAtlasSource_xbafm")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3asa"]
+size = Vector2(34, 24)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8jge5"]
 texture = ExtResource("7_1l2te")
 14:0/0 = 0
@@ -7826,9 +7830,6 @@ texture = ExtResource("3_i04dm")
 sources/0 = SubResource("TileSetAtlasSource_8jge5")
 sources/1 = SubResource("TileSetAtlasSource_kchmo")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3asa"]
-size = Vector2(34, 24)
-
 [node name="Node2D" type="Node2D" unique_id=1451406429]
 y_sort_enabled = true
 script = ExtResource("1_ntwyx")
@@ -8052,10 +8053,6 @@ shape = SubResource("CircleShape2D_x6vnd")
 [node name="LabelPosition" type="Marker2D" parent="Bowl_3/Interactable2" unique_id=1944150849]
 position = Vector2(-14.5, -79)
 
-[node name="caillou" type="TileMapLayer" parent="." unique_id=577074584]
-tile_map_data = PackedByteArray("AAAXAAcAAQAIAAwAAAAXAAgAAQAIAA0AAAAYAAcAAQAJAAwAAAAYAAgAAQAJAA0AAAAZAAcAAQAKAAwAAAAZAAgAAQAKAA0AAAAaAAcAAQALAAwAAAAaAAgAAQALAA0AAAAiAAcAAQAIAAwAAAAiAAgAAQAIAA0AAAAjAAcAAQAJAAwAAAAjAAgAAQAJAA0AAAAkAAcAAQAKAAwAAAAkAAgAAQAKAA0AAAAlAAcAAQALAAwAAAAlAAgAAQALAA0AAAAtAAcAAQAIAAwAAAAtAAgAAQAIAA0AAAAuAAcAAQAJAAwAAAAuAAgAAQAJAA0AAAAvAAcAAQAKAAwAAAAvAAgAAQAKAA0AAAAwAAcAAQALAAwAAAAwAAgAAQALAA0AAAA=")
-tile_set = SubResource("TileSet_e0ch8")
-
 [node name="BookPage" parent="." unique_id=454720209 instance=ExtResource("2_mbexe")]
 position = Vector2(877, 317)
 page_id = "page_3"
@@ -8076,6 +8073,25 @@ position_smoothing_enabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/TerrainDetector" unique_id=635036639]
 position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_l3asa")
+
+[node name="caillou" type="TileMapLayer" parent="." unique_id=577074584]
+tile_map_data = PackedByteArray("AAAXAAcAAQAIAAwAAAAXAAgAAQAIAA0AAAAYAAcAAQAJAAwAAAAYAAgAAQAJAA0AAAAZAAcAAQAKAAwAAAAZAAgAAQAKAA0AAAAaAAcAAQALAAwAAAAaAAgAAQALAA0AAAAiAAcAAQAIAAwAAAAiAAgAAQAIAA0AAAAjAAcAAQAJAAwAAAAjAAgAAQAJAA0AAAAkAAcAAQAKAAwAAAAkAAgAAQAKAA0AAAAlAAcAAQALAAwAAAAlAAgAAQALAA0AAAAtAAcAAQAIAAwAAAAtAAgAAQAIAA0AAAAuAAcAAQAJAAwAAAAuAAgAAQAJAA0AAAAvAAcAAQAKAAwAAAAvAAgAAQAKAA0AAAAwAAcAAQALAAwAAAAwAAgAAQALAA0AAAA=")
+tile_set = SubResource("TileSet_e0ch8")
+
+[node name="SteleIndice" type="Node2D" parent="." unique_id=1371935908]
+script = ExtResource("23_j6odt")
+
+[node name="Interactable" parent="SteleIndice" unique_id=1521756030 instance=ExtResource("16_5sg2u")]
+position = Vector2(197.5, 232)
+interact_name = "Stele"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SteleIndice/Interactable" unique_id=950640890]
+position = Vector2(34.499996, -37.999996)
+scale = Vector2(0.315, 0.315)
+shape = SubResource("CircleShape2D_x6vnd")
+
+[node name="LabelPosition" type="Marker2D" parent="SteleIndice/Interactable" unique_id=1797691259]
+position = Vector2(-14.5, -79)
 
 [node name="Murs" type="StaticBody2D" parent="." unique_id=2042559377]
 visible = false
