@@ -1,6 +1,5 @@
 extends Node2D
 
-# On crée un signal pour prévenir le niveau que le joueur essaie de jouer
 signal played_hydraulis
 
 @onready var interactable_area = $Interactable

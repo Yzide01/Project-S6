@@ -13,9 +13,7 @@ func _ready() -> void:
 		interactable_area.interact = _on_interact
 
 func _on_interact():
-	if is_locked:
-		print("Player tried to leave but level not finished")
-	else:
+	if not is_locked:
 		start_level_combat.emit()
 
 func unlock() -> void:

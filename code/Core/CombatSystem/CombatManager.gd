@@ -48,7 +48,6 @@ signal answer_selected(is_correct: bool)
 @onready var question_text: Label = $BottomUI/QuizPanel/QuestionText
 @onready var answers_container: VBoxContainer = $BottomUI/QuizPanel/AnswersContainer
 
-# La base de données de tes questions (bien rangée !)
 var quiz_data = {
 	"corde": {
 		1: [
@@ -134,11 +133,6 @@ func _check_test_mode(level: int = 1) -> void:
 
 		# We launch the combat
 
-		#var test_enemy = BaseEnemy.new()
-		#test_enemy.enemy_name = "Test Minion"
-		#test_enemy.max_hp = 30
-		#test_enemy.rank = 1
-		#start_encounter([test_enemy], ["percussion", "vent", "corde"], "Test Encounter Started!")
 		var unlocked_skills: Array[String] = ["corde"]
 		if level >= 2:
 			unlocked_skills.append("percussion")
@@ -147,7 +141,7 @@ func _check_test_mode(level: int = 1) -> void:
 
 		# We launch the combat
 		start_encounter(horde, unlocked_skills, intro_message, level)
-# Fonction utilitaire pour éviter de répéter le code de création
+# Utility function to prevent code repetition during instance creation.
 func _create_enemy_data(nom: String, hp: int, rank: int) -> BaseEnemy:
 	var e = BaseEnemy.new()
 	e.enemy_name = nom
@@ -205,47 +199,18 @@ func start_encounter(horde: Array[BaseEnemy], skills: Array[String], intro_text:
 	start_battle()
 
 # --- fight loop ---
-#func start_battle() -> void:
-	## CORRECTION 1 : On attend le clic pour l'intro !
-	#if intro_message != "":
-		#info_text.text = intro_message + "\n\n[ Click or press Space to continue ]"
-		#await intro_terminee
-	#
-	#if get_alive_enemies_count() > 1:
-		#await display_text("A group of Silence Minions appears!")
-	#else:
-		#await display_text("A Silence Minion appears!")
-	#
-	#while player_hp > 0 and get_alive_enemies_count() > 0 and not escaped:
-		#await player_turn()
-		#
-		#if get_alive_enemies_count() <= 0 or escaped:
-			#break
-			#
-		#await enemy_turn()
-		#
-	#if escaped:
-		#queue_free()
-	#elif player_hp > 0:
-		#await display_text("Victory! Music is back in the spotlight.")
-		#end_battle(true)
-	#else:
-		#var tween = create_tween()
-		#tween.tween_property(player_visual, "modulate:a", 0.0, 1.0)
-		#await display_text("Defeat... Silence has engulfed you.")
-		#end_battle(false)
+			# break
+		# end_battle(true)
+		# end_battle(false)
 
 # --- fight loop ---# --- fight loop ---
 func start_battle() -> void:
-	# 1. GESTION DE L'ÉCRAN NOIR ET DE L'ANNONCE EN FONDU
 	if intro_message != "":
-		# On crée le fond noir opaque qui va recouvrir l'écran
 		var dark_bg = ColorRect.new()
-		dark_bg.color = Color(0, 0, 0, 1.0) # Noir total au départ
+		dark_bg.color = Color(0, 0, 0, 1.0)
 		dark_bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 		add_child(dark_bg)
 		
-		# On crée le texte d'avertissement au centre
 		var big_intro = Label.new()
 		big_intro.text = "Silence minions are approaching...\n\n" + intro_message + "\n\n[ Click or press Space to continue ]"
 		big_intro.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -253,36 +218,29 @@ func start_battle() -> void:
 		big_intro.autowrap_mode = TextServer.AUTOWRAP_WORD
 		big_intro.set_anchors_preset(Control.PRESET_FULL_RECT)
 		
-		# On applique des marges de sécurité pour le texte
 		big_intro.offset_left = 100
 		big_intro.offset_right = -100
 		
 		dark_bg.add_child(big_intro)
 		
-		# On commence l'écran en transparent pour faire un fondu entrant élégant (0.5 seconde)
 		dark_bg.modulate.a = 0.0
 		var tween_in = create_tween()
 		tween_in.tween_property(dark_bg, "modulate:a", 1.0, 0.5)
 		await tween_in.finished
 		
-		# On attend le clic ou l'appui sur Espace du joueur pour continuer
 		await intro_terminee
 		
-		# Le joueur a validé : on fait un magnifique fondu sortant (1.0 seconde)
 		var tween_out = create_tween()
 		tween_out.tween_property(dark_bg, "modulate:a", 0.0, 1.0)
 		await tween_out.finished
 		
-		# On détruit l'écran d'introduction, le combat au tour par tour commence !
 		dark_bg.queue_free() 
 	
-	# 2. GESTION DES PETITS TEXTES DE COMBAT EN BAS DE L'ÉCRAN
 	if get_alive_enemies_count() > 1:
 		await display_text("A group of Silence Minions appears!")
 	else:
 		await display_text("A Silence Minion appears!")
 	
-	# (Le reste de ta boucle 'while' et de ta fonction reste inchangé !)
 	while player_hp > 0 and get_alive_enemies_count() > 0 and not escaped:
 		await player_turn()
 		
@@ -330,7 +288,6 @@ func player_turn() -> void:
 					await display_text("The enemy's shield shatters!")
 					target.has_shield = false
 					
-					# Here I added the shield animation code
 					if target.ui_node.has_method("play_shield_break"):          
 						target.ui_node.play_shield_break()
 					
@@ -533,7 +490,6 @@ func choose_target() -> Dictionary:
 		
 	info_text.text = "Choose a target!"
 
-	# CORRECTION 2 : On efface le texte de la question QCM !
 	question_text.text = "Select an enemy to attack:"
 
 	for child in answers_container.get_children():

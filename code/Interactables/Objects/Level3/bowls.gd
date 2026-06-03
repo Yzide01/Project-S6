@@ -27,14 +27,14 @@ func _on_interact():
 func _update_feedback():
 	if audio:
 		match current_mass_state:
-			0: audio.pitch_scale = 1.7 # Vide = Aigu
-			1: audio.pitch_scale = 0.7 # Plein = Grave
+			0: audio.pitch_scale = 1.7
+			1: audio.pitch_scale = 0.7
 			
 func _on_interact2():
 	current_mass_state = (current_mass_state + 1) % 2
 	
 	var target_alpha = 0.0 if vide.visible else 1.0
-	vide.visible = true  # important sinon on ne verra pas le fade
+	vide.visible = true
 	
 	var tween = create_tween()
 	tween.tween_property(vide, "modulate:a", target_alpha, 0.5)

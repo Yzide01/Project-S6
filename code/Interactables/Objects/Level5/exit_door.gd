@@ -11,9 +11,7 @@ func _ready() -> void:
 		interactable_area.interact = _on_interact
 
 func _on_interact():
-	if is_locked:
-		print("The door is locked")
-	else:
+	if not is_locked:
 		SceneManager.changer_niveau("res://Levels/niveau2_vents.tscn")
 
 func unlock() -> void:

@@ -33,17 +33,15 @@ var water_ready: bool = false
 func _on_water_changed():
 	current_tune.clear()
 	
-	# Vérification des niveaux d'eau : Vide (0/Grave) - Plein (1/Aigu) - Vide (0/Grave)
 	var current_water = [bowls[0].current_mass_state, bowls[1].current_mass_state, bowls[2].current_mass_state]
 	
 	if current_water == secret_combination and not water_ready:
 		water_ready = true
 		
-		# --- DÉCLENCHEMENT DU DIALOGUE ---
-		# On charge le fichier .dialogue dédié à cette étape
+		# --- DIALOGUE TRIGGER ---
+		# Loads the specific .dialogue file for this level sequence.
 		var dialogue_resource = load("res://Dialogues/Level3/WaterReady.dialogue")
 		if dialogue_resource:
-			# On lance le dialogue à la section "start"
 			DialogueManager.show_example_dialogue_balloon(dialogue_resource, "start")
 		else:
 			push_error("Fichier de dialogue introuvable !")
@@ -74,7 +72,6 @@ func _on_bowl_played(bowl_index: int):
 
 func _trigger_victory():
 	is_solved = true
-	# ⚠️ CORRECTION : On await directement la séquence entière, et on supprime l'ancien "await DialogueManager..." qui faisait crasher
 	await _play_sequence(outro_position, "res://Dialogues/Level3/Outro.dialogue")
 	await get_tree().create_timer(2.0).timeout
 	
@@ -101,7 +98,6 @@ func _play_sequence(pos, diag_path):
 		t.tween_property(spirit, "modulate:a", 1.0, 0.8)
 		await t.finished
 
-	# ⚠️ CORRECTION : On utilise `load()` au lieu de `FileAccess`
 	var dialogue_res = load(diag_path)
 	if dialogue_res:
 		DialogueManager.show_example_dialogue_balloon(dialogue_res, "start")
@@ -123,7 +119,7 @@ func _play_sequence(pos, diag_path):
 func _on_terrain_entered(area: Area2D) -> void:
 	pass
 
-# --- GESTION DE LA SAUVEGARDE DE L'ÉTAT DU NIVEAU ---
+# --- LEVEL STATE SAVE MANAGEMENT ---
 func get_level_state() -> Dictionary:
 	return {
 		"is_solved": is_solved

@@ -1,6 +1,6 @@
 extends Node2D
 
-signal hint_requested # Signal envoyé au niveau pour jouer le son
+signal hint_requested
 
 @onready var interactable_area = $Interactable
 @onready var open_sprite = $Sprite2D
@@ -17,10 +17,8 @@ func _ready() -> void:
 
 func _on_interact():
 	if is_locked:
-		print("Indice demandé à la porte !")
 		hint_requested.emit()
 	else:
-		print("Le joueur traverse la porte !")
 		SceneManager.changer_niveau("res://Levels/niveau2_corde.tscn")
 
 func unlock() -> void:

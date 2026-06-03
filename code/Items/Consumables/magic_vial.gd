@@ -15,8 +15,6 @@ func use(player: Node) -> void:
 	DialogueManager.show_example_dialogue_balloon(load(diag_path), "start")
 
 func lancer_fin_du_jeu() -> void:
-	print("Lancement de la cinématique finale")
-	# On utilise la fonction qui change de scène automatiquement après la vidéo
 	SceneManager.jouer_cinematique(endgame_video_path, "res://scenes/credits.tscn")
 
 func proceder_changement_couleur(player: Node) -> void:

@@ -8,7 +8,6 @@ func _ready() -> void:
 	if interactable:
 		interactable.interact_name = "Pluck the string"
 		interactable.is_interactable = true
-		# On lie l'action à ce script
 		interactable.interact = _on_interact
 
 func _on_interact():
@@ -21,4 +20,3 @@ func _on_interact():
 		get_node(sound_node_name).play()
 
 	played.emit(id)
-	print("Corde jouée : ", id)

@@ -9,7 +9,6 @@ signal victory
 @onready var book_page = $BookPage
 @onready var inventory: Inventory = preload("res://Core/InventorySystem/playerInventory.tres")
 
-# On charge ton fichier de dialogue (le chemin exact vient de ton fichier .import !)
 const DIALOGUE_FILE = preload("res://Dialogues/Level2/level2.dialogue")
 
 func _ready() -> void:
@@ -20,32 +19,28 @@ func _ready() -> void:
 
 func _on_interact():
 	if is_locked:
-		# Le piano n'a pas encore toutes les partitions
 		DialogueManager.show_example_dialogue_balloon(DIALOGUE_FILE, "piano_inactive")
 	else:
 		delete_sheets()
-		# Le joueur a tout trouvé et interagit pour jouer
 		DialogueManager.show_example_dialogue_balloon(DIALOGUE_FILE, "piano_active")
 		
-		interactable_area.is_interactable = false # On désactive l'interaction
+		interactable_area.is_interactable = false
 		if audio_player:
-			audio_player.play() # La musique se lance !
+			audio_player.play()
 		await DialogueManager.dialogue_ended
 		await get_tree().create_timer(1.0).timeout
 		victory.emit()
 
-# Cette fonction est appelée automatiquement par les partitions quand on les ramasse
 func ajouter_partition() -> void:
 	partitions_actuelles += 1
 	
-	# On lance la bonne pensée selon le nombre de partitions trouvées
 	if partitions_actuelles == 1:
 		DialogueManager.show_example_dialogue_balloon(DIALOGUE_FILE, "find_fragment_1")
 	elif partitions_actuelles == 2:
 		DialogueManager.show_example_dialogue_balloon(DIALOGUE_FILE, "find_fragment_2")
 	elif partitions_actuelles >= partitions_requises:
 		DialogueManager.show_example_dialogue_balloon(DIALOGUE_FILE, "find_fragment_3")
-		unlock() # On déverrouille le piano !
+		unlock()
 
 func unlock() -> void:
 	is_locked = false

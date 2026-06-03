@@ -15,7 +15,7 @@ var level6_dialogue = load("res://Dialogues/Level6/Intro.dialogue")
 @onready var inca_trigger_area = $IncaTriggerArea 
 @onready var exit = $Exit
 @onready var flute = $flute_pan
-@onready var flute_inca = $flute_pan2 # Ton nœud de l'Inca avec sa flûte !
+@onready var flute_inca = $flute_pan2
 @export var endgame_video_path: String = "res://Assets/Videos/final_vial_scene.ogv"
 
 var player: Node2D
@@ -27,7 +27,6 @@ var is_dialogue_playing: bool = false
 var current_target: int = 5 
 
 func _ready() -> void:
-	# Sécurité absolue : tout commence masqué et transparent
 	if flute:
 		flute.hide()
 		flute.visible = false
@@ -65,7 +64,6 @@ func _on_inca_trigger_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and not inca_met:
 		inca_met = true
 		
-		# Apparition de l'esprit Inca initial (SANS flûte)
 		if inca_ghost:
 			inca_ghost.show()
 			inca_ghost.visible = true
@@ -75,7 +73,6 @@ func _on_inca_trigger_area_body_entered(body: Node2D) -> void:
 		
 		await _play_dialogue("lecon_inca")
 		
-		# Disparition après avoir parlé pour laisser le joueur faire le puzzle seul
 		if inca_ghost:
 			var t_fade = create_tween()
 			t_fade.tween_property(inca_ghost, "modulate:a", 0.0, 1.0)
@@ -86,7 +83,6 @@ func check_tube(size: int, tube_node: Node2D) -> void:
 	if puzzle_completed: return
 	
 	if size == current_target:
-		print("Bon tube touché : ", size)
 		tube_node.hide()
 		var interactable = tube_node.get_node_or_null("Interactable")
 		if interactable:
@@ -97,12 +93,10 @@ func check_tube(size: int, tube_node: Node2D) -> void:
 		if current_target == 0:
 			_on_puzzle_completed()
 	else:
-		print("Erreur ! Le joueur a touché le tube ", size, " au lieu de ", current_target)
 		reset_puzzle()
 
 func reset_puzzle() -> void:
 	current_target = 5
-	print("Réinitialisation du puzzle...")
 	for tube in get_tree().get_nodes_in_group("tubes"):
 		tube.show()
 		var interactable = tube.get_node_or_null("Interactable")
@@ -114,7 +108,7 @@ func _on_puzzle_completed():
 	exit.unlock()
 	await get_tree().create_timer(0.5).timeout
 	
-	# --- SÉQUENCE VISUELLE DE FIN ---
+	# --- FINAL VISUAL SEQUENCE ---
 	var fade_tween = create_tween().set_parallel(true)
 	
 	if flute_inca:
@@ -127,14 +121,12 @@ func _on_puzzle_completed():
 		
 	await fade_tween.finished
 	
-	# On s'assure que le volume est normal, puis on lance la musique
 	if audio:
 		audio.volume_db = 0.0
 		audio.play()
 		
 	await _play_dialogue("success")
 
-	# L'Esprit des Vents ($WindSpirit) apparaît pour son "Shhh"
 	if spirit_winds:
 		spirit_winds.show()
 		var t_wind = create_tween()
@@ -143,7 +135,7 @@ func _on_puzzle_completed():
 
 	await _play_dialogue("suite_success")
 
-	# --- DISPARITION FINALE DES ESPRITS ---
+	# --- SPIRITS FINAL DISAPPEARANCE ---
 	var final_fade = create_tween().set_parallel(true)
 	
 	if flute_inca: 
@@ -151,13 +143,11 @@ func _on_puzzle_completed():
 	if spirit_winds: 
 		final_fade.tween_property(spirit_winds, "modulate:a", 0.0, 1.5)
 		
-	# 🎵 NOUVEAU : On baisse le son en même temps qu'ils disparaissent !
 	if audio and audio.playing:
 		final_fade.tween_property(audio, "volume_db", -60.0, 1.5)
 		
 	await final_fade.finished
 	
-	# On coupe l'audio pour de bon
 	if audio:
 		audio.stop()
 	
@@ -168,15 +158,10 @@ func _on_puzzle_completed():
 	book_page.victory()
 
 func _on_exit_interacted_for_combat() -> void:
-	# On coupe la musique ambiante du niveau par sécurité avant le combat
 	if audio: audio.stop() 
 	
-	# ⚠️ CORRECTION : Le "await" est vital ici !
 	await start_combat(3)
 	
-	## Sécurité : Si le joueur perd et que la scène redémarre, on ne lance pas la fin
-	#if not is_inside_tree():
-		#return
 	if not is_inside_tree() or is_queued_for_deletion():
 		return
 	SceneManager.jouer_cinematique(endgame_video_path, "res://scenes/credits/credits.tscn")
@@ -206,7 +191,6 @@ func start_combat(niveau_id: int) -> void:
 	current_battle_scene = null
 	
 	# --- ANTI-CRASH FIX ---
-	# If player died, the level was reloaded. This ghost script must abort here!
 	if not is_inside_tree() or is_queued_for_deletion():
 		return
 		
@@ -225,12 +209,12 @@ func _play_dialogue(title: String):
 		DialogueManager.show_example_dialogue_balloon(level6_dialogue, title)
 		await DialogueManager.dialogue_ended
 	else:
-		print("ERREUR : res://Dialogues/Level6/Intro.dialogue introuvable")
+		pass
 	
 	if player: 
 		player.process_mode = Node.PROCESS_MODE_INHERIT
 
-# --- GESTION DE LA SAUVEGARDE DE L'ÉTAT DU NIVEAU ---
+# --- LEVEL STATE SAVE MANAGEMENT ---
 func get_level_state() -> Dictionary:
 	return {
 		"puzzle_completed": puzzle_completed,
@@ -249,5 +233,4 @@ func restore_level_state(state: Dictionary) -> void:
 			if interactable:
 				interactable.is_interactable = false
 		
-		# On supprime le livre s'il a déjà été récupéré
 		if book_page: book_page.queue_free()

@@ -8,7 +8,6 @@ func _ready():
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.2).set_trans(Tween.TRANS_SINE)
 	
 	if $VBoxContainer:
-		# On élargit le conteneur pour accueillir toute la ligne
 		$VBoxContainer.custom_minimum_size = Vector2(900, 0)
 		$VBoxContainer.offset_left = -450
 		$VBoxContainer.offset_right = 450
@@ -16,7 +15,6 @@ func _ready():
 	build_ui()
 
 func build_ui():
-	# Nettoyer les enfants existants
 	for child in $VBoxContainer.get_children():
 		child.queue_free()
 		
@@ -28,7 +26,6 @@ func build_ui():
 		var info = SaveManager.get_slot_info(i)
 		var is_empty = info.is_empty()
 		
-		# Label d'information
 		var label = create_themed_label()
 		if is_empty:
 			label.text = "Slot " + str(i) + " - Empty"
@@ -39,12 +36,10 @@ func build_ui():
 			label.text = "Slot " + str(i) + " : " + chap + " (Lv " + lvl + ") - " + date
 		hbox.add_child(label)
 		
-		# Bouton Sauvegarder
 		var btn_save = create_themed_button("Save")
 		btn_save.pressed.connect(func(): _on_save_pressed(i))
 		hbox.add_child(btn_save)
 		
-		# Bouton Charger
 		var btn_load = create_themed_button("Load")
 		btn_load.disabled = is_empty
 		if is_empty:
@@ -52,7 +47,6 @@ func build_ui():
 		btn_load.pressed.connect(func(): _on_load_pressed(i))
 		hbox.add_child(btn_load)
 		
-		# Bouton Supprimer
 		var btn_delete = create_themed_button("Delete")
 		btn_delete.disabled = is_empty
 		if is_empty:
@@ -62,12 +56,10 @@ func build_ui():
 		
 		$VBoxContainer.add_child(hbox)
 		
-	# Espace
 	var spacer = Control.new()
 	spacer.custom_minimum_size = Vector2(0, 40)
 	$VBoxContainer.add_child(spacer)
 	
-	# Bouton Retour
 	var back_btn = create_themed_button("Back")
 	back_btn.custom_minimum_size = Vector2(400, 60)
 	back_btn.pressed.connect(_on_back_pressed)

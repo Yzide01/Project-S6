@@ -107,7 +107,6 @@ func _unhandled_input(event):
 		update_view()
 
 func update_view():
-	# On utilise get_node_or_null sur les chemins probables ou des noms uniques
 	var title_l = _find_node_by_name("TitleLabel")
 	var text_l = _find_node_by_name("RichTextLabelLecon")
 	var img_l = _find_node_by_name("IllustrationLeft")
@@ -165,9 +164,7 @@ func update_view():
 				img_r.texture = load(data["img_right"])
 				_apply_img_settings(img_r, data.get("is_large_r", false))
 
-# Fonction utilitaire pour remplacer find_child qui semble poser problème
 func _find_node_by_name(node_name: String) -> Node:
-	# On cherche dans les enfants de manière récursive
 	return find_child(node_name, true, false)
 
 func _apply_img_settings(img_node: TextureRect, is_large: bool):

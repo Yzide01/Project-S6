@@ -1,13 +1,12 @@
 extends StaticBody2D
 
-signal hint_requested # Signal envoyé au niveau pour demander l'indice musical
+signal hint_requested
 
 @export var is_open: bool = false
-@export var is_locked: bool = true # Le verrou de l'énigme
+@export var is_locked: bool = true
 @export var is_interactable: bool = true
 @export var object_name: String = "Porte"
 
-# Variables pour glisser tes deux images de porte dans l'inspecteur Godot
 @export var texture_fermee: Texture2D 
 @export var texture_ouverte: Texture2D 
 
@@ -24,13 +23,10 @@ func _on_interact(_player: Node2D = null) -> void:
 	if not is_interactable:
 		return
 		
-	# Si la porte est verrouillée, on ne l'ouvre pas, on demande l'indice !
 	if is_locked:
-		print("La porte est verrouillée. Elle émet une mélodie...")
 		hint_requested.emit()
 		return
 
-	# Si elle n'est plus verrouillée, on l'ouvre
 	is_open = !is_open
 	_update_door_state()
 

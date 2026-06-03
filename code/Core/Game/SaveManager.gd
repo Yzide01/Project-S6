@@ -2,19 +2,18 @@ extends Node
 
 const DB_PATH = "user://chromesthesia_save.db"
 
-# Variables de progression globale
 var current_chapter: String = "Wind Floor"
 var current_level: int = 1
 
 var db: SQLite = null
 
 func _ready() -> void:
-	# Initialise la base de données
+	# Initializes the SQLite database connection.
 	db = SQLite.new()
 	db.path = DB_PATH
 	db.open_db()
 	
-	# Crée la table de sauvegarde si elle n'existe pas
+	# Creates the save data table if it does not already exist.
 	var table_dict = {
 		"id": {"data_type": "int", "primary_key": true, "auto_increment": true},
 		"chapter": {"data_type": "text"},
@@ -32,13 +31,11 @@ func _ready() -> void:
 	
 	db.create_table("saves", table_dict)
 	
-	# Ajout sécurisé des colonnes si elles n'existent pas dans les anciennes sauvegardes
 	db.query("ALTER TABLE saves ADD COLUMN combat_state TEXT;")
 	db.query("ALTER TABLE saves ADD COLUMN level_state TEXT;")
 	db.query("ALTER TABLE saves ADD COLUMN vial_use_count INTEGER DEFAULT 0;")
 	db.query("ALTER TABLE saves ADD COLUMN unlocked_pages TEXT;")
 
-# Variables de restauration
 var restore_player_position: bool = false
 var loaded_player_x: float = 0.0
 var loaded_player_y: float = 0.0
@@ -47,10 +44,9 @@ var restore_combat: bool = false
 var loaded_combat_level: int = 1
 var loaded_level_state: Dictionary = {}
 
-# Sauvegarde l'état du jeu (supporte plusieurs slots)
+# Saves the current game state across multiple profile slots.
 func save_game(slot_id: int = 1) -> void:
 	if not db:
-		print("Erreur: base de données non initialisée.")
 		return
 		
 	var inventory = preload("res://Core/InventorySystem/playerInventory.tres")
@@ -78,7 +74,6 @@ func save_game(slot_id: int = 1) -> void:
 			p_x = player.global_position.x
 			p_y = player.global_position.y
 			
-		# Déduire automatiquement le chapitre et le niveau depuis le nom du fichier
 		var sp_lower = scene_path.to_lower()
 		if "vents" in sp_lower:
 			current_chapter = "Wind Floor"
@@ -137,21 +132,16 @@ func save_game(slot_id: int = 1) -> void:
 		"last_saved": time_now
 	}
 	
-	# On vérifie si la sauvegarde existe déjà pour ce slot
 	db.query("SELECT id FROM saves WHERE id = " + str(slot_id) + ";")
 	if db.query_result.size() > 0:
-		# Mise à jour
 		db.update_rows("saves", "id = " + str(slot_id), data)
 	else:
-		# Insertion
 		db.insert_row("saves", data)
 		
-	print("Partie sauvegardée (Slot ", slot_id, ") : ", current_chapter, " - Niveau ", current_level)
 
-# Charge l'état du jeu
+# Loads the persisted game state.
 func load_game(slot_id: int = 1) -> void:
 	if not db:
-		print("Erreur: base de données non initialisée.")
 		return
 		
 	db.query("SELECT * FROM saves WHERE id = " + str(slot_id) + ";")
@@ -217,13 +207,11 @@ func load_game(slot_id: int = 1) -> void:
 					if progression_node.has_signal("page_unlocked_signal"):
 						progression_node.page_unlocked_signal.emit()
 				
-		print("Partie chargée (Slot ", slot_id, ") ! Reprise au : ", current_chapter, " - Niveau ", current_level)
 		
 		var target_path = ""
 		if result.has("scene_path") and result["scene_path"] != "":
 			target_path = result["scene_path"]
 		else:
-			# Fallback pour les anciennes sauvegardes (sans scene_path)
 			if current_chapter == "Étage des Vents" or current_chapter == "Wind Floor":
 				if current_level == 1:
 					target_path = "res://Levels/niveau1_vents.tscn"
@@ -242,7 +230,6 @@ func load_game(slot_id: int = 1) -> void:
 				await get_tree().process_frame
 				await get_tree().process_frame
 				
-			# On attend un tout petit peu pour s'assurer que la nouvelle scène a fini son _ready
 			await get_tree().create_timer(0.5).timeout
 			
 			var new_scene = get_tree().current_scene
@@ -257,12 +244,9 @@ func load_game(slot_id: int = 1) -> void:
 						new_scene.start_combat(loaded_combat_level)
 					restore_combat = false
 				
-		# Unpause the game if loaded from pause menu
 		get_tree().paused = false
 		if PauseMenuManager.has_method("close_pause_menu"):
 			PauseMenuManager.close_pause_menu()
-	else:
-		print("Aucune sauvegarde trouvée pour le slot ", slot_id)
 
 func get_slot_info(slot_id: int) -> Dictionary:
 	if not db:
@@ -276,4 +260,3 @@ func delete_save(slot_id: int = 1) -> void:
 	if not db:
 		return
 	db.query("DELETE FROM saves WHERE id = " + str(slot_id) + ";")
-	print("Sauvegarde supprimée (Slot ", slot_id, ")")

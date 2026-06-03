@@ -5,7 +5,6 @@ func _ready():
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.2).set_trans(Tween.TRANS_SINE)
 	
-	# Connect buttons to their assigned levels
 	if $VBoxContainer.has_node("Level1CordeButton"):
 		$VBoxContainer/Level1CordeButton.pressed.connect(func(): _load_level("res://Levels/niveau1_cordeV2.tscn"))
 		$VBoxContainer/Level1CordeButton.grab_focus()

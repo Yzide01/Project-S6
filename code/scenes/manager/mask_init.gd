@@ -3,13 +3,11 @@ extends ColorRect
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-	# Cache ce ColorRect car on applique le shader directement aux objets
 	visible = false
 	
 	var mat = material as ShaderMaterial
 	if not mat: return
 	
-	# On applique la couleur de départ UNIQUEMENT basée sur le compteur global
 	var current_sat = 0.0
 	if SceneManager.vial_use_count == 1:
 		current_sat = 0.35
@@ -28,10 +26,10 @@ func _apply_material_to_world():
 
 func _apply_recursive(node: Node):
 	if node is CanvasLayer:
-		return # Ne pas affecter l'UI
+		return
 		
 	if node.name == "Player" or node.name == "player" or node.is_in_group("player"):
-		return # Ne pas affecter le joueur
+		return
 		
 	if node is CanvasItem and node != self:
 		if node.material == null:

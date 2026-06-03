@@ -1,6 +1,6 @@
 extends Node
 
-signal page_unlocked_signal # Nouveau signal
+signal page_unlocked_signal
 
 var unlocked_pages = {
 	"page_1": false,
@@ -14,8 +14,8 @@ var unlocked_pages = {
 func unlock_page(page_id: String) -> void:
 	if unlocked_pages.has(page_id):
 		unlocked_pages[page_id] = true
-		page_unlocked_signal.emit() # On prévient que quelque chose a changé
+		page_unlocked_signal.emit()
 		
-		# Auto-sauvegarde de la progression globale
+		# Auto-saves the global progression state.
 		if SaveManager and SaveManager.has_method("save_game"):
 			SaveManager.save_game()
