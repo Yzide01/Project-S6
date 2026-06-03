@@ -88,8 +88,8 @@
 [ext_resource type="Texture2D" uid="uid://c0vgkjc5kcr6e" path="res://Assets/TBC/Melos/inactif_5/0079.png" id="82_n72lr"]
 [ext_resource type="Texture2D" uid="uid://beyx5u5lobac6" path="res://Assets/TBC/Melos/inactif_5/0080.png" id="83_el8d6"]
 [ext_resource type="Texture2D" uid="uid://4qlgls5t4v03" path="res://Assets/TBC/bulle.png" id="86_0jhdy"]
-[ext_resource type="Texture2D" uid="uid://cjt2h0f0tsaos" path="res://Assets/TBC/button1.png" id="86_cwemx"]
-[ext_resource type="Texture2D" uid="uid://b8d7w8ussgans" path="res://Assets/TBC/button.png" id="87_18nv8"]
+[ext_resource type="Texture2D" uid="uid://bccdotidqhsn3" path="res://Assets/TBC/button1.png" id="86_cwemx"]
+[ext_resource type="Texture2D" uid="uid://dfhuie7cql4nw" path="res://Assets/TBC/button.png" id="87_18nv8"]
 [ext_resource type="AudioStream" uid="uid://cghx85cp2m13b" path="res://Assets/Sound/OST/combat_music.wav" id="91_ik0mx"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_0jhdy"]
@@ -350,60 +350,6 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="FontFile" id="FontFile_ik0mx"]
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-cache/0/variation_coordinates = {}
-cache/0/face_index = 0
-cache/0/embolden = 0.0
-cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
-cache/0/spacing_top = 0
-cache/0/spacing_bottom = 0
-cache/0/spacing_space = 0
-cache/0/spacing_glyph = 0
-cache/0/baseline_offset = 0.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/17/0/ascent = 0.0
-cache/0/17/0/descent = 0.0
-cache/0/17/0/underline_position = 0.0
-cache/0/17/0/underline_thickness = 0.0
-cache/0/17/0/scale = 1.0
-cache/0/15/0/ascent = 0.0
-cache/0/15/0/descent = 0.0
-cache/0/15/0/underline_position = 0.0
-cache/0/15/0/underline_thickness = 0.0
-cache/0/15/0/scale = 1.0
-cache/0/14/0/ascent = 0.0
-cache/0/14/0/descent = 0.0
-cache/0/14/0/underline_position = 0.0
-cache/0/14/0/underline_thickness = 0.0
-cache/0/14/0/scale = 1.0
-cache/0/13/0/ascent = 0.0
-cache/0/13/0/descent = 0.0
-cache/0/13/0/underline_position = 0.0
-cache/0/13/0/underline_thickness = 0.0
-cache/0/13/0/scale = 1.0
-cache/0/12/0/ascent = 0.0
-cache/0/12/0/descent = 0.0
-cache/0/12/0/underline_position = 0.0
-cache/0/12/0/underline_thickness = 0.0
-cache/0/12/0/scale = 1.0
-cache/0/11/0/ascent = 0.0
-cache/0/11/0/descent = 0.0
-cache/0/11/0/underline_position = 0.0
-cache/0/11/0/underline_thickness = 0.0
-cache/0/11/0/scale = 1.0
-cache/0/18/0/ascent = 0.0
-cache/0/18/0/descent = 0.0
-cache/0/18/0/underline_position = 0.0
-cache/0/18/0/underline_thickness = 0.0
-cache/0/18/0/scale = 1.0
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v66yn"]
 texture = ExtResource("86_0jhdy")
 texture_margin_right = 77.0
@@ -564,12 +510,11 @@ offset_top = 21.0
 offset_right = 513.00006
 offset_bottom = 159.0
 mouse_filter = 1
-theme_override_colors/font_color = Color(0.25490198, 0.25490198, 0.2509804, 1)
+theme_override_colors/font_color = Color(0.00066695263, 0.00066695263, 0.0006468763, 1)
 theme_override_constants/line_spacing = 3
 theme_override_constants/paragraph_spacing = 0
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = SubResource("FontFile_ik0mx")
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxTexture_v66yn")
 text = "Watch out ! Silence Minion(s) appear(s) !"
 horizontal_alignment = 1
@@ -582,7 +527,8 @@ offset_left = 648.0
 offset_top = 41.0
 offset_right = 857.0
 offset_bottom = 93.0
-theme_override_colors/font_color = Color(0.25490198, 0.25490198, 0.2509804, 1)
+theme_override_colors/font_color = Color(0.00066695263, 0.00066695263, 0.0006468763, 1)
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxTexture_0jhdy")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_ik0mx")
 theme_override_styles/hover = SubResource("StyleBoxTexture_ujkq1")
@@ -597,7 +543,7 @@ offset_left = 867.0
 offset_top = 40.0
 offset_right = 1073.0
 offset_bottom = 92.0
-theme_override_colors/font_color = Color(0.25490198, 0.25490198, 0.2509804, 1)
+theme_override_colors/font_color = Color(0.00066695263, 0.00066695263, 0.0006468763, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_18nv8")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_4kwq3")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3xtuf")
