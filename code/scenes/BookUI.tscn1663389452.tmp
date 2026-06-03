@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://crbf0xp4440lp"]
 
 [ext_resource type="Script" uid="uid://bvwjbjmav0kss" path="res://scenes/BookUI.gd" id="1_h7dfs"]
-[ext_resource type="Texture2D" uid="uid://ct6cgc7juy46c" path="res://Assets/Book/flechedroite.png" id="2_qjh8d"]
-[ext_resource type="Texture2D" uid="uid://c27opbvxkoffk" path="res://Assets/Book/flechegauche.png" id="3_fq5ne"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogy4m"]
 bg_color = Color(0.9019608, 0.8352941, 0.72156864, 1)
@@ -40,11 +38,6 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="MainPanel/MarginContainer" unique_id=1052792306]
-modulate = Color(0, 0, 0, 1)
-custom_minimum_size = Vector2(0, 125)
-layout_mode = 2
-
 [node name="VBoxMain" type="VBoxContainer" parent="MainPanel/MarginContainer" unique_id=1015711696]
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -67,27 +60,6 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
-
-[node name="PrevPageButton" type="TextureButton" parent="MainPanel/MarginContainer/VBoxMain/HBoxPages/PageGaucheMargin" unique_id=1515598576]
-clip_contents = true
-custom_minimum_size = Vector2(70, 40)
-layout_direction = 3
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-size_flags_stretch_ratio = 0.0
-texture_normal = ExtResource("3_fq5ne")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="LeftPageNumber" type="Label" parent="MainPanel/MarginContainer/VBoxMain/HBoxPages/PageGaucheMargin" unique_id=1871690339]
-modulate = Color(0, 0, 0, 1)
-custom_minimum_size = Vector2(-191, -60)
-layout_mode = 2
-size_flags_vertical = 8
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 2
 
 [node name="PageGauche" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxMain/HBoxPages/PageGaucheMargin" unique_id=1242733329]
 layout_mode = 2
@@ -124,25 +96,6 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
-
-[node name="RightPageNumber" type="Label" parent="MainPanel/MarginContainer/VBoxMain/HBoxPages/PageDroiteMargin" unique_id=232747740]
-modulate = Color(0, 0, 0, 1)
-custom_minimum_size = Vector2(191, -60)
-layout_mode = 2
-size_flags_vertical = 8
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="NextPageButton" type="TextureButton" parent="MainPanel/MarginContainer/VBoxMain/HBoxPages/PageDroiteMargin" unique_id=638161086]
-clip_contents = true
-custom_minimum_size = Vector2(70, 40)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 10
-texture_normal = ExtResource("2_qjh8d")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="PageDroite" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxMain/HBoxPages/PageDroiteMargin" unique_id=979243221]
 layout_mode = 2
@@ -199,5 +152,53 @@ stretch_mode = 3
 unique_name_in_owner = true
 layout_mode = 2
 
-[connection signal="pressed" from="MainPanel/MarginContainer/VBoxMain/HBoxPages/PageGaucheMargin/PrevPageButton" to="." method="_on_prev_page_button_pressed"]
-[connection signal="pressed" from="MainPanel/MarginContainer/VBoxMain/HBoxPages/PageDroiteMargin/NextPageButton" to="." method="_on_next_page_button_pressed"]
+[node name="Control" type="Control" parent="." unique_id=1052792306]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RightPageNumber" type="Label" parent="Control" unique_id=232747740]
+custom_minimum_size = Vector2(191, -60)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="LeftPageNumber" type="Label" parent="Control" unique_id=1871690339]
+custom_minimum_size = Vector2(-191, -60)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="NextPageButton" type="TextureButton" parent="." unique_id=638161086]
+custom_minimum_size = Vector2(-65, -60)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PrevPageButton" type="TextureButton" parent="." unique_id=1515598576]
+custom_minimum_size = Vector2(65, -60)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[connection signal="pressed" from="NextPageButton" to="." method="_on_next_page_button_pressed"]
+[connection signal="pressed" from="PrevPageButton" to="." method="_on_prev_page_button_pressed"]

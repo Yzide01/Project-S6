@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+# 1. Variables de configuration et d'état
 var current_page : int = 1
 var wave_color : Color = Color(0.75, 0.6, 0.3, 1.0) 
 var wave_thickness : float = 2.0
@@ -79,6 +80,7 @@ var book_content = {
 }
 
 func _ready():
+	# Initialisation automatique sur la dernière page débloquée par le joueur
 	for i in range(6, 0, -1):
 		if Progression.unlocked_pages.get("page_" + str(i), false):
 			current_page = i
@@ -106,6 +108,7 @@ func _unhandled_input(event):
 		current_page -= 1
 		update_view()
 
+# 2. Fonction principale de rafraîchissement visuel
 func update_view():
 	var title_l = _find_node_by_name("TitleLabel")
 	var text_l = _find_node_by_name("RichTextLabelLecon")
@@ -114,11 +117,37 @@ func update_view():
 	var img_r = _find_node_by_name("IllustrationRight")
 	var container_cordes = _find_node_by_name("ContainerCordes")
 
+	# --- RECHERCHE AUTOMATIQUE ET SÉCURISÉE DES NUMÉROS ET BOUTONS ---
+	var lbl_left = _find_node_by_name("LeftPageNumber")
+	var lbl_right = _find_node_by_name("RightPageNumber")
+	
+	# Gestion sécurisée du bouton droit (détecte 'NextPageButton' ou 'NextPage')
+	var btn_next = _find_node_by_name("NextPageButton")
+	if not btn_next: btn_next = _find_node_by_name("NextPage")
+	
+	# Gestion sécurisée du bouton gauche (détecte 'PrevPageButton', 'PrevPage' ou 'Prev')
+	var btn_prev = _find_node_by_name("PrevPageButton")
+	if not btn_prev: btn_prev = _find_node_by_name("PrevPage")
+	if not btn_prev: btn_prev = _find_node_by_name("Prev")
+
 	var page_key = "page_" + str(current_page)
 	var is_unlocked = Progression.unlocked_pages.get(page_key, false)
 
 	if text_l: text_l.set_horizontal_alignment(HORIZONTAL_ALIGNMENT_LEFT)
 	if text_r: text_r.set_horizontal_alignment(HORIZONTAL_ALIGNMENT_LEFT)
+
+	# --- MISE À JOUR DYNAMIQUE DES NUMÉROS DE PAGE ---
+	if lbl_left and lbl_right:
+		var left_num = (current_page - 1) * 2 + 1
+		var right_num = left_num + 1
+		lbl_left.text = str(left_num)
+		lbl_right.text = str(right_num)
+
+	# --- GESTION DE LA VISIBILITÉ DES FLÈCHES DE NAVIGATION ---
+	if btn_next:
+		btn_next.visible = current_page < book_content.size()
+	if btn_prev:
+		btn_prev.visible = current_page > 1
 
 	if not is_unlocked:
 		if title_l: title_l.text = "LEVEL " + str(current_page) + " - ???"
@@ -164,6 +193,18 @@ func update_view():
 				img_r.texture = load(data["img_right"])
 				_apply_img_settings(img_r, data.get("is_large_r", false))
 
+# 3. Fonctions déclenchées par les signaux de clics (UI)
+func _on_next_page_button_pressed():
+	if current_page < book_content.size():
+		current_page += 1
+		update_view()
+
+func _on_prev_page_button_pressed():
+	if current_page > 1:
+		current_page -= 1
+		update_view()
+
+# 4. Fonctions utilitaires internes (Ondes & Images)
 func _find_node_by_name(node_name: String) -> Node:
 	return find_child(node_name, true, false)
 
