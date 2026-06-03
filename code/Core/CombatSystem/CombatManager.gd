@@ -111,7 +111,8 @@ func _ready() -> void:
 	corde_button.pressed.connect(_on_corde_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	
-	call_deferred("_check_test_mode")
+	if get_tree().current_scene == self:
+		call_deferred("_check_test_mode")
 
 func _check_test_mode(level: int = 1) -> void:
 	current_level_id = level
