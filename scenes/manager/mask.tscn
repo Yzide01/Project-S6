@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cjfgvdyda2af"]
+
+[ext_resource type="Shader" uid="uid://d10ytub0gh11c" path="res://scenes/manager/mask.gdshader" id="1_7xngd"]
+[ext_resource type="Script" uid="uid://bhwwjxsugrubq" path="res://scenes/manager/mask_init.gd" id="2_sty7p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sty7p"]
+shader = ExtResource("1_7xngd")
+shader_parameter/saturation = 1.0
+
+[node name="Mask" type="ColorRect" unique_id=1462240249 groups=["world_filter"]]
+z_index = 10
+material = SubResource("ShaderMaterial_sty7p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_sty7p")

@@ -1,0 +1,26 @@
+~ start
+Mélos: It looks like a forest of stone... The air whistles without harmony here.
+Mélos: Look at these monumental structures. Something important was broken here.
+=> END
+
+~ indice_stele
+Mélos: "From the rumbling of the earth to the whistling of the summit."
+Mélos: That means from longest to shortest. From Low pitch to High pitch.
+=> END
+
+~ lecon_inca
+Incan Spirit: Stranger, my soul wanders because my sacred Syrinx has been scattered by the silence.
+Incan Spirit: I need your help to reconstruct its voice, from the deepest breath to the highest whisper.
+Incan Spirit: Remember the law of the Andes: a long tube holds the air and sings Low; a short tube releases it quickly and sings High.
+Incan Spirit: Gather the five pipes in order, from the longest to the shortest, to restore the harmony.
+=> END
+
+~ success
+Mélos: Listen! The air is flowing perfectly through the tubes.
+Incan Spirit: You have repaired my flute! The sacred scale echoes once again in the mountains.
+=> END
+
+~ suite_success
+Wind Spirit: *Fuuuushhh... Shhh...* Thank you, creators of wind. The harmony is reclaimed!
+Mélos: The melody is pure... the final passage is open! Now, I can finally go beat the Silence.
+=> END

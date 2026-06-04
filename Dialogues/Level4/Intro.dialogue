@@ -1,0 +1,36 @@
+~ start
+Mélos: Oh no, a giant gap! How am I supposed to cross this?
+=> END
+
+~ impact_fail
+Mélos: Ouch... There's no bounce at all. It's like jumping on a wet sponge.
+Mélos: These drums are way too loose to jump on.
+=> END
+
+~ spirit_appears
+Percussion Spirit: You thought rhythm was just background noise, little Mélos? Rhythm is pure energy!
+Percussion Spirit: Look at these skins. Without tension, they are hollow and lifeless.
+Mélos: I'll bring the life back to them. I just need to find a way to tighten them up!
+=> END
+
+~ find_wheel
+Mélos: This massive wheel... It must be the mechanism to tighten the drum skins.
+=> END
+
+~ victory
+Mélos: Perfect! The tension is back and the drums are firm.
+Mélos: I can finally reach the altar!
+=> END
+
+~ across_the_gap
+Mélos: I made it! That was some serious bounce.
+Mélos: Now, let's see what's inside this altar...
+=> END
+
+~ outro
+Mélos: This is incredible... The enemy horde has been defeated! The land's true rhythm is finally echoing with strength again.
+Percussion Spirit: Phenomenal work, mortal! You've got a serious sense of tempo. Without your help, the silence would have completely choked my drums out.
+Percussion Spirit: As promised for your victory, here is the second magic vial to restore even more colors to this world. It has been added to your inventory!
+Mélos: Awesome! With this, the colors will grow even stronger.
+Percussion Spirit: Let its power protect your mind from the gray void ahead. The drums and the rhythm will be your shield now. Farewell, creator of harmony!
+=> END

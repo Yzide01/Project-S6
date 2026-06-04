@@ -1,0 +1,8 @@
+~ start
+Mélos: The water successfully caught the air! The pressure is perfectly stable now.
+Mélos: Look! The ancient mechanism is engaging and the passage is finally opening!
+=> END
+
+~ fail
+Mélos: The air leaked out... The system is empty again. We need to pump the bellows at the Organ once more.
+=> END

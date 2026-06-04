@@ -1,0 +1,23 @@
+~ intro
+Mélos: The world has lost its colors and its melody... Everything is frozen in a grey, heavy silence.
+Mélos: I must restore harmony. By solving these puzzles, I will bring life and vibrance back to this world!
+Game: Welcome, Melos. This is your first trial. To restore harmony, you must prove your worth by mastering the laws of sound. Only then will the Spirits of Music agree to help you.
+Game: Good luck on your journey!
+=> END
+
+~ start
+Mélos: This door... it seems to react to my presence. There is no lock; I should try to interact with it to see if it opens.
+=> END
+
+~ hint
+Mélos: It is waiting for an answer. I must mimic that echo. These strings on the ground... if I interact with them, I can make them vibrate!
+Harmony Guide: [HINT] String length determines pitch. Long strings are heavy and slow, creating a Deep sound. Short strings are light and fast, creating a High sound.
+=> END
+
+~ lesson
+Mélos: A page... it detached itself from the door's structure.
+Harmony Guide: [GRIMOIRE UPDATED]
+Harmony Guide: LESSON I: THE DIMENSION OF SOUND. Length dictates the note.
+Harmony Guide: Long String = Low Frequency. Large objects vibrate slower, creating a Deep sound.
+Harmony Guide: Short String = High Frequency. Small objects vibrate faster, creating a High sound.
+=> END

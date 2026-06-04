@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HealthItem" format=3 uid="uid://cnqrnyi3aesln"]
+
+[ext_resource type="Script" uid="uid://crpqs4r3w20l3" path="res://Items/Consumables/magic_vial.gd" id="1_2js8a"]
+[ext_resource type="Texture2D" uid="uid://dc23qeyn50ekc" path="res://Assets/Graphics/Ninja Adventure - Asset Pack/Items/Potion/LifePot.png" id="2_w7k22"]
+
+[resource]
+script = ExtResource("1_2js8a")
+name = "vial"
+texture = ExtResource("2_w7k22")
+metadata/_custom_type_script = "uid://y2adiqmd6hk5"

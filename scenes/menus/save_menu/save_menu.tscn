@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://76epofytche4"]
+
+[ext_resource type="Script" uid="uid://cb4pfxids5msr" path="res://scenes/menus/save_menu/save_menu.gd" id="1_save"]
+
+[node name="SaveMenu" type="Control" unique_id=172335575]
+auto_translate_mode = 2
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_save")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=554357400]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.043, 0.047, 0.063, 0.9)
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1961739839]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 64
+text = "Save / Load"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=418770541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -100.0
+offset_right = 300.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Slot1Button" type="Button" parent="VBoxContainer" unique_id=190619637]
+custom_minimum_size = Vector2(600, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/font_pressed_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_colors/font_hover_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 28
+text = "Slot 1 - Empty"
+flat = true
+
+[node name="Slot2Button" type="Button" parent="VBoxContainer" unique_id=2124167866]
+custom_minimum_size = Vector2(600, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/font_pressed_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_colors/font_hover_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 28
+text = "Slot 2 - Empty"
+flat = true
+
+[node name="Slot3Button" type="Button" parent="VBoxContainer" unique_id=650545368]
+custom_minimum_size = Vector2(600, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/font_pressed_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_colors/font_hover_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 28
+text = "Slot 3 - Empty"
+flat = true
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1270999500]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="VBoxContainer" unique_id=292690754]
+custom_minimum_size = Vector2(600, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/font_pressed_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_colors/font_hover_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 28
+text = "Back"
+flat = true

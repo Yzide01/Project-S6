@@ -1,0 +1,41 @@
+~ piano_inactive
+Mélos: The piano is silent. It's missing three specific pieces of sheet music.
+=> END
+
+~ explore_zone
+Mélos: I have a strange feeling about this area... It feels like there is another room hidden behind.
+Mélos: I should try to explore it.
+=> END
+
+~ find_fragment_1
+Mélos: I found the first fragment! The melody is beginning to reappear in my mind.
+=> END
+
+~ find_fragment_2
+Mélos: The second fragment. The rhythm is getting stronger.
+=> END
+
+~ find_fragment_3
+Mélos: That's it! The score is complete. 
+Mélos: Now, let's see if this piano remembers how to sing.
+=> END
+
+~ piano_active
+Mélos: The score is placed. The strings are vibrating with anticipation.
+Mélos: It's time to play.
+=> END
+
+~ page_collected
+Mélos: Now, I should find a way out of here.
+=> END
+
+~ reconnaissance
+Mélos: The enemies are gone... But this world remains so gray and lifeless.
+String Spirit: Do not despair, mortal. I have observed your journey from the shadows, and you have done phenomenal work with your strings.
+Mélos: Who are you?! 
+String Spirit: I am the Spirit of Strings. This world was plunged into this dark, colorless oblivion by the Spirit of Silence, who drained every spark of life from our lands.
+String Spirit: To aid you on your quest, take this magic vial. It has been added to your inventory.
+String Spirit: To use it and bring back some of the world's colors, open your inventory, scroll to select the potion, and press Q to use it.
+Mélos: Thank you. I can feel hope returning.
+String Spirit: May the harmony guide your steps. Farewell!
+=> END

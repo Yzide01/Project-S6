@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BookItem" format=3 uid="uid://dkafvraiv6k0f"]
+
+[ext_resource type="Script" path="res://Items/Consumables/book.gd" id="1_xg5bw"]
+[ext_resource type="Texture2D" uid="uid://i3wsbba2dk3u" path="res://Assets/Book/book_image_5.png" id="2_xg5bw"]
+
+[resource]
+script = ExtResource("1_xg5bw")
+name = "Book"
+texture = ExtResource("2_xg5bw")
+maxAmountPrStack = 1
+metadata/_custom_type_script = "uid://y2adiqmd6hk5"

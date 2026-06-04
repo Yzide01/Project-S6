@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://fall0one1234"]
+
+[ext_resource type="Script" uid="uid://fallzonescript12" path="res://Entities/Terrain/fall_zone.gd" id="1_fall"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fall"]
+size = Vector2(100, 100)
+
+[node name="FallZone" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_fall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fall")
+debug_color = Color(0.8, 0.1, 0.2, 0.4)

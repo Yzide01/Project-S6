@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cuq0t4mv4fe5x"]
+
+[ext_resource type="FontFile" uid="uid://d1ke0ykk6vxsi" path="res://Assets/Graphics/Ninja Adventure - Asset Pack/Ui/Font/NormalFont.ttf" id="1_p6lqt"]
+[ext_resource type="Script" uid="uid://oqgdernx7emt" path="res://Core/InventorySystem/items_stack_gui.gd" id="1_waik6"]
+
+[node name="Panel" type="Panel" unique_id=1820047434]
+script = ExtResource("1_waik6")
+
+[node name="item" type="TextureRect" parent="." unique_id=471479910]
+layout_mode = 0
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = 8.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="." unique_id=965268725]
+custom_minimum_size = Vector2(11, 11)
+layout_mode = 0
+offset_left = -3.0
+offset_right = 8.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_p6lqt")
+theme_override_font_sizes/font_size = 6
+text = "99"
+horizontal_alignment = 2

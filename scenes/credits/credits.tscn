@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://cmxxp6vam2qe4"]
+
+[ext_resource type="Script" uid="uid://dqexmgsjlqedu" path="res://scenes/credits/credits.gd" id="1_dr3ri"]
+[ext_resource type="AudioStream" uid="uid://df1q7136v2n0q" path="res://Assets/Sound/menu.wav" id="2_8n0nl"]
+
+[node name="Control" type="Control" unique_id=481977147]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dr3ri")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1841330239]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=218451064]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 173.0
+offset_right = 747.0
+offset_bottom = 534.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1922757852]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "THE END "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=1428631069]
+layout_mode = 2
+theme_override_font_sizes/font_size = 138
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label10" type="Label" parent="VBoxContainer" unique_id=1413316361]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "The eternal Silence has finally been shattered, and the world resonates once more. 
+
+Thanks to your courage and your melody, harmony has been restored. The world will never be plunged into absolute quiet again.
+
+Thank you for playing!
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label9" type="Label" parent="VBoxContainer" unique_id=766624485]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Credits:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label8" type="Label" parent="VBoxContainer" unique_id=1179891034]
+layout_mode = 2
+theme_override_font_sizes/font_size = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer" unique_id=412206034]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Story and cinematics: Angèle"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer" unique_id=1936341351]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Game design lead: Yashica"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="VBoxContainer" unique_id=948079342]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Player and combat: Téo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="VBoxContainer" unique_id=849862090]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "UI, interfaces, DB: Thomas"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label7" type="Label" parent="VBoxContainer" unique_id=1280122571]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Level design, mechanics: Zide"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label11" type="Label" parent="VBoxContainer" unique_id=1230540439]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label13" type="Label" parent="VBoxContainer" unique_id=659832079]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "Sound - Ambiance"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label14" type="Label" parent="VBoxContainer" unique_id=1059372390]
+layout_mode = 2
+theme_override_font_sizes/font_size = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label12" type="Label" parent="VBoxContainer" unique_id=64735226]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Music: Freesounds
+SFX: LMMS + GeneralUser (GS)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label18" type="Label" parent="VBoxContainer" unique_id=1849426284]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label15" type="Label" parent="VBoxContainer" unique_id=210200366]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "Design"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label16" type="Label" parent="VBoxContainer" unique_id=127841213]
+layout_mode = 2
+theme_override_font_sizes/font_size = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label17" type="Label" parent="VBoxContainer" unique_id=1580072677]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "General design: Itch.io
+Cinematics & animations: Gemini
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=941494556]
+stream = ExtResource("2_8n0nl")
+volume_db = -16.4
+autoplay = true
