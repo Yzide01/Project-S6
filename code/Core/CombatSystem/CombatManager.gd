@@ -299,7 +299,7 @@ func player_turn() -> void:
 				else:
 					target.hp = max(0, target.hp - 15)
 					await display_text(target.name + " loses 15 HP.")
-					hit.play()
+					animate_enemy_damage(target)
 					target.ui_node.update_hp(target.hp)
 			else:
 				await display_text("Wrong answer! Melos hesitates and misses the tempo...")
@@ -325,7 +325,7 @@ func player_turn() -> void:
 					if enemy.hp > 0:
 						if !enemy.has_shield:
 							enemy.hp = max(0, enemy.hp - 5)
-							hit.play()
+							animate_enemy_damage(enemy)
 							enemy.ui_node.update_hp(enemy.hp)
 							if randf() > 0.5:
 								enemy.stunned = true
@@ -414,6 +414,13 @@ func animate_player_damage() -> void:
 	hit.play()
 	tween.tween_property(player_visual, "modulate", Color.RED, 0.1)
 	tween.tween_property(player_visual, "modulate", Color.WHITE, 0.1)
+	tween.set_loops(2)
+
+func animate_enemy_damage(enemy) -> void:
+	var tween = create_tween()
+	hit.play()
+	tween.tween_property(enemy.ui_node.anim_container, "modulate", Color.RED, 0.1)
+	tween.tween_property(enemy.ui_node.anim_container, "modulate", Color.WHITE, 0.1)
 	tween.set_loops(2)
 	
 func end_battle(player_won: bool) -> void:
