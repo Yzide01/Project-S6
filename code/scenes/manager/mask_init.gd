@@ -31,6 +31,9 @@ func _apply_recursive(node: Node):
 	if node.name == "Player" or node.name == "player" or node.is_in_group("player"):
 		return
 		
+	if "Spirit" in node.name or "spirit" in node.name:
+		return
+		
 	if node is CanvasItem and node != self:
 		if node.material == null:
 			node.material = self.material

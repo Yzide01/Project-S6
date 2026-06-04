@@ -7837,12 +7837,13 @@ intro_position = Vector2(759, 428)
 outro_position = Vector2(580, -29)
 
 [node name="PercussionSpirit" type="Sprite2D" parent="." unique_id=619430691]
-z_index = 96
+z_index = 10
 position = Vector2(580, -28.999992)
 scale = Vector2(0.33323172, 0.35649675)
 texture = ExtResource("16_jk20k")
 
 [node name="floor" type="TileMapLayer" parent="." unique_id=1930917716]
+z_index = -1
 tile_set = SubResource("TileSet_higgj")
 
 [node name="grass" type="TileMapLayer" parent="floor" unique_id=343394]
