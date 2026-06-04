@@ -2068,7 +2068,7 @@ playback_type = 1
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1993330315]
 
 [node name="Murs coté" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1890970804]
-polygon = PackedVector2Array(-43, -184, -37, 1028, 1223, 1056, 1222, -13, 1152, -13, 1153, 976, 0, 976, 0, 9, 1152, 2, 1163, -166)
+polygon = PackedVector2Array(-43, -184, -37, 1028, 1223, 1056, 1222, -13, 1123, 7, 1115, 976, 34, 976, 42, 6, 1124, 1, 1163, -166)
 
 [node name="BookUI" parent="." unique_id=1635178096 groups=["book_ui"] instance=ExtResource("26_sntxp")]
 visible = false
